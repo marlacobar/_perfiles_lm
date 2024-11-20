@@ -1,0 +1,303 @@
+<mvc:View
+    controllerName="sap.ui.demo.webapp.controller.Materiales.MonitorTransportesPlanta"
+    xmlns:uxap="sap.uxap"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:layout="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:ch="sap.suite.ui.commons">
+    <Page backgroundDesign="Solid" enableScrolling="true">
+        <customHeader>
+            <Toolbar class="toolbar_default">
+                <Button icon="sap-icon://nav-back" type="Transparent" class="sapUiMediumMarginBegin"
+                    press="onNavBack"></Button>
+                <Image src="images/SAP_Logo.png" />
+                <Label labelFor="myColumn" class="toolbar_title" text="Monitor Transportes"
+                    wrapping="true" />
+                <ToolbarSpacer />
+                <Label id="username" text="" class="toolbar_color"></Label>
+            </Toolbar>
+        </customHeader>
+        <fb:FilterBar header="Monitor Transporte" search="onConsultar" class="sapUiSizeCompact">
+            <fb:filterItems>
+                <fb:FilterItem name="A" label="{i18n>StartDate}">
+                    <fb:control>
+                        <DatePicker id="start_date" valueFormat="dd-MM-yyyy"
+                            displayFormat="dd-MM-yyyy" />
+                    </fb:control>
+                </fb:FilterItem>
+
+                <fb:FilterItem name="B" label="{i18n>EndDate}">
+                    <fb:control>
+                        <DatePicker id="end_date" valueFormat="dd-MM-yyyy"
+                            displayFormat="dd-MM-yyyy" />
+                    </fb:control>
+                </fb:FilterItem>
+
+                <fb:FilterItem name="C" label="Tipo Unidad">
+                    <fb:control>
+                        <ComboBox id="listTpUnidad" class="sapUiTinyMarginBegin"
+                            showSecondaryValues="true"
+                            items="{
+								path: '/ITEMS'									
+								}"
+                            placeholder="Seleccione Tipo Unidad">
+                            <core:ListItem key="{TIPOCAMIONID}" text="{DESCRIPCION}" />
+                        </ComboBox>
+                    </fb:control>
+                </fb:FilterItem>
+
+                <fb:FilterItem name="D" label="Ciclo Realiza">
+                    <fb:control>
+                        <ComboBox id="listCiclo" class="sapUiTinyMarginBegin"
+                            placeholder="Seleccione Ciclo">
+                            <core:Item key="CARGA" text="CARGA" />
+                            <core:Item key="DESCARGA" text="DESCARGA" />
+                            <core:Item key="CHATARRA" text="CHATARRA" />
+                            <core:Item key="OTRO" text="OTRO" />
+                        </ComboBox>
+                    </fb:control>
+                </fb:FilterItem>
+            </fb:filterItems>
+        </fb:FilterBar>
+        <content>
+            <VBox >
+                <IconTabBar id="icontabs" 
+                    stretchContentHeight="true"
+                    backgroundDesign="Transparent"
+                    applyContentPadding="false">
+                    <items>
+                        <IconTabFilter icon="sap-icon://activities" text="Indicadores" key="kpis">
+                            <layout:Grid defaultSpan="L12 M7 S12">
+                                <layout:content>
+                                    <FlexBox alignItems="Center" justifyContent="Center">
+                                        <GenericTile
+                                            class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout"
+                                            header="Promedio Unidades" subheader="Diarias">
+                                            <TileContent unit="Cantidad">
+                                                <NumericContent value="{data>/KPI_AVG/0/AVGUNID}"
+                                                    withMargin="false" />
+                                            </TileContent>
+                                        </GenericTile>
+                                        <GenericTile
+                                            class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout"
+                                            header="Ton. Cargadas" subheader="Promedio">
+                                            <TileContent unit="Ton">
+                                                <NumericContent truncateValueTo="8"
+                                                    value="{data>/KPI_AVG/0/AVGTONC}"
+                                                    withMargin="false" />
+                                            </TileContent>
+                                        </GenericTile>
+                                        <GenericTile
+                                            class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout"
+                                            header="Ton. Descargadas" subheader="Promedio">
+                                            <TileContent unit="Ton">
+                                                <NumericContent truncateValueTo="8"
+                                                    value="{data>/KPI_AVG/0/AVGTOND}"
+                                                    withMargin="false" />
+                                            </TileContent>
+                                        </GenericTile>
+                                        <GenericTile
+                                            class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout"
+                                            header="Ton. Chatarra" subheader="Promedio">
+                                            <TileContent unit="Ton">
+                                                <NumericContent truncateValueTo="8"
+                                                    value="{data>/KPI_AVG/0/AVGTONCT}"
+                                                    withMargin="false" />
+                                            </TileContent>
+                                        </GenericTile>
+                                        <GenericTile
+                                            class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout"
+                                            header="Ton. Otro" subheader="Promedio">
+                                            <TileContent unit="Ton">
+                                                <NumericContent truncateValueTo="8"
+                                                    value="{data>/KPI_AVG/0/AVGTONOT}"
+                                                    withMargin="false" />
+                                            </TileContent>
+                                        </GenericTile>
+
+                                        <GenericTile
+                                            class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout"
+                                            header="Tiempo Promedio Unidades">
+                                            <TileContent unit="Horas">
+                                                <NumericContent value="{data>/KPI_AVG/0/AVGTMP} "
+                                                    withMargin="false" />
+                                            </TileContent>
+                                        </GenericTile>
+                                    </FlexBox>
+                                </layout:content>
+                            </layout:Grid>
+                            <layout:Grid defaultSpan="L6 M6 S12">
+                                <layout:content>
+                                    <ch:ChartContainer
+                                        id="chartContainerMes"
+                                        showFullScreen="true"
+                                        showPersonalization="false"
+                                        autoAdjustHeight="false"
+                                        showLegend="true"
+                                        title="Ingreso Unidades">
+                                        <ch:content>
+                                            <ch:ChartContainerContent
+                                                icon="sap-icon://line-chart"
+                                                title="Line Chart">
+                                                <ch:content>
+                                                    <viz:VizFrame xmlns="sap.viz" width="100%"
+                                                        id="cd_unidades" />
+                                                </ch:content>
+                                            </ch:ChartContainerContent>
+                                        </ch:content>
+                                    </ch:ChartContainer>
+
+                                    <ch:ChartContainer
+                                        id="chartContainerDia"
+                                        showFullScreen="true"
+                                        showPersonalization="false"
+                                        autoAdjustHeight="false"
+                                        showLegend="true"
+                                        title="Toneladas Carga/Descarga">
+                                        <ch:content>
+                                            <ch:ChartContainerContent
+                                                icon="sap-icon://line-chart"
+                                                title="Line Chart">
+                                                <ch:content>
+                                                    <viz:VizFrame xmlns="sap.viz" width="100%"
+                                                        id="cd_toneladas" />
+                                                </ch:content>
+                                            </ch:ChartContainerContent>
+                                        </ch:content>
+                                    </ch:ChartContainer>
+
+                                    <ch:ChartContainer
+                                        id="chartContainerTiempo"
+                                        showFullScreen="true"
+                                        showPersonalization="false"
+                                        autoAdjustHeight="false"
+                                        showLegend="true"
+                                        title="Tiempo Promedio por Estatus">
+                                        <ch:content>
+                                            <ch:ChartContainerContent
+                                                icon="sap-icon://line-chart"
+                                                title="Line Chart">
+                                                <ch:content>
+                                                    <viz:VizFrame xmlns="sap.viz" width="100%"
+                                                        id="cd_tiempo" />
+                                                </ch:content>
+                                            </ch:ChartContainerContent>
+                                        </ch:content>
+                                    </ch:ChartContainer>
+
+                                    <ch:ChartContainer
+                                        id="chartContainerPuerta"
+                                        showFullScreen="true"
+                                        showPersonalization="false"
+                                        autoAdjustHeight="false"
+                                        showLegend="true"
+                                        title="Ton. Carga por Puerta">
+                                        <ch:content>
+                                            <ch:ChartContainerContent
+                                                icon="sap-icon://line-chart">
+                                                <ch:content>
+                                                    <viz:VizFrame xmlns="sap.viz" width="100%"
+                                                        id="cd_cpuerta" />
+                                                </ch:content>
+                                            </ch:ChartContainerContent>
+                                        </ch:content>
+                                    </ch:ChartContainer>
+                                </layout:content>
+                            </layout:Grid>
+                        </IconTabFilter>
+                        <IconTabFilter icon="sap-icon://table-view" text="Tabla" key="datos">
+                            <layout:Grid defaultSpan="L12 M7 S12">
+                                <layout:content>
+                                    <Table
+                                        id="TBLREP"
+                                        width="auto"
+                                        growing="true"
+                                        growingThreshold="50"
+                                        items="{/ITEMS}">
+                                        <headerToolbar>
+                                            <OverflowToolbar>
+                                                <ToolbarSpacer></ToolbarSpacer>
+                                                <Button icon="sap-icon://download" press="onExport"
+                                                    tooltip="Exportar CSV" />
+                                            </OverflowToolbar>
+                                        </headerToolbar>
+                                        <columns>
+                                            <Column>
+                                                <Label text="TRANSPORTE" />
+                                            </Column>
+                                            <Column>
+                                                <Label text="CICLO" />
+                                            </Column>
+                                            <Column>
+                                                <Label text="PUERTA" />
+                                            </Column>
+                                            <Column>
+                                                <Label text="CHOFER" />
+                                            </Column>
+                                            <Column>
+                                                <Label text="LINEA TRANSP." />
+                                            </Column>
+                                            <Column>
+                                                <Label text="TIPO UNIDAD" />
+                                            </Column>
+                                            <Column>
+                                                <Label text="PLACAS" />
+                                            </Column>
+                                            <Column>
+                                                <Label text="PLANA" />
+                                            </Column>
+                                            <Column>
+                                                <Label text="CONTENEDOR" />
+                                            </Column>
+                                            <Column>
+                                                <Label text="PESO C/D" />
+                                            </Column>
+                                            <Column>
+                                                <Label text="FECHA LLEGO" />
+                                            </Column>
+                                            <Column>
+                                                <Label text="FECHA SALIDA" />
+                                            </Column>
+                                            <Column>
+                                                <Label text="TIEMPO" />
+                                            </Column>
+                                            <Column>
+                                                <Label text="TIEMPO C/D" />
+                                            </Column>
+                                        </columns>
+                                        <items>
+                                            <ColumnListItem>
+                                                <cells>
+                                                    <Link text="{TRANSPORTE}" press="GeneraBoleta"
+                                                        tooltip="Reimprimir Boleta Bascula" />
+                                                    <Text text="{CICLO}" />
+                                                    <Text text="{PUERTA}" />
+                                                    <Text text="{CHOFER}" />
+                                                    <Text text="{LINEA}" />
+                                                    <Text text="{TIPOUNIDAD}" />
+                                                    <Text text="{TRACTO}" />
+                                                    <Text text="{PLANA}" />
+                                                    <Text text="{CONTENEDOR}" />
+                                                    <Text text="{PESO}" />
+                                                    <Text text="{FECHA_LLEGO}" />
+                                                    <Text text="{FECHA_SALIDA}" />
+                                                    <Text text="{HORAS}" />
+                                                    <Text text="{HORAS_CARGA}" />
+                                                </cells>
+                                            </ColumnListItem>
+                                        </items>
+                                    </Table>
+                                </layout:content>
+                            </layout:Grid>
+                        </IconTabFilter>
+                    </items>
+                </IconTabBar>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

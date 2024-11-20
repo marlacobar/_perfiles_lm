@@ -1,0 +1,181 @@
+<mvc:View controllerName="sap.ui.demo.webapp.controller.Catalogos.Correo" xmlns:uxap="sap.uxap"
+	xmlns:core="sap.ui.core" xmlns="sap.m"
+	xmlns:f="sap.f" xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form"
+	xmlns:table="sap.ui.table" xmlns:mvc="sap.ui.core.mvc">
+	<Toolbar class="toolbar_default">
+		<Button icon="sap-icon://nav-back" type="Transparent" class="sapUiMediumMarginBegin"
+			press="onNavBack"></Button>
+		<Image src="images/SAP_Logo.png"></Image>
+		<core:Icon src="sap-icon://show-edit" class="toolbar_title sapUiSmallMarginBegin">
+			<core:layoutData>
+				<FlexItemData growFactor="1" />
+			</core:layoutData>
+		</core:Icon>
+		<MenuButton text="Catalogos " class="customtitle">
+			<menu>
+				<Menu>
+					<items>
+						<MenuItem text="Página Inicial" icon="sap-icon://home" press="goToHome" />
+					</items>
+				</Menu>
+			</menu>
+		</MenuButton>
+		<ToolbarSpacer />
+		<Label id="username" text="" class="toolbar_color"></Label>
+		<MenuButton
+			visible="true"
+			tooltip="Salir"
+			type="Transparent"
+			text=""
+			icon="sap-icon://person-placeholder"
+			class="sapUiLargeMarginEnd">
+			<menu>
+				<Menu>
+					<MenuItem
+						text="Cerrar sesión"
+						icon="sap-icon://slim-arrow-right"
+						press="logoff" />
+				</Menu>
+			</menu>
+		</MenuButton>
+	</Toolbar>
+	<uxap:ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true"
+		alwaysShowContentHeader="false"
+		preserveHeaderStateOnScroll="false" headerContentPinnable="true" isChildPage="true"
+		upperCaseAnchorBar="false" height="100%">
+		<uxap:headerTitle>
+			<uxap:ObjectPageDynamicHeaderTitle>
+				<uxap:actions>
+					<FlexBox direction="Column" alignItems="Start">
+						<Label text="" />
+						<Button type="Accept" icon="sap-icon://sys-enter-2" text="Nuevo"
+							press="onOpenDialogNuevoCatalogoEmail">
+						</Button>
+					</FlexBox>
+				</uxap:actions>
+			</uxap:ObjectPageDynamicHeaderTitle>
+		</uxap:headerTitle>
+		<uxap:headerContent></uxap:headerContent>
+		<uxap:sections>
+			<uxap:ObjectPageSection title="Listas de Correo">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection>
+						<uxap:blocks>
+							<layout:Grid defaultSpan="L10 M12 S6" class="sapUiSmallMarginTop">
+								<layout:content>
+
+									<FlexBox direction="Column" alignItems="Start">
+										<table:Table
+											id="oTablaCatalogo"
+											selectionMode="MultiToggle"
+											showNoData="true"
+											visibleRowCountMode="Interactive"
+											visibleRowCount="200"
+											threshold="100"
+											rowSelectionChange="onSelectRowCatalog"
+											rows="{path : 'emailCatalogModel>/Rowsets/Rowset/0/Row' }">
+											<table:extension>
+												<OverflowToolbar style="Clear">
+													<ToolbarSpacer />
+													<Title id="title"
+														text="Asignar destinatarios a múltiples catálogos seleccionados" />
+													<Button
+														icon="sap-icon://email"
+														tooltip="Asignar destinatarios"
+														press="onAsignarDestinatarios" />
+												</OverflowToolbar>
+											</table:extension>
+											<table:columns>
+												<table:Column sortProperty="ID_KEY_CATALOG"
+													filterProperty="ID_KEY_CATALOG" visible="true"
+													width="20%">
+													<Text text="ID" />
+													<table:template>
+														<Text
+															text="{emailCatalogModel>ID_KEY_CATALOG}" />
+													</table:template>
+												</table:Column>
+
+												<table:Column sortProperty="DS_KEY_CATALOG"
+													filterProperty="DS_KEY_CATALOG" visible="true"
+													width="20%">
+													<Text text="Catálogo" />
+													<table:template>
+														<Text
+															text="{emailCatalogModel>DS_KEY_CATALOG}" />
+													</table:template>
+												</table:Column>
+												<table:Column sortProperty="DS_SUBJECT"
+													filterProperty="DS_SUBJECT" visible="true"
+													width="20%">
+													<Text text="Titulo Correo" />
+													<table:template>
+														<Text text="{emailCatalogModel>DS_SUBJECT}" />
+													</table:template>
+												</table:Column>
+												<table:Column sortProperty="DS_BODY" visible="true"
+													width="60%">
+													<Text text="Glosa Correo" />
+													<table:template>
+														<Text text="{emailCatalogModel>DS_BODY}" />
+													</table:template>
+												</table:Column>
+												<table:Column sortProperty="DS_FOOTER"
+													visible="true" width="60%">
+													<Text text="Pié de Correo" />
+													<table:template>
+														<Text text="{emailCatalogModel>DS_FOOTER}" />
+													</table:template>
+												</table:Column>
+
+												<table:Column hAlign="Center" width="30%">
+													<Text text="Modificar" />
+													<table:template>
+														<core:Icon
+															press="onOpenDialogEditCatalogoEmail"
+															color="#053662"
+															src="sap-icon://initiative" size="1.8em"
+															xmlns:sap.ui.core="sap.ui.core" />
+													</table:template>
+												</table:Column>
+
+												<table:Column hAlign="Center" width="20%">
+													<Text text="Eliminar" />
+													<table:template>
+														<core:Icon
+															press="onOpenDialogDeleteCatalogoEmail"
+															color="#053662"
+															src="sap-icon://delete" size="1.8em"
+															xmlns:sap.ui.core="sap.ui.core" />
+													</table:template>
+												</table:Column>
+
+												<table:Column hAlign="Center" width="20%">
+													<Text text="Destinatarios" />
+													<table:template>
+														<core:Icon src="{emailCatalogModel>DS_ICON}"
+															color="#053662" size="1.5em"
+															xmlns:sap.ui.core="sap.ui.core"
+															press="onOpenDialogAgregarEmail" />
+													</table:template>
+												</table:Column>
+												<table:Column sortProperty="ID_KEY_CATALOG"
+													visible="true" width="0px">
+													<Text text="id Catalogo" />
+													<table:template>
+														<Text
+															text="{emailCatalogModel>ID_KEY_CATALOG}" />
+													</table:template>
+												</table:Column>
+											</table:columns>
+										</table:Table>
+									</FlexBox>
+								</layout:content>
+							</layout:Grid>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+		</uxap:sections>
+	</uxap:ObjectPageLayout>
+</mvc:View>

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mvc:View
+  controllerName="sap.ui.demo.webapp.controller.Calidad.InspeccionCalidad03"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:fb="sap.ui.comp.filterbar"
+  xmlns:tnt="sap.tnt"
+  xmlns:mvc="sap.ui.core.mvc">
+  <NavContainer id="wizardNavContainer">
+    <pages>
+      <Page
+        id="wizardContentPage"
+        backgroundDesign="Solid"
+        showHeader="false">
+        <Toolbar
+          class="toolbar_default">
+          <Button icon="sap-icon://nav-back" type="Transparent" class="sapUiMediumMarginBegin"
+            press="onNavBack" />
+          <Image src="images/SAP_Logo.png">
+          </Image>
+          <core:Icon
+            src="sap-icon://measurement-document"
+            class="toolbar_title sapUiSmallMarginBegin">
+            <core:layoutData>
+              <FlexItemData growFactor="1" />
+            </core:layoutData>
+          </core:Icon>
+          <Label labelFor="myColumn"
+            class="toolbar_title"
+            text="Lotes de Inspección"
+            wrapping="true"
+          />
+          <ToolbarSpacer />
+          <Label
+            id="username"
+            text=""
+            class="toolbar_color"></Label>
+          <MenuButton
+            visible="true"
+            tooltip="Salir"
+            type="Transparent"
+            text=""
+            icon="sap-icon://person-placeholder"
+            class="sapUiLargeMarginEnd">
+            <menu>
+              <Menu>
+                <MenuItem
+                  text="Cerrar sesión"
+                  icon="sap-icon://slim-arrow-right"
+                  press="logoff" />
+              </Menu>
+            </menu>
+          </MenuButton>
+        </Toolbar>
+        <fb:FilterBar header="Filtros"
+          reset="onReset" search="onSearch" clear="onClear" showRestoreButton="true"
+          showClearButton="true" class="sapUiSizeCompact">
+          <fb:filterItems>
+
+            <fb:FilterItem visible="true" name="A" label="Fecha" mandatory="true">
+              <fb:control>
+                <DateRangeSelection id="fecha" displayFormat="yyyy-MM-dd" valueFormat="yyyy-MM-dd"
+                  change="" />
+              </fb:control>
+            </fb:FilterItem>
+            <!--
+          <fb:FilterItem visible="true" name="C" label="Tipo de Inspección" mandatory="true">
+            <fb:control>
+              <ComboBox 
+                  id="tipo_inspeccion"
+                  enabled="true"
+                  showSecondaryValues="true"
+                  selectionChange="">
+                <core:ListItem key="MP" text="Materia Prima" additionalText="01" />
+                <core:ListItem key="PROD" text="Producción" additionalText="03-04"/>
+              </ComboBox>
+            </fb:control>
+          </fb:FilterItem>
+          <fb:FilterItem visible="true" name="E" label="Pedido">
+            <fb:control>
+            <Input id="inp_pedido" placeholder="Pedido..." class="sapUiSizeCompact"/>
+            </fb:control>
+          </fb:FilterItem>
+          -->
+
+            <fb:FilterItem visible="true" name="F" label="Orden">
+              <fb:control>
+                <Input id="inp_orden" placeholder="Orden..." class="sapUiSizeCompact" />
+              </fb:control>
+            </fb:FilterItem>
+
+            <fb:FilterItem visible="true" name="G" label="Lote de inspección">
+              <fb:control>
+                <Input id="inp_insplot" placeholder="Lote de inspección..." class="sapUiSizeCompact" />
+              </fb:control>
+            </fb:FilterItem>
+
+            <fb:FilterItem visible="true" name="H" label="Lote">
+              <fb:control>
+                <Input id="inp_lote" placeholder="Lote..." class="sapUiSizeCompact" />
+              </fb:control>
+            </fb:FilterItem>
+
+            <fb:FilterItem visible="true" name="I" label="Material">
+              <fb:control>
+                <Input id="inp_material" placeholder="Material..." class="sapUiSizeCompact" />
+              </fb:control>
+            </fb:FilterItem>
+            <fb:FilterItem visible="true" name="J" label="Estatus">
+              <fb:control>
+                <ComboBox id="color" enabled="true" selectionChange="" showClearIcon="true">
+                  <core:ListItem key="NUEVO" text="Nuevo lote" />
+                  <core:ListItem key="DECISION" text="Con decisión de empleo" />
+                  <core:ListItem key="INSPECCION" text="Inspección realizada" />
+                  <core:ListItem key="ANULADO" text="Lote anulado" />
+                </ComboBox>
+              </fb:control>
+            </fb:FilterItem>
+          </fb:filterItems>
+
+        </fb:FilterBar>
+        <Table id="insplot_list" sticky="ColumnHeaders,HeaderToolbar" class="sapUiResponsiveMargin"
+          items="{/ITEMS}" busyIndicatorDelay="10" width="auto" growing="true" growingThreshold="50">
+          <headerToolbar>
+            <Toolbar class="sapMTBStandard_0">
+              <Title text="Lotes de Inspección" level="H1" />
+              <ToolbarSpacer />
+              <core:Icon src="sap-icon://color-fill" color="#0A6ED1" />
+              <Label displayOnly="true" wrapping="true" text="Nuevo lote" />
+              <core:Icon src="sap-icon://color-fill" color="#007833" />
+              <Label displayOnly="true" wrapping="true" text="Con decisión de empleo" />
+              <core:Icon src="sap-icon://color-fill" color="#DF6E0C" />
+              <Label displayOnly="true" wrapping="true" text="Inspección realizada" />
+              <core:Icon src="sap-icon://color-fill" color="Negative" />
+              <Label displayOnly="true" wrapping="true" text="Lote anulado" />
+            </Toolbar>
+          </headerToolbar>
+          <columns>
+            <Column>
+              <Label text="Lote inspección" />
+            </Column>
+            <Column>
+              <Label text="Material" />
+            </Column>
+            <Column>
+              <Label text="Orden" />
+            </Column>
+
+	<Column>
+              <Label text="Clave" />
+            </Column>
+
+            <Column>
+              <Label text="Lote" />
+            </Column>
+            <Column>
+              <Label text="Cantidad" />
+            </Column>
+            <Column>
+              <Label text="Fecha" />
+            </Column>
+          </columns>
+          <items>
+            <ColumnListItem type="Navigation" press="onInspeccion" highlight="{ESTATUS}">
+              <cells>
+                <ObjectStatus text="{LOTE_INSPECCION}" active="true" inverted="true"
+                  state="Indication06" />
+                <ObjectIdentifier title="{MATERIAL}" text="{DESC_MATERIAL}" />
+                <Text text="{ORDEN}" />
+	
+	<Text text="{ZCT_CLAVE}" />
+
+                <Text text="{LOTE}" />
+                <Text text="{CANTIDAD} {UM}" />
+                <Text text="{path: 'FECHA_INS', formatter: '.formatter.date'}" />
+              </cells>
+            </ColumnListItem>
+          </items>
+        </Table>
+      </Page>
+    </pages>
+  </NavContainer>
+</mvc:View>

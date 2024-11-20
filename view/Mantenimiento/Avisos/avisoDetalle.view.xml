@@ -1,0 +1,195 @@
+﻿<mvc:View
+	controllerName="sap.ui.demo.webapp.controller.Mantenimiento.Avisos.avisoDetalle"
+	xmlns:uxap="sap.uxap"
+  xmlns:core="sap.ui.core"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+  xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc">
+  <Toolbar
+        class="toolbar_default">
+    <Button icon="sap-icon://nav-back" type="Transparent" class="sapUiMediumMarginBegin" press="onNavBack"></Button>
+    <Image src="images/SAP_Logo.png">
+    </Image>
+    <core:Icon
+    src="sap-icon://show-edit"
+    class="toolbar_title sapUiSmallMarginBegin">
+      <core:layoutData>
+        <FlexItemData growFactor="1" />
+      </core:layoutData>
+    </core:Icon>
+    <MenuButton text="Detalle de Aviso" class="customtitle">
+      <menu>
+        <Menu>
+          <items>
+            <MenuItem text="Página Inicial" icon="sap-icon://home" press="goToHome"/>
+          </items>
+        </Menu>
+      </menu>
+    </MenuButton>
+    <ToolbarSpacer/>
+    <Label
+              id ="username"
+              text=""
+              class="toolbar_color"></Label>
+    <Button icon="sap-icon://person-placeholder" type="Transparent" class="sapUiLargeMarginEnd">
+    </Button>
+  </Toolbar>
+  <uxap:ObjectPageLayout
+		id="ObjectPageLayout"
+		showTitleInHeaderContent="true"
+		alwaysShowContentHeader="false"
+		preserveHeaderStateOnScroll="false"
+		headerContentPinnable="true"
+		isChildPage="true"
+		upperCaseAnchorBar="false">
+    <uxap:headerTitle>
+      <uxap:ObjectPageDynamicHeaderTitle>
+        <uxap:expandedHeading>
+          <Title text="Aviso {/id}" wrapping="true" class="sapUiSmallMarginEnd"/>
+        </uxap:expandedHeading>
+
+        <uxap:snappedHeading>
+          <FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
+            <FlexBox wrap="NoWrap" fitContainer="true" alignItems="Center" class="sapUiTinyMarginEnd">              
+              <Title text="Aviso {/id}" wrapping="true"/>
+            </FlexBox>
+          </FlexBox>
+        </uxap:snappedHeading>
+
+        <uxap:actions>    
+          <Button
+              id="statusUsuarioAviso" 
+              icon="sap-icon://edit" 
+              text="Est. Usuario"
+              type="Emphasized" 
+              tooltip="Modificar" 
+              class="sapUiSmallMarginBeginEnd"
+              press="onEstatusUsuario" />              
+          <Button
+            id="addOrder"
+            icon="sap-icon://add"
+						text="Orden"
+            press="onShowCreatePMOrder"
+            tooltip="Asignar orden"
+						type="Emphasized"/>
+          <Button
+            id="releaseOrder"
+						icon="sap-icon://flag"
+            type="Transparent"
+            tooltip="Liberar aviso"
+						press="onRelease"/>
+          <Button
+            id="closeNotif"
+						icon="sap-icon://flag"
+            type="Reject"
+            tooltip="Cerrar aviso"
+						press="onCloseNotif"/>            
+        </uxap:actions>
+      </uxap:ObjectPageDynamicHeaderTitle>
+    </uxap:headerTitle>
+
+    <uxap:headerContent>
+      <FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">        
+        <layout:VerticalLayout >
+          <ObjectStatus title="Incidente" text="{/short_text}"/>
+          <ObjectStatus title="Descripción" text="{/large_text}"/>
+          <ObjectIdentifier title="{/status}"/>
+        </layout:VerticalLayout>
+      </FlexBox>
+    </uxap:headerContent>
+
+    <uxap:sections>
+      <uxap:ObjectPageSection title="Información General">
+        <uxap:subSections>
+          <uxap:ObjectPageSubSection>
+            <uxap:blocks>
+              <form:SimpleForm
+								maxContainerCols="2"
+								editable="false"
+								layout="ResponsiveGridLayout"
+								labelSpanL="12"
+								labelSpanM="12"
+								emptySpanL="0"
+								emptySpanM="0"
+								columnsL="1"
+								columnsM="1">
+                <form:content>
+                  <Label text="Equipo"/>
+                  <Link text="{/equipment} {/descEquipment}" press="verImgEquipo"/>
+                  <Label text="Ubicación Técnica"/>
+                  <Text text="{/functionalLocation} {/descFunctionalLocation}"/>
+                </form:content>
+              </form:SimpleForm>
+            </uxap:blocks>
+          </uxap:ObjectPageSubSection>
+        </uxap:subSections>
+      </uxap:ObjectPageSection>
+
+      <uxap:ObjectPageSection title="Responsabilidades">
+        <uxap:subSections>
+          <uxap:ObjectPageSubSection>
+            <uxap:blocks>
+              <form:SimpleForm
+								maxContainerCols="2"
+								editable="false"
+								layout="ResponsiveGridLayout"
+								labelSpanL="12"
+								labelSpanM="12"
+								emptySpanL="0"
+								emptySpanM="0"
+								columnsL="1"
+								columnsM="1">
+                <form:content>
+                  <Label text="Creado Por"/>
+                  <Text text="{/createdby}"/>
+                  <Label text="Creado el"/>
+                  <Text text="{/createdDate}"/>
+                  <Label text="Orden"/>
+                  <Link text="{order}" tooltip="{i18n>PMNotiDetail.tooltipToOrder}" press="onShowOrder" />                  
+                  <Label text="Reportado por"/>
+                  <Text text="{/reportedby}"/>
+                  <Label text="Puesto de Trabajo"/>
+                  <Text text="{/workCenter} {/plant} {/descPuesto}"/>
+                </form:content>
+              </form:SimpleForm>
+            </uxap:blocks>
+          </uxap:ObjectPageSubSection>
+        </uxap:subSections>
+      </uxap:ObjectPageSection>
+
+      <uxap:ObjectPageSection title="Causas">
+        <uxap:subSections>
+          <uxap:ObjectPageSubSection>
+            <uxap:blocks>
+              <form:SimpleForm
+								maxContainerCols="2"
+								editable="false"
+								layout="ResponsiveGridLayout"
+								labelSpanL="12"
+								labelSpanM="12"
+								emptySpanL="0"
+								emptySpanM="0"
+								columnsL="1"
+								columnsM="1">
+                <form:content>
+                  <Label text="Parte Objeto"/>
+                  <Text text="{/catObjectPart} {/objectPart} {/descObjectPart}"/>
+                  <Label text="Avería"/>
+                  <Text text="{/catDamage} {/damage} {/descDamage}"/>
+                  <Label text="Texto Síntoma"/>
+                  <Text text="{/textDamage}"/>
+                  <Label text="Causa"/>
+                  <Text text="{/catCause} {/cause} {/descCause}"/>
+                  <Label text="Texto causa"/>
+                  <Text text="{/textCause}"/>
+                </form:content>
+              </form:SimpleForm>
+            </uxap:blocks>
+          </uxap:ObjectPageSubSection>
+        </uxap:subSections>
+      </uxap:ObjectPageSection>
+    </uxap:sections>
+  </uxap:ObjectPageLayout>
+</mvc:View>

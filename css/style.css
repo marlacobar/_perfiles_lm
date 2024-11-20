@@ -1,0 +1,1510 @@
+html[dir="ltr"] .myAppDemoWT .myCustomButton.sapMBtn {
+  margin-right: 0.125rem
+}
+
+html[dir="rtl"] .myAppDemoWT .myCustomButton.sapMBtn {
+  margin-left: 0.125rem
+}
+
+.myAppDemoWT .myCustomText {
+  display: inline-block;
+  font-weight: bold;
+}
+
+.sapMListTblHighlightCol+.sapMListTblCell.sapMListTblHeaderCell_1{
+visibility: hidden;
+}
+
+.sapMTile {
+    width: 17rem;
+    height: 17rem;
+}
+
+.sapMTileContent {
+    width: 13rem;
+    height: 13rem;
+}
+
+.Switch {
+
+}
+.toolbar_title {
+    font-size:large;
+    color:#16517b !important;
+    font-weight:bold !important
+}
+
+.toolbar_title_Ext {
+    font-size:large;
+    color:#ffffff !important;
+    font-weight:bold !important
+}
+
+.toolbar_title_Menu {
+    font-size:large;
+    color:white !important;
+    font-weight:bold !important
+}
+
+.toolbar_color {
+    color: #16517b !important
+}
+
+.toolbar_color_Ext {
+    color: #ffffff !important
+}
+
+.toolbar_background {
+    background-color: transparent !important;
+    border-bottom-color: transparent
+}
+
+.toolbar_default {
+    background-color: #EFF4F9 !important;
+    border-bottom-color: #D1E0EE
+}
+
+.toolbar_default_Ext {
+    background-color: #b90c0d !important;
+    border-bottom-color: #D1E0EE
+}
+
+
+.toolbar_default1{
+    background-color: #EFF4F9 !important;
+    border-bottom-color: transparent;
+margin-left:-60px;
+width:110%;
+}
+
+
+.toolbar_icons {
+    background-color: #EFF4F9 !important;
+    border-bottom-color: #EFF4F9
+}
+
+.toolbar_default2 {
+    background-color: #EFF4F9 !important;
+    border-bottom: 0 !important;
+}
+
+.customtitle .sapMBtnInner {
+    vertical-align: top;
+    -webkit-appearance: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    box-sizing: border-box;
+    font-family: "72","72full",Arial,Helvetica,sans-serif;
+    font-size: 1.16rem;
+    font-weight: bold;
+    height: 2.500rem;
+    min-width: 2.500rem;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    position: relative;
+    background-color: transparent;
+    border: none !important;
+    border-radius: 0.2rem;
+    color: #16517b;
+    text-shadow: 0 0 0.125rem #ffffff;
+}
+
+.parosButton {
+height: 300px;
+border-radius: 20%;
+}
+
+/*Dimensiones de la Hoja Viajera*/
+div.imprimible {
+    display: block;
+    width: 500px;
+    height: 300px;
+    font-size: 10px;
+}
+
+div.noImprimible {
+    display: none;
+}
+
+/*Titulo Principal de la Hoja Viajera*/
+#tituloHojaViajera {
+    text-align: center;
+    font-size: 100px;
+}
+
+.letra {
+    font-size: 10px;
+}
+
+/*Codigo 2D*/
+#prntCode {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/*Pie de Página*/
+#piePagina {
+    text-align: center;
+    font-style: normal;
+    font-size: 8px;
+}
+
+p.tabla8 {
+  font-size: 8px;
+  text-align: center;
+  margin:0
+}
+
+p.tablaClientes {
+  font-size: 12px;
+  text-align: left;
+  margin:1px
+}
+
+p.tabla10 {
+  font-size: 10px;
+}
+
+p.tabla12 {
+  font-size: 12px;
+}
+
+p.tabla12Centrado {
+  font-size: 12px;
+    text-align: center;
+}
+
+td.tabla10{
+padding: 5px 0px 0px 5px;
+}
+
+p.partida {
+  font-size: 24px;
+}
+
+td.small{
+padding: 0px 0px 0px 0px;
+}
+
+th.titulo{
+padding: 0px 0px 0px 5px;
+}
+
+p.sub {
+  font-size: 18px;
+}
+
+p.texto14 {
+  font-size: 14px;
+ text-align: center;
+}
+
+p.tituloCentrado{
+text-align: center;
+  font-size: 12px;
+}
+
+p.tituloCentradoChico{
+text-align: center;
+  font-size: 10px;
+}
+
+.print {
+display:none;
+}
+
+@media print {
+  .print  {display:block!important;}
+   div.saltopagina{
+      display:block;
+      page-break-before:always;
+   }
+@page {size: a4 landscape}
+}
+
+td.centrado{
+vertical-align: middle;
+backgorund-color:#ff3300;
+}
+
+th.dos{
+padding: 2px 2px 2px 2px;
+}
+
+p.centrado {
+  font-size: 12px;
+  text-align: center;
+}
+
+p.gccFirma {
+  font-size: 10px;
+  text-align: center;
+margin: 0
+}
+
+td.borde{
+border: 1px solid black;
+padding: 5px 5px 5px 5px;
+}
+
+p.texto8 {
+  font-size: 8px;
+}
+
+/*#######*/
+.panelStyle {
+    padding-bottom: 0px !important;
+}
+
+.panelStyle .sapMRbBLabel{
+    max-width: 100%;
+} 
+  
+.sapUiSizeCompact .panelStyle .sapMRbBLabel{
+    max-width: 100%;
+}
+
+.settingsLabel {
+    margin-bottom: 2px;
+}
+
+.settingsBox {
+    width: 150px;
+}
+
+.middleSettingsBox {
+    width: 180px;
+}
+
+.widerSettingsBox{
+    width: 200px;
+}
+
+.settingsRadio {
+    margin: -3px 0 -3px -7px;
+    width: 100%;
+}
+
+.settingsRadioWithLongText{
+  margin: -3px 0 -3px -7px;
+}
+
+.settingsRadio .sapMRbBLabel{
+    padding-left: 2.95rem;
+}
+
+.settingsSwitch{
+    margin-top: 1px;
+}
+
+.settingsHBox {
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+}
+
+.settingsSelect {
+    margin-top: 7px;
+    height: 36px;
+}
+
+.settingsSelect .sapMSltLabel{
+   line-height: 1.8rem;
+}
+
+.settingsSelect .sapMSltArrow {
+   line-height: 1.8rem;
+}
+
+.sapUiSizeCompact .sapMSltLabel{
+   line-height: 1.6rem;
+}
+
+.sapUiSizeCompact .sapMSltArrow {
+   line-height: 1.6rem;
+}
+
+.formTitleHeight .sapUiFormM .sapUiFormContainerTitle>.sapUiFormTitle {
+    height: 0;
+}
+
+.settingsFormGrid .sapUiFormResGrid.sapUiFormBackgrTranslucent>div{
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.settingsFormGrid .sapUiRespGridMedia-Std-Tablet.sapUiFormResGridMain>div:not(.sapUiRespGridSpanM12):not(.sapUiFormResGridLastContM),
+.settingsFormGrid .sapUiRespGridMedia-Std-Desktop.sapUiFormResGridMain>div:not(.sapUiRespGridSpanL12):not(.sapUiFormResGridLastContL),
+.settingsFormGrid .sapUiRespGridMedia-Std-LargeDesktop.sapUiFormResGridMain>div:not(.sapUiRespGridSpanXL12):not(.sapUiFormResGridLastContXL){
+    padding-right: 0;
+}
+
+.settingsFormGrid .sapUiRespGridMedia-Std-Tablet.sapUiFormResGridMain>div:not(.sapUiRespGridBreakM):not(.sapUiRespGridSpanM12),
+.settingsFormGrid .sapUiRespGridMedia-Std-Desktop.sapUiFormResGridMain>div:not(.sapUiRespGridBreakL):not(.sapUiRespGridSpanL12),
+.settingsFormGrid .sapUiRespGridMedia-Std-LargeDesktop.sapUiFormResGridMain>div:not(.sapUiRespGridBreakXL):not(.sapUiRespGridSpanXL12){
+    padding-left: 0;
+}
+
+.settingsFormGrid .sapUiFormResGridCont{
+    padding-bottom:0;
+}
+
+.rangeSliderPadding{
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.VBoxHeight .sapMFlexBoxBGTransparent.sapMFlexItem.sapMFlexItemAlignAuto {
+    height: 100%;
+}
+/*#######*/
+
+.bgPods
+{
+background-color: #000000; //for setting background color
+}
+
+.TamañoF
+{
+font-size: 30px !important;
+color: #000000 !important;
+}
+
+.TamañoFPRD
+{
+font-size: 40px !important;
+color: #000000 !important;
+padding: 0px;
+margin: 0px;
+padding-top: 10px;
+padding-bottom: 10px;
+border: 1px solid black;
+font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+}
+
+.TamañoFEstatus
+{
+font-size: 110px !important;
+color: #FFFFFF !important;
+font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+text-align: center !important;
+}
+
+.TamañoFPRDtext
+{
+font-size: 40px !important;
+color: #000000 !important;
+padding: 0px;
+margin: 0px;
+padding: 10px;
+font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+ font-weight: bolder;
+}
+
+.EstatusLoteOKVEL1
+{
+background-color: #000000 !important; 
+font-size: 110px !important;
+color: #008f39 !important;
+font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+text-align: center !important;
+width:100% !important;
+height:100% !important;
+}
+
+.EstatusLoteOKVEL2
+{
+background-color: #008f39 !important; 
+font-size:  90px !important;
+color: #000000 !important;
+font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+text-align: center !important;
+width:100% !important;
+height:100% !important;
+}
+
+.EstatusLoteNOKVEL1
+{
+background-color: #000000 !important; 
+font-size: 110px !important;
+color: orange !important;
+font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+text-align: center !important;
+width:100% !important;
+height:100% !important;
+}
+
+.EstatusLoteNOKVEL2
+{
+background-color: orange !important; 
+font-size: 150px !important;
+ font-weight: 600;
+color: #000000 !important;
+font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+text-align: center !important;
+width:100% !important;
+height:100% !important;
+}
+
+.EstatusLoteNOKCAL1
+{
+-webkit-text-stroke: 2px White;
+background-color: #000000 !important; 
+font-size: 110px !important;
+color: #1565c0 !important;
+font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+text-align: center !important;
+width:100% !important;
+height:100% !important;
+}
+
+.EstatusLoteNOKCAL2
+{
+-webkit-text-stroke: 1px White;
+background-color: #1565c0 !important; 
+font-size: 110px !important;
+color: #332f2c !important;
+font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+text-align: center !important;
+width:100% !important;
+height:50% !important;
+}
+
+.EstatusLoteNOKCALVEL1
+{
+-webkit-text-stroke: 2px black;
+background-color: #000000 !important; 
+font-size: 110px !important;
+color: #804000 !important;
+font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+text-align: center !important;
+width:100% !important;
+height:100% !important;
+}
+
+.EstatusLoteNOKCALVEL2
+{
+-webkit-text-stroke: 1px black;
+background-color: #804000 !important; 
+font-size: 110px !important;
+color: #000000 !important;
+font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+text-align: center !important;
+width:100% !important;
+height:100% !important;
+}
+
+.EstatusLoteMETASUP1
+{
+-webkit-text-stroke: 2px black;
+background-color: Black !important; 
+font-size: 110px !important;
+color: White !important;
+font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+text-align: center !important;
+width:100% !important;
+height:100% !important;
+}
+
+.EstatusLoteMETASUP2
+{
+-webkit-text-stroke: 1px black;
+background-color: White !important; 
+font-size: 180px !important;
+color: Black !important;
+font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+text-align: center !important;
+width:100% !important;
+height:100% !important;
+
+}
+
+.headerPERDIDAShbox
+{
+background-color: #4472c5 !important; 
+font-size: 40px !important;
+color: white !important;
+font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+text-align: center !important;
+ font-weight: bolder;
+border: 1px solid white;
+}
+
+.headerPERDIDAS
+{
+background-color: #4472c5 !important; 
+font-size: 40px !important;
+color: white !important;
+font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+text-align: center !important;
+ font-weight: bolder;
+
+}
+
+.linesPERDIDAS
+{ 
+
+font-size: 2.9vw !important;
+color: black !important;
+font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+text-align: center !important;
+font-weight: bolder;
+padding-left: 10px;
+}
+
+.linesPERDIDASbox
+{ 
+font-size: 40px !important;
+color: black !important;
+font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+text-align: center !important;
+font-weight: bolder;
+border: 1px solid white;
+}
+
+.fondoLine1Perdidas
+{
+background-color: #d0d6eb !important; 
+}
+
+.fondoLine2Perdidas
+{
+background-color: #eaecf6 !important; 
+}
+
+.bordeTexto
+{
+-webkit-text-stroke: 2px black;
+}
+
+.prdClassLine1
+{
+font-size: 40px !important;
+color: #000000 !important;
+border: 1px solid black;
+text-align: center;
+width:100% !important;
+ font-weight: bolder;
+padding-top: 20px;
+padding-bottom: 20px;
+}
+
+
+.size45px
+{
+font-size: 45px !important;
+}
+
+.whiteText
+{
+font-size: 16px !important;
+color: #000000 !important;
+}
+
+.redText
+{
+font-size: 16px !important;
+color: #FF3300 !important;
+}
+
+.yellowText
+{
+font-size: 20px !important;
+color: #FF3300 !important;
+}
+
+.sizeOfNumbers
+{
+font-size: 110px !important;
+color: #ffffff !important;
+ font-weight: 100;
+transform: scale(.8, 1);
+}
+
+.sizeOfNumbers2
+{
+font-size: 80px !important;
+font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+color: #000000 !important;
+ font-weight: 100;
+transform: scale(.8, 1);
+width:100%;
+border-bottom-color: #000000;
+}
+
+.sizeOfNumbers3
+{
+font-size: 4vw !important;
+font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+color: #000000 !important;
+ font-weight: 100;
+width:100%;
+border-bottom-color: #000000;
+margin-left: 0;
+margin-right: 0;
+padding-left: 0;
+padding-right: 0;
+}
+
+.sizeOfNumbers4
+{
+font-size: 60px !important;
+font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+color: #000000 !important;
+ font-weight: bolder;
+width:100%;
+border-bottom-color: #000000;
+margin-left: 0;
+margin-right: 0;
+padding-left: 0;
+padding-right: 0;
+}
+
+
+.sizeOfNumbers5
+{
+font-size: 50px !important;
+font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+color: #000000 !important;
+ font-weight: 200;
+width:100%;
+border-bottom-color: #000000;
+margin-left: 0;
+margin-right: 0;
+padding-left: 0;
+padding-right: 0;
+padding-top: 10px;
+}
+
+.borderbottom
+{
+border-bottom: 1px solid #000;
+padding-top: 10px;
+padding-bottom: 10px;
+}
+
+.border
+{
+border: 1px solid #000;
+margin: 0px;
+}
+
+.bold
+{
+font-weight: bolder;
+}
+
+.boldSize
+{
+font-weight: bolder;
+font-size: 25px !important;
+}
+
+.descriptionOF
+{
+font-size: 60px !important;
+color: #ffffff !important;
+ font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+ font-weight: 200;
+    text-align: center !important;
+}
+
+.descriptionOFred
+{
+font-size: 60px !important;
+color: #FF0000 !important;
+ font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+    text-align: center !important;
+ font-weight: 200;
+}
+
+.descriptionAlarma
+{
+    font-size: 60px !important;
+    color: #FFFFFF !important;
+    font-weight: 200 !important;
+    text-align: center !important;
+    margin-top: 90px;
+}
+
+.valorEstatusA
+{
+    color: #FF0000  !important;
+    font-size: 160px !important;
+    font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+    font-weight: 200;
+    margin-top: 90px;
+}
+
+.valorEstatusS
+{
+    color: yellow !important;
+    font-size: 160px !important;
+    font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+    font-weight: 200;
+    margin-top: 90px;
+}
+
+.valorEstatusD
+{
+    color: #00aae4 !important;
+    font-size: 160px !important;
+    font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+    font-weight: 200;
+    margin-top: 90px;
+}
+
+.AlarmaFooter
+{
+font-size: 40px !important;
+color: #FFFFFF !important;
+}
+
+.date
+{
+font-size: 40px !important;
+color: #ecf238 !important;
+}
+
+.ClienteDescripcion
+{
+    -webkit-text-stroke: 1px black;
+    color: #FFFFFF !important;
+    font-size: 45px !important;
+    font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+}
+
+
+.valorOk
+{
+    -webkit-text-stroke: 1px black;
+    color: #008f39 !important;
+    font-size: 110px !important;
+    font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+    font-weight: 100;
+    margin-top: 20px;
+}
+
+.valorVR
+{
+    -webkit-text-stroke: 1px black;
+    color: yellow !important;
+    font-size: 110px !important;
+    font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+    font-weight: 100;
+    margin-top: 20px;
+}
+
+.valorNC
+{
+    -webkit-text-stroke: 1px black;
+    color: #00aae4  !important;
+    font-size: 110px !important;
+    font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+    font-weight: 100;
+    margin-top: 20px;
+}
+
+.valorNOK
+{
+    -webkit-text-stroke: 1px black;
+    color: #ff8000  !important;
+    font-size: 110px !important;
+    font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+    font-weight: 100;
+    margin-top: 20px;
+}
+
+.valorPNP
+{
+    background-color: #eff4f9 !important; 
+    color: #000000 !important;
+    -webkit-text-stroke: 1px black;
+    font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+    font-size: 60px;
+    margin-right: 0px;
+    margin-left: 0px;
+    padding-top: 20px;
+    padding-right: 0px;
+    padding-left: 0px;
+    width: 100%;
+}
+
+.fondoPNP
+{
+    background-color: #eff4f9 !important; 
+}
+
+
+
+.blancoRojoPNP
+{
+    background-color: #BF1212; 
+    -webkit-text-stroke: 2px black;
+    font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+    font-size: 60px;
+    color: #FFFFFF !important;
+    margin: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100%;
+}
+
+.valorOEEOK
+{
+    -webkit-text-stroke: 2px black;
+    color: #008f39 !important;
+    font-size: 80px !important;
+    font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+    font-weight: 100;
+}
+
+.valorOEENOK
+{
+    -webkit-text-stroke: 2px black;
+    color: #FF0000  !important;
+    font-size: 80px !important;
+    font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+    font-weight: 100;
+}
+
+.valorOEEOKYellow
+{
+    -webkit-text-stroke: 2px black;
+    color: yellow  !important;
+    font-size: 80px !important;
+    font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+    font-weight: 100;
+}
+
+
+.tiempoTamaño
+{
+font-size: 50px;
+}
+
+.rojoCelestePNP
+{
+    background-color: #eff4f9; 
+    -webkit-text-stroke: 1px black;
+    color: #BF1212 !important;
+    font-size: 100px;
+}
+
+.fondoCelestePNP
+{
+    background-color: #eff4f9 !important; 
+}
+
+.fondoCelestePRD
+{
+    background-color: #eff4f9 !important; 
+}
+
+.rojoCelestePNP2
+{
+    background-color: #eff4f9; 
+    -webkit-text-stroke: 1px black;
+    color: #BF1212 !important;
+    font-size: 50px;
+}
+
+.rojoCelestePNP3
+{
+    border-top: 1px solid #000;
+    background-color: #eff4f9; 
+    color: #BF1212 !important;
+    font-size: 80px;
+    font-weight: bolder;
+}
+
+.gridDisplay{
+display: flex;
+justify-content: center;
+}
+
+.produccion{
+font-size: 25px !important;
+color: #ffffff !important;
+}
+
+.titulosDiario{
+font-size: 20px !important;
+color: #ffffff !important;
+}
+
+.testPadding{
+background-color: #000000; //for setting background color
+font-size: 20px !important;
+color: #ffffff !important;
+padding:0;
+}
+
+.date2
+{
+font-size: 40px !important;
+color: #ecf238;
+}
+
+.date3
+{
+font-size: 30px !important;
+color: #000000 !important;
+}
+
+tr[data-mydata="5"] { 
+background: #ff3333!important;
+font-size: 36px !important;
+color: #FF3300 !important;
+}
+
+tr[data-mydata="2"] { 
+background: #ff3333!important;
+font-size: 36px !important;
+color: #FF3300 !important;
+}
+
+tr[data-mydata="3"] { 
+background: #ff3333!important;
+font-size: 36px !important;
+color: #FF3300 !important;
+}
+
+tr[data-mydata="4"] { 
+background:  #ecf238!important;
+font-size: 36px !important;
+color: #FF3300 !important;
+}
+
+tr[data-mydata="1"] { 
+background:  #ecf238!important;
+font-size: 36px !important;
+color: #FF3300 !important;
+}
+
+.footerBlack{
+background:  #000000 !important;
+color: #FFFFFF  !important;
+font-size: 35px !important;
+}
+
+.velocidadVerde{
+background:  #000000 !important;
+color: #008f39  !important;
+font-size: 35px !important;
+}
+
+.velocidadAmarillo{
+background:  #000000 !important;
+color: yellow  !important;
+font-size: 35px !important;
+}
+
+.velocidadRojo{
+background:  #000000 !important;
+color: #BF1212  !important;
+font-size: 35px !important;
+}
+
+.velocidadNegro{
+background:  #eff4f9 !important;
+color: #000000  !important;
+font-size: 35px !important;
+}
+
+.velocidadBlanco{
+background:  #000000 !important;
+color: #FFFFFF  !important;
+font-size: 35px !important;
+}
+
+.velocidadVerde2{
+background-color: #eff4f9 !important; 
+color: #008f39  !important;
+font-size: 35px !important;
+}
+
+.velocidadAmarillo2{
+background-color: #eff4f9 !important; 
+color: yellow  !important;
+font-size: 35px !important;
+}
+
+.velocidadRojo2{
+background-color: #eff4f9 !important; 
+color: #BF1212  !important;
+font-size: 35px !important;
+}
+
+.prdVerde{
+color: #008f39  !important;
+}
+
+.prdAmarillo{
+color: yellow  !important;
+}
+
+.prdRojo{
+color: #BF1212  !important;
+}
+
+.footerPNP{
+background:  #eff4f9 !important;
+color: #000000  !important;
+}
+
+.PedidoGrande
+{
+    -webkit-text-stroke: 1px black;
+    font-family: "Franklin Gothic",Arial,Helvetica,sans-serif;
+    color: #FFFFFF  !important;;
+    font-size: 85px !important;
+    font-weight: 100;
+}
+
+.footerOEE{
+background:  #eff4f9 !important;
+color: #000000  !important;;
+}
+
+
+.trabajandoEstatus{
+font-size: 95px !important;
+}
+
+.alarmaEstatus{
+font-size: 95px !important;
+}
+
+
+.grid1Margin{
+ margin-left: 0px;
+ margin-right: 0px;
+ padding-left: 0px;
+ padding-right: 0px;
+}
+
+.velocidadFootbar
+font-size: 30px !important;
+color: #FFFFFF !important;
+}
+
+.usuarioFootbar{
+font-size: 30px !important;
+color: #000000 !important;
+}
+
+.of{
+font-size: 100px !important;
+color: #ffffff !important;
+ font-weight: 700;
+}
+
+.calidadAzul
+{
+color: blue !important;
+}
+
+.vrAmarillo
+{
+color: yellow !important;
+}
+
+.naranja
+{
+color: orange !important;
+}
+
+.oeeVariable
+{
+font-size: 100px !important;
+color: #ffffff !important;
+ font-weight: 100;
+transform: scale(.5,1.2);
+}
+
+.horasProduccion{
+  color: #FF0000 !important;
+  font-size: 60px !important;
+  font-weight: 200;
+}
+
+.contadorPNP{
+  font-size: 100px !important;
+  font-weight: 200;
+}
+
+.graficoOK {
+    background-color: #008f39;
+    border-bottom: 1px solid;
+    border-bottom-color: #000000;
+    border-top: 1px solid;
+    border-top-color: #000000;
+    border-right: 0px solid;
+    border-right-color: #FFFFFF;
+}
+.graficoNOK {
+    background-color: #804000;
+    border-bottom: 1px solid;
+    border-bottom-color: #000000;
+    border-top: 1px solid;
+    border-top-color: #000000;
+    border-right: 0px solid;
+    border-right-color: #FFFFFF;
+}
+.graficoPNP {
+    background-color: #c01614;
+    border-bottom: 1px solid;
+    border-bottom-color: #000000;
+    border-top: 1px solid;
+    border-top-color: #000000;
+    border-right: 0px solid;
+    border-right-color: #FFFFFF;
+}
+.graficoPP {
+    background-color: #ff0417;
+    border-bottom: 1px solid;
+    border-bottom-color: #000000;
+    border-top: 1px solid;
+    border-top-color: #000000;
+    border-right: 0px solid;
+    border-right-color: #FFFFFF;
+}
+.graficoNC {
+    background-color: #00aae4;
+    border-bottom: 1px solid;
+    border-bottom-color: #000000;
+    border-top: 1px solid;
+    border-top-color: #000000;
+    border-right: 0px solid;
+    border-right-color: #FFFFFF;
+}
+.graficoBV {
+    background-color: #ffff00;
+    border-bottom: 1px solid;
+    border-bottom-color: #000000;
+    border-top: 1px solid;
+    border-top-color: #000000;
+    border-right: 0px solid;
+    border-right-color: #FFFFFF;
+}
+.graficoVR {
+    background-color: #ffff00;
+    border-bottom: 1px solid;
+    border-bottom-color: #000000;
+    border-top: 1px solid;
+    border-top-color: #000000;
+    border-right: 0px solid;
+    border-right-color: #FFFFFF;
+}
+
+.cuadrado{
+width: 40px;
+height: 40px;
+margin: 20px;
+}
+
+
+.bgOK {
+    background-color: #008f39;
+    border: 1px solid;
+    border-color: #000000;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.bgNOK {
+    background-color: #804000;
+    border: 1px solid;
+    border-color: #000000;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.bgPNP {
+    background-color: #c01614;
+    border: 1px solid;
+    border-color: #000000;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.bgPP {
+    background-color: #ff0417;
+    border: 1px solid;
+    border-color: #000000;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.bgNC {
+    background-color: #00aae4;
+    border: 1px solid;
+    border-color: #000000;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.bgBV {
+    background-color: #ffff00;
+    border: 1px solid;
+    border-color: #000000;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.bgVR {
+    background-color: #ffff00;
+    border: 1px solid;
+    border-color: #000000;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.bgOK2 {    background-color: #a2d56e;}
+.bgNOK2 {    background-color: #b86902;}
+.bgPNP2 {    background-color: #c01614;}
+.bgPP2 {    background-color: #c01614;}
+.bgNC2 {    background-color: #00aae4;}
+.bgVR2 {    background-color: #e0af07;}
+
+/*
+//COLORES ORDENES PERDIDAS
+.grisOscuro {
+    background-color: #757c82;
+}
+.grisClaro {
+    background-color: #ada686;
+}
+.color1 {background-color: #FD770E;}
+.color2 {background-color: #091f92;}
+.color3 {background-color: #A316FF;}
+.color4 {background-color: #DA1F4A;}
+.color5 {background-color: #84AD03;}
+.color6 {background-color: #AD0B03;}
+.color7 {background-color: #ada686;}
+.color8 {background-color: #ada686;}
+.color9 {background-color: #ada686;}
+.color10 {background-color: #810495;}
+.color11 {background-color: #952C04;}
+.color12 {background-color: #239652;}
+.color13 {background-color: #969623;}
+.color14 {background-color: #F19D63;}
+.color15 {background-color: #6379F1;}
+.color16 {background-color: #F1F163;}
+.color17 {background-color: #CC63F1;}
+.color18 {background-color: #F1EF63;}
+.color19 {background-color: #C0BF70;}
+.color20 {background-color: #C08870;}
+.color21 {background-color: #70C096;}
+.color22 {background-color: #7094C0;}
+.color23 {background-color: #BA70C0;}
+.color24 {background-color: #C07070;}
+.color25 {background-color: #610000;}
+.color26 {background-color: #FFABFC;}
+.color27 {background-color: #E3FFAB;}
+.color28 {background-color: #ABFFFF;}
+.color29 {background-color: #006152;}
+.color30 {background-color: #667E7E;}
+.color31 {background-color: #9E3535;}
+.color32 {background-color: #6E6D34;}
+.color33 {background-color: #5B6100;}
+.color34 {background-color: #34346E;}
+.color35 {background-color: #56D334;}
+.color36 {background-color: #34D3C9;}
+.color37 {background-color: #D33445;}
+.color38 {background-color: #205726;}
+.color39 {background-color: #0E18E5;}
+.color40 {background-color: #61005E;}
+.color41 {background-color: #E59A0E;}
+.color42 {background-color: #2BE50E;}
+.color43 {background-color: #096100;}
+.color44 {background-color: #C9A259;}
+.color45 {background-color: #59C968;}
+.color46 {background-color: #3F7170;}
+.color47 {background-color: #CD03AF;}
+.color48 {background-color: #CD0303;}
+.color49 {background-color: #9D5252;}
+.color50 {background-color: #4BEFFF;}
+.color51 {background-color: #FF4BFF;}
+.color52 {background-color: #FF4B4B;}
+.color53 {background-color: #FAFF4B;}
+.color54 {background-color: #E2E3C1;}
+.color55 {background-color: #DAE00A;}
+.color56 {background-color: #0D0AE0;}
+*/
+
+.grisClaro {
+    background-color: #FFFFFF;
+}
+.color1 {background-color: #3838ff;}
+.color2 {background-color: #091f92;}
+.color3 {background-color: #3838ff;}
+.color4 {background-color: #091f92;}
+.color5 {background-color: #3838ff;}
+.color6 {background-color: #091f92;}
+.color7 {background-color: #3838ff;}
+.color8 {background-color: #091f92;}
+.color9 {background-color: #3838ff;}
+.color10 {background-color: #091f92;}
+.color11 {background-color: #3838ff;}
+.color12 {background-color: #091f92;}
+.color13 {background-color: #3838ff;}
+.color14 {background-color: #091f92;}
+.color15 {background-color: #3838ff;}
+.color16 {background-color: #091f92;}
+.color17 {background-color: #3838ff;}
+.color18 {background-color: #091f92;}
+.color19 {background-color: #3838ff;}
+.color20 {background-color: #091f92;}
+.color21 {background-color: #3838ff;}
+.color22 {background-color: #091f92;}
+.color23 {background-color: #3838ff;}
+.color24 {background-color: #091f92;}
+.color25 {background-color: #3838ff;}
+.color26 {background-color: #091f92;}
+.color27 {background-color: #3838ff;}
+.color28 {background-color: #091f92;}
+.color29 {background-color: #3838ff;}
+.color30 {background-color: #091f92;}
+.color31 {background-color: #3838ff;}
+.color32 {background-color: #091f92;}
+.color33 {background-color: #3838ff;}
+.color34 {background-color: #091f92;}
+.color35 {background-color: #3838ff;}
+.color36 {background-color: #091f92;}
+.color37 {background-color: #3838ff;}
+.color38 {background-color: #091f92;}
+.color39 {background-color: #3838ff;}
+.color40 {background-color: #091f92;}
+.color41 {background-color: #3838ff;}
+.color42 {background-color: #091f92;}
+.color43 {background-color: #3838ff;}
+.color44 {background-color: #091f92;}
+.color45 {background-color: #3838ff;}
+.color46 {background-color: #091f92;}
+.color47 {background-color: #3838ff;}
+.color48 {background-color: #091f92;}
+.color49 {background-color: #3838ff;}
+.color50 {background-color: #091f92;}
+.color51 {background-color: #3838ff;}
+.color52 {background-color: #091f92;}
+.color53 {background-color: #3838ff;}
+.color54 {background-color: #091f92;}
+.color55 {background-color: #3838ff;}
+.color56 {background-color: #091f92;}
+
+
+.BorderLeftBox {
+    border-left: 1px solid;
+    border-left-color: #000000;
+}
+
+.textSize{
+    font-size: 20px !important;
+}
+.textSize2{
+    font-size: 20px !important;
+    color: #eff4f9 !important;
+}
+
+.noBorderLeftBox {
+    border-left-color: #000000;
+}
+
+.imageSize {
+width: 100% !important;
+height: 100% !important;
+margin: 0 !important;
+padding: 0 !important;
+display: block;
+}
+
+.greenButton>.sapMBtnInner {
+  background-color:#92BE72;
+  background-image: none;
+  text-shadow: none;
+  color: #fff;
+}
+
+.bgPage {
+  background-color:#dae6f2  !important;
+}
+.bgBlanco {
+  background-color:#FFFFFF  !important;
+}
+
+.greenButton .sapMBtnIcon  {
+  color: #fff !important;
+}
+
+.greenButton.sapMBtn:hover>.sapMBtnHoverable {
+    background-color:#008a22;
+    color: white;
+    border-color: green;
+}
+
+.rejectButton>.sapMBtnInner {
+  background-color:#925ace;
+  background-image: none;
+  text-shadow: none;
+  color: #fff;
+}
+
+.rejectButton .sapMBtnIcon  {
+  color: #fff !important;
+}
+
+.rejectButton.sapMBtn:hover>.sapMBtnHoverable {
+    background-color:#825ace;
+    color: white;
+    border-color: purple;
+}
+
+.rejectButton.sapMBtn:hover>.sapMBtnHoverable .sapMBtnIcon {
+    color: red;
+}
+
+.whiteButton>.sapMBtnInner {
+  background-image: none;
+  text-shadow: none;
+  color: #fff;
+}
+
+.whiteButton .sapMBtnIcon  {
+  color: #fff !important;
+}
+
+tr[data-mydata="X"] { 
+background: #f9cb9c !important;
+}
+
+.toolbarVersion {
+    font-size:medium;
+    color:white;
+    font-weight:bold !important
+}
+
+.toolbarGreen{
+background:  #CAF6CA !important;
+}
+
+.toolbarRed{
+background:  #F7CDC9 !important;
+}
+
+.tileNaranja1 {
+
+}
+
+.tileNaranja0 {
+border-color:  #ff8000 !important;
+border-bottom-width: 30px !important;
+}
+
+.bordeNaranja0 {
+    border-color:  #ff8000 !important;
+}
+
+.botonBordeMorado .sapMBtnInner{
+  border-radius:0px;
+    border-color:  #9F2B68 !important;
+}

@@ -1,0 +1,53 @@
+{
+    "cols": [
+        {
+            "label": "Orden",
+            "template": "SHOP_ORDER",
+            "width": "6rem"
+        },
+        {
+            "label": "Material",
+            "template": "DESCRIPTION"
+        },
+        {
+            "label": "Clave",
+            "template": "CLAVE"
+        },
+        {
+            "label": "Aleacion",
+            "template": "ALEACION"
+        },
+        {
+            "label": "Largo",
+            "template": "LARGO_PERFIL"
+        },
+        {
+            "label": "Acabado",
+            "template": "ACABADO"
+        },
+        {
+            "label": "Temple",
+            "template": "TEMPLE"
+        },
+        {
+            "label": "Inicio",
+            "template": "ACTUAL_START_DATE",
+            "width": "10rem"
+        },
+        {
+            "label": "Planeado",
+            "template": "QTY_TO_BUILD",
+            "width": "6rem"
+        },
+        {
+            "label": "Producido",
+            "template": "QTY_DONE",
+            "width": "6rem"
+        },
+        {
+            "label": "Pausa",
+            "template": "HOLD",
+            "width": "4rem"
+        }
+    ]
+}

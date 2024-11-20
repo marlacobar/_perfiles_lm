@@ -1,0 +1,48 @@
+<core:FragmentDefinition xmlns="sap.m"
+  xmlns:l="sap.ui.layout"
+  xmlns:core="sap.ui.core">
+  <Dialog contentHeight="600px" contentWidth="800px" id="updateImpresoraDialog" title="Impresora Actualizar">
+    <l:VerticalLayout class="sapUiContentPadding" width="100%">
+      <l:content>
+        <HBox direction="Column" class=" sapUiSmallMarginEnd">
+          <items>
+            <Label text="ID" width="100%" design="Bold" class="sapUiTinyMarginEnd" />
+            <Input id="ipuPRN_ID" maxLength="36" showValueHelp="false" liveChange="onUpperCase" />
+          </items>
+        </HBox>
+        <HBox direction="Column" class=" sapUiSmallMarginEnd">
+          <items>
+            <Label text="Descripción" width="100%" design="Bold" class="sapUiTinyMarginEnd" />
+            <Input id="ipuPRN_DESCRIPCION" maxLength="40" showValueHelp="false" />
+          </items>
+        </HBox>
+        <HBox direction="Column" class=" sapUiSmallMarginEnd">
+          <items>
+            <Label text="Habilitado" width="100%" design="Bold" class="sapUiTinyMarginEnd" />
+            <CheckBox id="cpuFL_HABILITADO" />
+          </items>
+        </HBox>
+        <HBox direction="Column" class=" sapUiSmallMarginEnd">
+          <items>
+            <Label text="IP" width="100%" design="Bold" class="sapUiTinyMarginEnd" liveChange="onlyIP" />
+            <Input id="ipuPRN_IP" maxLength="15" />
+          </items>
+        </HBox>
+        <HBox direction="Column" class=" sapUiSmallMarginEnd">
+          <items>
+            <Label text="Puerto" width="100%" design="Bold" class="sapUiTinyMarginEnd" />
+            <Input id="ipuPRN_PUERTO" maxLength="5" liveChange="onlyNumeric" />
+          </items>
+        </HBox>
+      </l:content>
+    </l:VerticalLayout>
+
+    <beginButton>
+      <Button type="Emphasized" text="Grabar" icon="sap-icon://add-document" press="editImpresora" />
+    </beginButton>
+    <endButton>
+      <Button type="Reject" text="Cancelar" icon="sap-icon://cancel" press="onCloseDialogU" />
+    </endButton>
+
+  </Dialog>
+</core:FragmentDefinition>

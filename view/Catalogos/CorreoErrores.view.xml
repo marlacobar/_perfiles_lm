@@ -1,0 +1,204 @@
+<mvc:View
+	controllerName="sap.ui.demo.webapp.controller.Catalogos.CorreoErrores"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core"
+	xmlns:u="sap.ui.unified"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns="sap.m"
+	xmlns:tnt="sap.tnt">
+	<NavContainer id="wizardNavContainer">
+		<pages>
+			<Page
+				id="Plan"
+				showHeader="false"
+				backgroundDesign="Solid">
+				<Toolbar
+					class="toolbar_default">
+					<Button icon="sap-icon://nav-back" type="Transparent"
+						class="sapUiMediumMarginBegin" press="onNavBack"></Button>
+					<Image src="images/SAP_Logo.png" />
+					<core:Icon
+						src="sap-icon://grid"
+						class="toolbar_title sapUiSmallMarginBegin">
+						<core:layoutData>
+							<FlexItemData growFactor="1" />
+						</core:layoutData>
+					</core:Icon>
+					<Label labelFor="myColumn"
+						class="toolbar_title"
+						text="Monitor de mensajes de error"
+						wrapping="true" />
+					<ToolbarSpacer />
+					<Label
+						id="username"
+						text=""
+						class="toolbar_title"></Label>
+					<MenuButton
+						visible="true"
+						tooltip="Salir"
+						type="Transparent"
+						text=""
+						icon="sap-icon://person-placeholder"
+						class="sapUiLargeMarginEnd">
+						<menu>
+							<Menu>
+								<MenuItem
+									text="Cerrar sesión"
+									icon="sap-icon://slim-arrow-right"
+									press="logoff" />
+							</Menu>
+						</menu>
+					</MenuButton>
+				</Toolbar>
+
+				<fb:FilterBar header=""
+					reset="onReset" search="onFilterSearch" clear="onClear" showGoOnFB="true"
+					showFilterConfiguration="false" showRestoreButton="true" showClearButton="true"
+					class="sapUiSizeCompact">
+					<fb:filterItems>
+
+						<fb:FilterItem name="D" label="Puesto de trabajo">
+							<fb:control>
+								<MultiComboBox showSecondaryValues="true" id="Puesto_Trabajo_select"
+									items="{ path: '/' }" enabled="true">
+									<core:ListItem key="{WORK_CENTER}" text="{DESCRIPTION}"
+										additionalText="{WORK_CENTER}" />
+								</MultiComboBox>
+							</fb:control>
+						</fb:FilterItem>
+
+						<fb:FilterItem name="E" label="ID Mensaje SAP">
+							<fb:control>
+								<ComboBox id="cboMensajeSAP" items="{ path: '/' }" enabled="true">
+									<core:ListItem key="{ID_MSG_SAP}" text="{ID_MSG_SAP}" />
+								</ComboBox>
+							</fb:control>
+						</fb:FilterItem>
+
+						<fb:FilterItem name="F" label="ID Número SAP">
+							<fb:control>
+								<ComboBox id="cboNumeroSAP" items="{ path: '/' }" enabled="true">
+									<core:ListItem key="{ID_NUM_SAP}" text="{ID_NUM_SAP}" />
+								</ComboBox>
+							</fb:control>
+						</fb:FilterItem>
+
+						<fb:FilterItem name="G" label="Agregar">
+							<fb:control>
+								<Button press="onAgregar" class="" icon="sap-icon://download"
+									tooltip="Agregar" />
+								<Button type="Accept"
+									text=""
+									icon="sap-icon://add-document"
+									press="onAgregar"
+									ariaDescribedBy="acceptButtonDescription genericButtonDescription">
+								</Button>
+							</fb:control>
+
+						</fb:FilterItem>
+						<!--
+           <fb:FilterItem name="H" label="Borrar" >
+              <fb:control> 
+                <Button press="onBorrar" class="" icon="sap-icon://download" tooltip="Borrar" />
+              </fb:control>
+            </fb:FilterItem>
+-->
+					</fb:filterItems>
+
+				</fb:FilterBar>
+				<content>
+					<FlexBox id="print">
+						<l:VerticalLayout>
+							<l:HorizontalLayout class="sapUiResponsiveMargin">
+							</l:HorizontalLayout>
+
+							<IconTabBar
+								id="IconTabBar_Orders"
+								select="handleIconTabBarSelect"
+								class="sapUiResponsiveContentPadding"
+								visible="false">
+								<items>
+									<IconTabFilter
+										showAll="true"
+										count="{/TOTAL}"
+										text="TOTAL"
+										key="All" />
+								</items>
+							</IconTabBar>
+
+
+							<FlexBox id="errores">
+
+
+								<Table
+									id="t_catalogo_errores"
+									class="sapUiResponsiveMargin"
+									width="auto"
+									fixedLayout="true"
+									items="{
+										path: '/ITEMS'
+
+									}">
+									<headerToolbar>
+										<OverflowToolbar>
+											<Title text="Monitor de mensajes de errores" level="H2" />
+											<ToolbarSpacer></ToolbarSpacer>
+										</OverflowToolbar>
+									</headerToolbar>
+									<columns>
+										<Column
+											minScreenWidth="Tablet"
+											demandPopin="false" visible="true">
+											<Text text="ID" />
+										</Column>
+										<Column
+											minScreenWidth="Tablet"
+											demandPopin="false">
+											<Text text="Puesto de trabajo" />
+										</Column>
+										<Column
+											minScreenWidth="Small"
+											demandPopin="true">
+											<Text text="ID Mensaje de SAP" />
+										</Column>
+										<Column
+											minScreenWidth="Small"
+											demandPopin="true">
+											<Text text="ID Número de SAP" />
+										</Column>
+										<Column
+											minScreenWidth="Small"
+											demandPopin="true">
+											<Text text="Habilitado" />
+										</Column>
+									</columns>
+
+									<items>
+										<ColumnListItem>
+											<cells>
+												<Text text="{ID}" />
+												<Text text="{WORK_CENTER}" />
+												<Text text="{ID_MSG_SAP}" />
+												<Text text="{ID_NUM_SAP}" />
+												<Switch state="{VISIBLE}" type="AcceptReject"
+													change="onActivo" class="sapUiSizeCompact">
+													<layoutData>
+														<FlexItemData growFactor="0" />
+													</layoutData>
+												</Switch>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</FlexBox>
+
+						</l:VerticalLayout>
+					</FlexBox>
+				</content>
+
+			</Page>
+		</pages>
+	</NavContainer>
+</mvc:View>

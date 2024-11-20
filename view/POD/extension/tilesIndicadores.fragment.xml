@@ -1,0 +1,28 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:tnt="sap.tnt"
+	xmlns:core="sap.ui.core">
+
+	<!-- Tiles Indicadores Puesto-->
+	<FlexBox alignItems="Start" justifyContent="Start">
+		<HBox id="vboxItems" items="{path:'TagTilesModel>/Rowsets/Rowset/0/Row'}" width="100%">
+			<items>
+
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{TagTilesModel>TILE}" press="onPress" visible="{= ${TagTilesModel>TIPO_TILE} === 'TRABAJANDO' ? false : true }">
+					<TileContent unit="{TagTilesModel>UM}">
+						<NumericContent truncateValueTo="8" value="{TagTilesModel>VALOR}" icon="{TagTilesModel>TILE_ICON}" withMargin="false" />
+					</TileContent>
+				</GenericTile>
+
+			</items>
+		</HBox>
+
+	</FlexBox>
+
+	<!-- Semaforo Estatus Puesto-->
+	<FlexBox alignItems="Start" justifyContent="Start" class="sapUiTinyMarginTop">
+		<HBox items="{path:'TagTilesModel>/Rowsets/Rowset/0/Row'}" width="100%">
+			<!-- 3 Rojo / 7 Verde-->
+			<tnt:InfoLabel id="estadoPuesto" text="{TagTilesModel>VALOR}" colorScheme="{TagTilesModel>COLOR}" visible="{= ${TagTilesModel>TIPO_TILE} === 'TRABAJANDO' ? true : false }" />
+		</HBox>
+	</FlexBox>
+</core:FragmentDefinition>

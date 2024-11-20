@@ -1,0 +1,44 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		id="pDialog"
+		noDataText="No se encontraron usuarios"
+		title="Seleccionar Usuarios"
+		search=".handleSearch"
+		confirm=".handleClose"
+		cancel=".handleClose"
+		items="{/ITEMS}">
+		<columns>
+			<Column>
+				<header>
+					<Text text="Usuario" />
+				</header>
+			</Column>
+			<Column
+				minScreenWidth="Desktop"
+				demandPopin="true"
+				hAlign="End">
+				<header>
+					<Text text="Estatus" />
+				</header>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+					<Text text="{USER_ID}" />
+					<ObjectStatus class="stat"
+                        text="{
+                                      path: 'ESTATUS',
+                                      formatter: '.formatter.TextoTile'
+                                    }"
+                        state="{
+                                      path: 'ESTATUS',
+                                      formatter: '.formatter.TextoStateTile'
+                              }" />
+				</cells>
+			</ColumnListItem>
+		</items>
+	</TableSelectDialog>
+</core:FragmentDefinition>

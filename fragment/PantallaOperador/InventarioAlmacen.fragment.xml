@@ -1,0 +1,101 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:u="sap.ui.unified"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core">
+    <Dialog id="dlg_inventarioAlmacen" 
+            title = "Inventario Disponible" resizable="true" draggable="true" contentHeight="100%" contentWidth="100%">
+        <l:Grid 
+                defaultSpan = "L12 M12 S12" 
+                width = "auto" 
+                id = "Filters">
+            <l:content>
+                <Table id="tbl_inventario" width="100%" growing="false" items="{/ITEMS}" mode="MultiSelect" sticky="ColumnHeaders,HeaderToolbar,InfoToolbar" >    
+                    <headerToolbar>
+                        <Toolbar class="sapMTBStandard_0">
+                            <Title text=" " level="H3"/>
+                            <ToolbarSeparator/>
+                            <SearchField width="40%" liveChange="buscarMaterialInventario" />
+                            <ToolbarSpacer/>
+                            <Button text="Agregar" type="Success" icon="sap-icon://navigation-right-arrow" tooltip="" visible="true" press="agruparComponentes"/>
+                        </Toolbar>
+                    </headerToolbar>
+                    <noData>
+                        <IllustratedMessage/>
+                    </noData>
+                    <columns>
+                        <Column minScreenWidth="Tablet" demandPopin="false" visible="false">
+                            <Label text="Puesto de trabajo" />
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="false">
+                            <Label text="Material" />
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="false" width="20%">
+                            <Label text="Lote" />
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Label text="Almacen " />
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Label text="Cantidad" />
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Label text="UM " />
+                        </Column>
+                        <Column visible = "false" minScreenWidth="Tablet" demandPopin="true">
+                            <Label text="Orden" />
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true" visible="false">
+                            <Label text="ID" />
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true" visible="false">
+                            <Label text="CTD ORIGINAL" />
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true" visible="true">
+                            <Label text="Largo" />
+                        </Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true" visible="true">
+                            <Label text="Car" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <ObjectIdentifier title="{WORK_CENTER}" text="{WORK_CENTER_TEXT}"/>
+                                <ObjectIdentifier title="{
+                                            path: 'CD_MATERIAL',
+                                            formatter: '.formatter.stripLeadingZeros'
+                                        }" text="{DS_MATERIAL}"/>
+                                <ObjectNumber number="{
+                                            path: 'LOTE'
+                                        }" unit="" state="Success"/>
+                                <Text text="{CD_ALMACEN}" />
+                                <Input value="{CANTIDAD}"
+                                            type = "Number" liveChange="verificarCantidadGen" enabled="true"/>
+                                <Text text="{UM}" />
+                                <ObjectNumber number="{
+                                            path: 'ORDEN',
+                                            formatter: '.formatter.stripLeadingZeros'
+                                        }" unit="" state="Information"/>
+                                <Text text="{ID_MOVIMIENTO}" />
+                                <Text text="{CANTIDAD_ORIGINAL}" />
+                                <Text text="{LARGO}" />
+                                <Button width="5em" icon="sap-icon://list" type="Critical" press="mostrarCaracteristicasItem"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </l:content>
+        </l:Grid>
+        <buttons>
+            <Button id="button_eliminar"
+                    width ="20%" type="Accept" visible="false" text="Cambiar" icon="sap-icon://edit" press="confirmarEstatusDialog"/>
+            <Button 
+                    class = "sapUiTinyMarginEnd"
+					width ="20%"
+					text = "Cancelar" 
+					press = "cancelarInventario" icon="sap-icon://sys-cancel-2" 
+					type = "Reject"/>
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

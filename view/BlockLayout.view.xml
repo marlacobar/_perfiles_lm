@@ -1,0 +1,161 @@
+<mvc:View
+  controllerName="sap.ui.demo.webapp.controller.BlockLayout"
+	xmlns:l="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:form="sap.ui.layout.form"
+	xmlns="sap.m">
+  <Panel>
+    <content>
+      <Label class="sapMTitle sapMTitleMaxWidth sapMTitleNoWrap sapMTitleStyleH2 sapUiSelectable sapUiTinyMarginTopBottom"
+            text="Planta"
+             ></Label>
+      <Select
+            id="listPMPlantaBlock"
+            class="sapUiTinyMarginBegin"
+				items="{
+					path: '/',
+					sorter: { path: 'desc' }
+				}"
+        change="onchangeModules"
+        selectionChange="onselectionChangeModules">
+        <core:Item key="{id}" text="{desc}" />
+      </Select>
+    </content>
+  </Panel>
+  <l:VerticalLayout id="containerLayout" width="100%" >
+    <l:BlockLayout id="BlockLayout" background="Light">
+      <l:BlockLayoutRow accentCells="Accent1">
+        <l:BlockLayoutCell
+          id="Accent1"
+          width="2">
+          <core:Icon src="sap-icon://flag" class="sapUiVlt sapUiSmallMarginBeginEnd sapUiSmallMarginBottom blockTittle"/>
+          <Label class="sapMTitle sapMTitleMaxWidth sapMTitleNoWrap sapMTitleStyleH2 sapUiSelectable sapUiSmallMarginBeginEnd"
+            text="{i18n>createPMOrder}"
+            width="100%"></Label>
+          <Text text="{i18n>descCreatePMOrder}" class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop"/>
+          <l:content>
+            <Link
+              type="Default"
+              text="{i18n>linkCreatePMOrder}"
+              press="onDisplayCreatePMOrder"
+              emphasized="true"
+              class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop"/>
+          </l:content>
+        </l:BlockLayoutCell>
+
+        <l:BlockLayoutCell
+          id="Accent2"
+          width="2">
+          <core:Icon src="sap-icon://list" class="sapUiVlt sapUiSmallMarginBeginEnd sapUiSmallMarginBottom blockTittle"/>
+          <Label class="sapMTitle sapMTitleMaxWidth sapMTitleNoWrap sapMTitleStyleH2 sapUiSelectable sapUiSmallMarginBeginEnd"
+            text="{i18n>viewPMOrder}"
+            width="100%"></Label>
+          <Text text="{i18n>descViewPMOrder}" class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop"/>
+          <l:content>
+            <Link
+              type="Default"
+              text="{i18n>linkListPMOrder}"
+              press="onDisplayViewPMOrder"
+              emphasized="true"
+              class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop"/>
+          </l:content>
+        </l:BlockLayoutCell>
+
+        <l:BlockLayoutCell
+           id="Accent3"
+           width="2">
+          <core:Icon src="sap-icon://add-equipment" class="sapUiVlt sapUiSmallMarginBeginEnd sapUiSmallMarginBottom blockTittle"/>
+          <Label class="sapMTitle sapMTitleMaxWidth sapMTitleNoWrap sapMTitleStyleH2 sapUiSelectable sapUiSmallMarginBeginEnd"
+            text="{i18n>createPMNotification}"
+            width="100%"></Label>
+          <Text text="{i18n>descCreatePMNotification}" class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop"/>
+          <l:content>
+            <Link
+              type="Default"
+              text="{i18n>linkCreatePMNotification}"
+              press="onDisplayCreatePMNotification"
+              emphasized="true"
+              class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop"/>
+          </l:content>
+        </l:BlockLayoutCell>
+
+        <l:BlockLayoutCell
+           id="Accent4"
+           width="2">
+          <core:Icon src="sap-icon://activity-items" class="sapUiVlt sapUiSmallMarginBeginEnd sapUiSmallMarginBottom blockTittle"/>
+          <Label class="sapMTitle sapMTitleMaxWidth sapMTitleNoWrap sapMTitleStyleH2 sapUiSelectable sapUiSmallMarginBeginEnd"
+            text="{i18n>viewPMNotification}"
+            width="100%"></Label>
+          <Text text="{i18n>descViewPMNotification}" class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop"/>
+          <l:content>
+            <Link
+              type="Default"
+              text="{i18n>linkListPMNotification}"
+              press="onDisplayViewPMNotification"
+              emphasized="true"
+              class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop"/>
+          </l:content>
+        </l:BlockLayoutCell>
+      </l:BlockLayoutRow>
+
+      <l:BlockLayoutRow>
+        <l:BlockLayoutCell
+        id="Accent5"
+        width="2">
+          <core:Icon src="sap-icon://activity-individual" class="sapUiVlt sapUiSmallMarginBeginEnd sapUiSmallMarginBottom blockTittle"/>
+          <Label class="sapMTitle sapMTitleMaxWidth sapMTitleNoWrap sapMTitleStyleH2 sapUiSelectable sapUiSmallMarginBeginEnd"
+            text="{i18n>tittlePP}"
+            width="100%"></Label>
+          <Text text="{i18n>descriptionPPnoti}" class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop"/>
+          <l:content>
+            <Link
+              type="Default"
+              text="{i18n>linkPPNotification}"
+              press="onCreateOrder"
+              emphasized="true"
+              class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop"/>
+          </l:content>
+        </l:BlockLayoutCell>
+
+        <l:BlockLayoutCell
+          id="Accent6"
+          width="2">
+          <core:Icon src="sap-icon://business-objects-experience" class="sapUiVlt sapUiSmallMarginBeginEnd sapUiSmallMarginBottom blockTittle"/>
+          <Label class="sapMTitle sapMTitleMaxWidth sapMTitleNoWrap sapMTitleStyleH2 sapUiSelectable sapUiSmallMarginBeginEnd"
+            text="{i18n>tittleOEE}"
+            width="100%"></Label>
+          <Text text="{i18n>descOEE}" class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop"/>
+          <l:content>
+            <Link
+              type="Default"
+              text="{i18n>linkOEE}"
+              press="onDisplayOEE"
+              emphasized="true"
+              class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop"/>
+          </l:content>
+        </l:BlockLayoutCell>
+
+        <l:BlockLayoutCell
+          id="Accent7"
+          width="2">
+          <core:Icon src="sap-icon://checklist-2" class="sapUiVlt sapUiSmallMarginBeginEnd sapUiSmallMarginBottom blockTittle"/>
+          <Label class="sapMTitle sapMTitleMaxWidth sapMTitleNoWrap sapMTitleStyleH2 sapUiSelectable sapUiSmallMarginBeginEnd"
+            text="{i18n>tittleQuality}"
+            width="100%"></Label>
+          <Text text="{i18n>descQuality}" class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop"/>
+          <l:content>
+            <Link
+              type="Default"
+              text="{i18n>linkQuality}"
+              press="onQMModule"
+              emphasized="true"
+              class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop"/>
+          </l:content>
+        </l:BlockLayoutCell>
+
+      </l:BlockLayoutRow>
+
+    </l:BlockLayout>
+  </l:VerticalLayout>
+</mvc:View>

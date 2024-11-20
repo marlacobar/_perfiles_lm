@@ -1,0 +1,91 @@
+<mvc:View
+	controllerName="sap.ui.demo.webapp.controller.Catalogos.traduccionValores"
+	xmlns:uxap="sap.uxap"
+	xmlns:core="sap.ui.core"
+	xmlns:tnt="sap.tnt"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:layout="sap.ui.layout"
+	xmlns:forms="sap.ui.layout.form"
+	xmlns:sample="sap.uxap.sample.ObjectPageSubSectionSized.controller.blocks"
+	xmlns:mvc="sap.ui.core.mvc">
+	<NavContainer id="wizardNavContainer">
+		<pages>
+			<Page id="Traduccion" showHeader="false" backgroundDesign="Solid">
+				<Toolbar class="toolbar_default">
+					<Button icon="sap-icon://nav-back" type="Transparent" class="sapUiMediumMarginBegin" press="onNavBack"></Button>
+					<Image src="images/SAP_Logo.png" />
+					<core:Icon src="sap-icon://chain-link" class="toolbar_title sapUiSmallMarginBegin">
+						<core:layoutData>
+							<FlexItemData growFactor="1" />
+						</core:layoutData>
+					</core:Icon>
+					<Label labelFor="myColumn" class="toolbar_title" text="Traduccion de Valores" wrapping="true"/>
+					<ToolbarSpacer />
+					<Label id="username" text="" class="toolbar_title"></Label>
+					<MenuButton visible="true" tooltip="Salir" type="Transparent" text="" icon="sap-icon://person-placeholder" class="sapUiLargeMarginEnd">
+						<menu>
+							<Menu>
+								<MenuItem text="Cerrar sesión" icon="sap-icon://slim-arrow-right" press="logoff" />
+							</Menu>
+						</menu>
+					</MenuButton>
+				</Toolbar>				
+				<content>
+					<VBox class="sapUiSmallMargin sapUiSizeCompact sapUiSizeCozy ">
+						<MessageStrip
+							text="La traducción se hace por proveedor, se tiene que especificar cada una de las características presentes en el certificado."
+							class="sapUiSmallMargin"
+							showIcon="true"/>
+						<forms:SimpleForm editable="true" layout="ColumnLayout"                                         
+							columnsM="2"
+							columnsL="3"
+							columnsXL="4">
+							<forms:content>
+								<Label text="Proveedor"/>
+								<Input
+									id="SupplierSeach"
+									placeholder="Busqueda por Proveedor"
+									showSuggestion="true"
+									suggest=".onSuggest"
+									suggestionItemSelected=".onSuggestionItemSelected"
+									suggestionItems="{path: 'SupplierModel>/Rowsets/Rowset/0/Row'}" >
+									<suggestionItems>
+										<core:ListItem key="{SupplierModel>KEY}" text="{SupplierModel>TEXT}" additionalText="{SupplierModel>KEY}" />
+									</suggestionItems>
+								</Input>
+							</forms:content>
+						</forms:SimpleForm>
+						<Table id="table_traducciones" items="{char>/Rowsets/Rowset/0/Row}">
+							<columns>                   
+								<Column> <Button icon="sap-icon://add"    press="onNewChar" ></Button> </Column>
+								<Column> <Text text="Texto Característica" /> </Column>
+								<Column><Text text="Tipo" /></Column>
+								<Column><Text text="Código Característica Galvasid" /></Column>
+								<Column><Text text="Código Característica Proveedor" /></Column>
+								<Column><Text text="Factor de conversión" /></Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+									<HBox>
+										<Button icon="sap-icon://delete" visible="{path: 'char>REMOVENEW', formatter: '.enableControl'}" press="onDeleteChar" tooltip="Borrar"></Button>
+										<Button icon="sap-icon://edit"   visible="{path: 'char>REMOVENEW', formatter: '.enableControl'}" press="onEditChar" tooltip="Editar" class="sapUiSmallMarginBegin"></Button>
+										<Button icon="sap-icon://activity-items"    visible="{path: 'char>CATTYPE', formatter: '.enableControl'}" press="onViewCharCat"  class="sapUiSmallMarginBegin" tooltip="Ver Categorias"></Button>
+									</HBox>
+									<Text  text="{char>CHAR_DESC}" />
+									<Text  text="{char>TYPE}" />
+									<Text  text="{char>COD_CHAR}" />
+									<Text  text="{char>COD_CHAR_SUP}" />
+									<Text  text="{char>CON}"  />
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</VBox>
+				</content>
+			</Page>
+		</pages>
+	</NavContainer>
+</mvc:View>

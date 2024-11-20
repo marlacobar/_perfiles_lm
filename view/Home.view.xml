@@ -1,0 +1,276 @@
+<mvc:View controllerName="sap.ui.demo.webapp.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:layout="sap.ui.layout"
+    xmlns:tnt="sap.tnt"
+    xmlns:microchart="sap.suite.ui.microchart">
+    <Page showHeader="false">
+        <Toolbar class="toolbar_background">
+
+
+            <core:Icon src="sap-icon://home" class="toolbar_title_Menu sapUiSmallMarginBegin">
+                <core:layoutData>
+                    <FlexItemData growFactor="1" />
+                </core:layoutData>
+            </core:Icon>
+            <Label labelFor="myColumn" class="toolbar_title_Menu" text="Página inicial" wrapping="true" />
+            <ToolbarSpacer />
+            <Label id="username" text="" class="toolbar_title_Menu">
+            </Label>
+            <MenuButton visible="true" icon="sap-icon://person-placeholder" class="sapUiLargeMarginEnd">
+                <menu>
+                    <Menu>
+                        <MenuItem text="Cerrar sesión" icon="sap-icon://slim-arrow-right" press="logoff" />
+                    </Menu>
+                </menu>
+            </MenuButton>
+        </Toolbar>
+        <layout:VerticalLayout class="sapUiResponsiveMargin">
+            <Title text="Centro" class="sapUiTinyMarginBegin toolbar_title_Menu" />
+            <Select id="ListPlanta" width="100%" class="sapUiTinyMarginBegin" change=".onChangePlant" items="{
+                    path: '/',
+                    sorter: { path: 'Name' }
+                }">
+                <core:Item key="{id}" text="{desc}" />
+            </Select>
+
+            <layout:HorizontalLayout allowWrapping="true">
+                <GenericTile id="idTileGenerico" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Tile" subheader="Genericos" press="onTile" visible="true">
+                    <TileContent>
+                        <ImageContent src="sap-icon://alert" />
+                    </TileContent>
+                </GenericTile>
+            </layout:HorizontalLayout>
+
+            <MessageStrip text="Panel Operador" type="Information" showIcon="false" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout">
+            </MessageStrip>
+            <Title text="Panel Operador" visible="false" class="sapUiTinyMarginBegin sapUiTinyMarginTop toolbar_title_Menu" />
+            <layout:HorizontalLayout allowWrapping="true">
+                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" id="panel_operador" visible="true" header="Panel Operador" subheader="POD" press="onPanelOperador">
+                    <TileContent>
+                        <ImageContent src="sap-icon://factory" />
+                    </TileContent>
+                </GenericTile>
+
+            </layout:HorizontalLayout>
+
+            <MessageStrip text="Mantenimiento" type="Information" showIcon="false" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout">
+            </MessageStrip>
+            <Title text="Ver Avisos" visible="false" class="sapUiTinyMarginBegin sapUiTinyMarginTop toolbar_title_Menu" />
+            <layout:HorizontalLayout allowWrapping="true">
+                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" id="ver_aviso" visible="true" header="Ver Avisos" subheader="Mantenimiento" press="onVerAvisos">
+                    <TileContent>
+                        <ImageContent src="sap-icon://alert" />
+                    </TileContent>
+                </GenericTile>
+                <GenericTile id="Ver_ordenes" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Ver Órdenes" subheader="Mantenimiento" press="onVerOrdenes">
+                    <TileContent>
+                        <ImageContent src="sap-icon://key-user-settings" />
+                    </TileContent>
+                </GenericTile>
+                <GenericTile id="Ver_paros" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Paros" subheader="Ver paros / justificar" press="onParos" visible="true">
+                    <TileContent>
+                        <ImageContent src="sap-icon://fob-watch" />
+                    </TileContent>
+                </GenericTile>
+                <GenericTile id="checklist_act" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="CheckList" subheader="Actividades" press="onCheckList_Act" visible="true">
+                    <TileContent>
+                        <ImageContent src="sap-icon://request" />
+                    </TileContent>
+                </GenericTile>
+                <GenericTile id="checklist" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="CheckList" subheader="" press="onCheckList" visible="true">
+                    <TileContent>
+                        <ImageContent src="sap-icon://request" />
+                    </TileContent>
+                </GenericTile>
+                <GenericTile id="checklist_supervisor" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="CheckList" subheader="Supervisor" press="onCheckList_Supervisor" visible="true">
+                    <TileContent>
+                        <ImageContent src="sap-icon://request" />
+                    </TileContent>
+                </GenericTile>
+
+
+            </layout:HorizontalLayout>
+            <MessageStrip text="Catalogos" type="Information" showIcon="false" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout">
+            </MessageStrip>
+            <Title text="Catalogos" visible="false" class="sapUiTinyMarginBegin sapUiTinyMarginTop toolbar_title_Menu" />
+            <layout:HorizontalLayout allowWrapping="true">
+                <GenericTile id="traduccion_valores" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Traducción" subheader="Certificado Proveedor" press="onTraduccion" visible="true">
+                    <TileContent>
+                        <ImageContent src="sap-icon://chain-link" />
+                    </TileContent>
+                </GenericTile>
+                <GenericTile id="idMantenedorImpresoras" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Impresoras" subheader="Administración" press="onMantenedorImpresoras" visible="false">
+                    <TileContent>
+                        <ImageContent src="sap-icon://print" />
+                    </TileContent>
+                </GenericTile>
+
+            </layout:HorizontalLayout>
+
+
+            <MessageStrip text="Calidad" type="Information" showIcon="false" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout">
+            </MessageStrip>
+            <Title text="Calidad" visible="false" class="sapUiTinyMarginBegin sapUiTinyMarginTop toolbar_title_Menu" />
+            <layout:HorizontalLayout allowWrapping="true">
+                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" id="inspeccion" visible="true" header="Avisos Calidad" subheader="Crear" press="onAvisosCalidadCrear">
+                    <TileContent>
+                        <ImageContent src="sap-icon://measurement-document" />
+                    </TileContent>
+                </GenericTile>
+                <GenericTile id="id_pt_terminado" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout CALIDAD" header="Producto Terminado" subheader="Inspección Calidad 04" press="OnInspeccionPT" visible="true">
+                    <TileContent>
+                        <ImageContent src="sap-icon://kpi-managing-my-area" />
+                    </TileContent>
+                </GenericTile>
+                <GenericTile id="id_mat_prima" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout CALIDAD" header="Materia Prima" subheader="Inspección Calidad 01" press="OnInspeccionMP" visible="true">
+                    <TileContent>
+                        <ImageContent src="sap-icon://activity-assigned-to-goal" />
+                    </TileContent>
+                </GenericTile>
+                <GenericTile id="id_revision_lotes" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Revisión de Lotes" subheader="Modificaciones" press="on_ver_revision_lotes" visible="true">
+                    <TileContent>
+                        <ImageContent src="sap-icon://browse-folder" />
+                    </TileContent>
+                </GenericTile>
+                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" id="inspeccion03" header="Lotes Inspección 03" subheader="Inspeccionar" press="onInspeccion03" visible="true">
+                    <TileContent>
+                        <ImageContent src="sap-icon://measurement-document"/>
+                    </TileContent>
+                </GenericTile>
+                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" id="inspeccion09" header="Lotes Inspección 09" subheader="Inspeccionar" press="onInspeccion09" visible="true">
+                    <TileContent>
+                        <ImageContent src="sap-icon://measurement-document"/>
+                    </TileContent>
+                </GenericTile>
+                <GenericTile id="id_revision_lotes_offline" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Revision Lotes" subheader="OFFLINE" press="on_revision_lotes_offline" visible="true">
+                    <TileContent>
+                        <ImageContent src="sap-icon://edit" />
+                    </TileContent>
+                </GenericTile>
+
+            </layout:HorizontalLayout>
+
+            <MessageStrip id="tit_homeAdministracion" text="Administración" type="Information" showIcon="false" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout">
+            </MessageStrip>
+            <Title text="Administración" visible="false" class="sapUiMediumMarginBegin toolbar_title_Menu" />
+            <layout:HorizontalLayout allowWrapping="true">
+                <GenericTile id="mantenimientoUsuarios" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Mantenimiento de Usuarios" subheader="Administración" press="onMantenimientoUsuarios" visible="true">
+                    <TileContent>
+                        <ImageContent src="sap-icon://key-user-settings" />
+                    </TileContent>
+                </GenericTile>
+                <GenericTile id="configuracionObjetosMII" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Objetos MII" subheader="Configuración" press="onGotoConfiguracionObjetosMII" visible="true">
+                    <TileContent>
+                        <ImageContent src="sap-icon://syntax" />
+                    </TileContent>
+                </GenericTile>
+            </layout:HorizontalLayout>
+
+
+            <MessageStrip id="tit_homeDatosMaestros" text="Datos maestros" type="Information" showIcon="false" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout">
+            </MessageStrip>
+            <Title text="Datos maestros" visible="false" class="sapUiMediumMarginBegin toolbar_title_Menu" />
+            <layout:HorizontalLayout allowWrapping="true">
+
+                <GenericTile id="correo" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Listas de Correo" subheader="Administración" press="onListaCorreo" visible="true">
+                    <TileContent>
+                        <ImageContent src="sap-icon://email" />
+                    </TileContent>
+                </GenericTile>
+
+                <GenericTile id="monitorerrores" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Monitor de mensajes" subheader="Administración" press="onListaCorreoErrores" visible="true">
+                    <TileContent>
+                        <ImageContent src="sap-icon://alert" />
+                    </TileContent>
+                </GenericTile>
+
+                <GenericTile id="supervisoresProd" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Supervisores de Prod" subheader="Alta, baja y cambio de supervisores" press="onSupervisoresProd" visible="true">
+                    <TileContent>
+                        <ImageContent src="sap-icon://meeting-room" />
+                    </TileContent>
+                </GenericTile>
+
+                <GenericTile id="id_caractPantOperador" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Caracteristicas" subheader="Pantalla Operador" press="onCaractPantOperador" visible="true">
+                    <TileContent>
+                        <ImageContent src="sap-icon://detail-view" />
+                    </TileContent>
+                </GenericTile>
+            </layout:HorizontalLayout>
+
+
+            <MessageStrip id="tit_homeTransportes" text="Transportes" type="Information" showIcon="false" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout">
+            </MessageStrip>
+
+            <layout:HorizontalLayout allowWrapping="true">
+
+                <GenericTile id="id_regTransportista" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Reg Transportista" subheader="Registro Transportista" press="onRegistroTransportista" visible="true">
+                    <TileContent>
+                        <ImageContent src="sap-icon://shipping-status" />
+                    </TileContent>
+                </GenericTile>
+
+                <GenericTile id="id_regPenalizacion" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Penalizaciones" subheader="" press="onPenalizaciones" visible="true">
+                    <TileContent>
+                        <ImageContent src="sap-icon://collision" />
+                    </TileContent>
+                </GenericTile>
+
+
+<GenericTile id="id_regBascula" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Bascula"  press="onBasculaNuevo" visible="true">
+					<TileContent>
+						<ImageContent src="sap-icon://compare" />
+					</TileContent>
+				</GenericTile>
+
+                <GenericTile id="id_logTransportista" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Log Transporte" subheader="Logistica Transportista" press="onLogtsTransporte" visible="false">
+                    <TileContent>
+                        <ImageContent src="sap-icon://shipping-status" />
+                    </TileContent>
+                </GenericTile>
+
+                <GenericTile id="id_Monitor_Transportes1" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Monitor" subheader="Transportes" press="onMonitorTransportesNuevo" visible="false">
+                    <TileContent>
+                        <ImageContent src="sap-icon://customize" />
+                    </TileContent>
+                </GenericTile>
+                <GenericTile id="id_pizarratransportes" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Pizarra" subheader="Transportes" press="onPizarraTransportes" visible="false">
+                    <TileContent>
+                        <ImageContent src="sap-icon://customize" />
+                    </TileContent>
+                </GenericTile>
+                <GenericTile id="id_pizarralogistica" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Pizarra" subheader="Logistica" press="onPizarraLogistica" visible="false">
+                    <TileContent>
+                        <ImageContent src="sap-icon://customize" />
+                    </TileContent>
+                </GenericTile>
+
+            </layout:HorizontalLayout>
+
+            <MessageStrip id="tit_homeReportes" text="Reportes" type="Information" showIcon="false" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout">
+            </MessageStrip>
+
+            <layout:HorizontalLayout allowWrapping="true">
+                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Reporte Defectos" id="id_defecto_reporte" subheader="Ver Reporte" press="onDefectos" visible="false">
+                    <TileContent>
+                        <ImageContent src="sap-icon://customize" />
+                    </TileContent>
+                </GenericTile>
+                <GenericTile id="id_reporte_calidad" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Reporte Calidad" subheader="Ver Reporte" press="onReporteCali" visible="false">
+                    <TileContent>
+                        <ImageContent src="sap-icon://customize" />
+                    </TileContent>
+                </GenericTile>
+            </layout:HorizontalLayout>
+
+        </layout:VerticalLayout>
+        <footer>
+            <OverflowToolbar id="otbFooter">
+                <ToolbarSpacer />
+                <Label id="version" text="" class="toolbarVersion ">
+                </Label>
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>

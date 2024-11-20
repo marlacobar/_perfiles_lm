@@ -1,0 +1,40 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <TableSelectDialog
+        id="tsd_almacenes"
+        multiSelect ="false"
+        resizable="true"
+        draggable="true"
+        contentWidth="60%"
+        noDataText="Sin resultados"
+        title="Almacenes"
+        search="filtroAlmacen"
+        liveChange="filtroAlmacen"
+        confirm="confirmarAlmacen"
+        cancel="cancelarTSD"
+        items="{
+            path : '/ITEMS',
+            sorter : {
+                path : 'DS_ALMACEN',
+                descending : false
+                }
+        }">
+        <ColumnListItem>
+            <cells>
+                <ObjectIdentifier
+                    title="{CD_ALMACEN}"
+                    text="{DS_ALMACEN}"/>
+            </cells>
+        </ColumnListItem>
+        <columns>
+            <Column
+                minScreenWidth="Tablet"
+                demandPopin="true">
+                <header>
+                    <Text text="Elementos" />
+                </header>
+            </Column>
+        </columns>
+    </TableSelectDialog>
+</core:FragmentDefinition>

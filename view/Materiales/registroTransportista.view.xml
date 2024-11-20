@@ -1,0 +1,115 @@
+<mvc:View 
+	controllerName="sap.ui.demo.webapp.controller.Materiales.registroTransportista"
+    xmlns:core="sap.ui.core"
+    xmlns:fm="sap.ui.layout.form"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:l="sap.ui.layout"
+    xmlns:mvc="sap.ui.core.mvc"
+   xmlns:si="sap.suite.ui.commons.statusindicator"
+	>
+    <Page backgroundDesign="Solid" enableScrolling="true">
+        <customHeader>
+            <Toolbar class="toolbar_default">
+                <Button icon="sap-icon://nav-back" type="Transparent" class="sapUiMediumMarginBegin" press="onNavBack"></Button>
+                <Image src="images/SAP_Logo.png" />
+                <Label labelFor="myColumn" class="toolbar_title" text="Registro Transportistas" wrapping="true" />
+                <ToolbarSpacer/>
+                <Label id="username" text="" class="toolbar_color"></Label>
+	   <MenuButton visible="true" tooltip="Salir" type="Transparent" text="" icon="sap-icon://person-placeholder" class="sapUiLargeMarginEnd">
+		<menu>
+			<Menu>
+				<MenuItem text="Cerrar sesión" icon="sap-icon://slim-arrow-right" press="logoff" />
+			</Menu>
+		</menu>
+ 	   </MenuButton>               
+            </Toolbar>
+        </customHeader>
+        <content>
+	<l:HorizontalLayout class="sapUiContentPadding" >
+	            <FlexBox alignItems="Start"   fitContainer="false">
+			<l:HorizontalLayout class="sapUiResponsiveMargin" allowWrapping="true">
+				<l:VerticalLayout class="sapUiResponsiveMargin" id="Vmsg_solicitud">
+				</l:VerticalLayout >
+			</l:HorizontalLayout >
+			<l:HorizontalLayout class="sapUiResponsiveMargin" allowWrapping="true">
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Total" subheader="{data>/TOTAL} Unidades" press="onTblRegistros('ALL')">
+				<TileContent>
+					<si:StatusIndicator value="{data>/OCUPACION}" showLabel="true" labelPosition="Right"  class="sapUiTinyMargin SICursorStyle" size="Large">
+						<si:propertyThresholds>
+							<si:PropertyThreshold fillColor="Error" toValue="100"/>
+							<si:PropertyThreshold fillColor="Critical" toValue="60"/>
+							<si:PropertyThreshold fillColor="Good" toValue="0"/>
+						</si:propertyThresholds>
+						<si:ShapeGroup>
+							<si:LibraryShape shapeId="factory"/>
+						</si:ShapeGroup>
+					</si:StatusIndicator>
+				</TileContent>
+			</GenericTile>
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="En Espera" press="onTblRegistros('EN_ESPERA')">
+				<TileContent>
+					<NumericContent value="{data>/ESPERA}"  id="kpi_espera"
+						icon="images/Transporte/aparcamiento.png"  withMargin="false" />
+				</TileContent>
+			</GenericTile>
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="En Fila" subheader="Bascula" press="onTblRegistros('FILA_BASCULA')">
+				<TileContent>
+					<NumericContent value="{data>/FILA_BASCULA}"  id="kpi_patio"
+						icon="images/Transporte/bascula.png"  withMargin="false" />
+				</TileContent>
+			</GenericTile>
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Pendiente por" subheader="Descarga" press="onTblRegistros('PEND_DESCARGA')">
+				<TileContent>
+					<NumericContent value="{data>/PEND_DESCARGA}"  id="kpi_bascula"
+						icon="images/Transporte/envase.png"  withMargin="false" />
+				</TileContent>
+			</GenericTile>
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Pendiente por" subheader="Carga" press="onTblRegistros('PEND_CARGA')">
+				<TileContent>
+					<NumericContent value="{data>/PEND_CARGA}"  id="kpi_carga"
+						icon="images/Transporte/camion.png"  withMargin="false" />
+				</TileContent>
+			</GenericTile>
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Pendiente por" subheader="Facturacion" press="onTblRegistros('PEND_FACTURA')">
+				<TileContent>
+					<NumericContent value="{data>/PEND_FACTURA}"  id="kpi_descarga"
+						icon="images/Transporte/fila_factura.png"  withMargin="false" />
+				</TileContent>
+			</GenericTile>
+		          <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="En Fila" subheader="Salida" press="onTblRegistros('FILA_SALIDA')">
+				<TileContent>
+					<NumericContent value="{data>/FILA_SALIDA}"  id="kpi_salida"
+						icon="images/Transporte/fila_salida.png"  withMargin="false" />
+				</TileContent>
+			</GenericTile>
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Tolva" subheader="Pendiente" press="onTblContenedores()">
+				<TileContent>
+					<NumericContent value="{data>/CONTENEDOR}"  id="kpi_contenedor"
+						icon="images/Transporte/contenedores.png"  withMargin="false" />
+				</TileContent>
+			</GenericTile>
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Otro" subheader="" press="onTblRegistros('OTRO')">
+				<TileContent>
+					<NumericContent value="{data>/OTRO}"  id="kpi_otro"
+						icon="images/Transporte/camioneta.png"  withMargin="false" />
+				</TileContent>
+			</GenericTile>
+		</l:HorizontalLayout >
+            </FlexBox>
+</l:HorizontalLayout>
+        </content>
+	<footer>
+		<OverflowToolbar>
+                		<ToolbarSpacer/>
+			<Button icon="sap-icon://appointment-2" type="Emphasized" text="Registrar Unidad" press="onRegistrarUnidad" />
+			<Button icon="sap-icon://begin" type="Success" text="Ingreso Unidad" press="onEntrada" />
+			<Button icon="sap-icon://complete" type="Negative" text="Salida Unidad" press="onSalida" />
+			<Button icon="sap-icon://complete" type="Attention" text="Re-imprimir Boleta" press="onReImprimirBoleta" />
+			<Button icon="sap-icon://alert" type="Negative" text="Genera Penalizacion" press="Penalizacion" />
+			<Button icon="sap-icon://add-contact" type="Transparent" text="Catalogos" press="onCatalogo" />
+                		<ToolbarSpacer/>
+		</OverflowToolbar>
+	</footer>
+    </Page>
+</mvc:View>

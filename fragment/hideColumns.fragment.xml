@@ -1,0 +1,44 @@
+﻿<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:l="sap.ui.layout"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:core="sap.ui.core" >
+  <Dialog
+     id="hideColumns_fragment"
+     title="{i18n>dialog.Columns}">
+    <l:VerticalLayout
+      class="sapUiContentPadding"
+      width="100%">
+      <l:content>       
+        <List
+          id="columnList"
+          items="{/columns}"
+          mode="MultiSelect"
+          includeItemInSelection="true"
+          selectionChange="onSelectionChange">          
+          <StandardListItem
+            title="{Column}"
+            type="Active"
+             />
+          <headerToolbar>
+            <Toolbar>
+              <Title text="{i18n>Columns}" level="H2" />
+              <ToolbarSpacer />                            
+              <Button
+                text="{i18n>selectAll}"
+                icon="sap-icon://multiselect-all"
+                press="_selectColumnsAll" />             
+            </Toolbar>
+          </headerToolbar>
+        </List>
+      </l:content>
+    </l:VerticalLayout>
+
+    <endButton>
+      <Button
+         text="{i18n>ButtonClose}"
+         press="onCloseDialogHideColumns"/>
+    </endButton>
+
+  </Dialog>
+</core:FragmentDefinition>

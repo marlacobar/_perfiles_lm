@@ -1,0 +1,12 @@
+<core:FragmentDefinition 
+    xmlns="sap.ui.comp.valuehelpdialog"
+    xmlns:m="sap.m"
+    xmlns:core="sap.ui.core">
+    <ValueHelpDialog title="Puestos Trabajo" 
+                    ok=".onValueHelpOK" 
+                    cancel=".onValueHelpCancelar" 
+                    afterClose=".onValueHelpAfterClose" 
+                    supportMultiselect="false" key="WORK_CENTER" 
+                    descriptionKey="DESCRIPTION">
+    </ValueHelpDialog>
+</core:FragmentDefinition>

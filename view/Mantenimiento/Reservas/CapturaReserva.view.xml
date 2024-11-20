@@ -1,0 +1,495 @@
+<mvc:View
+	controllerName="sap.ui.demo.webapp.controller.Mantenimiento.Reservas.CapturaReserva"
+	xmlns:uxap="sap.uxap"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:mvc="sap.ui.core.mvc">
+	<NavContainer id="wizardNavContainer">
+		<pages>
+			<Page
+			id="ViewPMOrders"
+			showHeader="false"
+			backgroundDesign="Solid">
+				<Toolbar
+				class="toolbar_default">
+					<Button icon="sap-icon://nav-back" type="Transparent" class="sapUiMediumMarginBegin" press="onNavBack"></Button>
+					<Image src="images/SAP_Logo.png">
+					</Image>
+					<core:Icon
+					src="sap-icon://grid"
+					class="toolbar_title sapUiSmallMarginBegin">
+						<core:layoutData>
+							<FlexItemData growFactor="1" />
+						</core:layoutData>
+					</core:Icon>
+					<Label labelFor="myColumn"
+						class="toolbar_title"
+						text="Captura de Reservas"
+						wrapping="true"
+            />
+					<ToolbarSpacer/>
+					<Label
+						id ="username"
+						text=""
+						class="toolbar_color"></Label>
+					<MenuButton
+						visible="true"
+						tooltip="Salir"
+						type="Transparent"
+						text=""
+						icon="sap-icon://person-placeholder"
+						class="sapUiLargeMarginEnd">
+						<menu>
+							<Menu>
+								<MenuItem
+									text="Cerrar sesión"
+									icon="sap-icon://slim-arrow-right"
+									press="logoff" />
+							</Menu>
+						</menu>
+					</MenuButton>
+				</Toolbar>
+
+				<uxap:ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true" alwaysShowContentHeader="false" preserveHeaderStateOnScroll="false" headerContentPinnable="true" isChildPage="true" upperCaseAnchorBar="false">
+					<uxap:headerTitle>
+						<uxap:ObjectPageDynamicHeaderTitle>
+							<uxap:actions>
+
+							</uxap:actions>
+						</uxap:ObjectPageDynamicHeaderTitle>
+					</uxap:headerTitle>
+					<uxap:headerContent></uxap:headerContent>
+					<uxap:sections>
+						<uxap:ObjectPageSection title="Áreas">
+							<uxap:subSections>
+								<uxap:ObjectPageSubSection>
+									<uxap:blocks>
+										<layout:Grid defaultSpan="L10 M12 S6" class="sapUiSmallMarginTop">
+											<layout:content>
+												<layout:HorizontalLayout class="sapUiContentPadding">
+													<FlexBox direction="Column" alignItems="Start" >
+														<Label text="Fecha Base :"/>
+														<DatePicker id = "fecha_base"
+																	valueFormat="dd-MM-yyyy"
+																	displayFormat="dd-MM-yyyy"/>
+													</FlexBox>
+
+													<FlexBox direction="Column" alignItems="Start" visible="false">
+														<Label text="Clase Movimiento :"/>
+														<ComboBox id="clase_movimiento_select" width="100%" showSecondaryValues="true" items="{ path: '/', sorter: { path: 'id' } }">
+															<core:ListItem key="{BWA}" text="{HTEXT}" additionalText="{CODE}"/>
+														</ComboBox>
+													</FlexBox>
+													<FlexBox direction="Column" alignItems="Start" visible="false">
+														<Label text="Centro :"/>
+														<ComboBox id="centro_select" width="100%" showSecondaryValues="true" items="{ path: '/', sorter: { path: 'id' } }">
+															<core:ListItem key="{WERKS}" text="{NAME1}" additionalText="{CODE}"/>
+														</ComboBox>
+													</FlexBox>
+													<FlexBox direction="Column" alignItems="Start">
+														<Label text="Cuenta de mayor :"/>
+														<ComboBox showSecondaryValues="true" id="SelectCuentaMayor" items="{ path: '/' }" enabled="true">
+															<core:ListItem key="{SAKNR}" text="{SAKNR}-{TXT50}" additionalText="{WORK_CENTER}"/>
+														</ComboBox>
+													</FlexBox>
+													<FlexBox direction="Column" alignItems="Start">
+														<Label text="Centro de Coste :"/>
+														<ComboBox showSecondaryValues="true" id="SelectPCentroCoste" items="{ path: '/' }" enabled="true">
+															<core:ListItem key="{KOSTL}" text="{LTEXT}" additionalText="{WORK_CENTER}"/>
+														</ComboBox>
+													</FlexBox>
+													<FlexBox direction="Column" alignItems="Start">
+														<Label text="Destin.mcías: "/>
+														<Input id="input_dest_mcias" type="Text" width="300px" placeholder="Destin. mcias..." class="sapUiSmallMarginBottom"/>
+													</FlexBox>
+													<FlexBox direction="Column" alignItems="Start" visible="false">
+														<Label text="PosPre :"/>
+														<ComboBox showSecondaryValues="true" id="SelectPosPre" items="{ path: '/' }" enabled="true">
+															<core:ListItem key="{FIPEX}" text="{FIPEX}-{BEZEI}" additionalText="{WORK_CENTER}"/>
+														</ComboBox>
+													</FlexBox>
+
+													<FlexBox direction="Column" alignItems="Start" visible="false">
+														<Label text="Centro Gestor :"/>
+														<ComboBox showSecondaryValues="true" id="SelectCentroGestor" items="{ path: '/' }" enabled="true">
+															<core:ListItem key="{FICTR}" text="{MCTXT}" additionalText="{WORK_CENTER}"/>
+														</ComboBox>
+													</FlexBox>
+												</layout:HorizontalLayout>
+
+												<layout:HorizontalLayout class="sapUiContentPadding">
+													<FlexBox direction="Column" alignItems="Start" visible="false">
+														<Label text="Almacen :"/>
+														<ComboBox showSecondaryValues="true" id="SelectAlmacen" items="{ path: '/' }" enabled="true" selectionChange="onChangeSelectAlmacen">
+															<core:ListItem key="{LGORT}" text="{LGORT}" additionalText="{LGOBE}"/>
+														</ComboBox>
+													</FlexBox>
+													<FlexBox direction="Column" alignItems="Start">
+														<Label text="Material :"/>
+														<ComboBox showSecondaryValues="true" filterSecondaryValues="true" id="SelectMaterial" items="{ path: '/' }" enabled="true" selectionChange="onChangeSelectMaterial">
+															<core:ListItem key="{MATNR}" text="{MATNR}"  additionalText="{MAKTG}"/>
+														</ComboBox>
+													</FlexBox>
+													<FlexBox direction="Column" alignItems="Start">
+														<Label text="Cantidad :"/>
+														<Input id="inputCantidad" type="Text" width="300px" placeholder="Cantidad..." class="sapUiSmallMarginBottom"/>
+													</FlexBox>
+													<FlexBox direction="Column" alignItems="Start" visible="false">
+														<CheckBox id="check_cantidad_fija" text="Cantidad Fija" selected="true" />
+													</FlexBox>
+													<FlexBox direction="Column" alignItems="Start">
+														<Label text="UM Entrada :"/>
+														<ComboBox showSecondaryValues="true" id="SelectUMEntrada" items="{ path: '/' }" enabled="true">
+															<core:ListItem key="{MSEH3}" text="{MSEHL}" />
+														</ComboBox>
+													</FlexBox>
+													<FlexBox direction="Column" alignItems="Start" visible="false">
+														<CheckBox id="check_movimiento_permitido" text="Movimiento Permitido" selected="true" />
+													</FlexBox>
+													<FlexBox direction="Column" alignItems="Start" visible="false">
+														<Label text="Txt. Posicion: "/>
+														<Input id="input_txt_pos" type="Text" width="300px" placeholder="Txt. Posicion..." class="sapUiSmallMarginBottom"/>
+													</FlexBox>
+													<FlexBox direction="Column" alignItems="Start" visible="false">
+														<Label text="Puesto Desc.: "/>
+														<Input id="input_puesto_desc" type="Text" width="300px" placeholder="Puesto Desc..." class="sapUiSmallMarginBottom"/>
+													</FlexBox>
+													<FlexBox direction="Column" alignItems="Stretch">
+														<Button icon="sap-icon://time-account" type="Emphasized" text="Agregar" press="onAddRow" />
+
+													</FlexBox>
+													<FlexBox direction="Column" alignItems="Start">
+														<Button icon="sap-icon://save" type="Accept" text="Guardar" press="onSave" />
+													</FlexBox>
+
+												</layout:HorizontalLayout>
+
+
+												<FlexBox direction="Column" alignItems="Start">
+													<Table id="TableItemReservas" class="sapUiResponsiveMargin" width="100%"  growing="true" items="{/ITEMS}" mode="MultiSelect">
+														<headerToolbar>
+															<OverflowToolbar id="toolbar">
+																<Button icon="sap-icon://delete" tooltip="Eliminar Posición" press=".onDeletePosition"/>
+																<ToolbarSpacer />
+															</OverflowToolbar>
+														</headerToolbar>
+														<columns>
+															<Column width="8%">
+																<Label text="Posicion"/>
+															</Column>
+															<Column >
+																<Label text="Centro"/>
+															</Column>
+															<Column>
+																<Label text="Material"/>
+															</Column>
+															<Column>
+																<Label text="Descripción"/>
+															</Column>
+															<Column >
+																<Label text="Almacen"/>
+															</Column>
+															<Column>
+																<Label text="Cantidad"/>
+															</Column>
+															<Column>
+																<Label text="Cant.Fija"/>
+															</Column>
+															<Column>
+																<Label text="Unidad"/>
+															</Column>
+															<Column>
+																<Label text="Movim.Permitido"/>
+															</Column>
+															<Column>
+																<Label text="Txt.Pos."/>
+															</Column>
+															<Column>
+																<Label text="Puesto.Desc"/>
+															</Column>
+														</columns>
+														<items>
+															<ColumnListItem>
+																<cells>
+																	<Text text="{POSICION}"/>
+																	<Text text="{CENTRO}"/>
+																	<Text text="{MATERIAL}"/>
+																	<Text text="{DESCRIPCION}"/>
+																	<Text text="{ALMACEN}"/>
+																	<Text text="{CANTIDAD}"/>
+																	<Text text="{CANTIDAD_FIJA}"/>
+																	<Text text="{UNIDAD}"/>
+																	<Text text="{MOVIMIENTO_PERMITIDO}"/>
+																	<Text text="{TEXTO_POSICION}"/>
+																	<Text text="{PUESTO_POSICION}"/>
+																</cells>
+															</ColumnListItem>
+														</items>
+													</Table>
+												</FlexBox>
+											</layout:content>
+										</layout:Grid>
+
+									</uxap:blocks>
+								</uxap:ObjectPageSubSection>
+							</uxap:subSections>
+						</uxap:ObjectPageSection>
+						<uxap:ObjectPageSection title="Reservas">
+							<uxap:subSections>
+								<uxap:ObjectPageSubSection>
+									<uxap:blocks>
+										<layout:Grid defaultSpan="L12 M12 S6" class="sapUiSmallMarginTop">
+											<layout:content>
+												<layout:HorizontalLayout class="sapUiContentPadding">
+													<fb:FilterBar header=""
+							  reset="onReset" search="onShowCRView" clear="onClear" showRestoreButton="true" showClearButton="true" class="sapUiSizeCompact">
+														<fb:filterItems>
+
+															<fb:FilterItem name="A" label="Fecha Inicial">
+																<fb:control>
+																	<DatePicker
+																	  id="start_date"
+																	  valueFormat="dd-MM-yyyy"
+																	  displayFormat="dd-MM-yyyy"/>
+																</fb:control>
+															</fb:FilterItem>
+
+															<fb:FilterItem name="B" label="Fecha Final">
+																<fb:control>
+																	<DatePicker
+																	  id="end_date"
+																	  valueFormat="dd-MM-yyyy"
+																	  displayFormat="dd-MM-yyyy"/>
+																</fb:control>
+															</fb:FilterItem>
+
+															<fb:FilterItem name="D" label="Material">
+																<fb:control>
+																	<ComboBox
+																		id="SelectCRMaterial"
+																		items="{
+                          path: '/',
+                          sorter: { path: 'desc' }
+                        }"
+																		showSecondaryValues="true" filterSecondaryValues="true">
+																		<core:ListItem key="{MATNR}" text="{MATNR}"  additionalText="{MAKTG}"/>
+																	</ComboBox>
+																</fb:control>
+															</fb:FilterItem>
+
+															<fb:FilterItem name="O" label="Reserva" mandatory="false">
+																<fb:control>
+																	<MultiInput id="num_reserva_input" showValueHelp="false"/>
+																</fb:control>
+															</fb:FilterItem>
+
+														</fb:filterItems>
+													</fb:FilterBar>
+												</layout:HorizontalLayout>
+												<FlexBox direction="Column" alignItems="Start">
+													<Table id="Table_reservas" class="sapUiResponsiveMargin" width="auto" items="{/ITEMS}">
+														<columns>
+															<Column>
+																<Label text="Reserva"/>
+															</Column>
+															<Column >
+																<Label text="Fecha"/>
+															</Column>
+															<Column>
+																<Label text="Usuario"/>
+															</Column>
+															<Column >
+																<Label text="Posición"/>
+															</Column>
+															<Column>
+																<Label text="Material"/>
+															</Column>
+															<Column>
+																<Label text="Descripción"/>
+															</Column>
+															<Column>
+																<Label text="Gpo.Artículos"/>
+															</Column>
+															<Column>
+																<Label text="Centro"/>
+															</Column>
+															<Column>
+																<Label text="Almacén"/>
+															</Column>
+															<Column>
+																<Label text="Cantidad Sol."/>
+															</Column>
+															<Column>
+																<Label text="Unidad"/>
+															</Column>
+														</columns>
+														<items>
+															<ColumnListItem type="Active" press="onShowTraceability">
+																<cells>
+																	<Text text="{RSNUM}"/>
+																	<Text text="{RSDAT}"/>
+																	<Text text="{USNAM}"/>
+																	<Text text="{RSPOS}"/>
+																	<Text text="{MATNR}"/>
+																	<Text text="{MAKTX}"/>
+																	<Text text="{MATKL}"/>
+																	<Text text="{WERKS}"/>
+																	<Text text="{LGORT}"/>
+																	<Text text="{BDMNG}"/>
+																	<Text text="{MEINS}"/>
+																</cells>
+															</ColumnListItem>
+														</items>
+													</Table>
+												</FlexBox>
+											</layout:content>
+										</layout:Grid>
+									</uxap:blocks>
+								</uxap:ObjectPageSubSection>
+							</uxap:subSections>
+						</uxap:ObjectPageSection>
+						<uxap:ObjectPageSection title="Consulta Stock">
+							<uxap:subSections>
+								<uxap:ObjectPageSubSection>
+									<uxap:blocks>
+										<layout:Grid defaultSpan="L12 M12 S6" class="sapUiSmallMarginTop">
+											<layout:content>
+												<layout:HorizontalLayout class="sapUiContentPadding">
+													<fb:FilterBar header=""
+							  reset="onReset" search="onShowCSView" clear="onClear" showRestoreButton="true" showClearButton="true" class="sapUiSizeCompact">
+														<fb:filterItems>
+
+															<fb:FilterItem name="D" label="Material">
+																<fb:control>
+																	<ComboBox
+																		id="SelectCSMaterial"
+																		items="{
+                          path: '/',
+                          sorter: { path: 'desc' }
+                        }"
+																		showSecondaryValues="true" filterSecondaryValues="true">
+																		<core:ListItem key="{MATNR}" text="{MATNR}"  additionalText="{MAKTG}"/>
+																	</ComboBox>
+																</fb:control>
+															</fb:FilterItem>
+														</fb:filterItems>
+													</fb:FilterBar>
+												</layout:HorizontalLayout>
+												<FlexBox direction="Column" alignItems="Start">
+													<Table id="Table_stock" class="sapUiResponsiveMargin" width="auto" items="{/ITEMS}">
+														<columns>
+															<Column>
+																<Label text="Material"/>
+															</Column>
+															<Column>
+																<Label text="Tipo"/>
+															</Column>
+															<Column>
+																<Label text="Stock Disponible"/>
+															</Column>
+															<Column>
+																<Label text="Punto Pedido"/>
+															</Column>
+															<Column>
+																<Label text="Stock Máximo"/>
+															</Column>
+														</columns>
+														<items>
+															<ColumnListItem>
+																<cells>
+																	<Text text="{MAKTG}"/>
+																	<Text text="{MTART}"/>
+																	<Text text="{LABST}"/>
+																	<Text text="{MINBE}"/>
+																	<Text text="{MABST}"/>
+																</cells>
+															</ColumnListItem>
+														</items>
+													</Table>
+												</FlexBox>
+											</layout:content>
+										</layout:Grid>
+									</uxap:blocks>
+								</uxap:ObjectPageSubSection>
+							</uxap:subSections>
+						</uxap:ObjectPageSection>
+						<uxap:ObjectPageSection title="Componentes">
+							<uxap:subSections>
+								<uxap:ObjectPageSubSection>
+									<uxap:blocks>
+										<layout:Grid defaultSpan="L12 M12 S6" class="sapUiSmallMarginTop">
+											<layout:content>
+												<layout:HorizontalLayout class="sapUiContentPadding">
+													<fb:FilterBar header=""
+							  reset="onReset" search="onShowCCView" clear="onClear" showRestoreButton="true" showClearButton="true" class="sapUiSizeCompact">
+														<fb:filterItems>
+															<fb:FilterItem name="D" label="Equipo">
+																<fb:control>
+																	<ComboBox
+																		id="SelectCCEquipo"
+																		items="{
+                          path: '/',
+                          sorter: { path: 'desc' }
+                        }"
+																		showSecondaryValues="true" filterSecondaryValues="true">
+																		<core:ListItem key="{EQUNR}" text="{EQUNR}"  additionalText="{EQKTX}"/>
+																	</ComboBox>
+																</fb:control>
+															</fb:FilterItem>
+														</fb:filterItems>
+													</fb:FilterBar>
+												</layout:HorizontalLayout>
+												<FlexBox direction="Column" alignItems="Start">
+													<Table id="Table_componentes" class="sapUiResponsiveMargin" width="auto" items="{/ITEMS}">
+														<columns>
+															<Column>
+																<Label text="Pos."/>
+															</Column>
+															<Column>
+																<Label text="TpP"/>
+															</Column>
+															<Column>
+																<Label text="Componente"/>
+															</Column>
+															<Column>
+																<Label text="Descripción"/>
+															</Column>
+															<Column>
+																<Label text="Cantidad"/>
+															</Column>
+															<Column>
+																<Label text="UM"/>
+															</Column>
+														</columns>
+														<items>
+															<ColumnListItem>
+																<cells>
+																	<Text text="{POSNR}"/>
+																	<Text text="{EQTYP}"/>
+																	<Text text="{IDNRK}"/>
+																	<Text text="{MAKTX}"/>
+																	<Text text="{MENGE}"/>
+																	<Text text="{MEINS}"/>
+																</cells>
+															</ColumnListItem>
+														</items>
+													</Table>
+												</FlexBox>
+											</layout:content>
+										</layout:Grid>
+									</uxap:blocks>
+								</uxap:ObjectPageSubSection>
+							</uxap:subSections>
+						</uxap:ObjectPageSection>
+					</uxap:sections>
+				</uxap:ObjectPageLayout>
+			</Page>
+		</pages>
+	</NavContainer>
+</mvc:View>
+
+

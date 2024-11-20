@@ -1,0 +1,69 @@
+<mvc:View
+	controllerName="sap.ui.demo.webapp.controller.Materiales.PenalizacionesTransporte"
+	xmlns:uxap="sap.uxap"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"
+            xmlns:viz="sap.viz.ui5.controls"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:ch="sap.suite.ui.commons">
+	<Page backgroundDesign="Solid" enableScrolling="true">
+		<customHeader>
+			<Toolbar class="toolbar_default">
+				<Button icon="sap-icon://nav-back" type="Transparent" class="sapUiMediumMarginBegin" press="onNavBack"></Button>
+				<Image src="images/SAP_Logo.png" />
+				<Label labelFor="myColumn" class="toolbar_title" text="Penalizaciones Transportes" wrapping="true" />
+				<ToolbarSpacer/>
+				<Label id="username" text="" class="toolbar_color"></Label>
+				<Button icon="sap-icon://person-placeholder" type="Transparent" class="sapUiLargeMarginEnd" />
+            			</Toolbar>
+        		</customHeader>
+		<content>
+			<VBox class="sapUiSmallMargin sapUiSizeCompact sapUiSizeCozy ">
+				<layout:Grid defaultSpan="L12 M7 S12">
+					<layout:content>
+						<Table
+							id="tblpenalizacion"
+							width="auto"
+							growing="true"
+							growingThreshold="50"
+							items="{penalizaciones>/}">
+							<headerToolbar>
+								<OverflowToolbar>									
+                                            						<ToolbarSpacer></ToolbarSpacer>                                            
+                                            						<Button icon="sap-icon://refresh" press="onConsultar" tooltip="Actualizar" />
+                                            						<Button icon="sap-icon://download" press="onExport" tooltip="Exportar CSV" />
+                                        					</OverflowToolbar>
+                                    					</headerToolbar>
+							<columns>
+								<Column><Label text="TRANSPORTE"/></Column>
+								<Column><Label text="FECHA PENALIZACION"/></Column>
+								<Column><Label text="TIPO"/></Column>
+								<Column><Label text="PENALIZADO"/></Column>
+								<Column><Label text="COMENTARIO"/></Column>
+								<Column><Label text="ESTATUS"/></Column>
+								<Column></Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text text="{penalizaciones>TRANSPORTE}" />
+										<Text text="{penalizaciones>FECHA_PENALIZACION}"/>
+										<Text text="{penalizaciones>TIPO}"/>
+										<Text text="{penalizaciones>PENALIZADO}"/>
+										<Text text="{penalizaciones>COMENTARIO}"/>
+										<Text text="{penalizaciones>ESTATUS}"/>
+										<Button tooltip="Desactivar" icon="sap-icon://cancel"  press="DesactivarPenalizacion" />
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</layout:content>
+				</layout:Grid>
+			</VBox>
+		</content>
+	</Page>
+</mvc:View>

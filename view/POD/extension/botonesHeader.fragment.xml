@@ -1,0 +1,26 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:tnt="sap.tnt"
+    xmlns:core="sap.ui.core">
+
+    <Button icon="sap-icon://nav-back" type="Transparent" class="sapUiTinyMarginBegin" press="onNavBack">
+    </Button>
+    <Image src="../../Piso/MII-Launchpad/images/logo_perfiles.png" press="onNavBack" width="15%"/>
+
+    <ToolbarSpacer/>
+    <Button id="btn_iniciarOrden" visible="{CNF_OBJ>/btn_iniciarOrden}" icon="sap-icon://process" type="Emphasized" text="Iniciar Orden" press="onIniciarOrden"/>
+    <Button id="btn_declararMaterial" visible="{CNF_OBJ>/btn_declararMaterial}" icon="sap-icon://add-product" type="Negative" text="Declarar Material" press="onCompletarSfc"/>
+    <Button id="btn_montarComponente" visible="{CNF_OBJ>/btn_montarComponente}" icon="sap-icon://bar-code" type="Success" text="Montar" press="onComponentesList"/>
+    <Button id="btn_pausarOrden" visible="{CNF_OBJ>/btn_pausarOrden}" icon="sap-icon://pause" type="Critical" text="Pausar Orden" press="onPendiente"/>
+    <Button id="btn_cerrarOrden" visible="{CNF_OBJ>/btn_cerrarOrden}" icon="sap-icon://inspect-down" type="Negative" text="Cerrar Orden" press="onCerrarOrden"/>
+    <Button id="btn_reAbrirOrden" visible="{CNF_OBJ>/btn_reAbrirOrden}" icon="sap-icon://restart" type="Critical" text="Re-Abrir Orden" press="onReAbrirOrden"/>
+    <Button icon="sap-icon://synchronize" tooltip="Recargar información" press="onRefreshOrders">
+    </Button>
+
+    <FlexBox direction="Row" alignItems="Start" class="sapUiTinyMarginBottom">
+        <Text text="Usuario" class="sapUiTinyMarginEnd"/>
+        <tnt:InfoLabel id="username" text="" colorScheme="7"/>
+    </FlexBox>
+
+    <Button icon="sap-icon://log" tooltip="Cerrar Sesión" press="onCerrarSesion"/>
+
+</core:FragmentDefinition>

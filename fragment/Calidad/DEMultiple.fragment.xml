@@ -1,0 +1,72 @@
+<core:FragmentDefinition xmlns="sap.m"
+  xmlns:l="sap.ui.layout"
+  xmlns:core="sap.ui.core">
+  <Dialog id="InspeccionarDialogDE" title="Lotes a Registrar Decisión de Empleo">
+    <l:VerticalLayout class="sapUiContentPadding" width="100%">
+      <l:content>
+        <Panel width="100%" class="sapUiResponsiveMargin sapUiNoContentPadding">
+          <content>
+
+            <FlexBox justifyContent="Start" class="sapUiResponsiveMargin" width="auto">
+              <VBox class="sapUiSmallMarginEnd" justifyContent="Start">
+                <Label text="Indique valoración:"/>
+                <ComboBox id="Combo_decisionMULTI" showSecondaryValues="true" width="80%" selectionChange="onDEChange" items="{
+                    path: '/',
+                    sorter: { path: 'id' }
+                }">
+                  <core:ListItem key="{key}" text="{text}" additionalText="{code}"/>
+                </ComboBox>
+              </VBox>
+              <VBox class="sapUiSmallMarginEnd" justifyContent="Start">
+                <Label id="dateExpLabel" text="Nueva fecha de vencimiento:" visible="false"/>
+                <DatePicker value="{global>/expiryDate}" id="expiryDatePicker" change="handleChange" valueFormat="yyyy-MM-dd" displayFormat="dd-MM-yyyy" visible="false" />
+              </VBox>
+
+            </FlexBox>
+
+            <Table id="Tabla_LotesDE" class="sapUiResponsiveMargin" width="auto" mode="MultiSelect" items="{/ITEMS}">
+              <columns>
+                <Column minScreenWidth="Small" demandPopin="true" hAlign="Center">
+                  <Label text="Lote"/>
+                </Column>
+                <Column minScreenWidth="Small" demandPopin="true" hAlign="Center">
+                  <Label text="Fecha Creación"/>
+                </Column>
+                <Column minScreenWidth="Small" demandPopin="true" hAlign="Center">
+                  <Label text="Status"/>
+                </Column>
+                <Column minScreenWidth="Small" demandPopin="true">
+                  <Label text="Material"/>
+                </Column>
+                <Column minScreenWidth="Small" demandPopin="true" hAlign="Center">
+                  <Label text="Puesto de Trabajo"/>
+                </Column>
+                <Column minScreenWidth="Small" demandPopin="true" hAlign="Center">
+                  <Label text="Orden"/>
+                </Column>
+              </columns>
+              <items>
+                <ColumnListItem>
+                  <cells>
+                    <Text text="{LOTE_INSPECCION}"/>
+                    <Text text="{path: 'CREAT_DAT', formatter: '.formatter.date'}" />
+                    <ObjectStatus text="{SYS_STATUS}" active="true" inverted="true" state="{= ${SYS_STATUS} === 'LIB' ? 'Information' : 'Warning'}" />
+                    <ObjectIdentifier title="{MATERIAL_DESC}" text="{MATERIAL}" />
+                    <Text text="{ARBPL}" />
+                    <Text text="{NUM_ORDER}" />
+                  </cells>
+                </ColumnListItem>
+              </items>
+            </Table>
+          </content>
+        </Panel>
+      </l:content>
+    </l:VerticalLayout>
+    <beginButton>
+      <Button type="Accept" text="Grabar DE Múltiple" icon="sap-icon://employee-lookup" press="onConfirmDEMasiva" enabled="{= ${global>/decision_Accept} === true ? ${global>/expiryDate} !== '' ? true : false : true}"/>
+    </beginButton>
+    <endButton>
+      <Button type="Reject" text="Cancelar" icon="sap-icon://cancel" press="onCloseDialogLotesDE"/>
+    </endButton>
+  </Dialog>
+</core:FragmentDefinition>

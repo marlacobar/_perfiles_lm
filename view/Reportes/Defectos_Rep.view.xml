@@ -1,0 +1,86 @@
+<mvc:View controllerName="sap.ui.demo.webapp.controller.Reportes.Defectos_Rep"
+  xmlns:form="sap.ui.layout.form"
+  xmlns:l="sap.ui.layout"
+  xmlns:core="sap.ui.core"
+  xmlns:u="sap.ui.unified"
+  xmlns:fb="sap.ui.comp.filterbar"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m">
+  <NavContainer id="wizardNavContainer">
+    <pages>
+      <Page id="wizardContentPage" title="Defectos Lote" backgroundDesign="Solid" showHeader="false">
+        <Toolbar class="toolbar_default">
+          <Button icon="sap-icon://nav-back" type="Transparent" class="sapUiMediumMarginBegin" press="onNavBack"></Button>
+          <Image src="images/SAP_Logo.png">
+          </Image>
+          <core:Icon src="sap-icon://grid" class="toolbar_title sapUiSmallMarginBegin">
+            <core:layoutData>
+              <FlexItemData growFactor="1" />
+            </core:layoutData>
+          </core:Icon>
+          <Label labelFor="myColumn" class="toolbar_title" text="Defectos Lote" wrapping="true" />
+          <ToolbarSpacer/>
+          <Label
+              id ="username" text="" class="toolbar_color"></Label>
+          <MenuButton visible="true" tooltip="Salir" type="Transparent" text="" icon="sap-icon://person-placeholder" class="sapUiLargeMarginEnd">
+            <menu>
+              <Menu>
+                <MenuItem text="Cerrar sesión" icon="sap-icon://slim-arrow-right" press="logoff" />
+              </Menu>
+            </menu>
+          </MenuButton>
+        </Toolbar>
+        <fb:FilterBar header="Defectos por Lote" reset="onReset" search="onFilterSearch" clear="onClear" showRestoreButton="true" showClearButton="true" class="sapUiSizeCompact">
+          <fb:filterItems>
+
+            <fb:FilterItem name="A" label="Lote(s)" mandatory="true">
+              <fb:control>
+                <MultiInput id="batch"/>
+              </fb:control>
+            </fb:FilterItem>
+
+          </fb:filterItems>
+
+        </fb:FilterBar>
+
+        <content>
+
+          <Table id="Defectos" class="sapUiResponsiveMargin" width="auto" items="{/ITEMS}">
+            <columns>
+              <Column minScreenWidth="Small" demandPopin="true">
+                <Label text="ID"/>
+              </Column>
+              <Column minScreenWidth="Small" demandPopin="true">
+                <Label text="Defecto"/>
+              </Column>
+              <Column minScreenWidth="Small" demandPopin="true">
+                <Label text="Fecha Reg"/>
+              </Column>
+              <Column minScreenWidth="Small" demandPopin="true">
+                <Label text="Usuario"/>
+              </Column>
+              <Column minScreenWidth="Tablet" demandPopin="false">
+                <Label text="Observación"/>
+              </Column>
+            </columns>
+
+            <items>
+              <ColumnListItem>
+                <cells>
+                  <ObjectIdentifier title="{ID_DEFECTO}"/>
+                  <Text text="{DESCRIPCION}"/>
+                  <Text text="{
+                                path: 'FECHA_INS',
+                                formatter:'.formatter.date'
+                                }"/>
+                  <Text text="{USUARIO_REGISTRO}"/>
+                  <Text text="{TEXTO}"/>
+                </cells>
+              </ColumnListItem>
+            </items>
+          </Table>
+        </content>
+      </Page>
+    </pages>
+  </NavContainer>
+</mvc:View>

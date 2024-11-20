@@ -1,0 +1,53 @@
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:l="sap.ui.layout"
+   xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form">
+<Dialog id="translatechars_inspeccion" title="Traducción de valores"  afterClose="">
+	<VBox class="sapUiSmallMargin sapUiSizeCompact sapUiSizeCozy ">
+		<f:Form editable="true">	
+			<f:layout>  
+				<f:ResponsiveGridLayout
+					adjustLabelSpan="true"
+					singleContainerFullSize="true" />
+			</f:layout>
+			<f:formContainers>
+				<f:FormContainer title="" >
+					<f:formElements>
+						<f:FormElement label="Codigo Traduccion">
+							<f:fields>
+								<Input value="" id="che_cod" enabled="false"/>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Codigo Galvasid" >
+							<f:fields>
+								<Input value="" id="che_codgalv"/>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Codigo Proveedor">
+							<f:fields>
+							<Input value="" id="che_codprv"/>
+							</f:fields>
+						</f:FormElement>						
+					</f:formElements>
+				</f:FormContainer>
+			</f:formContainers>
+		</f:Form>
+	</VBox>
+    <beginButton>
+      <Button
+         type="Accept"
+         text="Guardar"
+         icon="sap-icon://accept"
+         press="onSaveChar"/>
+    </beginButton>
+    <endButton>
+      <Button
+         type="Reject"
+         text="Cerrar"
+         icon="sap-icon://cancel"
+         press="onCancelChars"/>
+    </endButton>
+
+  </Dialog>
+</core:FragmentDefinition>

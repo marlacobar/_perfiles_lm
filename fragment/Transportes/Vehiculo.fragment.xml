@@ -1,0 +1,440 @@
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc">
+    <Dialog id="DGCatalogos" title="Actualiza Catalogos Transportistas" afterClose="onCloseCat">
+
+
+        <OverflowToolbar>
+            <Button
+                press="onBack" icon="sap-icon://nav-back"
+                type="Transparent" visible="{/BtnBack}" />
+            <Button
+                text="Alta Chofer"
+                press="onAChofer" icon="sap-icon://add-employee"
+                visible="{/BtnACh}" />
+            <Button
+                text="Alta Camion"
+                press="onACamion" icon="sap-icon://add-product"
+                visible="{/BtnACa}" />
+            <Button
+                text="Alta Remolque"
+                press="onARemolque" icon="sap-icon://add-coursebook"
+                visible="{/BtnARe}" />
+        </OverflowToolbar>
+
+        <VBox class=" sapUiSmallMargin sapUiSizeCompact sapUiSizeCozy ">
+            <core:InvisibleText id="infoV" text="0" />
+            <core:InvisibleText id="Vehiculoid" text="0" />
+
+
+            <f:Form id="SFMCatalogos" editable="true">
+                <f:layout>
+                    <f:ResponsiveGridLayout
+                        adjustLabelSpan="true"
+                        columnsXL="2"
+                        columnsL="2"
+                        columnsM="2"
+
+                        singleContainerFullSize="true"
+                         />
+                </f:layout>
+                <f:formContainers>
+
+                    <f:FormContainer title="Operador" visible="{/FcOperador}">
+                        <f:formElements>
+                            <f:FormElement label="Curp">
+                                <f:fields>
+                                    <Input
+                                        id="in_curp"
+                                        maxLength="18"
+                                        placeholder="Ingresa CURP"
+                                        showSuggestion="true"
+                                        suggest=".onSearchCurp"
+                                        maxSuggestionWidth="800px"
+                                        showTableSuggestionValueHelp="false"
+                                        suggestionRows="{path: 'curp>/'}"
+                                        suggestionItemSelected=".onSelectCurp"
+                            
+                                        >
+                                        <suggestionColumns>
+                                            <Column demandPopin="true">
+                                                <Label text="CURP" />
+                                            </Column>
+                                            <Column demandPopin="true">
+                                                <Label text="NOMBRE" />
+                                            </Column>
+                                            <Column demandPopin="true">
+                                                <Label text="TELEFONO" />
+                                            </Column>
+                                        </suggestionColumns>
+                                        <suggestionRows>
+                                            <ColumnListItem>
+                                                <cells>
+                                                    <Label text="{curp>CURP}" />
+                                                    <Label text="{curp>NOMBRE}" />
+                                                    <Label text="{curp>TELEFONO}" />
+                                                </cells>
+                                            </ColumnListItem>
+                                        </suggestionRows>
+                                    </Input>
+                                    <Button tooltip="Buscar" icon="sap-icon://search"
+                                        press="onValidaCurp" type="Attention" id="btn_vcurp">
+                                        <layoutData>
+                                            <l:GridData span="XL1 L1 M2 S2" />
+                                        </layoutData>
+                                    </Button>
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Nombre">
+                                <f:fields>
+                                    <Input id="in_chofer" value="" placeholder="Ingresa chofer" />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Tiene Whatsapp">
+                                <f:fields>
+                                    <CheckBox id="in_wtsp" valueState="Information" select="false"
+                                        tooltip="Whatsapp" />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Celular Operador" visible="{/TelVisible}">
+                                <f:fields>
+                                    <MaskInput mask="999 999 9999" placeholderSymbol="_"
+                                        placeholder="Ingrese Tefono" id="in_tel" />
+                                    <Button tooltip="Validar" icon="sap-icon://complete"
+                                        press="onValidaTelefono" type="Attention">
+                                        <layoutData>
+                                            <l:GridData span="XL1 L1 M2 S2" />
+                                        </layoutData>
+                                    </Button>
+                                </f:fields>
+                            </f:FormElement>
+
+                            <f:FormElement label="Licencia">
+                                <f:fields>
+                                    <Input id="ilicencia" value="" placeholder="Ingresa licencia" />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Vigenvia licencia">
+                                <DatePicker
+                                    id="DP2"
+                                    placeholder="Ingrese la fecha"
+                                    change="handleChange"
+                                    class="sapUiSmallMarginBottom" />
+                            </f:FormElement>
+                            <f:FormElement label="Estado licencia">
+                                <f:fields>
+                                    <Input id="iedo_lic" value="" placeholder="Estado" />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="NSS">
+                                <f:fields>
+                                    <Input id="inss" value="" placeholder="Ingresa NSS" />
+                                </f:fields>
+                            </f:FormElement>
+
+                            <f:FormElement>
+                                
+                                <f:fields > 
+                                                                       
+                                    <Button text=" Guardar Operador " tooltip="GuardarOperador"
+                                        icon="sap-icon://save"
+                                        press="OnSaveOp" type="Emphasized">
+                                        <layoutData>
+                                            <l:GridData span="XL3 L4 M6 S12" />
+                                        </layoutData>
+                                    </Button>
+                                </f:fields>
+                            </f:FormElement>
+
+                        </f:formElements>
+                    </f:FormContainer>
+
+
+                    <f:FormContainer title="Transporte" visible="{/FcTransporte}">
+                        <f:formElements>
+
+                            <f:FormElement label="Linea Transporte" id="lbprov_cliente">
+                                <f:fields>
+                                    <ComboBox
+                                        id="in_transportista"
+                                        items="{path:'transporte>/' ,length : '9999'}"
+                                        placeholder="Selecciona Proveedor / Transportista"
+                                        showSecondaryValues="true"
+                                        filterSecondaryValues="true"
+                                    >
+                                        <core:ListItem key="{transporte>ID_PROVEEDOR}"
+                                            text="{transporte>NOMBRE}"
+                                            additionalText="{transporte>ID_PROVEEDOR}" />
+                                    </ComboBox>
+                                </f:fields>
+                            </f:FormElement>
+
+                            <f:FormElement label="Placas Tracto">
+                                <f:fields>
+                                    <Input
+                                        id="in_placas"
+                                        maxLength="7"
+                                        placeholder="Ingresa Placa"
+                                        showSuggestion="true"
+                                        suggest=".onSearchPlaca"
+                                        maxSuggestionWidth="800px"
+                                        showTableSuggestionValueHelp="false"
+                                        suggestionRows="{path: 'placas>/'}"
+                                        suggestionItemSelected=".onSelectPlaca">
+                                        <suggestionColumns>
+                                            <Column demandPopin="true">
+                                                <Label text="TRACTO" />
+                                            </Column>
+                                            <Column demandPopin="true">
+                                                <Label text="CHOFER" />
+                                            </Column>
+                                            <Column demandPopin="true">
+                                                <Label text="PLANA" />
+                                            </Column>
+                                            <Column demandPopin="true">
+                                                <Label text="TIPO CAMION" />
+                                            </Column>
+                                            <Column demandPopin="true">
+                                                <Label text="LINEA" />
+                                            </Column>
+                                            <Column demandPopin="true">
+                                                <Button press="NuevoTransporte"
+                                                    tooltip="Nuevo Transporte" icon="sap-icon://add" />
+                                            </Column>
+                                        </suggestionColumns>
+                                        <suggestionRows>
+                                            <ColumnListItem>
+                                                <cells>
+                                                    <Label text="{placas>PLACAS_TRACTO}" />
+                                                    <Label text="{placas>CHOFER}" />
+                                                    <Label text="{placas>PLACAS_PLANA}" />
+                                                    <Label text="{placas>TIPOCAMION}" />
+                                                    <Label text="{placas>TRANSPORTISTA}" />
+                                                    <Label text="" />
+                                                </cells>
+                                            </ColumnListItem>
+                                        </suggestionRows>
+                                    </Input>
+                                </f:fields>
+                            </f:FormElement>
+
+                            <f:FormElement label="Tipo Camion">
+                                <f:fields>
+                                    <ComboBox id="in_tipocamion"
+                                        change="onChangeTipoCamion"
+                                        placeholder="Selecciona Tipo Camion"
+                                        items="{tipocamion>/}">
+                                        <core:ListItem key="{tipocamion>VALUE}"
+                                            text="{tipocamion>DESCRIPCION}" />
+                                    </ComboBox>
+                                </f:fields>
+                            </f:FormElement>
+
+                            <f:FormElement label="Marca">
+                                <f:fields>
+                                    <ComboBox id="Marca"
+                                        change="onChangeMarca"
+                                        placeholder="Selecciona Marca"
+                                        items="{marcas>/}">
+                                        <core:ListItem key="{marcas>VALUE}"
+                                            text="{marcas>DESCRIPCION}" />
+                                    </ComboBox>
+                                </f:fields>
+                            </f:FormElement>
+
+                            <f:FormElement label="Color">
+                                <f:fields>
+                                    <ComboBox id="Color"
+                                        change="onChangeColor"
+                                        placeholder="Selecciona Color"
+                                        items="{color>/}">
+                                        <core:ListItem key="{color>VALUE}"
+                                            text="{color>DESCRIPCION}" />
+                                    </ComboBox>
+                                </f:fields>
+                            </f:FormElement>
+
+
+                            <f:FormElement label="Modelo  " id="Modelo">
+                                <!-- <f:fields>
+                                    <Input maxLength="5" id="reg_Modelo"
+                                        placeholder="Selecciona Modelo" />
+                                </f:fields> -->
+                                <DatePicker
+                                    id="DP11"
+                                    value="{
+						                'path': '/valueDP11',
+						                'type': 'sap.ui.model.type.Date',
+						                'formatOptions': {
+							                'pattern': 'yyyy'
+						                }
+					                }"
+                                    change="handleChange"
+                                    class="sapUiSmallMarginBottom" />
+                            </f:FormElement>
+
+                            <f:FormElement label="Serie" id="Serie">
+                                <f:fields>
+                                    <Input maxLength="5" id="reg_Serie"
+                                        placeholder="Ingrese N° Serie" />
+                                </f:fields>
+                            </f:FormElement>
+
+                            <f:FormElement label="Poliza" id="Poliza">
+                                <f:fields>
+                                    <Input maxLength="5" id="reg_Poliza"
+                                        placeholder="Selecciona Poliza" />
+                                </f:fields>
+
+                            </f:FormElement>
+
+                            <f:FormElement label="Fecha poliza" id="Fe_poliza">
+                                <!-- <f:fields>
+                                    <Input maxLength="5" id="reg_FePoliza"
+                                        placeholder="Selecciona Fecha poliza" />
+                                </f:fields> -->
+                                <DatePicker
+                                    id="DP1"
+                                    placeholder="Ingrese la fecha"
+                                    change="handleChange"
+                                    class="sapUiSmallMarginBottom" />
+                            </f:FormElement>
+
+                            <f:FormElement label="GPS" id="gps">
+                                <f:fields>
+                                    <CheckBox id="reg_gps" valueState="Information" select="false"
+                                        tooltip="Cuenta con GPS" />
+
+                                </f:fields>
+                            </f:FormElement>
+
+
+                            <f:FormElement>
+                                <f:fields>
+                                    
+                                    <Button text=" Guardar Unidad " tooltip="Guardar Unidad"
+                                        icon="sap-icon://save"
+                                        press="OnSaveTr" type="Emphasized">
+                                        <layoutData>
+                                            <l:GridData span="XL3 L4 M6 S12" />
+                                        </layoutData>
+                                    </Button>
+                                </f:fields>
+                            </f:FormElement>
+
+                        </f:formElements>
+                    </f:FormContainer>
+
+
+                    <f:FormContainer title="Remolque" visible="{/FcRemolque}">
+                        <f:formElements>
+
+                            <f:FormElement label="Linea Transporte" id="lbprov_plana">
+                                <f:fields>
+                                    <ComboBox
+                                        id="in_trans_plana"
+                                        items="{path:'transporte>/' ,length : '9999'}"
+                                        placeholder="Selecciona Proveedor / Transportista"
+                                        showSecondaryValues="true"
+                                        filterSecondaryValues="true"
+                                    >
+                                        <core:ListItem key="{transporte>ID_PROVEEDOR}"
+                                            text="{transporte>NOMBRE}"
+                                            additionalText="{transporte>ID_PROVEEDOR}" />
+                                    </ComboBox>
+                                </f:fields>
+                            </f:FormElement>
+
+                            <f:FormElement label="Placas Plana" id="lbplacasplana">
+                                <f:fields>
+                                    <Input maxLength="14" id="in_plana"
+                                        placeholder="Ingresa placas" />
+                                </f:fields>
+                            </f:FormElement>
+
+                            <f:FormElement label="Plataforma" id="lbplataforma">
+                                <f:fields>
+                                    <Input maxLength="10" id="in_plataforma"
+                                        placeholder="Numero Economico" />
+                                </f:fields>
+                            </f:FormElement>
+
+                            <f:FormElement label="Tipo">
+                                <f:fields>
+                                    <ComboBox id="in_tipo"
+                                        change="onChangeTRemolque"
+                                        placeholder="Selecciona Tipo Remolque"
+                                        items="{tiporemolque>/}">
+                                        <core:ListItem key="{tiporemolque>VALUE}"
+                                            text="{tiporemolque>DESCRIPCION}" />
+                                    </ComboBox>
+                                </f:fields>
+                            </f:FormElement>
+
+                            <f:FormElement label="Poliza" id="lblPolizap">
+                                <f:fields>
+                                    <Input maxLength="5" id="reg_Polizap"
+                                        placeholder="Ingrese poliza" />
+                                </f:fields>
+
+                            </f:FormElement>
+
+                            <f:FormElement label="Fecha poliza" id="Fe_polizap">
+                                <!-- <f:fields>
+                                    <Input maxLength="5" id="reg_FePoliza"
+                                        placeholder="Selecciona Fecha poliza" />
+                                </f:fields> -->
+                                <DatePicker
+                                    id="DP3"
+                                    placeholder="Ingrese la fecha"
+                                    change="handleChange"
+                                    class="sapUiSmallMarginBottom" />
+                            </f:FormElement>
+
+                            <f:FormElement label="Longitud Plana" id="lblongplana">
+                                <f:fields>
+                                    <!-- <Input id="reg_longplana" placeholder="Ingresa longitud
+                                    plana" />-->
+                                    <ComboBox id="in_longplana"
+                                        change="onChangeLongPlana"
+                                        placeholder="Selecciona..."
+                                        items="{long_plana>/}">
+                                        <core:ListItem key="{long_plana>VALUE}"
+                                            text="{long_plana>DESCRIPCION}" />
+                                    </ComboBox>
+                                </f:fields>
+                            </f:FormElement>
+
+                            <f:FormElement>
+                                <f:fields>
+                                    
+                                    <Button text=" Guardar Remolque" tooltip="Guardar Remolque"
+                                        icon="sap-icon://save"
+                                        press="OnSaveTr" type="Emphasized">
+                                        <layoutData>
+                                            <l:GridData span="XL3 L4 M6 S12" />
+                                        </layoutData>
+                                    </Button>
+                                </f:fields>
+                            </f:FormElement>
+
+                        </f:formElements>
+                    </f:FormContainer>
+
+                </f:formContainers>
+            </f:Form>
+
+        </VBox>
+
+        <endButton>
+            <Button
+                text="Cancelar"
+                press="onCloseCat" icon="sap-icon://sys-cancel-2"
+                type="Reject" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>
+<!-- ciclo procesar change onChangeCiclo -->

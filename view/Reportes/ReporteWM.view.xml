@@ -1,0 +1,298 @@
+    <mvc:View
+        controllerName="sap.ui.demo.webapp.controller.Reportes.ReporteWM"
+        xmlns:form="sap.ui.layout.form"
+        xmlns:l="sap.ui.layout"
+        xmlns:core="sap.ui.core"
+        xmlns:u="sap.ui.unified"
+        xmlns:mvc="sap.ui.core.mvc"
+        xmlns:fb="sap.ui.comp.filterbar"
+        xmlns="sap.m"
+        xmlns:tnt="sap.tnt">
+        <NavContainer id="wizardNavContainer">
+            <pages>
+                <Page
+                id="Plan"
+                showHeader="false"
+                backgroundDesign="Solid">
+                    <Toolbar
+                    class="toolbar_default">
+                        <Button icon="sap-icon://nav-back" type="Transparent" class="sapUiMediumMarginBegin" press="onNavBack"></Button>
+                        <Image src="images/SAP_Logo.png"/>
+                        <core:Icon
+                        src="sap-icon://grid"
+                        class="toolbar_title sapUiSmallMarginBegin">
+                            <core:layoutData>
+                                <FlexItemData growFactor="1" />
+                            </core:layoutData>
+                        </core:Icon>
+                        <Label labelFor="myColumn"
+                            class="toolbar_title"
+                            text="Reporte de lotes  IM/WM"
+                            wrapping="true"/>
+                        <ToolbarSpacer/>
+                        <Label
+                            id ="username"
+                            text=""
+                            class="toolbar_title"></Label>
+                        <Button icon="sap-icon://person-placeholder" type="Transparent" class="sapUiLargeMarginEnd">
+                        </Button>
+                    </Toolbar>
+                    <fb:FilterBar header="Filtros"
+                                    reset="onReset" search="onSearch" clear="onClear" showRestoreButton="true" showClearButton="true" class="sapUiSizeCompact">
+
+                        <fb:filterItems>
+
+
+                            <fb:FilterItem mandatory="true" name="A1" label="Numero de almacen" labelTooltip="Tooltip Example" margin-top="-10px">
+                                <fb:control>
+                                   <ComboBox
+                                        id="Almacen_select"                        
+                                        class="sapUiTinyMarginBegin"
+                                        showSecondaryValues= "true"
+                                        items="{
+                                            path: '/',
+                                            sorter: { path: 'desc' }
+                                        }"
+                                        width="100%"
+                                        selectionChange="UbicacionesAlmacen"
+                                    >
+                                        <core:ListItem key="{key}" text="{text}" additionalText = "{key}"/>
+                                </ComboBox>                            
+                                </fb:control>
+                            </fb:FilterItem>
+                            <fb:FilterItem name="Buscar" label="Lote">
+                                <fb:control>
+                                    <Input 
+                                      id="lote_input"
+                                      width="100%" 
+                                      placeholder="Buscar Lote...."/>
+                                </fb:control>
+                            </fb:FilterItem>
+                            <fb:FilterItem name="material" label="Material">
+                                <fb:control>
+                                    <Input 
+                                      id="material_input"
+                                      width="100%" 
+                                      placeholder="Buscar Material...."/>
+                                </fb:control>
+                            </fb:FilterItem>                            
+                            <fb:FilterItem mandatory="false" name="A2" label="Grupo Articulo" labelTooltip="Tooltip Example" margin-top="-10px">
+                                <fb:control>
+                                   <ComboBox
+                                        id="gpo_articulo"                        
+                                        class="sapUiTinyMarginBegin"
+                                        showSecondaryValues= "true"
+                                        items="{
+                                            path: '/',
+                                            sorter: { path: 'desc' }
+                                        }"
+                                        width="100%"                                        
+                                    >
+                                        <core:ListItem key="{key}" text="{text}"/>
+                                    </ComboBox>                            
+                                </fb:control>
+                            </fb:FilterItem>
+		<fb:FilterItem mandatory="false" name="A3" label="Ubicacion" labelTooltip="Tooltip Example" margin-top="-10px">
+                                <fb:control>
+                                   <ComboBox
+                                        id="ubicacion_mat"                        
+                                        class="sapUiTinyMarginBegin"
+                                        showSecondaryValues= "true"
+                                        items="{
+                                            path: '/',
+                                            sorter: { path: 'desc' }
+                                        }"
+                                        width="100%"                                        
+                                    >
+                                        <core:ListItem key="{key}" text="{text}"/>
+                                    </ComboBox>                            
+                                </fb:control>
+                            </fb:FilterItem>
+                         </fb:filterItems>
+                    </fb:FilterBar>
+
+                    <content>
+                        <FlexBox id="print">
+                            <l:VerticalLayout allowWrapping="true">
+                                <FlexBox id="orders">
+                                    <Table
+                                        id="t_lotes_WM"
+                                        class="sapUiResponsiveMargin"
+                                        width="auto"
+                                        fixedLayout="true"
+                                        items="{
+                                        path : '/ITEMS',
+                                        sorter : {
+                                            path : '',
+                                            group : true
+                                        }
+                                        }">
+                                    <headerToolbar>
+                                        <OverflowToolbar>
+                                            <Title text="" level="H2" />
+                                            <ToolbarSpacer></ToolbarSpacer>
+                                            <Button icon="sap-icon://download" press="onDataExport" tooltip="Exportar Excel" />
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                        <columns>
+                                            <Column
+                                                minScreenWidth="Small"
+                                                demandPopin="true" >
+                                                <Text text="Lote"/>
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Small"
+                                                demandPopin="true">
+                                                <Text text="Almacén / Num almcén"/>
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Small"
+                                                demandPopin="true">
+                                                <Text text="Tipo almacén"/>
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Small"
+                                                demandPopin="true">
+                                                <Text text="Ubicación"/>
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Small"
+                                                demandPopin="true">
+                                                <Text text="Material"/>
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Small"
+                                                demandPopin="true">
+                                                <Text text="Descripción"/>
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Small"
+                                                demandPopin="true">
+                                                <Text text="CTD"/>
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Small"
+                                                demandPopin="true">
+                                                <Text text="UM"/>
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Tablet"
+                                                demandPopin="false">
+                                                <Text text="Estatus lote"/>
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Tablet"
+                                                demandPopin="false">
+                                                <Text text="Tipo stock"/>
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Tablet"
+                                                demandPopin="false">
+                                                <Text text="Pdo.cliente/Pos"/>
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Tablet"
+                                                demandPopin="false">
+                                                <Text text="Estado WM"/>
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Tablet"
+                                                demandPopin="false">
+                                                <Text text="NUM ORDEN"/>
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Tablet"
+                                                demandPopin="false">
+                                                <Text text="Canal"/>
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Tablet"
+                                                demandPopin="false">
+                                                <Text text="Cliente"/>
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Tablet"
+                                                demandPopin="false">
+                                                <Text text="Grupo Articulo"/>
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Tablet"
+                                                demandPopin="false">
+                                                <Text text="Calidad Lote"/>
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Tablet"
+                                                demandPopin="false">
+                                                <Text text="Descripcion Defecto"/>
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Tablet"
+                                                demandPopin="false">
+                                                <Text text="Proveedor"/>
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Tablet"
+                                                demandPopin="false">
+                                                <Text text="Num Proveedor"/>
+                                            </Column>
+                                            <Column
+                                                minScreenWidth="Tablet"
+                                                demandPopin="false">
+                                                <Text text="Fecha Caducidad"/>
+                                            </Column>
+                                        </columns>
+
+                                        <items>
+                                           <ColumnListItem>
+                                               <cells>
+                                                    <Text text="{lote}"/>
+                                                    <Text text="{almacen} {num_almacen}"/>
+                                                    <Text text="{tipo_almacen}"/>
+                                                    <Text text="{ubicacion}"/>
+                                                    <Text text="{material}"/>
+                                                    <Text text="{desc_material}"/>
+                                                    <Text text="{ctd}"/>
+                                                    <Text text="{um}"/>
+                                                    <ObjectStatus class="stat" text="{
+                                                              path: 'estatus',
+                                                              formatter: '.formatter.TextoLote'
+                                                            }"
+                                                        state="{
+                                                              path: 'estatus',
+                                                              formatter: '.formatter.TextoLoteEstado'
+                                                            }"
+                                                    />
+                                                    <Text text="{stock}"/>
+                                                    <Text text="{no_necesidad}"/>
+                                                    <ObjectStatus
+                                                      class="stat"
+                                                      text="{
+                                                              path: 'ubicado',
+                                                              formatter: '.formatter.TextoWM'
+                                                            }"
+                                                      state="{
+                                                              path: 'ubicado',
+                                                              formatter: '.formatter.TextoWMEstado'
+                                                      }"
+                                                    />
+                                                    <Text text="{num_orden}"/>
+                                                    <Text text="{canal}"/>
+                                                    <Text text="{cliente}"/>
+                                                    <Text text="{gpo_articulo}"/>
+                                                    <Text text="{calidad_lote}"/>
+                                                    <Text text="{desc_defecto}"/>
+                                                    <Text text="{proveedor}"/>
+                                                    <Text text="{num_proveedor}"/>
+                                                    <Text text="{fecha_caducidad}"/>
+                                                </cells>
+                                            </ColumnListItem>
+                                        </items>
+                                    </Table>
+                                </FlexBox>
+                            </l:VerticalLayout>
+                        </FlexBox>
+                    </content>
+                </Page>
+            </pages>
+        </NavContainer>
+    </mvc:View>

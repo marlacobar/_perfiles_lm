@@ -1,0 +1,87 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout">
+    <Dialog id="listaComponenteDialog" title="Componentes de la Orden" contentWidth="60%"
+        contentHeight="90%" afterClose="onCancelarListaComponentes"> 
+        <l:Grid defaultSpan="L12 M12 S12" width="auto" id="ComponentList">
+            <l:content>
+                <Table id="TablaListaComponentes" width="auto" mode="SingleSelectMaster"
+                    sticky="ColumnHeaders" select="buttonActivation" class="sapUiTinyMarginBegin"
+                    items="{/ITEMS}">
+                    <columns>
+                        <Column minScreenWidth="Small" demandPopin="true">
+                            <Text text="Material" />
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true">
+                            <Text text="Descripción" />
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true">
+                            <Text text="Almacen" />
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true">
+                            <Text text="Cantidad planeada" />
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true" visible="false">
+                            <Text text="Reserva" />
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true" visible="false">
+                            <Text text="Posicion" />
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true" visible="false">
+                            <Text text="Sector" />
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true" visible="false">
+                            <Text text="Grupo Articulo" />
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true" visible="false">
+                            <Text text="Es Configuable?" />
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true" visible="false">
+                            <Text text="Sujeto a Lote?" />
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true" visible="false">
+                            <Text text="Planta" />
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true">
+                            <Text text="Montar" />
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true">
+                            <Text text="Pedido" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{MATERIAL}" />
+                                <Text text="{DESCRIPTION}" />
+                                <Text text="{STORAGE_LOCATION}" />
+                                <ObjectNumber number="{QTY_PLAN}" unit="{UNIT_OF_MEASURE}" />
+                                <Text text="{RESERVATION_ORDER_NUMBER}" />
+                                <Text text="{RESERVATION_ITEM_NUMBER}" />
+                                <Text text="{SECTOR}" />
+                                <Text text="{GRUPO_ARTICULO}" />
+                                <Text text="{ITEM_TYPE}" />
+                                <Text text="{INC_BATCH_NUMBER}" />
+                                <Text text="{SITE}" />
+                                <Button text="" type="Success"
+                                    visible="{= ${INC_BATCH_NUMBER} === 'N'? true : false }"
+                                    press="onValidaDatosInstalacion_v2"></Button>
+                                <Text text="{COMP_PEDIDO} - {COMP_PEDIDO_POS}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </l:content>
+        </l:Grid>
+        <buttons>
+            <Button id="btn_inventarioAlmacen" visible="{CNF_OBJ>/btn_inventarioAlmacen}"
+                class="sapUiSmallMarginBeginEnd" text="Inventario"
+                press="mostrarFragmentoInventario" icon="sap-icon://sys-find" type="Critical" />
+            <Button text="Montar" press="onValidaDatosInstalacion" icon="sap-icon://org-chart"
+                type="Success" class="sapUiSmallMarginBeginEnd" />
+            <Button text="Salir" press="onCancelarListaComponentes" icon="sap-icon://sys-cancel-2"
+                type="Reject" class="sapUiSmallMarginBeginEnd" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,80 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:layout="sap.ui.layout"
+	xmlns:u="sap.ui.unified"
+	xmlns:tnt="sap.tnt"
+	xmlns:table="sap.ui.table"
+	xmlns:dnd="sap.ui.core.dnd"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.f"
+	xmlns:grid="sap.ui.layout.cssgrid"
+	>
+
+<grid:CSSGrid
+			id="grid1"
+			gridAutoFlow="Row"
+			gridTemplateColumns="repeat(12, 1fr)"
+			gridTemplateRows="repeat(2, 5rem)"
+			gridAutoRows="5rem"
+			gridAutoColumns="1fr"
+			gridGap="0.5rem">
+<VBox class="demoBox">
+				<layoutData>
+					<grid:GridItemLayoutData gridColumn="span 2"  />
+				</layoutData>
+			<Label text="Material: " labelFor="inputText">
+			</Label>
+			<Input
+			id="inputText"
+			placeholder="Enter text"
+			class="sapUiSmallMarginBottom"	
+ 			/>
+			<Label text="Denominacion: " labelFor="inputText3">
+			</Label>
+			<Input
+			id="inputText3"
+			placeholder="Enter text"
+			class="sapUiSmallMarginBottom"	
+ 			/>
+</VBox>						
+
+<VBox class="demoBox">
+				<layoutData>
+					<grid:GridItemLayoutData gridColumn="span 2" />
+				</layoutData>
+<Label text="Centro: " labelFor="inputText2" >
+</Label>
+		<Input
+			id="inputText2"
+			placeholder="Enter text"
+			class="sapUiSmallMarginBottom"	
+ 			/>
+</VBox>				
+<VBox class="demoBox">
+				<layoutData>
+					<grid:GridItemLayoutData gridColumn="span 2" />
+				</layoutData>
+<Label text="Lote: " labelFor="inputText4" >
+</Label>
+		<Input
+			id="inputText4"
+			placeholder="Enter text"
+			class="sapUiSmallMarginBottom"	
+ 			/>
+</VBox>		
+<VBox class="demoBox">
+				<layoutData>
+					<grid:GridItemLayoutData gridColumn="span 2" />
+				</layoutData>
+<Label text="Cantidad: " labelFor="inputText5" >
+</Label>
+		<Input
+			id="inputText5"
+			placeholder="Enter text"
+			class="sapUiSmallMarginBottom"	
+ 			/>
+</VBox>			
+
+
+</grid:CSSGrid>
+</core:FragmentDefinition>

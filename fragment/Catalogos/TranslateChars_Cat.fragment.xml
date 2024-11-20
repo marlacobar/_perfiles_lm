@@ -1,0 +1,44 @@
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:l="sap.ui.layout"
+   xmlns:core="sap.ui.core" >
+<Dialog id="translateChars" title="Traducción de valores"  contentWidth="40%">
+	<VBox class="sapUiSmallMargin sapUiSizeCompact sapUiSizeCozy ">
+        	<Table id="table_translate_cat" items="{cat>/Rowsets/Rowset/0/Row}">
+		<columns>
+			<Column><Button icon="sap-icon://add"  press="onNewCharCat" /> </Column>
+			<Column><Label text="Valor Galvasid"/> </Column>
+			<Column><Label text="Valor Proveedor"/></Column>                
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+					<HBox>
+						<Button icon="sap-icon://delete" visible="{path: 'cat>REMOVENEWCAT', formatter: '.enableControl'}" press="onDeleteCharCat" ></Button>
+						<Button icon="sap-icon://edit"   visible="{path: 'cat>REMOVENEWCAT', formatter: '.enableControl'}" press="onEditCharCat" class="sapUiSmallMarginBegin"></Button>
+						<Button icon="sap-icon://save"   visible="{path: 'cat>SAVENEWCAT',   formatter: '.enableControl'}" press="onSaveCharCat" ></Button>
+						<Button icon="sap-icon://cancel"   visible="{path: 'cat>CANCELNEWCAT',   formatter: '.enableControl'}" press="onCancelCharCat" ></Button>
+					</HBox>
+					<HBox>
+						<Text  text="{cat>VALUE_CAT}" visible="{path: 'cat>SAVENEWCATEDIT', formatter: '.disableControl'}" />
+						<Input value="{cat>VALUE_CAT}" visible="{path: 'cat>SAVENEWCATEDIT', formatter: '.enableControl'}" />
+					</HBox> 
+					<HBox>
+						<Text  text="{cat>VALUE_SUP_CAT}" visible="{path: 'cat>SAVENEWCAT', formatter: '.disableControl'}" />
+						<Input value="{cat>VALUE_SUP_CAT}" visible="{path: 'cat>SAVENEWCAT', formatter: '.enableControl'}" />
+					</HBox>
+				</cells>
+			</ColumnListItem>
+		</items>
+            </Table>
+	</VBox>
+    <endButton>
+      <Button
+         type="Reject"
+         text="Cerrar"
+         icon="sap-icon://cancel"
+         press="onCloseFragment"/>
+    </endButton>
+
+  </Dialog>
+</core:FragmentDefinition>

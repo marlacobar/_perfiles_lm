@@ -1,0 +1,101 @@
+<core:FragmentDefinition 
+   xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc">
+    <Dialog id="DGAssignaPuerta" title="Solicitar Unidad" > 
+	<VBox class="sapUiSmallMargin sapUiSizeCompact sapUiSizeCozy ">
+                <f:SimpleForm id="SFMAssignaPuerta"
+		editable="true" 
+		layout="ResponsiveGridLayout"
+		adjustLabelSpan="true"
+		columnsXL="4"
+		columnsL="3"
+		columnsM="3"    
+		singleContainerFullSize="true" >
+                    <f:content>
+		<core:Title text="Proceso"/>
+			<Label text="#Transporte" />
+				<Input type="Number" id="apt_transporte" value="{info>/NOTRANSPORTE}" enabled="false" />
+                            	<Label text=""  />
+			            <Button id="btn_schtarj" type="Accept" text="Buscar"  press="onTraerDatos" />
+			<Label text="Tipo Camion" />
+				<Input  id="apt_tipocamion" value="{info>/TIPOCAMION}"  enabled="false" />
+			<Label text="Placas Tracto" />
+				<Input id="apt_placas" value="{info>/PLACAS}"  enabled="false" />
+			<Label text="Linea Transp." />
+				<Input id="apt_transportista" value="{info>/TRANSPORTISTA}" enabled="false"/>
+			<Label text="Chofer" />
+				<Input id="apt_chofer" value="{info>/CHOFER}"  enabled="false"/>
+			<Label text="Placas Plana" />
+				<Input id="apt_plana" value="{info>/PLANA}"  enabled="false"/>
+			<Label text="#Economico" />
+				<Input id="apt_econom" value="{info>/NOECONOMICO}"  enabled="false"/>
+		<core:Title text="Equipo"  />
+			<Label text="Bases" />
+				<Input    id="apt_bases" value="{info>/BASES}" enabled="false"/>
+			<Label text="Cadenas" />
+				<Input    id="apt_cadenas" value="{info>/CADENAS}" enabled="false"/>
+			<Label text="Esquineros" />
+				<Input    id="apt_esquineros" value="{info>/ESQUINEROS}" enabled="false"/>
+			<Label text="Bandas" />
+				<Input    id="apt_bandas" value="{info>/BANDAS}"  enabled="false"/>
+			<Label text="Barrotes" />
+				<Input    id="apt_barrotes" value="{info>/BARROTES}" enabled="false"/>
+                        <core:Title text="Assignar" />
+			<Label text="Puerta" />
+				<ComboBox
+						id="apt_puerta"
+						items="{/ITEMS}"
+						placeholder="Seleccione una puerta"
+						enabled="false">
+					<core:Item key="{PUERTAID}" text="{DESCRIPCION}"/>
+				</ComboBox>
+			<Label text="Destino" />
+				<ComboBox
+						id="apt_destino"
+						placeholder="Seleccione un destino"
+						enabled="{/EnableAsignacion}">
+					<core:Item key="1" text="CLIENTE"/>
+					<core:Item key="2" text="LM"/>
+					<core:Item key="3" text="MEXICO"/>
+					<core:Item key="4" text="GUADALAJARA"/>
+					<core:Item key="5" text="BAJIO"/>
+					<core:Item key="6" text="NACIONAL"/>
+					<core:Item key="7" text="EXPORTACION USA"/>
+					<core:Item key="8" text="LOCAL"/>
+					<core:Item key="9" text="OTRO"/>
+				</ComboBox>
+			<Label text="Cliente" />
+				<ComboBox
+						id="apt_cliente"
+						items="{path:'/ITEMS',length : '9999'}"
+						placeholder="Seleccione un cliente"
+						showSecondaryValues="true"
+						filterSecondaryValues= "true"
+						enabled="false">
+					<core:ListItem key="{PROVID}" text="{NOMBRE}" additionalText="{PROVID}"/>
+				</ComboBox>
+			<Label text="Rollos(Menor a 5 Ton)" />
+				<Input  id="apt_me5" value="" enabled="{/EnableAsignacion}"/>
+			<Label text="Rollos (5 a 10 Ton)" />
+				<Input  id="apt_5a10" value="" enabled="{/EnableAsignacion}"/>
+			<Label text="Rollos(Mayor a 10 Ton)" />
+				<Input  id="apt_m10" value="" enabled="{/EnableAsignacion}"/>
+			<Label text="Paquetes" />
+				<Input  id="apt_paq" value="" enabled="{/EnableAsignacion}" />
+                    </f:content>
+                </f:SimpleForm>
+	</VBox>
+        <beginButton>
+            <Button type="Emphasized" text="Solicitar" icon="sap-icon://future" press="onRegistroSolicita"/>
+        </beginButton>
+        <endButton>
+            <Button 
+                text = "Cancelar" 
+                press = "onCloseSolicitaUnidad" icon="sap-icon://sys-cancel-2" 
+                type = "Reject"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

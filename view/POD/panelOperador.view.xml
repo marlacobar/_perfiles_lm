@@ -1,0 +1,38 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:layout="sap.ui.layout"
+    xmlns:t="sap.ui.table"
+    xmlns:tnt="sap.tnt"
+    xmlns:u="sap.ui.unified" controllerName="sap.ui.demo.webapp.controller.POD.panelOperador" height="100%">
+    <f:DynamicPage id="dpPantallaOperador" preserveHeaderStateOnScroll="true" headerExpanded="true">
+
+        <f:title>
+            <!-- DynamicPage Title -->
+            <f:DynamicPageTitle>
+                <f:heading>
+                </f:heading>
+                <f:actions>
+                    <c:Fragment type="XML" fragmentName="sap.ui.demo.webapp.view.POD.extension.botonesHeader" />
+                </f:actions>
+                <f:expandedContent>
+                    <c:Fragment type="XML" fragmentName="sap.ui.demo.webapp.view.POD.extension.tilesIndicadores" />
+                </f:expandedContent>
+            </f:DynamicPageTitle>
+        </f:title>
+        <!-- DynamicPage Header -->
+        <f:header>
+            <c:Fragment type="XML" fragmentName="sap.ui.demo.webapp.view.POD.extension.filtrosPuestoOrdenHeader" />
+        </f:header>
+        <!-- DynamicPage Content -->
+        <f:content>
+            <c:Fragment type="XML" fragmentName="sap.ui.demo.webapp.view.POD.extension.tablaOrdenes" />
+        </f:content>
+        <!-- DynamicPage Footer -->
+        <f:footer>
+            <c:Fragment type="XML" fragmentName="sap.ui.demo.webapp.view.POD.extension.botonesFooter" />
+        </f:footer>
+    </f:DynamicPage>
+</mvc:View>

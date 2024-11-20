@@ -1,0 +1,47 @@
+<core:FragmentDefinition
+	id ="metas_pro"
+	xmlns:table="sap.ui.table"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:u="sap.ui.unified"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" class="sapUiSizeCompact">
+	<Dialog title="Crear Metas" class="titleBold" id="crear_meta" afterClose="onCloseDialogonCnfPorcentaje" contentHeight="40%" contentWidth="80%">
+
+		<VBox width="100%" height="100%">
+			<HBox width="100%" height="100%" class=" sapUiTinyMarginBottom sapUiSmallMarginTop" alignContent="Center">
+				<items>
+					<VBox width="33%" height="100%" class="sapUiTinyMarginBegin sapUiTinyMarginEnd sapUiSmallMarginTop">
+						<Text text="Año/Mes" class="bold"/>
+						<DatePicker id="start" valueFormat="MM-yyyy" displayFormat="MM-yyyy" class="sapUiSizeCompact"/>
+					</VBox>
+					<VBox width="34%" height="100%" class="sapUiTinyMarginEnd sapUiSmallMarginTop">
+						<Text text="Puesto Trabajo" class="bold"/>
+						<ComboBox id="Puesto_Trabajo" showSecondaryValues= "true" class="sapUiSizeCompact" items="{
+							path: '/',
+							sorter: { path: 'desc' }
+							}" width="200%">
+							<core:ListItem key="{WORK_CENTER}" text="{DESCRIPTION}"
+								additionalText = "{WORK_CENTER}"/>
+						</ComboBox>
+					</VBox>
+					<VBox width="33%" height="100%" class="sapUiTinyMarginEnd sapUiSmallMarginTop">
+						<Text text="Meta" class="bold"/>
+						<Input id="new_meta" class="sapUiSizeCompact" />
+					</VBox>
+				</items>
+			</HBox>
+
+			<HBox justifyContent="Center" alignContent="Center" class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
+				<Label text="" width="2em"/>
+				<Button id="btnAsignaAsignar" press="onCrearMeta" text="Crear" class="sapUiSmallMarginEnd" width="100px" type="Accept"/>
+				<Label text="" width="2em"/>
+				<Label text="" width="2em"/>
+				<Label text="" width="2em"/>
+				<Button id="btnAsignaClose" press="onCloseDialogonCrear" text="Cerrar" class="sapUiSmallMarginEnd" width="100px" type="Reject"/>
+				<Label text="" width="2em"/>
+			</HBox>
+		</VBox>
+	</Dialog>
+</core:FragmentDefinition>

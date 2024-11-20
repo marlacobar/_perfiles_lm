@@ -1,0 +1,40 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <TableSelectDialog
+        id="tsd_areas"
+        multiSelect ="false"
+        resizable="true"
+        draggable="true"
+        contentWidth="60%"
+        noDataText="Sin resultados"
+        title="Areas"
+        search="filtroArea"
+        liveChange="filtroArea"
+        confirm="confirmarArea"
+        cancel="cancelarTSD"
+        items="{
+            path : '/ITEMS',
+            sorter : {
+                path : 'DS_AREA',
+                descending : false
+                }
+        }">
+        <ColumnListItem>
+            <cells>
+                <ObjectIdentifier
+                    title="{CD_AREA}"
+                    text="{DS_AREA}"/>
+            </cells>
+        </ColumnListItem>
+        <columns>
+            <Column
+                minScreenWidth="Tablet"
+                demandPopin="true">
+                <header>
+                    <Text text="Elementos" />
+                </header>
+            </Column>
+        </columns>
+    </TableSelectDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,97 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core">
+    <Dialog
+        id="InstalacionDialog"
+        contentWidth="30%" afterClose="onCancelarConsumo">
+        <ObjectHeader
+            id="oh1"
+            responsive="true"
+            binding="{/ProductCollection/0}"
+            intro="{Description}"
+            title="Montar componente"
+            numberState="Success"
+            backgroundDesign="Translucent">
+            <attributes>
+                <ObjectAttribute
+                    title=""
+                    text="{SFC}" />
+            </attributes>
+        </ObjectHeader>
+        <l:Grid
+            defaultSpan="L12 M12 S12"
+            width="auto"
+            id="Filters">
+            <l:content>
+
+                <f:SimpleForm id="SimpleFormToolbar2"
+                    editable="true"
+                    layout="ResponsiveGridLayout"
+                    labelSpanXL="4"
+                    labelSpanL="3"
+                    labelSpanM="4"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="0"
+                    emptySpanL="4"
+                    emptySpanM="0"
+                    emptySpanS="0"
+                    columnsXL="2"
+                    columnsL="1"
+                    columnsM="1"
+                    singleContainerFullSize="false"
+                    ariaLabelledBy="Title1">
+                    <f:content>
+                        <Label text="Material" />
+                        <Input id="input_material" liveChange="onKeyCode" />
+
+                        <Label text="Lote" />
+                        <Input id="input_lote" />
+
+                        <Label text="Cantidad" />
+                        <Input id="input_cantidad" />
+
+                        <Label text="UM" />
+                        <Input id="input_um" />
+
+                        <Label text="Centro" />
+                        <Input id="input_centro" />
+
+                        <Label text="Almacen" />
+                        <Input id="input_almacen" />
+
+                        <Label text="Observaciones" />
+                        <TextArea id="area_observacion" value="" rows="2" />
+                    </f:content>
+                </f:SimpleForm>
+
+            </l:content>
+        </l:Grid>
+
+        <buttons>
+            <Button
+                text=""
+                press="onVerDefectos"
+                icon="sap-icon://dimension"
+                tooltip="Ver Defectos"
+                type="Success" />
+            <Button
+                text="Cancelar"
+                press="onCancelarConsumo"
+                icon="sap-icon://decline"
+                type="Reject" />
+            <Button
+                text="Montar"
+                press="onAgregarConsumos"
+                icon="sap-icon://org-chart"
+                type="Success" />
+            <Button
+                text=""
+                press="onUpdateLX03"
+                icon="sap-icon://synchronize"
+                type="Success" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

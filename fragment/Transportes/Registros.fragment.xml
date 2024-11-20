@@ -1,0 +1,165 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc">
+    <Dialog id="DGTBL" title="{/TituloDetalle}"> 
+	<VBox class="sapUiSmallMargin sapUiSizeCompact ">
+		<Table
+			id="KTVIG" 
+			items="{
+				path:'/ITEMS',
+				sorter: [{
+					path: 'TRANSPORTE', 
+					ascending: 'true'
+				}]
+			}"
+			visible="false"
+			>
+			<columns>
+				<Column id="rs_baja"  width="5%"></Column>
+				<Column><Label text="TRANSPORTE"/></Column>
+				<Column><Label text="LLEGADA"/></Column>
+				<Column><Label text="CHOFER"/></Column>
+				<Column><Label text="LINEA TRANSPORTE"/></Column>
+				<Column><Label text="PLACAS"/></Column>
+				<Column><Label text="PLANA"/></Column>
+				<Column><Label text="CONTENEDOR"/></Column>
+				<Column><Label text="TIPO UNIDAD"/></Column>
+				<Column><Label text="REALIZA"/></Column>
+				<Column><Label text="PUERTA"/></Column>
+				<Column><Label text="VISUAL"/></Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+					<cells>
+						<Button tooltip="Cancelar" icon="sap-icon://cancel"  press="CancelarRegistro"  
+							visible="{path: 'VIG_CANC',formatter: '.formatter.enabled_ing_vig'}"/>
+						<Text text="{TRANSPORTE}" />
+						<Text text="{FECHALLEGADA}"/>
+						<Text text="{CHOFER}"/>
+						<Text text="{TRANSPORTISTA}"/>
+						<Text text="{PLACAS}"/>
+						<Text text="{PLACAS_PLANA}"/>
+						<Text text="{CONTENEDOR}"/>
+						<Text text="{TIPO_UNIDAD}"/>
+						<Text text="{CICLO}"/>
+						<Text text="{PUERTA}"/>
+						<Text text="{NO_ECONOMICO}"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<Table
+			id="KTBASC" 
+			items="{
+				path:'/ITEMS',
+				sorter: [{
+					path: 'SOL_BASC', 
+					descending: 'true'
+					},{
+					path: 'TRANSPORTE', 
+					ascending: 'true'
+					}
+				]
+			}"
+			visible="false"
+			>
+			<columns>
+				<Column id="rs_sol" width="5%"></Column>
+				<Column><Label text="TRANSPORTE"/></Column>
+				<Column><Label text="LLEGADA"/></Column>
+				<Column><Label text="CHOFER"/></Column>
+				<Column><Label text="LINEA TRANSPORTE"/></Column>
+				<Column><Label text="PLACAS"/></Column>
+				<Column><Label text="PLANA"/></Column>
+				<Column><Label text="TIPO UNIDAD"/></Column>
+				<Column><Label text="REALIZA"/></Column>
+				<Column><Label text="BOLETA"/></Column>
+				<Column><Label text="ESTATUS"/></Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+				<customData>
+					<core:CustomData key="mydata" value="{SOL_BASC}" writeToDom="true"></core:CustomData>
+				</customData>
+					<cells>
+						<Button 
+							tooltip="Solicitar" 
+							icon="sap-icon://bell"  
+							press="onSolicitar"  
+							visible="{
+								path: 'SOL_BASC',
+								formatter: '.formatter.enabled_solc_basc'
+							}"/>
+						<Text text="{TRANSPORTE}"/>
+						<Text text="{FECHALLEGADA}"/>
+						<Text text="{CHOFER}"/>
+						<Text text="{TRANSPORTISTA}"/>
+						<Text text="{PLACAS}"/>
+						<Text text="{PLACAS_PLANA}"/>
+						<Text text="{TIPO_UNIDAD}"/>
+						<Text text="{CICLO}"/>
+						<Text text="{BOLETA}"/>
+						<Text text="{ESTATUS}"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<Table
+			id="KTLOG" 
+			items="{
+				path:'/ITEMS',
+				sorter: [{
+					path: 'TIPO_CARGA', 
+					ascending: 'true',
+					group : true
+				},{
+					path: 'TRANSPORTE', 
+					ascending: 'true'
+				}]
+			}"
+			visible="false"
+			>
+			<columns>
+				<Column id="rs_asigna" width="5%"></Column>
+				<Column><Label text="TRANSPORTE"/></Column>
+				<Column><Label text="LLEGADA"/></Column>
+				<Column><Label text="CHOFER"/></Column>
+				<Column><Label text="LINEA TRANSPORTE"/></Column>
+				<Column><Label text="PLACAS"/></Column>
+				<Column><Label text="PLANA"/></Column>
+				<Column><Label text="TIPO UNIDAD"/></Column>
+				<Column><Label text="TIPO CARGA"/></Column>
+				<Column><Label text="DESTINO"/></Column>
+				<Column><Label text="CLIENTE"/></Column>
+				<Column><Label text="REALIZA"/></Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+					<cells>
+						<Button tooltip="Asignar" icon="sap-icon://feeder-arrow"  press="AsignaLog" />
+						<Text text="{TRANSPORTE}"/>
+						<Text text="{FECHALLEGADA}"/>
+						<Text text="{CHOFER}"/>
+						<Text text="{TRANSPORTISTA}"/>
+						<Text text="{PLACAS}"/>
+						<Text text="{PLACAS_PLANA}"/>
+						<Text text="{TIPO_UNIDAD}"/>
+						<Text text="{TIPO_CARGA}"/>
+						<Text text="{DESTINO}"/>
+						<Text text="{CLIENTE}"/>
+						<Text text="{CICLO}"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+	</VBox>
+        <endButton>
+            <Button 
+                text = "Cerrar" 
+                press = "onCloseTblRegistros" icon="sap-icon://sys-cancel-2" 
+                type = "Reject"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

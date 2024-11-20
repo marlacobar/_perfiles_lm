@@ -1,0 +1,204 @@
+<mvc:View
+   controllerName="sap.ui.demo.webapp.controller.Mantenimiento.Ordenes.crearOrden"
+		xmlns:form="sap.ui.layout.form"
+    xmlns:layout="sap.ui.layout"
+		xmlns:core="sap.ui.core"
+		xmlns:u="sap.ui.unified"
+		xmlns:mvc="sap.ui.core.mvc"
+    xmlns:uxap="sap.uxap"
+		xmlns="sap.m">
+  <Toolbar
+        class="toolbar_default">
+    <Button icon="sap-icon://nav-back" type="Transparent" class="sapUiMediumMarginBegin" press="onNavBack"></Button>
+    <Image src="images/SAP_Logo.png">
+    </Image>
+    <core:Icon
+    src="sap-icon://add-activity"
+    class="toolbar_title sapUiSmallMarginBegin">
+      <core:layoutData>
+        <FlexItemData growFactor="1" />
+      </core:layoutData>
+    </core:Icon>
+    <MenuButton text="Crear Orden" class="customtitle">
+      <menu>
+        <Menu>
+          <items>
+            <MenuItem text="Página Inicial" icon="sap-icon://home" press="goToHome"/>
+          </items>
+        </Menu>
+      </menu>
+    </MenuButton>
+    <ToolbarSpacer/>
+    <Label
+             id ="username"
+             text=""
+             class="toolbar_color"></Label>
+    <Button icon="sap-icon://person-placeholder" type="Transparent" class="sapUiLargeMarginEnd">
+    </Button>
+  </Toolbar>
+  <uxap:ObjectPageLayout
+		id="ObjectPageLayout"
+		showTitleInHeaderContent="true"
+		alwaysShowContentHeader="false"
+		preserveHeaderStateOnScroll="false"
+		headerContentPinnable="true"
+		isChildPage="true"
+		upperCaseAnchorBar="false">
+    <uxap:headerTitle>
+      <uxap:ObjectPageDynamicHeaderTitle>
+        <uxap:expandedHeading>
+          <Title text="Crear orden de mantenimiento" wrapping="true" class="sapUiSmallMarginEnd"/>
+        </uxap:expandedHeading>
+
+        <uxap:snappedHeading>
+          <FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
+            <FlexBox wrap="NoWrap" fitContainer="true" alignItems="Center" class="sapUiTinyMarginEnd">
+              <Title text="Crear orden de mantenimiento" wrapping="true"/>
+            </FlexBox>
+          </FlexBox>
+        </uxap:snappedHeading>
+
+        <uxap:actions>
+		  <Button
+            id="createButton"
+            icon="sap-icon://add-equipment"
+						text="Crear"
+						type="Emphasized"
+						press="onCreatePMOrder"/>
+          <Button
+            id="viewButton"
+            icon="sap-icon://display"
+						text="Ver Orden"
+						type="Emphasized"
+						press="onViewPMOrder"/>
+          <Button
+            id="cancelCreate"
+						text="Cancelar"
+            press="onCancelCreatePMOrder"
+						type="Transparent"/>
+        </uxap:actions>
+      </uxap:ObjectPageDynamicHeaderTitle>
+    </uxap:headerTitle>
+
+    <uxap:headerContent>
+      <ObjectStatus text="Ingrese los datos que se piden a continuación para crear una orden"/>
+    </uxap:headerContent>
+
+    <uxap:sections>
+      <uxap:ObjectPageSection title="Cabecera">
+        <uxap:subSections>
+          <uxap:ObjectPageSubSection>
+            <uxap:blocks>
+              <form:SimpleForm
+                editable="true">
+                <Label class="sapMTitleStyleH6 sapUiTinyMarginEnd"
+                  text="{i18n>PMOrderType}"></Label>
+                <Select
+                  id="PMType">
+                  <items>
+                    <core:ListItem key="UM01" text="ORDEN DE MANTENIMIENTO PLANEADO"/>
+                    <core:ListItem key="UM03" text="ORDEN DE MANTENIMIENTO CORRECTIVO"/>
+                  </items>
+                </Select>
+
+                <Label text="{i18n>PMNotiStep1Desc}" required="true"/>
+                <Input id="PM_orderDesc"/>
+
+                <Label class="sapMTitleStyleH6"
+                    text="{i18n>Priority}"></Label>
+                <Select
+                  id="priority"
+                  items="{
+					             path: '/',
+					             sorter: { path: 'desc' }
+			         }">
+                  <core:Item key="{id}" text="{desc}" />
+                </Select>
+              </form:SimpleForm>
+            </uxap:blocks>
+          </uxap:ObjectPageSubSection>
+        </uxap:subSections>
+      </uxap:ObjectPageSection>
+
+      <uxap:ObjectPageSection title="Operaciones">
+        <uxap:subSections>
+          <uxap:ObjectPageSubSection>
+            <uxap:blocks>
+				<form:SimpleForm
+				  editable="true">
+					<Label text="Txt.brv.Operación " required="true"/>
+					<Input id="txt_operacion"/>
+					<Label text="Duracion de operacion " required="true"/>
+					<Input id="duracion_oper"/>
+					<Label text="Ctd personas " required="true"/>
+					<Input id="ctd_personas"/>
+				</form:SimpleForm>
+			</uxap:blocks>
+		  </uxap:ObjectPageSubSection>
+		  <uxap:ObjectPageSubSection>
+			<uxap:blocks>  
+                  <Table
+                      id="PMOperationList"
+                      class="sapUiResponsiveMargin"
+                      width="100%" 
+				      growing="true"
+                      items="{/ITEMS}"
+				      mode="MultiSelect">
+				    <headerToolbar>
+				        <OverflowToolbar id="toolbar">
+							<Button icon="sap-icon://add" tooltip="Agregar Operación" press=".onAddOperation"/>
+							<Button icon="sap-icon://delete" tooltip="Eliminar Operación" press=".onDeleteOperation"/>
+							<ToolbarSpacer />
+				        </OverflowToolbar>
+				    </headerToolbar>
+                    <columns>
+                      <Column
+                        hAlign="End"
+                        minScreenWidth="Small"
+                        demandPopin="true"
+                        width="5em">
+                        <Label text="{i18n>columnIDOp}"/>
+                      </Column>
+                      <Column>
+                        <Label text="{i18n>columnPlant}"/>
+                      </Column>
+                      <Column>
+                        <Label text="{i18n>PMWorkCenter}"/>
+                      </Column>
+                      <Column
+                        minScreenWidth="Small"
+                        demandPopin="true">
+                        <Label text="{i18n>columnControlKey}"/>
+                      </Column>
+                      <Column
+                        minScreenWidth="Small"
+                        demandPopin="true">
+                        <Label text="{i18n>columnDesc}"/>
+                      </Column>
+                      <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="false">
+                        <Label text="{i18n>columnWork}"/>
+                      </Column>
+                    </columns>
+                    <items>
+                      <ColumnListItem>
+                        <cells>
+                          <Text text="{operation}"/>
+                          <Text text="{plant}"/>
+                          <Text text="{work_center}"/>
+                          <Text text="{control_key}"/>
+                          <Text text="{description}"/>
+                          <Text text="{work}"/>
+                        </cells>
+                      </ColumnListItem>
+                    </items>
+                  </Table>
+            </uxap:blocks>
+          </uxap:ObjectPageSubSection>
+        </uxap:subSections>
+      </uxap:ObjectPageSection>
+
+    </uxap:sections>
+  </uxap:ObjectPageLayout>
+</mvc:View>

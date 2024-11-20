@@ -1,0 +1,167 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+  xmlns:tnt="sap.tnt"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+  <Dialog
+    id="installedComponentFragment"
+    title = "Componentes Instalados"
+    contentWidth="80%"
+    contentHeight="90%">
+    <l:Grid
+      defaultSpan = "L12 M12 S12"
+      width = "auto"
+      id = "installedComponentList">
+      <l:content>
+        <Table
+          id="installedComponentTable"
+          width="auto"
+          mode="SingleSelectLeft"
+          sticky="ColumnHeaders"
+          growing = "true"
+          growingThreshold = "250"
+          select="buttonActivation"
+          class = "sapUiTinyMarginBegin"
+          items="{/ITEMS}">
+          <columns>
+            <Column
+								minScreenWidth="Small"
+								demandPopin="true">
+              <Text text="Material" />
+            </Column>
+            <Column
+              minScreenWidth="Small"
+              demandPopin="true">
+              <Text text="Descripción" />
+            </Column>
+            <Column
+              minScreenWidth="Small"
+              demandPopin="true">
+              <Text text="Almacen" />
+            </Column>
+            <Column
+              minScreenWidth="Small"
+              demandPopin="true">
+              <Text text="Lote" />
+            </Column>
+            <Column
+              minScreenWidth="Small"
+              demandPopin="true">
+              <Text text="Montado" />
+            </Column>
+            <Column
+              minScreenWidth="Small"
+              demandPopin="true">
+              <Text text="Cantidad" />
+            </Column>
+            <Column
+              minScreenWidth="Small"
+              demandPopin="true">
+              <Text text="Orden" />
+            </Column>
+            <Column
+              minScreenWidth="Small"
+              demandPopin="true">
+              <Text text="Estatus" />
+            </Column>
+            <Column
+              minScreenWidth="Small"
+              demandPopin="true"
+              width="6em"
+              visible="false">
+              <Text text="Vía" />
+            </Column>
+            <Column
+              minScreenWidth="Small"
+              demandPopin="true"
+              width="6em">
+              <Text text="Usuario" />
+            </Column>
+            <Column
+              minScreenWidth="Small"
+              demandPopin="true"
+              width="5em">              
+              <Text text="Caract." />
+            </Column>
+          </columns>
+          <items>
+            <ColumnListItem>
+              <cells>
+                <Text text="{MATERIAL}"/>
+                <Text text="{DESCRIPTION}"/>
+                <Text text="{ALMACEN}"/>                                
+                <Text text="{BATCH}"/>
+                <Text text="{INSTALLATION_DATE}"/>
+                <Text text="{CANTIDAD_RESTANTE}"/>
+                <Text text="{NUM_ORDER}"/>
+                <tnt:InfoLabel
+						                 text="{
+                              path: 'ESTATUS',
+                              formatter: '.formatter.componentText'
+                             }"
+						                displayOnly="true"
+						                colorScheme= "{
+							              parts: [
+								              {path: 'ESTATUS'}
+							              ],
+							              formatter: '.formatter.availableState'
+						              }"/>
+                <Text text="{VIA}"/>
+                <Text text="{USUARIO}"/>
+                <Button icon="sap-icon://detail-view"
+                      text =""
+                      type="Default"
+                      tooltip="Ver Características"
+                      press="onVerCaracteristicas_lote"/>                               
+              </cells>
+            </ColumnListItem>
+          </items>
+        </Table>
+      </l:content>
+    </l:Grid>
+
+    <buttons>
+        <Button
+           icon = "sap-icon://synchronize"
+           tooltip="Recargar información"
+           press = "onRefreshInstall"/>
+        <Button
+          icon = "sap-icon://expand-group"
+          type = "Transparent"
+          text = "Desactivar"
+          press = "desactivarComponente"/>
+        <Button
+          icon = "sap-icon://toaster-down"
+          type = "Transparent"
+          text = "Desmontar"
+          press = "desmontarComponente"/>
+      <Button
+          icon = "sap-icon://print"
+          type = "Transparent"
+          text = "Etiqueta"
+          visible = "false"
+          press = "datosEtiquetaComponente"/>
+      <Button
+          icon = "sap-icon://pull-down"
+          type = "Transparent"
+          text = "Consumir"
+          press = "dataCheckComponent"/>
+      <Button
+          icon = "sap-icon://add"
+          type = "Transparent"
+          text = "Generar CP"
+          press = "onCreateSFC"/>      
+      <Button
+         icon = "sap-icon://begin"
+         type = "Transparent"
+         text = "Activar"
+         press = "onActiveComponent"/>
+      <Button
+            icon = "sap-icon://decline"
+            type = "Reject"
+            text = "Cerrar"
+            press = "onCloseInstalledComponents"/>
+    </buttons>
+  </Dialog>
+</core:FragmentDefinition>

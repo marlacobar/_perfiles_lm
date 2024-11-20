@@ -1,0 +1,358 @@
+html[dir="ltr"] .myAppDemoWT .myCustomButton.sapMBtn {
+ 	margin-right: 0.125rem
+}
+
+html[dir="rtl"] .myAppDemoWT .myCustomButton.sapMBtn {
+ 	margin-left: 0.125rem
+}
+
+html, body { height:100%; margin:0; padding:0 }
+div { position:fixed; width:50%; height:50% }
+#NW { top:0;   left:0; }
+#NE { top:0;   left:50%;     }
+#SW { top:50%; left:0; }
+#SE { top:50%; left:50%; }   
+
+#NW2 { top:0;   left:0;  }
+#NE2 { top:0;   left:50%;     }
+#SW2 { top:50%; left:0;    }
+#SE2 { top:50%; left:50%;    }  
+
+.myAppDemoWT .myCustomText {
+	display: inline-block;
+	font-weight: bold;
+}
+
+.sapMTile {
+    width: 13rem;
+    height: 13rem;
+}
+
+.sapMTileContent {
+    width: 13rem;
+    height: 13rem;
+}
+
+.toolbar_title {
+    font-size:large;
+    color:#16517b !important;
+    font-weight:bold !important
+}
+
+.toolbar_color {
+    color: #16517b !important
+}
+
+.toolbar_background {
+    background-color: transparent !important;
+    border-bottom-color: transparent
+}
+
+.toolbar_default {
+    background-color: #EFF4F9 !important;
+    border-bottom-color: #D1E0EE
+}
+
+.toolbar_default2 {
+    background-color: #EFF4F9 !important;
+    border-bottom: 0 !important;
+}
+
+.customtitle .sapMBtnInner {
+    vertical-align: top;
+    -webkit-appearance: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    box-sizing: border-box;
+    font-family: "72","72full",Arial,Helvetica,sans-serif;
+    font-size: 1.16rem;
+    font-weight: bold;
+    height: 2.500rem;
+    min-width: 2.500rem;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    position: relative;
+    background-color: transparent;
+    border: none !important;
+    border-radius: 0.2rem;
+    color: #16517b;
+    text-shadow: 0 0 0.125rem #ffffff;
+}
+
+.parosButton {
+height: 300px;
+border-radius: 20%;
+}
+
+/*Dimensiones de la Hoja Viajera*/
+div.imprimible {
+    display: block;
+    width: 500px;
+    height: 300px;
+    font-size: 10px;
+}
+
+div.noImprimible {
+    display: none;
+}
+
+/*Titulo Principal de la Hoja Viajera*/
+#tituloHojaViajera {
+    text-align: center;
+    font-size: 100px;
+}
+
+.letra {
+    font-size: 10px;
+}
+
+/*Codigo 2D*/
+#prntCode {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/*Pie de Página*/
+#piePagina {
+    text-align: center;
+    font-style: normal;
+    font-size: 8px;
+}
+
+p.tabla8 {
+  font-size: 8px;
+  text-align: center;
+  margin:0
+}
+
+p.tablaClientes {
+  font-size: 12px;
+  text-align: left;
+  margin:1px
+}
+
+p.tabla10 {
+  font-size: 10px;
+}
+
+p.tabla12 {
+  font-size: 12px;
+}
+
+p.tabla12Centrado {
+  font-size: 12px;
+    text-align: center;
+}
+
+td.tabla10{
+padding: 5px 0px 0px 5px;
+}
+
+p.partida {
+  font-size: 24px;
+}
+
+td.small{
+padding: 0px 0px 0px 0px;
+}
+
+th.titulo{
+padding: 0px 0px 0px 5px;
+}
+
+p.sub {
+  font-size: 18px;
+}
+
+p.texto14 {
+  font-size: 14px;
+ text-align: center;
+}
+
+p.tituloCentrado{
+text-align: center;
+  font-size: 12px;
+}
+
+p.tituloCentradoChico{
+text-align: center;
+  font-size: 10px;
+}
+
+.print {
+display:none;
+}
+
+
+
+td.centrado{
+vertical-align: middle;
+backgorund-color:#ff3300;
+}
+
+th.dos{
+padding: 2px 2px 2px 2px;
+}
+
+p.centrado {
+  font-size: 12px;
+  text-align: center;
+}
+
+p.gccFirma {
+  font-size: 10px;
+  text-align: center;
+margin: 0
+}
+
+td.borde{
+border: 1px solid black;
+padding: 5px 5px 5px 5px;
+}
+
+p.texto8 {
+  font-size: 8px;
+}
+
+.greenButton>.sapMBtnInner {
+  background-color:#369643;
+  background-image: none;
+  text-shadow: none;
+  color: #fff;
+}
+
+.greenButton .sapMBtnIcon  {
+  color: #fff !important;
+}
+
+.greenButton.sapMBtn:hover>.sapMBtnHoverable {
+    background-color:#008a22;
+    color: white;
+    border-color: green;
+}
+
+.rejectButton>.sapMBtnInner {
+  background-color:#f53d3d;
+  background-image: none;
+  text-shadow: none;
+  color: #fff;
+}
+
+.rejectButton .sapMBtnIcon  {
+  color: #fff !important;
+}
+
+.rejectButton.sapMBtn:hover>.sapMBtnHoverable {
+    background-color:#e8201a;
+    color: white;
+    border-color: red;
+}
+
+.rejectButton.sapMBtn:hover>.sapMBtnHoverable .sapMBtnIcon {
+    color: red;
+}
+
+.pendingButton>.sapMBtnInner {
+  background-color:#de6210;
+  background-image: none;
+  text-shadow: none;
+  color: #fff;
+}
+
+.pendingButton .sapMBtnIcon  {
+  color: #fff !important;
+}
+
+.pendingButton.sapMBtn:hover>.sapMBtnHoverable {
+    background-color:#e0560b;
+    color: white;
+    border-color: orange;
+}
+
+.pendingButton.sapMBtn:hover>.sapMBtnHoverable .sapMBtnIcon {
+    color: orange;
+}
+
+.notifButton>.sapMBtnInner {
+  background-color:#3339e8;
+  background-image: none;
+  text-shadow: none;
+  color: #fff;
+}
+
+.notifButton .sapMBtnIcon  {
+  color: #fff !important;
+}
+
+.notifButton.sapMBtn:hover>.sapMBtnHoverable {
+    background-color:#0d12a1;
+    color: white;
+    border-color: blue;
+}
+
+.notifButton.sapMBtn:hover>.sapMBtnHoverable .sapMBtnIcon {
+    color: blue;
+}
+
+.customCellImageBackground {
+    color: #ffffff;
+    background-image: url("../images/baycoLocal.png");
+    background-size: 100% 100%;
+    background-position: 0 80%;
+    height:250px;
+    opacity:0.4
+}
+
+.customCellImageBackground2 {
+    color: #ffffff;
+    background-color:#000088;
+    height:250px;
+    opacity:0.4
+}
+
+.txtSize{
+     font-size:1.2rem !important;
+    }
+
+p.tabla10 {
+  font-size: 10px;
+}
+
+td.std1{
+padding: 1px;
+}
+
+th.std2{
+padding: 3px;
+}
+
+p.stdCenter1 {
+  font-size: 16px;
+  text-align: center;
+}
+
+.print {
+	display:none;
+}
+
+
+#wrapper {
+  display: flex;
+}
+
+#left {
+  flex: 0 0 50%;
+}
+
+#right {
+  flex: 1;
+}
+
+@page {
+    margin: 0;
+}
+

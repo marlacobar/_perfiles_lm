@@ -1,0 +1,29 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:layout="sap.ui.layout"
+	xmlns:u="sap.ui.unified"
+	xmlns:tnt="sap.tnt"
+	xmlns:table="sap.ui.table"
+	xmlns:dnd="sap.ui.core.dnd"
+	xmlns:core="sap.ui.core"
+xmlns:f="sap.f">
+	
+
+	<IconTabBar mode="Inline" id="idTabBar" class="sapUiResponsiveContentPadding">
+	
+		<items>
+			<IconTabFilter key="info" text="Cabecera" >
+					<core:Fragment type="XML" fragmentName="sap.ui.demo.webapp.view.Calidad.fragments.Crear_cabecera" />
+			</IconTabFilter>
+			<IconTabFilter key="attachments" text="Estado" >
+					<core:Fragment type="XML" fragmentName="sap.ui.demo.webapp.view.Calidad.fragments.Crear_estado" />
+			</IconTabFilter>
+			<IconTabFilter key="notes" text="Posiciones">
+					<core:Fragment type="XML" fragmentName="sap.ui.demo.webapp.view.Calidad.fragments.Crear_posiciones" />
+			</IconTabFilter>
+			<IconTabFilter key="people" text="Medidas">
+				
+			</IconTabFilter>
+		</items>
+	</IconTabBar>
+</core:FragmentDefinition>

@@ -1,0 +1,124 @@
+<mvc:View
+	controllerName="sap.ui.demo.webapp.controller.Pizarras.pizarra_transportes"
+	xmlns="sap.m"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:core="sap.ui.core"
+	xmlns:layout="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:tnt="sap.tnt">
+	<html:style type="text/css">
+		thead > tr > th{
+			background: #8A8A8A !important;
+		}
+		.col_header{			
+			color: white !important;
+			font-weight:bold !important;
+		}
+
+		tr[data-mydata="LOCAL"] {
+			background: #A7FE90 !important;
+		}
+		.pz_local {
+			padding: 8px;
+			font-size:large;
+			color:black !important;
+			font-weight:bold !important;
+			background-color: #A7FE90 !important;
+		}
+
+		tr[data-mydata="RECOGE"] { 
+			background: #90FEF2 !important;
+		}
+		.pz_recoge {
+			padding: 8px;
+			font-size:large;
+			color:black !important;
+			font-weight:bold !important;
+			background-color: #90FEF2 !important;
+		}
+		tr[data-mydata="EXPORTACION"] { 
+			background: #90C2FE !important;
+		}
+		.pz_exportacion {
+			padding: 8px;
+			font-size:large;
+			color:black !important;
+			font-weight:bold !important;
+			background-color: #90C2FE !important;
+		}
+		tr[data-mydata="NACIONAL"] { 
+			background: #FEAE90 !important;
+		}
+		.pz_nacional {
+			padding: 8px;
+			font-size:large;
+			color:black !important;
+			font-weight:bold !important;
+			background-color: #FEAE90 !important;
+		}
+	</html:style>
+	<Page backgroundDesign="Solid" enableScrolling="true" id="piz_page">
+		<customHeader>
+			<Toolbar class="toolbar_default">
+				<Label labelFor="myColumn" class="toolbar_title" text="Pizarra Transportes" wrapping="true" />
+				<ToolbarSpacer/>
+				<Label class="pz_exportacion" text="EXPORTACION"/>
+				<Label class="pz_local" text="LOCAL"/>
+				<Label class="pz_nacional" text="NACIONAL"/>
+				<Label class="pz_recoge" text="RECOGE"/>
+            			</Toolbar>
+        		</customHeader>
+		<content>
+			<VBox class="sapUiSmallMargin sapUiSizeCompact sapUiSizeCozy ">			
+				<layout:Grid defaultSpan="L12 M12 S12">
+					<layout:content>
+						<Table
+							id="TBLREP"							
+							autoPopinMode="true" contextualWidth="Auto"
+							items="{
+								path:'transportes>/Rowsets/Rowset/0/Row'								
+							}">
+							<columns   >
+								<Column hAlign="Center"><Label class="col_header" text="TIPO CARGA"/></Column>
+								<Column hAlign="Center"><Label class="col_header" text="TRANSPORTE"/></Column>
+								<Column hAlign="Center"><Label class="col_header" text="CICLO"/></Column>
+								<Column hAlign="Center"><Label class="col_header" text="CHOFER"/></Column>
+								<Column hAlign="Center"><Label class="col_header" text="LINEA TRANSP."/></Column>
+								<Column hAlign="Center"><Label class="col_header" text="TIPO UNIDAD"/></Column>
+								<Column hAlign="Center"><Label class="col_header" text="PLACAS"/></Column>
+								<Column hAlign="Center"><Label class="col_header" text="PLANA"/></Column>
+								<Column hAlign="Center"><Label class="col_header" text="DESTINO"/></Column>
+<!--								<Column hAlign="Center"><Label class="col_header" text="CLIENTE"/></Column>-->
+								<Column hAlign="Center"><Label class="col_header" text="FECHA LLEGADA"/></Column>
+								<Column hAlign="Center"><Label class="col_header" text="FECHA SOLICITADA"/></Column>
+<!--								<Column hAlign="Center"><Label class="col_header" text="FECHA INGRESO"/></Column>-->
+							</columns>
+							<items>
+								<ColumnListItem>
+									<customData>
+										<core:CustomData key="mydata" value="{transportes>TIPOCARGA}" writeToDom="true"></core:CustomData>
+									</customData>
+									<cells>
+										<Text text="{transportes>TIPOCARGA}"/>
+										<Text text="{transportes>TRANSPORTE_SAP}"/>
+										<Text text="{transportes>CICLO}"/>
+										<Text text="{transportes>CHOFER}"/>
+										<Text text="{transportes>TRANSPORTISTA}"/>
+										<Text text="{transportes>TIPOUNIDAD}"/>
+										<Text text="{transportes>PLACAS_TRACTO}"/>
+										<Text text="{transportes>PLACAS_PLANA}"/>
+										<Text text="{transportes>TIPOVIAJE}"/>
+<!--										<Text text="{transportes>CLIENTE}"/>-->
+										<Text text="{transportes>FECHA_LLEGO}"/>
+										<Text text="{transportes>FECHA_LOGISTICA}"/>
+<!--										<Text text="{transportes>FECHA_INGRESO}"/>-->
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</layout:content>
+				</layout:Grid>
+			</VBox>
+		</content>
+	</Page>
+</mvc:View>

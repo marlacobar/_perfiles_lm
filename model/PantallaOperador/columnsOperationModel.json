@@ -1,0 +1,12 @@
+{
+    "cols": [
+        {
+            "label": "Puesto de Trabajo",
+            "template": "WORK_CENTER"
+        },
+        {
+            "label": "Descripcion",
+            "template": "DESCRIPTION"
+        }
+    ]
+}

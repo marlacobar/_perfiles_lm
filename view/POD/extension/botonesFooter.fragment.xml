@@ -1,0 +1,12 @@
+<c:FragmentDefinition xmlns="sap.m"
+    xmlns:c="sap.ui.core">
+    <OverflowToolbar id="otbFooter">
+        <Button icon="sap-icon://activities" type="Ghost" text="Materiales Consumidos" id="button_rollosConsumidos" press="onRollosConsumidos"/>
+        <Button icon="sap-icon://activate" type="Attention" text="Materiales Disponibles" id="button_rollosDisponibles" press="onVerRollosDisponibles"/>
+        <ToolbarSpacer/>
+        <Button id="button_activarOrden" icon="sap-icon://flag" type="Attention" text="Activar/Desactivar Orden" visible="{CNF_OBJ>/button_activarOrden}" press="onActivarDesactivarOrden" />
+        <Button icon="sap-icon://delete" type="Neutral" text="Mermas" press="onReporteMermas"/>
+        <Button icon="sap-icon://legend" type="Emphasized" text="Instalado" press="onRollosInstalados"/>
+        <Button icon="sap-icon://table-column" type="Success" text="Reporte Prod" press="onReporteProduccion"/>
+    </OverflowToolbar>
+</c:FragmentDefinition>

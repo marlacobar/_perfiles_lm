@@ -1,0 +1,446 @@
+{
+  "_version": "1.8.0",
+  "sap.app": {
+    "id": "sap.ui.app.launchpad",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "applicationVersion": {
+      "version": "1.0.0"
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "rootView": {
+      "viewName": "sap.ui.demo.webapp.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "app"
+    },
+    "dependencies": {
+      "minUI5Version": "1.30",
+      "libs": {
+        "sap.m": {}
+      }
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "sap.ui.demo.webapp.i18n.i18n"
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "initData": {
+      "server": "devmiiplm.perfileslm.com:50100",
+      "protocol": "http://",
+      "__server__": "devmiiplm.perfileslm.com:50100"
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "viewPath": "sap.ui.demo.webapp.view",
+        "controlId": "app",
+        "controlAggregation": "pages",
+        "transition": "slide",
+        "bypassed": {
+          "target": "notFound"
+        },
+        "async": true
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "appHome",
+          "target": "home"
+        },
+        {
+          "pattern": "panelOperador",
+          "name": "panelOperador",
+          "target": "panelOperador"
+        },
+        {
+          "pattern": "AvisosCalidadCrear",
+          "name": "AvisosCalidadCrear",
+          "target": "AvisosCalidadCrear"
+        },
+        {
+          "pattern": "InspeccionCalidadPT",
+          "name": "InspeccionCalidadPT",
+          "target": "InspeccionCalidadPT"
+        },
+        {
+          "pattern": "InspeccionCalidadMP",
+          "name": "InspeccionCalidadMP",
+          "target": "InspeccionCalidadMP"
+        },
+        {
+          "pattern": "InspeccionCalidad03/{planta}",
+          "name": "InspeccionCalidad03",
+          "target": "InspeccionCalidad03"
+        },
+        {
+          "pattern": "InspeccionCalidad09/{planta}",
+          "name": "InspeccionCalidad09",
+          "target": "InspeccionCalidad09"
+        },
+        {
+          "pattern": "Inspecciones/{centro}/{lote}/{documento}/{tipo}/{producido}/{material}/{de}",
+          "name": "Inspecciones",
+          "target": "Inspecciones"
+        },
+        {
+          "pattern": "InspeccionesPeriodicas/{centro}/{lote}/{tipo}/{producido}/{material}/{de}",
+          "name": "InspeccionesPeriodicas",
+          "target": "InspeccionesPeriodicas"
+        },
+        {
+          "pattern": "revision_lotes",
+          "name": "revision_lotes",
+          "target": "revision_lotes"
+        },
+        {
+          "pattern": "revision_lotes_offline",
+          "name": "revision_lotes_offline",
+          "target": "revision_lotes_offline"
+        },
+        {
+          "pattern": "MantenimientoUsuarios/{planta}",
+          "name": "MantenimientoUsuarios",
+          "target": "MantenimientoUsuarios"
+        },
+        {
+          "pattern": "ConfiguracionObjetosMII/{planta}",
+          "name": "ConfiguracionObjetosMII",
+          "target": "ConfiguracionObjetosMII"
+        },
+        {
+          "pattern": "Correo",
+          "name": "Correo",
+          "target": "Correo"
+        },
+        {
+          "pattern": "CorreoErrores",
+          "name": "CorreoErrores",
+          "target": "CorreoErrores"
+        },
+        {
+          "pattern": "supervisoresProd/{planta}",
+          "name": "supervisoresProd",
+          "target": "supervisoresProd"
+        },
+        {
+          "pattern": "caractPantOperador",
+          "name": "caractPantOperador",
+          "target": "caractPantOperador"
+        },
+        {
+          "pattern": "verAvisos/{planta}",
+          "name": "verAvisos",
+          "target": "verAvisos"
+        },
+        {
+          "pattern": "verOrdenes/{planta}",
+          "name": "verOrdenes",
+          "target": "verOrdenes"
+        },
+        {
+          "pattern": "PenalizacionesTransporte",
+          "name": "PenalizacionesTransporte",
+          "target": "PenalizacionesTransporte"
+        },
+        {
+          "pattern": "registroTransportista",
+          "name": "registroTransportista",
+          "target": "registroTransportista"
+        },
+        {
+          "pattern": "traduccionValores",
+          "name": "traduccionValores",
+          "target": "traduccionValores"
+        },
+        {
+          "pattern": "Defectos_Rep",
+          "name": "Defectos_Rep",
+          "target": "Defectos_Rep"
+        },
+        {
+          "pattern": "ReporteCalidad/{plant}",
+          "name": "ReporteCalidad",
+          "target": "ReporteCalidad"
+        },
+        {
+          "pattern": "CheckList_Actividades",
+          "name": "CheckList_Actividades",
+          "target": "CheckList_Actividades"
+        },
+        {
+          "pattern": "CheckList",
+          "name": "CheckList",
+          "target": "CheckList"
+        },
+        {
+          "pattern": "CheckList_Supervisor",
+          "name": "CheckList_Supervisor",
+          "target": "CheckList_Supervisor"
+        },
+        {
+          "pattern": "parosProceso/{planta}",
+          "name": "verParos",
+          "target": "verParos"
+        },
+        {
+          "pattern": "oImpresoras/{planta}",
+          "name": "oImpresoras",
+          "target": "oImpresoras"
+        },
+        {
+          "pattern": "logisticaTransportista",
+          "name": "logisticaTransportista",
+          "target": "logisticaTransportista"
+        },
+        {
+          "pattern": "MonitorTransporte",
+          "name": "MonitorTransporte",
+          "target": "MonitorTransporte"
+        },
+        {
+          "pattern": "PizarraTransportes",
+          "name": "PizarraTransportes",
+          "target": "PizarraTransportes"
+        },
+        {
+          "pattern": "PizarraTransportes_Logistica",
+          "name": "PizarraTransportes_Logistica",
+          "target": "PizarraTransportes_Logistica"
+        },
+        {
+          "pattern": "BasculaNuevo",
+          "name": "BasculaNuevo",
+          "target": "BasculaNuevo"
+        }
+      ],
+      "targets": {
+        "home": {
+          "viewId": "home",
+          "viewName": "Home",
+          "viewLevel": 1
+        },
+        "panelOperador": {
+          "viewId": "panelOperador",
+          "viewName": "panelOperador",
+          "viewPath": "sap.ui.demo.webapp.view.POD",
+          "viewLevel": 1
+        },
+        "AvisosCalidadCrear": {
+          "viewId": "AvisosCalidadCrear",
+          "viewName": "AvisosCalidadCrear",
+          "viewPath": "sap.ui.demo.webapp.view.Calidad",
+          "viewLevel": 1
+        },
+        "InspeccionCalidadPT": {
+          "viewId": "me",
+          "viewName": "me",
+          "viewPath": "sap.ui.demo.webapp.view.Calidad",
+          "viewLevel": 1
+        },
+        "InspeccionCalidadMP": {
+          "viewId": "InspeccionCalidadMP",
+          "viewName": "InspeccionCalidadMP",
+          "viewPath": "sap.ui.demo.webapp.view.Calidad",
+          "viewLevel": 4
+        },
+        "InspeccionCalidad03": {
+          "viewId": "InspeccionCalidad03",
+          "viewName": "InspeccionCalidad03",
+          "viewPath": "sap.ui.demo.webapp.view.Calidad",
+          "viewLevel": 2
+        },
+        "InspeccionCalidad09": {
+          "viewId": "InspeccionCalidad09",
+          "viewName": "InspeccionCalidad09",
+          "viewPath": "sap.ui.demo.webapp.view.Calidad",
+          "viewLevel": 2
+        },
+        "revision_lotes": {
+          "viewId": "revisionLotes",
+          "viewName": "revisionLotes",
+          "viewPath": "sap.ui.demo.webapp.view.Calidad",
+          "viewLevel": 2
+        },
+        "Inspecciones": {
+          "viewId": "Inspecciones",
+          "viewName": "Inspecciones",
+          "viewPath": "sap.ui.demo.webapp.view.Calidad",
+          "viewLevel": 2
+        },
+        "InspeccionesPeriodicas": {
+          "viewId": "InspeccionesPeriodicas",
+          "viewName": "InspeccionesPeriodicas",
+          "viewPath": "sap.ui.demo.webapp.view.Calidad",
+          "viewLevel": 2
+        },
+        "revision_lotes_offline": {
+          "viewId": "revisionLotes_offline",
+          "viewName": "revisionLotes_offline",
+          "viewPath": "sap.ui.demo.webapp.view.Calidad",
+          "viewLevel": 2
+        },
+        "MantenimientoUsuarios": {
+          "viewId": "MantenimientoUsuarios",
+          "viewName": "MantenimientoUsuarios",
+          "viewPath": "sap.ui.demo.webapp.view.Administracion",
+          "viewLevel": 3
+        },
+        "ConfiguracionObjetosMII": {
+          "viewId": "ConfiguracionObjetosMII",
+          "viewName": "ConfiguracionObjetosMII",
+          "viewPath": "sap.ui.demo.webapp.view.Administracion",
+          "viewLevel": 2
+        },
+        "Correo": {
+          "viewId": "Correo",
+          "viewName": "Correo",
+          "viewPath": "sap.ui.demo.webapp.view.Catalogos",
+          "viewLevel": 3
+        },
+        "CorreoErrores": {
+          "viewId": "CorreoErrores",
+          "viewName": "CorreoErrores",
+          "viewPath": "sap.ui.demo.webapp.view.Catalogos",
+          "viewLevel": 3
+        },
+        "supervisoresProd": {
+          "viewId": "supervisoresProd",
+          "viewName": "supervisoresProd",
+          "viewPath": "sap.ui.demo.webapp.view.Catalogos",
+          "viewLevel": 2
+        },
+        "caractPantOperador": {
+          "viewId": "caractPantOperador",
+          "viewName": "caractPantOperador",
+          "viewPath": "sap.ui.demo.webapp.view.Catalogos",
+          "viewLevel": 2
+        },
+        "verAvisos": {
+          "viewId": "verAvisos",
+          "viewName": "verAvisos",
+          "viewPath": "sap.ui.demo.webapp.view.Mantenimiento.Avisos",
+          "viewLevel": 4
+        },
+        "verOrdenes": {
+          "viewId": "verOrdenesPM",
+          "viewName": "verOrdenes",
+          "viewPath": "sap.ui.demo.webapp.view.Mantenimiento.Ordenes",
+          "viewLevel": 2
+        },
+        "PenalizacionesTransporte": {
+          "viewId": "PenalizacionesTransporte",
+          "viewName": "PenalizacionesTransporte",
+          "viewPath": "sap.ui.demo.webapp.view.Materiales",
+          "viewLevel": 2
+        },
+        "registroTransportista": {
+          "viewId": "registroTransportista",
+          "viewName": "registroTransportista",
+          "viewPath": "sap.ui.demo.webapp.view.Materiales",
+          "viewLevel": 2
+        },
+        "traduccionValores": {
+          "viewId": "traduccionValores",
+          "viewName": "traduccionValores",
+          "viewPath": "sap.ui.demo.webapp.view.Catalogos",
+          "viewLevel": 2
+        },
+        "Defectos_Rep": {
+          "viewId": "Defectos_Rep",
+          "viewName": "Defectos_Rep",
+          "viewPath": "sap.ui.demo.webapp.view.Reportes",
+          "viewLevel": 2
+        },
+        "ReporteCalidad": {
+          "viewId": "ReporteCalidad",
+          "viewName": "ReporteCalidad",
+          "viewPath": "sap.ui.demo.webapp.view.Reportes",
+          "viewLevel": 2
+        },
+        "CheckList_Actividades": {
+          "viewId": "CheckList_Actividades",
+          "viewName": "CheckList_Actividades",
+          "viewPath": "sap.ui.demo.webapp.view.Mantenimiento.CheckLists",
+          "viewLevel": 2
+        },
+        "CheckList": {
+          "viewId": "CheckList",
+          "viewName": "CheckList",
+          "viewPath": "sap.ui.demo.webapp.view.Mantenimiento.CheckLists",
+          "viewLevel": 2
+        },
+        "CheckList_Supervisor": {
+          "viewId": "CheckList_Supervisor",
+          "viewName": "CheckList_Supervisor",
+          "viewPath": "sap.ui.demo.webapp.view.Mantenimiento.CheckLists",
+          "viewLevel": 2
+        },
+        "verParos": {
+          "viewId": "verParos",
+          "viewName": "verParos",
+          "viewPath": "sap.ui.demo.webapp.view.Reportes",
+          "viewLevel": 2
+        },
+        "oImpresoras": {
+          "viewId": "impresoras",
+          "viewName": "impresoras",
+          "viewPath": "sap.ui.demo.webapp.view.Administracion",
+          "viewLevel": 2
+        },
+        "logisticaTransportista": {
+          "viewId": "logisticaTransportista",
+          "viewName": "logisticaTransportista",
+          "viewPath": "sap.ui.demo.webapp.view.Materiales",
+          "viewLevel": 2
+        },
+        "MonitorTransporte": {
+          "viewId": "MonitorTransportesPlanta",
+          "viewName": "MonitorTransportesPlanta",
+          "viewPath": "sap.ui.demo.webapp.view.Materiales",
+          "viewLevel": 2
+        },
+        "PizarraTransportes": {
+          "viewId": "pizarra_transportes",
+          "viewName": "pizarra_transportes",
+          "viewPath": "sap.ui.demo.webapp.view.Pizarras",
+          "viewLevel": 2
+        }, 
+  "BasculaNuevo": {
+          "viewId": "BasculaNuevo",
+          "viewName": "BasculaNuevo",
+          "viewPath": "sap.ui.demo.webapp.view.Materiales",
+          "viewLevel": 3
+        },
+        "PizarraTransportes_Logistica": {
+          "viewId": "monitor_transportes",
+          "viewName": "monitor_transportes",
+          "viewPath": "sap.ui.demo.webapp.view.Pizarras",
+          "viewLevel": 2
+        }
+      }
+    }
+  }
+}

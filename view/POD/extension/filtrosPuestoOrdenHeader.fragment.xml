@@ -1,0 +1,36 @@
+<c:FragmentDefinition xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:layout="sap.ui.layout">
+    <f:DynamicPageHeader pinnable="true">
+
+        <FlexBox alignItems="Start" justifyContent="Start">
+            <items>
+                <form:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanM="12" labelSpanL="12" labelSpanXL="12" emptySpanL="6" emptySpanM="6">
+                    <form:content>
+                        <Label text="Puesto de trabajo" labelFor="multiInput"/>
+                        <Input id="inputWC" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onValueHelp_WC" suggestionItems="{ 
+								path: '/ITEMS', 
+								sorter: { path: 'WORK_CENTER' } 
+							}">
+                            <c:Item key="{WORK_CENTER}" text="{DESCRIPTION}"/>
+                        </Input>
+                    </form:content>
+                </form:SimpleForm>
+                <form:SimpleForm id="smf_ordenes" visible="{CNF_OBJ>/smf_ordenes}" editable="true" layout="ResponsiveGridLayout" labelSpanM="12" labelSpanL="12" labelSpanXL="12" emptySpanL="6" emptySpanM="6">
+                    <form:content>
+                        <Label text="Órdenes" labelFor="multiInput"/>
+                        <Input id="inputOrden" showValueHelp="true" valueHelpOnly="true" valueHelpRequest=".onViewOrders" suggestionItems="{ 
+								path: '/ITEMS', 
+								sorter: { path: 'Name' } 
+							}">
+                            <c:Item key="{SHOP_ORDER}" text="{SHOP_ORDER}"/>
+                        </Input>
+                    </form:content>
+                </form:SimpleForm>
+
+            </items>
+        </FlexBox>
+    </f:DynamicPageHeader>
+</c:FragmentDefinition>

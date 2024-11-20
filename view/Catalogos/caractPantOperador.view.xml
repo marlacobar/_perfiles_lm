@@ -1,0 +1,116 @@
+<mvc:View controllerName="sap.ui.demo.webapp.controller.Catalogos.caractPantOperador"
+    xmlns:uxap="sap.uxap"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:layout="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:table="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc">
+    <Toolbar class="toolbar_default">
+        <Button icon="sap-icon://nav-back" type="Transparent" class="sapUiMediumMarginBegin" press="onNavBack"></Button>
+        <Image src="images/SAP_Logo.png"></Image>
+        <core:Icon src="sap-icon://show-edit" class="toolbar_title sapUiSmallMarginBegin">
+            <core:layoutData>
+                <FlexItemData growFactor="1"/>
+            </core:layoutData>
+        </core:Icon>
+        <Label labelFor="myColumn" class="toolbar_title" text="Caracteristicas Pantalla Operador" wrapping="true" />
+        <ToolbarSpacer/>
+        <Label id="username" text="" class="toolbar_title"></Label>
+        <MenuButton visible="true" tooltip="Salir" type="Transparent" text="" icon="sap-icon://person-placeholder" class="sapUiLargeMarginEnd">
+            <menu>
+                <Menu>
+                    <MenuItem text="Cerrar sesión" icon="sap-icon://slim-arrow-right" press="logoff" />
+                </Menu>
+            </menu>
+        </MenuButton>
+    </Toolbar>
+    <uxap:ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true" alwaysShowContentHeader="false" preserveHeaderStateOnScroll="false" headerContentPinnable="true" isChildPage="true" upperCaseAnchorBar="false">
+        <uxap:headerTitle>
+            <uxap:ObjectPageDynamicHeaderTitle>
+            </uxap:ObjectPageDynamicHeaderTitle>
+        </uxap:headerTitle>
+        <uxap:headerContent></uxap:headerContent>
+        <uxap:sections>
+            <uxap:ObjectPageSection title="Caracteristicas">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <uxap:blocks>
+                            <layout:Grid defaultSpan="L10 M12 S10" class="sapUiSmallMarginTop">
+                                <layout:content>
+                                    <layout:HorizontalLayout class="sapUiContentPadding">
+                                        <FlexBox direction="Column" alignItems="Start">
+                                            <Label text="Estación de Trabajo :"/>
+                                            <ComboBox id="ListEstacion" class="sapUiSmallMarginBottom" selectionChange="onChangeWC" items="{
+                                                        path: '/',
+                                                        sorter: { path: 'WORK_CENTER' }
+                                                            }">
+                                                <core:Item key="{WORK_CENTER}" text="{DESCRIPTION}" />
+                                            </ComboBox>
+                                        </FlexBox>
+                                        <FlexBox direction="Column" alignItems="Start">
+                                            <Label text="Caracteristica :"/>
+                                            <ComboBox id="cmb_caracteristica" showSecondaryValues= "true" class="sapUiSmallMarginBottom" items="{
+                                                        path: '/'
+                                                            }">
+                                                <core:ListItem key ="{CODIGO}" text="{DESCRIPCION}" additionalText = "{CODIGO}" />
+                                            </ComboBox>
+                                        </FlexBox>
+                                        <FlexBox direction="Column" alignItems="Start">
+                                            <Label text=""/>
+                                            <Button type="Accept" icon="sap-icon://sys-enter-2" text="Agregar Caracteristica" press="onAgregarCaracteristica">
+                                            </Button>
+                                        </FlexBox>
+                                        <ToolbarSpacer width="100px"/>
+                                        <FlexBox direction="Column" alignItems="Start">
+                                            <Label text=""/>
+                                            <Button type="Accept" icon="sap-icon://sys-enter-2" text="Guardar Cambios Secuencia" press="onGuardarSecuencia">
+                                            </Button>
+                                        </FlexBox>
+                                    </layout:HorizontalLayout>
+                                    <FlexBox direction="Column" alignItems="Start">
+                                        <Table id="Table_caracteristicas" class="sapUiResponsiveMargin" width="100%" items="{/ITEMS}">
+                                            <columns>
+                                                <Column>
+                                                    <Label text="Estacion Trabajo"/>
+                                                </Column>
+                                                <Column>
+                                                    <Label text="Codigo Caract"/>
+                                                </Column>
+                                                <Column>
+                                                    <Label text="Descripcion"/>
+                                                </Column>
+                                                <Column width="15%">
+                                                    <Label text=""/>
+                                                </Column>
+                                                <Column width="15%">
+                                                    <Label text=""/>
+                                                </Column>
+                                                <Column width="15%">
+                                                    <Label text=""/>
+                                                </Column>
+                                            </columns>
+                                            <items>
+                                                <ColumnListItem>
+                                                    <cells>
+                                                        <Text text="{WORK_CENTER}"/>
+                                                        <Text text="{CODIGO}" />
+                                                        <Text text="{DESCRIPCION}" />
+                                                        <Button tooltip="Subir" icon="sap-icon://arrow-top" press="onMoverArriba" type="Emphasized" />
+                                                        <Button tooltip="Bajar" icon="sap-icon://arrow-bottom" press="onMoverAbajo" type="Emphasized" />
+                                                        <Button tooltip="Eliminar" icon="sap-icon://delete" press="onEliminarCaracteristica" type="Emphasized" />
+                                                    </cells>
+                                                </ColumnListItem>
+                                            </items>
+                                        </Table>
+                                    </FlexBox>
+                                </layout:content>
+                            </layout:Grid>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+    </uxap:ObjectPageLayout>
+</mvc:View>

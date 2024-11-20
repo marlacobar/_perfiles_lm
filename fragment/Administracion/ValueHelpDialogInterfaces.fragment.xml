@@ -1,0 +1,45 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <TableSelectDialog
+        id="iDialog"
+        noDataText="No se encontraron interfaces"
+        title="Seleccionar Interfaces"
+        search=".handleSearchInterfaces"
+        confirm=".handleCloseInterfaces"
+        cancel=".handleCloseInterfaces"
+        items="{/ITEMS}">
+        <columns>
+            <Column>
+                <Text text="#" />
+            </Column>
+            <Column>
+                <Text text="Alias" />
+            </Column>
+            <Column>
+                <Text text="Descripción" />
+            </Column>
+            <Column>
+                <Text text="Estado" />
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem>
+                <cells>
+                    <Text text="{ID_TILE}" />
+                    <Text text="{TILE_KEY}" />
+                    <Text text="{TILE_DESCRIPCION}" />
+                    <ObjectStatus class="stat"
+                        text="{
+                                      path: 'ACTIVO',
+                                      formatter: '.formatter.TextoTile'
+                                    }"
+                        state="{
+                                      path: 'ACTIVO',
+                                      formatter: '.formatter.TextoStateTile'
+                              }" />
+                </cells>
+            </ColumnListItem>
+        </items>
+    </TableSelectDialog>
+</core:FragmentDefinition>

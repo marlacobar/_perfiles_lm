@@ -1,0 +1,99 @@
+<mvc:View controllerName="sap.ui.demo.webapp.controller.Materiales.logisticaTransportista"
+    xmlns:core="sap.ui.core"
+    xmlns:fm="sap.ui.layout.form"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:l="sap.ui.layout"
+    xmlns:mvc="sap.ui.core.mvc"
+   xmlns:si="sap.suite.ui.commons.statusindicator"
+	>
+    <Page backgroundDesign="Solid" enableScrolling="true">
+        <customHeader>
+            <Toolbar class="toolbar_default">
+                <Button icon="sap-icon://nav-back" type="Transparent" class="sapUiMediumMarginBegin" press="onNavBack"></Button>
+                <Image src="images/SAP_Logo.png" />
+                <Label labelFor="myColumn" class="toolbar_title" text="Logistica Transportistas" wrapping="true" />
+                <ToolbarSpacer/>
+                <Label id="username" text="" class="toolbar_color"></Label>
+	   <MenuButton visible="true" tooltip="Salir" type="Transparent" text="" icon="sap-icon://person-placeholder" class="sapUiLargeMarginEnd">
+		<menu>
+			<Menu>
+				<MenuItem text="Cerrar sesión" icon="sap-icon://slim-arrow-right" press="logoff" />
+			</Menu>
+		</menu>
+ 	   </MenuButton> 
+            </Toolbar>
+        </customHeader>
+        <content>
+            <FlexBox alignItems="Start" justifyContent="Center"  fitContainer="true">
+		<l:HorizontalLayout class="sapUiResponsiveMargin" allowWrapping="true">
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="En Espera" press="onTblRegistros(0)">
+				<TileContent>
+					<NumericContent value="{data>/ESPERA}"  id="kpi_espera"
+						icon="images/Transporte/semi-camion.png"  withMargin="false" />
+				</TileContent>
+			</GenericTile>
+		</l:HorizontalLayout >
+		<l:HorizontalLayout class="sapUiResponsiveMargin" allowWrapping="true">
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Puerta1" press="onTblRegistros(1)">
+				<TileContent>
+					<NumericContent value="{data>/PUERTA1}"  id="kpi_puerta1"
+						icon="images/Transporte/camion.png"  withMargin="false" />
+				</TileContent>
+			</GenericTile>
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Puerta2" press="onTblRegistros(2)">
+				<TileContent>
+					<NumericContent value="{data>/PUERTA2}"  id="kpi_puerta2"
+						icon="images/Transporte/camion.png"  withMargin="false" />
+				</TileContent>
+			</GenericTile>
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Puerta3" press="onTblRegistros(3)">
+				<TileContent>
+					<NumericContent value="{data>/PUERTA3}"  id="kpi_puerta3"
+						icon="images/Transporte/camion.png"  withMargin="false" />
+				</TileContent>
+			</GenericTile>
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Decapado" press="onTblRegistros(4)">
+				<TileContent>
+					<NumericContent value="{data>/DECAPADO}"  id="kpi_decapado"
+						icon="images/Transporte/camion.png"  withMargin="false" />
+				</TileContent>
+			</GenericTile>
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Pintadora 2" press="onTblRegistros(5)">
+				<TileContent>
+					<NumericContent value="{data>/PINTADORA}"  id="kpi_pintadora"
+						icon="images/Transporte/camion.png"  withMargin="false" />
+				</TileContent>
+			</GenericTile>
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Galvanizadora 2" press="onTblRegistros(6)">
+				<TileContent>
+					<NumericContent value="{data>/GALVANIZADORA}"  id="kpi_galvanizadora"
+						icon="images/Transporte/camion.png"  withMargin="false" />
+				</TileContent>
+			</GenericTile>
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Molino" press="onTblRegistros(7)">
+				<TileContent>
+					<NumericContent value="{data>/MOLINO}"  id="kpi_molino"
+						icon="images/Transporte/camion.png"  withMargin="false" />
+				</TileContent>
+			</GenericTile>
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Por Definir" press="onTblRegistros(8)">
+				<TileContent>
+					<NumericContent value="{data>/PORDEFINIR}"  id="kpi_pd"
+						icon="images/Transporte/camion.png"  withMargin="false" />
+				</TileContent>
+			</GenericTile>
+		</l:HorizontalLayout >
+            </FlexBox>
+        </content>
+<!--
+<footer>
+	<OverflowToolbar >
+                	<ToolbarSpacer/>
+			<Button icon="sap-icon://appointment-2" type="Emphasized" text="Solicitar Unidad" press="onSolicitarUnidad" />
+                	<ToolbarSpacer/>
+                </OverflowToolbar>	
+</footer>
+-->
+    </Page>
+</mvc:View>

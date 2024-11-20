@@ -1,0 +1,8 @@
+<mvc:View
+	controllerName="sap.ui.demo.webapp.controller.App"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true">
+<App id="app" backgroundImage="/XMII/CM/MII/App/Piso/MII-Launchpad/images/PerfilesLM.png"/>
+<!--<App id="app"/>-->
+</mvc:View>

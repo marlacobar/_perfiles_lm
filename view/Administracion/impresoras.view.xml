@@ -1,0 +1,127 @@
+<mvc:View controllerName="sap.ui.demo.webapp.controller.Administracion.impresoras"
+  xmlns:form="sap.ui.layout.form"
+  xmlns:l="sap.ui.layout"
+  xmlns:core="sap.ui.core"
+  xmlns:u="sap.ui.unified"
+  xmlns:fb="sap.ui.comp.filterbar"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m">
+  <NavContainer id="wizardNavContainer">
+    <pages>
+      <Page id="wizardContentPage" title="Administración de TAGs Plant Connectivity" backgroundDesign="Solid" showHeader="false">
+        <Toolbar class="toolbar_default">
+          <Button icon="sap-icon://nav-back" type="Transparent" class="sapUiMediumMarginBegin" press="onNavBack"></Button>
+          <Image src="images/SAP_Logo.png">
+          </Image>
+          <core:Icon src="sap-icon://tag" class="toolbar_title sapUiSmallMarginBegin">
+            <core:layoutData>
+              <FlexItemData growFactor="1" />
+            </core:layoutData>
+          </core:Icon>
+          <Label labelFor="myColumn" class="toolbar_title" text="Administración de TAGs Plant Connectivity" wrapping="true" />
+          <ToolbarSpacer />
+          <Label id="username" text="" class="toolbar_color"></Label>
+          <MenuButton visible="true" tooltip="Salir" type="Transparent" text="" icon="sap-icon://person-placeholder" class="sapUiLargeMarginEnd">
+            <menu>
+              <Menu>
+                <MenuItem text="Cerrar sesión" icon="sap-icon://slim-arrow-right" press="logoff" />
+              </Menu>
+            </menu>
+          </MenuButton>
+        </Toolbar>
+        <fb:FilterBar header="{i18n>PMFiltros}" reset="onReset" search="onFilterSearchTags" clear="onClear" showRestoreButton="true" showClearButton="true" class="sapUiSizeCompact">
+          <fb:filterItems>
+
+            <!-- PRN_ID -->
+            <fb:FilterItem name="A" label="Id">
+              <fb:control>
+                <Input id="iPRN_ID" maxLength="36" />
+              </fb:control>
+            </fb:FilterItem>
+
+            <!-- PRN_DESCRIPCION -->
+            <fb:FilterItem name="B" label="Descripción">
+              <fb:control>
+                <Input id="iPRN_DESCRIPCION" maxLength="40" />
+              </fb:control>
+            </fb:FilterItem>
+
+            <!-- FL_HABILITADO -->
+            <fb:FilterItem name="C" label="Habilitado">
+              <fb:control>
+                <CheckBox id="cFL_HABILITADO" selected="true" />
+              </fb:control>
+            </fb:FilterItem>
+
+            <!-- PRN_IP -->
+            <fb:FilterItem name="D" label="IP">
+              <fb:control>
+                <Input id="iPRN_IP" maxLength="15" liveChange="onlyIP" />
+              </fb:control>
+            </fb:FilterItem>
+
+            <!-- PRN_PUERTO -->
+            <fb:FilterItem name="E" label="Puerto">
+              <fb:control>
+                <Input id="iPRN_PUERTO" maxLength="5" liveChange="onlyNumeric"/>
+              </fb:control>
+            </fb:FilterItem>
+
+          </fb:filterItems>
+        </fb:FilterBar>
+
+        <content>
+
+          <Table id="tbl_ImpresorasMII" class="sapUiTinyMarginEnd" items="{path:'listaImpresorasMain>/Rowsets/Rowset/0/Row'}">
+            <headerToolbar>
+              <Toolbar class="sapMTBStandard_0">
+                <Button text="Nueva Impresora" icon="sap-icon://tag" press="handleCrearTag" type="Default"/>
+                <ToolbarSpacer />
+                <Button text="Exportar" icon="sap-icon://excel-attachment" press="onExportHeader" type="Default"/>
+              </Toolbar>
+            </headerToolbar>
+            <columns>
+              <Column minScreenWidth="Tablet" demandPopin="true" visible="true">
+                <Label text="ID" />
+              </Column>
+              <Column minScreenWidth="Tablet" demandPopin="true">
+                <Label text="Descripción" />
+              </Column>
+              <Column minScreenWidth="Tablet" demandPopin="true">
+                <Label text="Habilitado" />
+              </Column>
+              <Column minScreenWidth="Tablet" demandPopin="true">
+                <Label text="IP" />
+              </Column>
+              <Column minScreenWidth="Tablet" demandPopin="true">
+                <Label text="Puerto" />
+              </Column>
+              <Column minScreenWidth="Tablet" demandPopin="true" width="120px">
+                <Label text="Modificar" />
+              </Column>
+              <Column minScreenWidth="Tablet" demandPopin="true" width="120px">
+                <Label text="Eliminar" />
+              </Column>
+
+
+            </columns>
+            <items>
+
+              <ColumnListItem vAlign="Middle" press="onNavigateToDetalle">
+                <cells>
+                  <Text text="{listaImpresorasMain>PRN_ID}" />
+                  <Text text="{listaImpresorasMain>PRN_DESCRIPCION}" />
+                  <Text text="{listaImpresorasMain>FL_HABILITADO}" />
+                  <Text text="{listaImpresorasMain>PRN_IP}" />
+                  <Text text="{listaImpresorasMain>PRN_PUERTO}" />
+                  <Button icon="sap-icon://edit" type="Emphasized" press="onEditTag" tooltip="{i18n>component}"/>
+                  <Button icon="sap-icon://delete" type="Negative" press="onDeleteTag" tooltip="{i18n>component}" />
+                </cells>
+              </ColumnListItem>
+            </items>
+          </Table>
+        </content>
+      </Page>
+    </pages>
+  </NavContainer>
+</mvc:View>

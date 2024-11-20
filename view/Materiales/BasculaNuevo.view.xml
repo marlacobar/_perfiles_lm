@@ -1,0 +1,123 @@
+<mvc:View 
+	controllerName="sap.ui.demo.webapp.controller.Materiales.BasculaNuevo" 
+	xmlns:core="sap.ui.core" 
+	xmlns="sap.m"  
+	xmlns:layout="sap.ui.layout" 
+	xmlns:f="sap.ui.layout.form" 
+	xmlns:mvc="sap.ui.core.mvc">
+    <Page backgroundDesign="Solid" enableScrolling="true">
+        <customHeader>
+            <Toolbar class="toolbar_default">
+                <Button icon="sap-icon://nav-back" type="Transparent" class="sapUiMediumMarginBegin" press="beforeNavBack"></Button>
+                <Image src="images/SAP_Logo.png">
+                </Image>
+                
+                <Label labelFor="myColumn" class="toolbar_title" text="Bascula" wrapping="true" />
+                <ToolbarSpacer/>
+                <Label id="username" text="" class="toolbar_color"></Label>
+                <Button icon="sap-icon://person-placeholder" type="Transparent" class="sapUiLargeMarginEnd">
+                </Button>
+            </Toolbar>
+        </customHeader>
+        <content>
+	<FlexBox wrap="Wrap"  alignItems="Start" justifyContent="Center">
+		<VBox class="sapUiSmallMargin sapUiSizeCompact sapUiSizeCozy ">
+			<f:SimpleForm id="SFMIngreso"
+				editable="true" 
+				layout="ResponsiveGridLayout"
+				labelSpanXL="6" 
+				labelSpanL="6"
+				labelSpanM="6"  
+				labelSpanS="12"
+				adjustLabelSpan="false"
+				columnsXL="3"
+				columnsL="3"
+				columnsM="3"
+				singleContainerFullSize="false" >
+		                    <f:content>
+				<core:Title text="Proceso"/>
+					<Label text="Transporte" />
+						<Input  id="basc_transporte" value="" placeholder="Transporte" />
+						<Button icon="sap-icon://search" tooltip="Traer Datos"  type="Emphasized"  press="onTraerDatos"  id="btntraeinfo">
+							<layoutData>
+								<layout:GridData span="XL2 L2 M2 S2" />
+							</layoutData>
+						</Button>
+					<Label text="Ciclo a realizar" />
+						<Input id="basc_ciclo" value="{data>/CICLO}" enabled="false" />
+		                            	<Label text="Remision/Pedido" id="lbl_remision" />
+						<TextArea id="basc_rem" value="{data>/REMISION}" rows="8" enabled="false"/>
+					<Label text="" />
+						<Button icon="sap-icon://add" tooltip="Agregar remisiones" text="Agregar" type="Ghost"  press="onAgregarRem"  id="btnaddrem" visible="false"/>
+		                        <core:Title text="Transporte" />
+					<Label text="Linea Transp." id="lbltranprov"/>
+		                            		<Input id="basc_transportista" value="{data>/TRANSPORTISTA}" enabled="false" />
+					<Label text="Chofer" />
+						<Input id="basc_chofer" value="{data>/CHOFER}"  enabled="false"/>
+					<Label text="Placas Tracto" />
+						<Input id="basc_placas" value="{data>/PLACAS}"  enabled="false" />
+					<Label text="Placas Plana" id="lbl_plana"/>
+						<Input id="basc_plana" value="{data>/PLANA}"  enabled="false" />
+					<Label text="Contenedor" id="lbl_contenedor" visible="false"/>
+						<Input id="basc_contenedor"  value="{data>/CONTENEDOR}"  enabled="false" visible="false"/>
+					<Label text="Boleta" />
+						<Input id="basc_boleta" value="{data>/BOLETA}"  enabled="false" />
+<!--					<Label text="Proveedor" />
+						<Input id="basc_proveedor" value="{data>/PROVEEDOR}" enabled="false" />
+-->
+				<core:Title text="Bascula" />
+					<Label text="Producto" />
+						<Input id="basc_producto" value="{data>/PRODUCTO}"  enabled="false"/>
+						<Button icon="sap-icon://save" type="Accept" tooltip="Producto" press="onGuardarProducto"  id="btnproducto" enabled="false">
+							<layoutData>
+								<layout:GridData span="XL1 L2 M2 S2" />
+							</layoutData>
+						</Button>
+					<Label text="Pesaje Tara" />
+						<Input id="basc_tara" value="{data>/PESAJE_TARA}"  enabled="false" />
+						<Button icon="sap-icon://compare" type="Attention" tooltip="Peso Tara" press="onValidatePeso(1)"  id="btnpesajetara"  enabled="false"> 
+							<layoutData>
+								<layout:GridData span="XL2 L2 M2 S2" />
+							</layoutData>
+						</Button>
+					<Label text="Pesaje Bruto" />
+						<Input id="basc_bruto" value="{data>/PESAJE_BRUTO}" enabled="false" />
+						<Button icon="sap-icon://compare" type="Attention" tooltip="Peso Bruto" press="onValidatePeso(2)"  id="btnpesajebruto" enabled="false">
+							<layoutData>
+								<layout:GridData span="XL2 L2 M2 S2" />
+							</layoutData>
+						</Button>
+					<Label text="Pesaje Neto" />
+						<Input id="basc_neto" value="{data>/PESAJE_NETO}"  enabled="false" />
+					<Label text="Peso Extra" id="lbl_pextra" visible="false"/>
+						<Input id="basc_pextra"  value="{data>/PESO_EXTRA}"  enabled="true" visible="false"/>
+					<Label text="Pesaje Cargado" id="lbl_pcarga" visible="false"/>
+						<Input id="basc_pcarga"  value="{data>/PESAJE_CARGA}"  enabled="false" visible="false"/>
+					<Label text="Tara Contenedor" id="lbl_tcontenedor" visible="false"/>
+						<Input id="basc_tcontenedor"  value="{data>/TARA_CONTENEDOR}"  enabled="false" visible="false"/>
+						<Button icon="sap-icon://compare" type="Attention" tooltip="Actualiza Tara Contenedor" press="onActualizaContenedor"  id="btntaracont" visible="false">
+							<layoutData>
+								<layout:GridData span="XL2 L2 M2 S2" />
+							</layoutData>
+						</Button>
+		                    </f:content>
+			</f:SimpleForm>
+		</VBox>
+	</FlexBox>
+        </content>
+<footer>
+	<OverflowToolbar >
+                	<ToolbarSpacer/>
+			<Button icon="sap-icon://supplier" type="Accept" text="Recibir Material" press="onRecibirMat"  id="btnrecibemat" visible="false"/>
+			<Button icon="sap-icon://compare" type="Attention" text="Pesaje Final" press="onValidatePeso(3)"  id="btnpesajefinal" visible="false"/>
+			<Button icon="sap-icon://print" type="Accept" text="Imprimir Boleta" press="onBoleta" id="btnboleta"  visible="false"/>
+			<Button icon="sap-icon://repost" type="Accept" text="Cambia Contenedor" press="onCambiarContenedor" id="btncambiocont"  visible="false"/>
+			<Button icon="sap-icon://print" type="Attention" text="Generar Salida" press="onGeneraSalida" id="btnsalida"  visible="false"/>
+			<Button icon="sap-icon://detail-view" type="Ghost" text="Ver Transportes" press="onTransportes" id="btnvertransportes"/>
+			<Button icon="sap-icon://add-activity" type="Critical" text="Re-Generar" press="onReGenerar" id="btnregenera" visible="false"/>
+                	<ToolbarSpacer/>
+                </OverflowToolbar>
+</footer>
+    </Page>
+
+</mvc:View>

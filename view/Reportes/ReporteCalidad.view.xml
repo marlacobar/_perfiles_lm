@@ -1,0 +1,285 @@
+<mvc:View controllerName="sap.ui.demo.webapp.controller.Reportes.ReporteCalidad"
+	xmlns="sap.m"
+	xmlns:viz="sap.viz.ui5.controls"
+	xmlns:layout="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.f"
+	xmlns:t="sap.ui.table"
+	xmlns:core="sap.ui.core"
+	xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+	xmlns:viz.data="sap.viz.ui5.data" height="100%">
+	<f:DynamicPage id="dynamicPageId" stickySubheaderProvider="iconTabBar" class="sapUiNoContentPadding" toggleHeaderOnTitleClick="{/titleClickable}">
+		<!-- DynamicPage Header -->
+		<f:header>
+			<f:DynamicPageHeader pinnable="true">
+				<Toolbar class="toolbar_default1">
+					<Button icon="sap-icon://nav-back" type="Transparent" class="sapUiMediumMarginBegin" press="onNavBack">
+					</Button>
+					<Image src="images/SAP_Logo.png">
+					</Image>
+					<core:Icon src="sap-icon://grid" class="toolbar_title sapUiSmallMarginBegin">
+						<core:layoutData>
+							<FlexItemData growFactor="1" />
+						</core:layoutData>
+					</core:Icon>
+					<Label labelFor="myColumn" class="toolbar_title" text="Reporte Calidad" wrapping="true"/>
+					<ToolbarSpacer/>
+					<Label id="username" text="" class="toolbar_color">
+					</Label>
+					<MenuButton visible="true" tooltip="Salir" type="Transparent" text="" icon="sap-icon://person-placeholder" class="sapUiLargeMarginEnd">
+						<menu>
+							<Menu>
+								<MenuItem text="Cerrar sesión" icon="sap-icon://slim-arrow-right" press="logoff" />
+							</Menu>
+						</menu>
+					</MenuButton>
+				</Toolbar>
+
+				<FlexBox width="100%" alignItems="End" justifyContent="End">
+					<Button id="meta" icon="sap-icon://opportunity" class="sapUiSizeCompact sapUiSmallMarginEnd" text="Metas" press="cnf_porc_upuetra" type="Emphasized" />
+					<Button id="crea_meta" class="sapUiSizeCompact sapUiSmallMarginEnd" text="Crear Meta" press="onCrear" type="Emphasized" />
+					<Button text="Ir" type="Emphasized" class="sapUiSizeCompact" press="onNCalidad"/>
+				</FlexBox>
+
+				<layout:HorizontalLayout allowWrapping="true" class="">
+					<layout:VerticalLayout class="sapUiMediumMarginEnd">
+						<ObjectAttribute title="Año-Mes"/>
+						<DatePicker id="DP10" class="sapUiSizeCompact" displayFormat="yyyy-MM" valueFormat="yyyy-MM" change="handleChange"/>
+					</layout:VerticalLayout>
+
+					<layout:VerticalLayout visible="false">
+						<ObjectAttribute title="{i18n>EndDate}"/>
+						<DatePicker id="end_date" class="sapUiSizeCompact" valueFormat="dd-MM-yyyy" displayFormat="dd-MM-yyyy"/>
+					</layout:VerticalLayout>
+
+					<layout:VerticalLayout class="sapUiMediumMarginBegin">
+						<ObjectAttribute title="Puesto de Trabajo"/>
+						<ComboBox id="Puesto_Trabajo_select" showSecondaryValues= "true" class="sapUiSizeCompact" items="{
+							path: '/',
+							sorter: { path: 'desc' }
+							}" width="200%" selectionChange="onTipoMaterial">
+							<core:ListItem key="{WORK_CENTER}" text="{DESCRIPTION}"
+								additionalText = "{WORK_CENTER}"/>
+						</ComboBox>
+					</layout:VerticalLayout>
+
+					<layout:VerticalLayout class="sapUiMediumMarginBegin" visible="false" id="layout_tipo_material">
+						<ObjectAttribute title="Tipo de Material"/>
+						<ComboBox id="tipo_material_select" showSecondaryValues= "true" class="sapUiSizeCompact" width="200%" selectionChange="">
+							<core:ListItem key="RAZ" text="Aluminio" additionalText = "RAZ"/>
+							<core:ListItem key="RGV" text="Galvanizado" additionalText = "RGV"/>
+							<core:ListItem key="RGP" text="Pintado" additionalText = "RGP RAP"/>
+							<core:ListItem key="RLN" text="Recocido" additionalText = "RLN RLP"/>
+						</ComboBox>
+					</layout:VerticalLayout>
+				</layout:HorizontalLayout>
+			</f:DynamicPageHeader>
+		</f:header>
+
+		<f:content>
+			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
+				<items>
+
+
+					<IconTabFilter text="No Calidad">
+						<layout:VerticalLayout class="sapUiResponsiveMargin sapUiSizeCompact">
+							<Label text = 'Mayor incidencia' design="Bold" class='settingsLabel'></Label>
+							<CheckBox id="check" selected="true" />
+						</layout:VerticalLayout>
+
+						<layout:FixFlex id='chartFixFlex' minFlexSize="800">
+							<layout:flexContent>
+								<viz:Popover id="idPopOver"></viz:Popover>
+								<viz:VizFrame xmlns="sap.viz" vizType='stacked_column'
+			width = "100%" id="idVizFrame" />
+							</layout:flexContent>
+						</layout:FixFlex>
+					</IconTabFilter>
+
+
+					<IconTabFilter text="Calidad por Año">
+
+						<layout:Grid
+			defaultSpan = "L12 M12 S12"
+			width = "auto"
+			id = "idGrid3">
+							<layout:content>
+
+								<layout:Grid
+					defaultSpan = "L6 M6 S12"
+					width = "auto"
+					id = "idGrid4">
+									<layout:content>
+										<Table width="100%" id="tab_mes" class="sapUiSizeCompact" items="{/ITEMS}">
+											<columns class=".sapMListTblCell.sapMListTblHeaderCell_1">
+												<Column hAlign="Center" visible="true" minScreenWidth="Tablet" class=".sapMListTblCell.sapMListTblHeaderCell_1">
+													<header class=".sapMListTblCell.sapMListTblHeaderCell_1">
+														<Label text="Mes"/>
+													</header>
+												</Column>
+												<Column hAlign="Center" visible="true" minScreenWidth="Tablet">
+													<header>
+														<Label text="Producido"/>
+													</header>
+												</Column>
+												<Column hAlign="Center" visible="true" minScreenWidth="Tablet">
+													<header>
+														<Label text="Cali 1ra"/>
+													</header>
+												</Column>
+												<Column hAlign="Center" visible="true" minScreenWidth="Tablet">
+													<header>
+														<Label text="% 1ra"/>
+													</header>
+												</Column>
+												<Column hAlign="Center" visible="true" minScreenWidth="Tablet">
+													<header>
+														<Label text="% Meta"/>
+													</header>
+												</Column>
+											</columns>
+											<items>
+												<ColumnListItem>
+													<cells>
+														<Text text="{MES}" />
+														<Text text="{PROD}" />
+														<Text text="{PRIMERA}" />
+														<Text text="{PORC}" />
+														<Text text="{META}" />
+													</cells>
+												</ColumnListItem>
+											</items>
+										</Table>
+										<viz:VizFrame xmlns="sap.viz" vizType='combination' id="util_mes" />
+
+									</layout:content>
+								</layout:Grid>
+
+							</layout:content>
+						</layout:Grid>
+					</IconTabFilter>
+
+
+
+					<IconTabFilter text="Calidad por Mes">
+
+						<layout:Grid
+			defaultSpan = "L12 M12 S12"
+			width = "auto"
+			id = "gridSem">
+							<layout:content>
+								<layout:Grid
+						defaultSpan = "L6 M6 S6"
+						width = "auto"
+						id = "gridgridSem">
+									<layout:content>
+										<Table width="100%" id="tab_sem" class="sapUiSizeCompact" items="{/ITEMS}">
+											<columns class=".sapMListTblCell.sapMListTblHeaderCell_1">
+												<Column hAlign="Center" visible="true" minScreenWidth="Tablet" class=".sapMListTblCell.sapMListTblHeaderCell_1">
+													<header class=".sapMListTblCell.sapMListTblHeaderCell_1">
+														<Label text="Semana"/>
+													</header>
+												</Column>
+												<Column hAlign="Center" visible="true" minScreenWidth="Tablet">
+													<header>
+														<Label text="Producido"/>
+													</header>
+												</Column>
+												<Column hAlign="Center" visible="true" minScreenWidth="Tablet">
+													<header>
+														<Label text="Cali 1ra"/>
+													</header>
+												</Column>
+												<Column hAlign="Center" visible="true" minScreenWidth="Tablet">
+													<header>
+														<Label text="% 1ra"/>
+													</header>
+												</Column>
+												<Column hAlign="Center" visible="true" minScreenWidth="Tablet">
+													<header>
+														<Label text="% Meta"/>
+													</header>
+												</Column>
+											</columns>
+											<items>
+												<ColumnListItem>
+													<cells>
+														<Text text="{SEMANA}" />
+														<Text text="{PROD}" />
+														<Text text="{PRIMERA}" />
+														<Text text="{PORC}" />
+														<Text text="{META}" />
+													</cells>
+												</ColumnListItem>
+											</items>
+										</Table>
+										<viz:VizFrame xmlns="sap.viz" width="100%" vizType='column' selectData="onClickOnColumnaSemana" id="util_semana" />
+									</layout:content>
+								</layout:Grid>
+							</layout:content>
+						</layout:Grid>
+					</IconTabFilter>
+
+					<IconTabFilter text="Calidad por Semana">
+
+						<layout:Grid
+			defaultSpan = "L12 M12 S12"
+			width = "auto"
+			id = "griddia">
+							<layout:content>
+								<layout:Grid
+					defaultSpan = "L6 M6 S6"
+					width = "auto"
+					id = "gridgriddia">
+									<layout:content>
+										<Table width="100%" id="tab_dia" class="sapUiSizeCompact" items="{/ITEMS}">
+											<columns class=".sapMListTblCell.sapMListTblHeaderCell_1">
+												<Column hAlign="Center" visible="true" minScreenWidth="Tablet" class=".sapMListTblCell.sapMListTblHeaderCell_1">
+													<header class=".sapMListTblCell.sapMListTblHeaderCell_1">
+														<Label text="Día"/>
+													</header>
+												</Column>
+												<Column hAlign="Center" visible="true" minScreenWidth="Tablet">
+													<header>
+														<Label text="Producido"/>
+													</header>
+												</Column>
+												<Column hAlign="Center" visible="true" minScreenWidth="Tablet">
+													<header>
+														<Label text="Cali 1ra"/>
+													</header>
+												</Column>
+												<Column hAlign="Center" visible="true" minScreenWidth="Tablet">
+													<header>
+														<Label text="% 1ra"/>
+													</header>
+												</Column>
+												<Column hAlign="Center" visible="true" minScreenWidth="Tablet">
+													<header>
+														<Label text="% Meta"/>
+													</header>
+												</Column>
+											</columns>
+											<items>
+												<ColumnListItem>
+													<cells>
+														<Text text="{DIA}" />
+														<Text text="{PROD}" />
+														<Text text="{PRIMERA}" />
+														<Text text="{PORC}" />
+														<Text text="{META}" />
+													</cells>
+												</ColumnListItem>
+											</items>
+										</Table>
+										<viz:VizFrame xmlns="sap.viz" width="100%" vizType='column' id="util_dia" />
+									</layout:content>
+								</layout:Grid>
+							</layout:content>
+						</layout:Grid>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

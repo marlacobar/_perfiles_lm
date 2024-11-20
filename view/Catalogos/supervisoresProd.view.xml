@@ -1,0 +1,142 @@
+<mvc:View controllerName="sap.ui.demo.webapp.controller.Catalogos.supervisoresProd"
+    xmlns:uxap="sap.uxap"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:layout="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:table="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc">
+    <Toolbar class="toolbar_default">
+        <Button icon="sap-icon://nav-back" type="Transparent" class="sapUiMediumMarginBegin"
+            press="onNavBack"></Button>
+        <Image src="images/SAP_Logo.png"></Image>
+        <core:Icon src="sap-icon://show-edit" class="toolbar_title sapUiSmallMarginBegin">
+            <core:layoutData>
+                <FlexItemData growFactor="1" />
+            </core:layoutData>
+        </core:Icon>
+        <Label labelFor="myColumn" class="toolbar_title" text="Catalogo Supervisores de Producción"
+            wrapping="true" />
+        <ToolbarSpacer />
+        <Label id="username" text="" class="toolbar_title"></Label>
+        <MenuButton visible="true" tooltip="Salir" type="Transparent" text=""
+            icon="sap-icon://person-placeholder" class="sapUiLargeMarginEnd">
+            <menu>
+                <Menu>
+                    <MenuItem text="Cerrar sesión" icon="sap-icon://slim-arrow-right" press="logoff" />
+                </Menu>
+            </menu>
+        </MenuButton>
+    </Toolbar>
+    <uxap:ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true"
+        alwaysShowContentHeader="false" preserveHeaderStateOnScroll="false"
+        headerContentPinnable="true" isChildPage="true" upperCaseAnchorBar="false">
+        <uxap:headerTitle>
+            <uxap:ObjectPageDynamicHeaderTitle>
+            </uxap:ObjectPageDynamicHeaderTitle>
+        </uxap:headerTitle>
+        <uxap:headerContent></uxap:headerContent>
+        <uxap:sections>
+            <uxap:ObjectPageSection title="Supervisores">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <uxap:blocks>
+                            <layout:Grid defaultSpan="L10 M12 S6" class="sapUiSmallMarginTop">
+                                <layout:content>
+                                    <layout:HorizontalLayout class="sapUiContentPadding">
+                                        <FlexBox direction="Column" alignItems="Start">
+                                            <Label text="Estación de Trabajo :" />
+                                            <ComboBox id="ListEstacion"
+                                                class="sapUiSmallMarginBottom"
+                                                selectionChange="onChangeWC"
+                                                items="{
+                                        path: '/',
+                                        sorter: { path: 'WORK_CENTER' }
+                                            }">
+                                                <core:Item key="{WORK_CENTER}" text="{DESCRIPTION}" />
+                                            </ComboBox>
+                                        </FlexBox>
+                                        <FlexBox direction="Column" alignItems="Start">
+                                            <Label text="ID Supervisor :" />
+                                            <Input id="inputIdSupervisor" type="Text" width="300px"
+                                                placeholder="ID...(Ej. LRUIZ)"
+                                                class="sapUiSmallMarginBottom" />
+                                        </FlexBox>
+                                        <FlexBox direction="Column" alignItems="Start">
+                                            <Label text="Nombre Supervisor :" />
+                                            <Input id="inputNombSupervisor" type="Text"
+                                                width="300px" placeholder="Nombre...(Ej. Luis Ruiz)"
+                                                class="sapUiSmallMarginBottom" />
+                                        </FlexBox>
+                                        <FlexBox direction="Column" alignItems="Start">
+                                            <Label text="" />
+                                            <Button type="Accept" icon="sap-icon://sys-enter-2"
+                                                text="Guardar Supervisor" press="onGuardaSupervisor">
+                                            </Button>
+                                        </FlexBox>
+                                    </layout:HorizontalLayout>
+                                    <FlexBox direction="Column" alignItems="Start">
+                                        <Table id="Table_supervisores" class="sapUiResponsiveMargin"
+                                            width="auto" items="{/ITEMS}">
+                                            <columns>
+                                                <Column>
+                                                    <Label text="ID Usuario" />
+                                                </Column>
+                                                <Column>
+                                                    <Label text="Nombre Usuario" />
+                                                </Column>
+                                                <Column>
+                                                    <Label text="Estacion Trabajo" />
+                                                </Column>
+                                                <Column width="10%">
+                                                    <Label text="Activo" />
+                                                </Column>
+                                                <Column width="10%">
+                                                    <Label text="" />
+                                                </Column>
+                                                <Column width="10%">
+                                                    <Label text="" />
+                                                </Column>
+                                            </columns>
+                                            <items>
+                                                <ColumnListItem>
+                                                    <cells>
+                                                        <Input value="{ID_USUARIO}" enabled="false" />
+                                                        <Input id="inputNombUsuario"
+                                                            value="{NOMB_USUARIO}" />
+                                                        <ComboBox id="ListEstacion_Tabla"
+                                                            class="sapUiSmallMarginBottom"
+                                                            selectedKey="{WORK_CENTER_SUP}"
+                                                            items="{
+                                                                path: 'WORK_CENTER_MENU/',
+                                                                sorter: { path: 'WORK_CENTER_M' },
+                                                                templateShareable:false
+                                                                }">
+                                                            <core:Item key="{WORK_CENTER_M}"
+                                                                text="{DESCRIPTION_M}" />
+                                                        </ComboBox>
+                                                        <Switch id="switchActivo" state="{ACTIVO}"
+                                                            type="AcceptReject">
+                                                            <layoutData>
+                                                                <FlexItemData growFactor="0" />
+                                                            </layoutData>
+                                                        </Switch>
+                                                        <Button text="Guardar"
+                                                            press="onGuardarCambios" />
+                                                        <Button text="Eliminar"
+                                                            press="onBorrarSupervisor" />
+                                                    </cells>
+                                                </ColumnListItem>
+                                            </items>
+                                        </Table>
+                                    </FlexBox>
+                                </layout:content>
+                            </layout:Grid>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+    </uxap:ObjectPageLayout>
+</mvc:View>

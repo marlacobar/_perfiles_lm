@@ -1,0 +1,201 @@
+<mvc:View controllerName="sap.ui.demo.webapp.controller.Calidad.revisionLotes_offline"
+    xmlns:uxap="sap.uxap"
+    xmlns:core="sap.ui.core"
+    xmlns:tnt="sap.tnt"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:layout="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:sample="sap.uxap.sample.ObjectPageSubSectionSized.controller.blocks"
+    xmlns:mvc="sap.ui.core.mvc">
+    <Page backgroundDesign="Solid" enableScrolling="false">
+        <customHeader>
+            <Toolbar class="toolbar_default_Ext">
+                <Button icon="sap-icon://nav-back" type="Transparent" class="sapUiMediumMarginBegin" press="onNavBack"/>
+                <Image src="images/SAP_Logo.png"/>
+                <core:Icon src="sap-icon://browse-folder" class="toolbar_title_Ext sapUiSmallMarginBegin">
+                    <core:layoutData>
+                        <FlexItemData growFactor="1" />
+                    </core:layoutData>
+                </core:Icon>
+                <Label labelFor="myColumn" class="toolbar_title_Ext toolbar_title" text="Revisión Lotes OFFLINE" wrapping="true"/>
+                <ToolbarSpacer/>
+                <Label id ="username" text="" class="toolbar_color_Ext"></Label>
+                <Button icon="sap-icon://person-placeholder" type="Transparent" class="sapUiLargeMarginEnd"/>
+            </Toolbar>
+        </customHeader>
+        <content>
+            <uxap:ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true" alwaysShowContentHeader="true" preserveHeaderStateOnScroll="true" headerContentPinnable="false" isChildPage="true" upperCaseAnchorBar="false">
+                <uxap:headerTitle>
+                    <uxap:ObjectPageDynamicHeaderTitle>
+                        <uxap:expandedHeading>
+                            <Title text="" wrapping="true" class="sapUiSmallMarginEnd"/>
+                        </uxap:expandedHeading>
+                        <uxap:snappedHeading>
+                            <FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
+                                <FlexBox wrap="NoWrap" fitContainer="true" alignItems="Center" class="sapUiTinyMarginEnd">
+                                    <Title text="Filtros" wrapping="true"/>
+                                </FlexBox>
+                            </FlexBox>
+                        </uxap:snappedHeading>
+
+                        <uxap:actions>
+                            <Button text="" tooltip="Anular Selección" icon="sap-icon://multiselect-none" press="anularSeleccion" />
+
+                            <Button text="Cambiar Calidad" tooltip="Filter" icon="sap-icon://complete" press="onChangeQA" />
+
+                            <MenuButton text="Mas" icon="">
+                                <menu>
+                                    <Menu itemSelected="onMenuAction">
+                                        <MenuItem text="Ver Observaciones" icon="sap-icon://attachment-text-file" press="onObservacion(1)" />
+                                        <MenuItem text="Ver Defectos" icon="sap-icon://inspect-down" press="OnDefectos" />
+                                        <MenuItem text="Afectado por" icon="sap-icon://validate" press="onPuestoTrabajoAfectar" />
+                                    </Menu>
+                                </menu>
+                            </MenuButton>
+                        </uxap:actions>
+
+                    </uxap:ObjectPageDynamicHeaderTitle>
+                </uxap:headerTitle>
+                <uxap:headerContent>
+                    <fb:FilterBar header="" reset="onReset" showFilterConfiguration="true" showGoOnFB="true" showRestoreButton="false" useToolbar="true" search="onConsultar" class="sapUiSizeCompact">
+                        <fb:filterItems>
+                            <fb:FilterItem name="D" label="Puesto trabajo">
+                                <fb:control>
+                                    <ComboBox id="puestoTrabajoSelect" showSecondaryValues= "true" items="{
+                                        path: '/',
+                                        sorter: { path: 'desc' }
+                                        }" width="200%">
+                                        <core:ListItem key ="{WORK_CENTER}" text="{DESCRIPTION}" additionalText = "{WORK_CENTER}" />
+                                    </ComboBox>
+                                </fb:control>
+                            </fb:FilterItem>
+                            <fb:FilterItem name="B1" label="Fecha Desde" mandatory="false">
+                                <fb:control>
+                                    <DatePicker id="start_date" valueFormat="dd-MM-yyyy" displayFormat="dd-MM-yyyy" value=""/>
+                                </fb:control>
+                            </fb:FilterItem>
+                            <fb:FilterItem name="B2" label="Fecha Hasta" mandatory="false">
+                                <fb:control>
+                                    <DatePicker id="end_date" valueFormat="dd-MM-yyyy" displayFormat="dd-MM-yyyy" value=""/>
+                                </fb:control>
+                            </fb:FilterItem>
+                            <fb:FilterItem name="Order" label="Orden(es)" mandatory="false">
+                                <fb:control>
+                                    <MultiInput id="num_orden_input" showValueHelp="false"/>
+                                </fb:control>
+                            </fb:FilterItem>
+                            <fb:FilterItem name="Batch" label="Lote(s)" mandatory="false">
+                                <fb:control>
+                                    <MultiInput id="lote_input" showValueHelp="false"/>
+                                </fb:control>
+                            </fb:FilterItem>
+                        </fb:filterItems>
+                    </fb:FilterBar>
+                </uxap:headerContent>
+                <uxap:sections>
+                    <uxap:ObjectPageSection >
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection>
+                                <uxap:blocks>
+                                    <layout:Grid defaultSpan="L12 M12 S12">
+                                        <layout:content>
+                                            <Button visible="false" icon="sap-icon://download"									
+											text = "Aceptar" 
+											press = "goToxml" 
+											type = "Emphasized"/>
+                                            <Table id="revisionLotes_table" select="buttonActivation" width="auto" growing="true" growingThreshold="50" mode="MultiSelect" items="{/ITEMS}">
+                                                <headerToolbar>
+                                                    <OverflowToolbar>
+                                                        <Title text="Registros" level="H2"/>
+                                                        <ToolbarSpacer/>
+                                                        <Button icon="sap-icon://action-settings" type="Transparent" press="_openModalColumn"/>
+                                                    </OverflowToolbar>
+                                                </headerToolbar>
+                                                <columns>
+                                                    <Column>
+                                                        <Label text="Material"/>
+                                                    </Column>
+                                                    <Column>
+                                                        <Label text="Descripción"/>
+                                                    </Column>
+                                                    <Column>
+                                                        <Label text="Lote"/>
+                                                    </Column>
+                                                    <Column>
+                                                        <Label text="Almacén"/>
+                                                    </Column>
+                                                    <Column>
+                                                        <Label text="Cantidad"/>
+                                                    </Column>
+                                                    <Column minScreenWidth="Small" demandPopin="true">
+                                                        <Label text="Orden"/>
+                                                    </Column>
+                                                    <Column>
+                                                        <Label text="Pedido"/>
+                                                    </Column>
+                                                    <Column minScreenWidth="Small" demandPopin="true">
+                                                        <Label text="Registrado"/>
+                                                    </Column>
+                                                    <Column>
+                                                        <Label text="P. Trabajo"/>
+                                                    </Column>
+                                                    <Column minScreenWidth="Small" demandPopin="true">
+                                                        <Label text="Afectado por"/>
+                                                    </Column>
+                                                    <Column>
+                                                        <Label text="Defecto"/>
+                                                    </Column>
+                                                    <Column>
+                                                        <Label text="Observaciones"/>
+                                                    </Column>
+                                                    <Column>
+                                                        <Label text="Calidad"/>
+                                                    </Column>
+                                                    <Column >
+                                                        <Label text="LOTE_INSPECCION_HIDE"/>
+                                                    </Column>
+                                                    <Column>
+                                                        <Label text="ID_HIDE"/>
+                                                    </Column>
+                                                </columns>
+                                                <items>
+                                                    <ColumnListItem>
+                                                        <cells>
+                                                            <Text text="{MATERIAL}"/>
+                                                            <Text text="{DESCRIPCION}"/>
+                                                            <Text text="{BATCH}"/>
+                                                            <Text text="{ALMACEN}"/>
+                                                            <Text text="{QUANTITY}"/>
+                                                            <Text text="{SHOP_ORDER}"/>
+                                                            <Text text="{S_ORD_POS}"/>
+                                                            <Text text="{PROD_DATE}"/>
+                                                            <Text text="{WORK_CENTER}"/>
+                                                            <Text text="{WORK_CENTER_AFFECTED}"/>
+                                                            <Text text="{DEFECT}"/>
+                                                            <Text text="{OBS}"/>
+                                                            <ComboBox id="comboQA" change="changeCombo" showSecondaryValues= "true" selectedKey="{QA}" items="{
+                                                                path: '/MENU',
+                                                                sorter: { path: 'CALIDAD' },
+                                                                templateShareable:false 
+                                                                }">
+                                                                <core:ListItem key="{CALIDAD}" text="{DESCRIPCION}" additionalText="{CALIDAD}"/>
+                                                            </ComboBox>
+                                                            <Text text="{LOTE_INSPECCION}"/>
+                                                            <Text text="{ID}"/>
+                                                        </cells>
+                                                    </ColumnListItem>
+                                                </items>
+                                            </Table>
+                                        </layout:content>
+                                    </layout:Grid>
+                                </uxap:blocks>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+                    </uxap:ObjectPageSection>
+                </uxap:sections>
+            </uxap:ObjectPageLayout>
+        </content>
+    </Page>
+</mvc:View>

@@ -1,0 +1,29 @@
+<core:FragmentDefinition xmlns="sap.m"
+  xmlns:l="sap.ui.layout"
+  xmlns:core="sap.ui.core">
+  <Dialog id="decisionEmpleo" title="Decisión de Empleo">
+    <l:VerticalLayout class="sapUiContentPadding" width="100%">
+      <l:content>
+        <!-- Filter by date range -->
+        <Label text="Selecciona una valoración :"/>
+        <ComboBox id="Combo_decision" showSecondaryValues="true" width="100%" selectionChange=".onDEChange" items="{
+					             path: '/',
+                       sorter: { path: 'id' }
+			              }">
+          <core:ListItem key="{key}" text="{text}" additionalText="{code}"/>
+        </ComboBox>
+        <!-- Filter by plan name(s) -->
+        <Label id="dateExpLabel" text="Nueva fecha de vencimiento:" class="sapUiTinyMarginTop" visible="false"/>
+        <DatePicker value="{global>/expiryDate}" id="expiryDatePicker" change="handleChange" valueFormat="yyyy-MM-dd" displayFormat="dd-MM-yyyy" visible="false" />
+      </l:content>
+    </l:VerticalLayout>
+
+    <beginButton>
+      <Button type="Emphasized" text="Grabar DE" icon="sap-icon://employee-lookup" press="onSendDE" enabled="{= ${global>/decision_Accept} === true ? ${global>/expiryDate} !== '' ? true : false : true}" />
+    </beginButton>
+    <endButton>
+      <Button type="Reject" text="Cancelar" icon="sap-icon://cancel" press="onCloseModal"/>
+    </endButton>
+
+  </Dialog>
+</core:FragmentDefinition>

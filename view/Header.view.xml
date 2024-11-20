@@ -1,0 +1,29 @@
+﻿<mvc:View
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns="sap.m">
+  <ObjectHeader
+		id="oh1"
+		responsive="true"
+		intro="{i18n>MIIModuleDescription}"
+		title="{i18n>MIIModule}"
+		showMarkers="true"
+		markFlagged="true"
+		markFavorite="true"
+		numberState="Success"
+		backgroundDesign="Translucent">
+    <attributes>
+      <ObjectAttribute
+				title="Negocio"
+				text="GIM"/>
+    </attributes>
+    <statuses>
+      <ObjectStatus
+				title=""
+				text="S4HANA MII"
+				state="Warning"/>
+    </statuses>
+    <headerContainer>
+    </headerContainer>
+  </ObjectHeader>
+</mvc:View>

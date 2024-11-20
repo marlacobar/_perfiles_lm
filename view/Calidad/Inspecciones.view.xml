@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mvc:View controllerName="sap.ui.demo.webapp.controller.Calidad.Inspecciones" xmlns="sap.m"
+	xmlns:t="sap.ui.table" xmlns:f="sap.f"
+	xmlns:core="sap.ui.core" xmlns:layout="sap.ui.layout" xmlns:dnd="sap.ui.core.dnd"
+	xmlns:tnt="sap.tnt" xmlns:mvc="sap.ui.core.mvc">
+
+	<NavContainer id="wizardNavContainer">
+		<pages>
+			<Page
+				id="wizardContentPage"
+				backgroundDesign="Solid"
+				showHeader="false">
+				<Toolbar
+					class="toolbar_default">
+					<Button icon="sap-icon://nav-back" type="Transparent"
+						class="sapUiMediumMarginBegin"
+						press="onNavBack" />
+					<Image src="images/SAP_Logo.png">
+					</Image>
+					<core:Icon
+						src="sap-icon://cause"
+						class="toolbar_title sapUiSmallMarginBegin">
+						<core:layoutData>
+							<FlexItemData growFactor="1" />
+						</core:layoutData>
+					</core:Icon>
+					<Label labelFor="myColumn"
+						class="toolbar_title"
+						text="Inspección de Calidad"
+						wrapping="true"
+					/>
+					<ToolbarSpacer />
+					<Label
+						id="username"
+						text=""
+						class="toolbar_color"></Label>
+					<MenuButton
+						visible="true"
+						tooltip="Salir"
+						type="Transparent"
+						text=""
+						icon="sap-icon://person-placeholder"
+						class="sapUiLargeMarginEnd">
+						<menu>
+							<Menu>
+								<MenuItem
+									text="Cerrar sesión"
+									icon="sap-icon://slim-arrow-right"
+									press="logoff" />
+							</Menu>
+						</menu>
+					</MenuButton>
+				</Toolbar>
+				<Toolbar>
+					<ToolbarSpacer />
+					<!-- <Button visible="false" type="Transparent" text="Crear Aviso" icon="sap-icon://alert"
+						press="onAviso" enabled="false" />
+					<Button type="Transparent" text="Registrar Defecto"
+						icon="sap-icon://activity-items" press="OnDefectos" enabled="true"
+						visible="false" />
+					<Button visible="false" type="Transparent" text="Observaciones"
+						icon="sap-icon://attachment-text-file" press="onObservacion"
+						enabled="false" /> -->
+
+					<MenuButton text="Operaciones.." icon="sap-icon://provision">
+						<menu>
+							<Menu itemSelected="onMenuAction">
+								<MenuItem id="btnInspeccionar" text="Inspeccionar"
+									icon="sap-icon://clinical-tast-tracker"
+									press="onInspeccion" />
+								<MenuItem id="btnDE" text="Decisión de empleo"
+									icon="sap-icon://employee-approvals"
+									press="onDe" />
+								<MenuItem id="btnInspeccionarMulti" text="Inspección multiple" icon="sap-icon://multi-select"
+									press="onInspeccionMultiple" />
+								<MenuItem id="btnDEMulti" text="Decisión de Empleo multiple"
+									icon="sap-icon://multi-select"
+									press="onDEMultiInspeccionar" visible="true" />
+							</Menu>
+						</menu>
+					</MenuButton>
+				</Toolbar>
+
+				<layout:HorizontalLayout>
+					<layout:VerticalLayout class="sapUiLargeMarginBegin sapUiSmallMarginTop">
+						<ObjectIdentifier title="Operacion: " />
+						<ComboBox visible="true" class="sapUiSizeCompact" id="listOperation"
+							showSecondaryValues="true" change="onChangeOperations"
+							items="{ path: '/', sorter: { path: 'desc' } }">
+							<core:ListItem key="{KEY}" text="{TEXT}" additionalText="{KEY}" />
+						</ComboBox>
+					</layout:VerticalLayout>
+
+					<layout:VerticalLayout class="sapUiLargeMarginBegin sapUiSmallMarginTop">
+						<ObjectStatus title="LOTE INSPECCION" text="{/LOTE}" />
+						<!--<ObjectStatus
+						id="CantInspecciones" title="INSPECCIONES REALIZADAS " text="{/CTD}"/>-->
+						<ObjectStatus id="material" title="MATERIAL"
+							text="{/MATERIAL} {/DESC_MATERIAL}" />
+						<ObjectStatus id="orden" title="ORDEN" text="{/ORDEN}" />
+						 <ObjectStatus id="clave" title="CLAVE" text="{/ZCT_CLAVE}" />
+						<ObjectStatus id="pedido" title="PEDIDO" text="{/PEDIDO}"
+							visible="{= ${/PEDIDO} !== '' ? true : false }" />
+						<ObjectStatus id="elemento_pep" title="ELEMENTO PEP"
+							text="{/ELEMENTO_PEP}"
+							visible="{= ${/ELEMENTO_PEP} !== '' ? true : false }" />
+						<ObjectStatus id="marca" title="MARCA" text="{/MARCA}"
+							visible="{= ${/MARCA} !== '' ? true : false }" />
+					</layout:VerticalLayout>
+
+					<layout:VerticalLayout class="sapUiLargeMarginBegin sapUiSmallMarginTop">
+						<ObjectStatus title="LOTE" text="{/LOTE_MAT}" />
+						<!--<Link
+						id="Lote" text="{/LOTE_MAT}" press="charBatch"/>-->
+						<ObjectStatus title="TAMAÑO DE LOTE" text="{/TAM_LOTE}" />
+						<ObjectStatus id="tam_muestra" title="TAMAÑO DE LA MUESTRA"
+							text="{/TAM_MUESTRA}" />
+						<ObjectStatus id="des" title="DE" text="{/CODE_DE} {/DESC_DE}" />
+						<Text visible="false" id="punto" text="{/PUNTO}" />
+					</layout:VerticalLayout>
+
+					<layout:VerticalLayout class="sapUiLargeMarginBegin sapUiSmallMarginTop"></layout:VerticalLayout>
+					<layout:VerticalLayout class="sapUiLargeMarginBegin sapUiSmallMarginTop">
+						<Text id="inicio_isp" visible="false" />
+					</layout:VerticalLayout>
+				</layout:HorizontalLayout>
+				<!--
+				<HBox justifyContent="Center">
+					<layout:VerticalLayout class="sapUiLargeMarginBeginEnd">
+						<NumericContent class="sapUiLargeMarginBegin" value="{/PORC_ACEPTADO}" scale="%"
+				valueColor="Good"/>
+						<Label class="sapUiLargeMarginBegin" text="Características Aceptadas"/>
+					</layout:VerticalLayout>
+					<layout:VerticalLayout class="sapUiLargeMarginBeginEnd">
+						<NumericContent value="{/PORC_RECHAZADO}" scale="%" valueColor="Error"/>
+						<Label text="Características Rechazadas"/>
+					</layout:VerticalLayout>
+				</HBox>
+				-->
+				<f:DynamicPage id="dynamicPageId" toggleHeaderOnTitleClick="false">
+					<!-- DynamicPage Title -->
+					<f:content>
+						<Table id="charListQM" items="{/ITEMS}"
+							fixedLayout="false" class="sapFDynamicPageAlignContent" width="auto"
+							busyIndicatorDelay="10">
+							<headerToolbar>
+								<Toolbar class="sapMTBStandard_0">
+									<Title text="Caracteristicas" level="H1" />
+									<ToolbarSpacer />
+									<Button id="editar" enabled="true" press="onEditar"
+										type="Transparent" text="Editar" icon="sap-icon://edit"
+										visible="true" />
+								</Toolbar>
+							</headerToolbar>
+							<columns>
+								<Column>
+									<Label text="Secuencia" />
+								</Column>
+								<Column>
+									<Label text="Descripcion" />
+								</Column>
+								<Column width="0px" visible="false">
+									<Label text="Tipo" />
+								</Column>
+								<Column>
+									<Label text="Valor" />
+								</Column>
+								<Column>
+									<Label text="Limt. inferior" />
+								</Column>
+								<Column>
+									<Label text="Limt. superior" />
+								</Column>
+								<Column>
+									<Label text="UM" />
+								</Column>
+								<Column>
+									<Label text="Estatus" />
+								</Column>
+								<Column visible="false" width="0px">
+									<Label text="Maestro" />
+								</Column>
+								<Column visible="false" width="0px">
+									<Label text="Grupo" />
+								</Column>
+								<!--
+								<Column>
+									<Label text="Inspecciones Realizadas"/>
+								</Column>
+								<Column >
+									<Label text="Muestreos"/>
+								</Column>
+								-->
+								<Column visible="false" width="0px">
+									<Label text="ID" />
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<ObjectIdentifier title="{INSPCHAR}" text="{MSTR_CHAR}" />
+										<Text text="{CHAR_DESCR}" />
+										<Text text="{CHAR_TYPE}" />
+										<HBox>
+											<Select id="comboMenu" enabled="false"
+												change="changeCombo" showSecondaryValues="true"
+												selectedKey="{sel_KEY}"
+												forceSelection="true"
+												visible="{ path: 'COMBO_VISIBLE', formatter: '.formatter.elementVisible' }"
+												items="{ path: 'MENU/', sorter: { path: 'KEYY', group: true }, templateShareable:false }">
+												<core:ListItem key="{KEY};{CODE};{CODE_GROUPE}"
+													text="{TEXT}" additionalText="{KEY}" />
+											</Select>
+											<Input enabled="false" type="Text" id="inputValue"
+												value="{VALOR}" liveChange="onVerifyValue"
+												visible="{ path: 'INPUT_VISIBLE', formatter: '.formatter.elementVisible' }"></Input>
+										</HBox>
+										<Text text="{LW_TO_LMT}" />
+										<Text text="{UP_TOL_LMT}" />
+										<Text text="{UNIT}" />
+										<Select id="comboDes" change="changeCombo"
+											selectedKey="{sel_KEY_des}"
+											items="{ path: 'MENU_DES/', sorter: { path: 'TEXT' }, templateShareable:false }">
+											<core:Item key="{KEY}" text="{TEXT}" />
+										</Select>
+										<Text text="{MSTR_CHAR}" />
+										<Text text="{CODE_GROUPE}" />
+										<!--
+										<Text text="{INSP}"/>
+										<Text text="{A_INSP}"/>
+										-->
+										<Text text="{ID_PDA}" />
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</f:content>
+				</f:DynamicPage>
+			</Page>
+		</pages>
+	</NavContainer>
+</mvc:View>

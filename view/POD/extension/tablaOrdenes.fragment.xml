@@ -1,0 +1,91 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:layout="sap.ui.layout"
+    xmlns:tnt="sap.tnt"
+    xmlns:core="sap.ui.core">
+    <VBox class="sapUiSmallMargin">
+        <OverflowToolbar id="ovf_menuBotones" visible="{CNF_OBJ>/ovf_menuBotones}" class="sapUiSmallMargin">
+            <content>
+
+                <Button id="btn_creacionAviso" visible="{CNF_OBJ>/btn_creacionAviso}" class="sapUiSmallMarginEnd" icon="sap-icon://goalseek" type="Reject" text="Crear Aviso PM" press="onCrearAvisoPM"/>
+
+                <Button id="btn_creacionParo" visible="{CNF_OBJ>/btn_creacionAviso}" class="sapUiSmallMarginEnd" icon="sap-icon://alert" type="Critical" text="Crear Paro" press="onCrearParo"/>
+                <ToolbarSpacer/>
+                <HBox id="hbx_piezasXatado" visible="{CNF_OBJ>/hbx_piezasXatado}">
+                    <Title class="sapUiSmallMargin" titleStyle="H5" text="Piezas por atado" />
+                    <Input class="sapUiSmallMarginEnd" id="inp_piezasXatado" width="6em"/>
+                    <Button id="btn_piezasXatado" class="sapUiSmallMarginEnd" icon="sap-icon://save" type="Negative" text="" press="grabarPiezasPorAtado"/>
+                </HBox>
+            </content>
+        </OverflowToolbar>
+        <!--<Table id="OrdersList" class="sapUiResponsiveMargin" mode="SingleSelectLeft" width="auto" selectionChange="selectOrder" growing="true" growingThreshold="300" items="{/ITEMS}">-->
+        <Table id="OrdersList" class="sapUiResponsiveMargin" mode="SingleSelectLeft" width="auto" growing="true" growingThreshold="300" items="{/ITEMS}">
+            <headerToolbar>
+                <OverflowToolbar>
+                    <content>
+                        <GenericTag text="Equipo:" visible="false" id="oTagEquipo" design="StatusIconHidden" status="Success" class="sapUiSmallMarginEnd"/>
+                        <GenericTag text="Serie:" visible="false" id="oTagSerie" design="StatusIconHidden" status="Success" class="sapUiSmallMarginEnd"/>
+                        <GenericTag text="Estado:" visible="false" id="oTagEstado" design="StatusIconHidden" status="Success" class="sapUiSmallMarginEnd"/>
+                        <GenericTag text="%0" visible="false" id="oTagPorcentajeDado" design="StatusIconHidden" status="Success" class="sapUiSmallMarginEnd"/>
+                        <ToolbarSpacer/>
+                        <GenericTag text="Debe Controlar Peso" visible="false" id="oTagAlertaCtrlPeso" design="StatusIconHidden" status="Warning" class="sapUiSmallMarginEnd"/>
+                    </content>
+                </OverflowToolbar>
+            </headerToolbar>
+            <columns>
+                <Column minScreenWidth="Small" demandPopin="true" width="7%">
+                    <Label text="Orden"/>
+                </Column>
+                <Column minScreenWidth="Small" demandPopin="true">
+                    <Label text="Material"/>
+                </Column>
+                <Column minScreenWidth="Small" demandPopin="true" visible="true">
+                    <Label text="Descripción"/>
+                </Column>
+                <!--<Column minScreenWidth="Small" demandPopin="true">
+                    <Label text="Fecha Inicio"/>
+                </Column>-->
+                <Column minScreenWidth="Small" demandPopin="false">
+                    <Label text="Planeada"/>
+                </Column>
+                <Column minScreenWidth="Small" demandPopin="false">
+                    <Label text="Producida"/>
+                </Column>
+                <Column minScreenWidth="Small" demandPopin="false">
+                    <Label text="Faltante"/>
+                </Column>
+                <Column minScreenWidth="Small" demandPopin="false">
+                    <Label text="Cliente"/>
+                </Column>
+                <Column minScreenWidth="Small" demandPopin="false">
+                    <Label text="Características"/>
+                </Column>
+                <Column minScreenWidth="Small" demandPopin="false">
+                    <Label text="Estatus Orden"/>
+                </Column>
+                <Column minScreenWidth="Small" demandPopin="false">
+                    <Label text=""/>
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem>
+                    <cells>
+                        <Text text="{SHOP_ORDER}"/>
+                        <Text text="{CODIGO}"/>
+                        <Text text="{DESCRIPTION}"/>
+                        <!--<Text text="{WORK_DATE}"/>-->
+                        <ObjectNumber number="{QTY_TO_BUILD}" unit="{UM}"/>
+                        <ObjectNumber number="{QTY_DONE}" unit="{UM}"/>
+                        <ObjectNumber number="{QTY_MISSING}" unit="{UM}"/>
+                        <Text text="{CLIENTE}"/>
+                        <Button icon="sap-icon://detail-view" text="" type="Default" tooltip="Ver Características" press="onVerCaracteristicas"/>
+                        <tnt:InfoLabel text="{ path: 'ACTIVA', formatter: '.formatter.orderText' }" colorScheme="{ parts: [ {path: 'ACTIVA'} ], formatter: '.formatter.availableState' }"/>
+                        <HBox>
+                            <Button icon="sap-icon://survey" text="" type="Default" visible="true" tooltip="Validacion Cuadre de Orden" press="onValidaConsumo"/>
+                            <!--<Button icon="sap-icon://clinical-task-tracker" text="" type="Default" visible="{= ${FL_CONSUMO} === '1' ? true : false }" tooltip="Validacion Consumo" press="onValidaConsumo"/>-->
+                        </HBox>
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </VBox>
+</core:FragmentDefinition>

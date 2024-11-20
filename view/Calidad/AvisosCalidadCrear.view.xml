@@ -1,0 +1,52 @@
+<mvc:View
+	height="100%"
+	controllerName="sap.ui.demo.webapp.controller.Calidad.AvisosCalidadCrear"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	>
+	<Page showHeader="false" class="sapUiContentPadding" backgroundDesign="Solid">
+        
+            <Toolbar class="toolbar_default">
+                <Button icon="sap-icon://nav-back" type="Transparent" class="sapUiMediumMarginBegin" press="onNavBack"></Button>
+                <Image src="images/SAP_Logo.png">
+                </Image>
+                <ToolbarSpacer/>
+                <Label id="username" text="" class="toolbar_color"></Label>
+                <Button icon="sap-icon://person-placeholder" type="Transparent" class="sapUiLargeMarginEnd">
+                </Button>
+            </Toolbar>
+        
+		<content>
+			<Panel headerText="Avisos Calidad">
+			<HBox alignItems="Center">
+				<Label width="8rem" class="sapUiSmallMarginBegin" text="Tipo de Aviso:" />
+
+			         <ComboBox
+					items="{
+						path: '/TypesAvisos',
+						sorter: { path: 'text' }
+						}">
+					<core:Item key="{key}" text="{text}" />
+				</ComboBox>
+
+			</HBox>
+			<Button 
+				class = "sapUiTinyMarginEnd"
+				width ="20%"
+				text = "Etiqueta Automotriz" 
+				press = "cargarFramentoEtiquetAutomotriz" 
+				icon="sap-icon://print" 
+				type = "Emphasized"
+		   		visible="{CNF_OBJ>/BTN_RECUPERAR}"/>
+		</Panel>
+
+		<Panel width="100%" height="100%" >
+				<core:Fragment type="XML" fragmentName="sap.ui.demo.webapp.view.Calidad.fragments.Crear" />
+		</Panel>
+
+
+		</content>
+	</Page>
+</mvc:View>

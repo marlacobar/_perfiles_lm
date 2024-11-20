@@ -1,0 +1,343 @@
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc">
+    <Dialog id="DGIngresoTransporte" title="Registrar Transporte" afterClose="onCloseRegistroUnidad">
+        <VBox class=" sapUiSmallMargin sapUiSizeCompact sapUiSizeCozy ">
+            <core:InvisibleText id="infoid" text="0" />
+            <core:InvisibleText id="choferid" text="0" />
+            <f:Form id="SFMIngreso" editable="true">
+                <f:layout>
+                    <f:ResponsiveGridLayout
+                        adjustLabelSpan="true"
+                        columnsXL="2"
+                        columnsL="2"
+                        columnsM="2"
+                        singleContainerFullSize="false" />
+                    </f:layout>
+                    <f:formContainers>
+
+
+                        <f:FormContainer title="Proceso">
+                            <f:formElements>
+                                <f:FormElement label="Ciclo a realizar">
+                                    <f:fields>
+                                        <ComboBox id="reg_ciclo" 
+                                           change="onChangeCiclo"
+                                           placeholder="Selecciona Tipo Ciclo"
+                                    
+                                           enabled="false"
+                                           items="{ciclo>/}">
+                                           <core:ListItem key="{ciclo>VALUE}"
+                                            text="{ciclo>DESCRIPCION}" />
+                                        </ComboBox>
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Observaciones">
+                                    <f:fields>
+                                        <TextArea value="" rows="2" id="reg_obs"
+                                            placeholder="Ingrese Observaciones" />
+                                        </f:fields>
+                                    </f:FormElement>
+                                </f:formElements>
+                            </f:FormContainer>
+
+
+
+
+                            <f:FormContainer title="Operador">
+                                <f:formElements>
+                                    <f:FormElement label="Curp">
+                                        <f:fields>
+                                            <!--                                    <Input id="reg_curp" value="" placeholder="Ingresa CURP" />-->
+                                            <Input
+                                                id="reg_curp"
+                                                maxLength="18"
+                                                placeholder="Ingresa CURP"
+                                                showSuggestion="true"
+                                                suggest=".onSearchCurp"
+                                                maxSuggestionWidth="800px"
+                                                showTableSuggestionValueHelp="false"
+                                                suggestionRows="{path: 'curp>/'}"
+                                                suggestionItemSelected=".onSelectCurp">
+                                                <suggestionColumns>
+                                                    <Column demandPopin="true">
+                                                        <Label text="CURP" />
+                                                    </Column>
+                                                    <Column demandPopin="true">
+                                                        <Label text="NOMBRE" />
+                                                    </Column>
+                                                    <Column demandPopin="true">
+                                                        <Label text="TELEFONO" />
+                                                    </Column>
+                                                </suggestionColumns>
+                                                <suggestionRows>
+                                                    <ColumnListItem>
+                                                        <cells>
+                                                            <Label text="{curp>CURP}" />
+                                                            <Label text="{curp>NOMBRE}" />
+                                                            <Label text="{curp>TELEFONO}" />
+                                                        </cells>
+                                                    </ColumnListItem>
+                                                </suggestionRows>
+                                            </Input>
+                                            <Button tooltip="Buscar" icon="sap-icon://search"
+                                                press="onValidaCurp" type="Attention" id="btn_validacurp">
+                                                <layoutData>
+                                                    <l:GridData span="XL2 L2 M2 S2" />
+                                                </layoutData>
+                                            </Button>
+                                        </f:fields>
+                                    </f:FormElement>
+                                    <f:FormElement label="Nombre">
+                                        <f:fields>
+                                            <Input id="reg_chofer" value="" placeholder="Ingresa chofer" />
+                                        </f:fields>
+                                    </f:FormElement>
+                                    <f:FormElement label="Tiene Whatsapp">
+                                        <f:fields>
+                                            <CheckBox id="reg_wtsp" valueState="Information" select="false"
+                                                tooltip="Whatsapp" />
+                                            </f:fields>
+                                        </f:FormElement>
+                                        <f:FormElement label="Celular Operador" visible="{/TelVisible}">
+                                            <f:fields>
+                                                <MaskInput mask="999 999 9999" placeholderSymbol="_"
+                                                    placeholder="Ingrese Tefono" id="reg_tel" />
+                                                    <Button tooltip="Validar" icon="sap-icon://complete"
+                                                        press="onValidaTelefono" type="Attention">
+                                                        <layoutData>
+                                                            <l:GridData span="XL2 L2 M2 S2" />
+                                                        </layoutData>
+                                                    </Button>
+                                                </f:fields>
+                                            </f:FormElement>
+                                        </f:formElements>
+                                    </f:FormContainer>
+
+
+                        <f:FormContainer title="Transporte">
+                            <f:formElements>
+
+  <f:FormElement label="Linea Transporte" id="lblprov_cliente">
+                                        <f:fields>
+                                            <ComboBox
+                                                id="reg_transportista"
+                                                items="{path:'transporte>/' ,length : '9999'}"
+                                                placeholder="Selecciona Proveedor / Transportista"
+                                                showSecondaryValues="true"
+                                                filterSecondaryValues="true"
+                                                >
+                                                <core:ListItem key="{transporte>ID_PROVEEDOR}"
+                                                    text="{transporte>NOMBRE}"
+                                                    additionalText="{transporte>ID_PROVEEDOR}" />
+                                                </ComboBox>
+                                            </f:fields>
+                                        </f:FormElement>
+
+                                <f:FormElement label="Placas Tracto">
+                                    <f:fields>
+                                        <Input
+                                            id="reg_placas"
+                                            maxLength="7"
+                                            placeholder="Ingresa Placa"
+                                            showSuggestion="true"
+                                            suggest=".onSearchPlaca"
+                                            maxSuggestionWidth="800px"
+                                            showTableSuggestionValueHelp="false"
+                                            suggestionRows="{path: 'placas>/'}"
+                                            suggestionItemSelected=".onSelectPlaca">
+                                            <suggestionColumns>
+                                                <Column demandPopin="true"><Label text="TRACTO" /></Column>
+                                                <Column demandPopin="true"><Label text="CHOFER" /></Column>
+                                                <Column demandPopin="true"><Label text="PLANA" /></Column>
+                                                <Column demandPopin="true"><Label text="TIPO CAMION" /></Column>
+                                                <Column demandPopin="true"><Label text="LINEA" /></Column>
+                                                <Column demandPopin="true"><Button press="NuevoTransporte" tooltip="Nuevo Transporte" icon="sap-icon://add" /></Column>
+                                            </suggestionColumns>
+                                            <suggestionRows>
+                                                <ColumnListItem>
+                                                    <cells>
+                                                        <Label text="{placas>PLACAS_TRACTO}" />
+                                                        <Label text="{placas>CHOFER}" />
+                                                        <Label text="{placas>PLACAS_PLANA}" />
+                                                        <Label text="{placas>TIPOCAMION}" />
+                                                        <Label text="{placas>TRANSPORTISTA}" />
+                                                        <Label text="" />
+                                                    </cells>
+                                                </ColumnListItem>
+                                            </suggestionRows>
+                                        </Input>
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Tipo Camion">
+                                    <f:fields>
+                                        <ComboBox id="reg_tipocamion"
+                                            change="onChangeTipoCamion"
+                                            placeholder="Selecciona Tipo Camion"
+                                            items="{tipocamion>/}">
+                                            <core:ListItem key="{tipocamion>VALUE}"
+                                                text="{tipocamion>DESCRIPCION}" />
+                                            </ComboBox>
+                                        </f:fields>
+                                    </f:FormElement>
+                                  
+                                        <f:FormElement label="Placas Plana" visible="{/PlacasPlana}"
+                                            id="lblplacasplana">
+                                            <f:fields>
+                                                <Input maxLength="14" id="reg_plana"
+                                                    placeholder="Ingresa placas" />
+                                                </f:fields>
+                                            </f:FormElement>
+                                            <f:FormElement label="No Economico"  visible="false" id="NoEconomico">
+                                                <f:fields>
+                                                    <Input maxLength="4" id="reg_noeco"
+                                                        placeholder="Ingresa No Economico" />
+                                                    </f:fields>
+                                                </f:FormElement>
+                                                <f:FormElement label="Longitud Plana"  id="lbllongplana">
+                                                    <f:fields>
+                                 <!-- <Input id="reg_longplana" placeholder="Ingresa longitud plana" />-->
+                                            <ComboBox id="reg_longplana"
+                                            change="onChangeLongPlana"
+                                            placeholder="Selecciona..."
+                                            items="{long_plana>/}">
+                                            <core:ListItem key="{long_plana>VALUE}"
+                                                text="{long_plana>DESCRIPCION}" />
+                                            </ComboBox>
+                                                    </f:fields>
+                                                </f:FormElement>
+                                                <f:FormElement label="Es Full" visible="{/Full}">
+                                                    <f:fields>
+                                                        <CheckBox id="reg_full" valueState="Information"
+                                                            select="EsFullChange" />
+                                                        </f:fields>
+                                                    </f:FormElement>
+                                                    <f:FormElement label="Placas Segunda Plana" visible="{/FullVisible}">
+                                                        <f:fields>
+                                                            <Input maxLength="11" id="reg_plana2"
+                                                                placeholder="Ingresa placas" />
+                                                            </f:fields>
+                                                        </f:FormElement>
+                                                        <f:FormElement label="No. Economico 2"  visible="False" >
+                                                            <f:fields>
+                                                                <Input maxLength="4" id="reg_eco2"
+                                                                    placeholder="Ingresa No Economico" />
+                                                                </f:fields>
+                                                            </f:FormElement>
+                                                            <f:FormElement label="Longitud Segunda Plana" visible="{/FullVisible}" id="lbllongplana2">
+                                                                <f:fields>
+                                                                    <Input id="reg_longplana2" placeholder="Ingresa longitud plana" />
+                                                                </f:fields>
+                                                            </f:FormElement>
+                                                        </f:formElements>
+                                                    </f:FormContainer>
+                                                   
+
+
+
+
+                        <!--                             <f:FormContainer title="Extra - Descarga" visible="{/DescargaVisible}">
+                                                        <f:formElements>
+                                                            <f:FormElement label="Remision">
+                                                                <f:fields>
+                                                                    <Input value="" id="reg_remision" type="Number" />
+                                                                    <Button tooltip="Validar" icon="sap-icon://complete"
+                                                                        press="onValidaRemision" type="Attention">
+                                                                        <layoutData>
+                                                                            <l:GridData span="XL2 L2 M2 S2" />
+                                                                        </layoutData>
+                                                                    </Button>
+                                                                </f:fields>
+                                                            </f:FormElement>
+                                                        </f:formElements>
+                                                    </f:FormContainer> -->
+
+  <!--                                                   <f:FormContainer title="Extra - Contenedor" visible="{/Contenedor}">
+                                                        <f:formElements>
+                                                            <f:FormElement label="Contenedor">
+                                                                <f:fields>
+                                                                    <Input value="" id="reg_nocontenedor" 
+                                                                        enabled="false" />
+                                                                        <Button tooltip="Buscar Contenedor"
+                                                                            icon="sap-icon://browse-folder" press="onViewContenedor"
+                                                                            type="Ghost">
+                                                                            <layoutData>
+                                                                                <l:GridData span="XL2 L2 M2 S2" />
+                                                                            </layoutData>
+                                                                        </Button>
+                                                                    </f:fields>
+                                                                </f:FormElement>
+                                                                <f:FormElement label="Salida Contenedor">
+                                                                    <f:fields>
+                                                                        <CheckBox id="reg_salidacontenedor" valueState="Information"
+                                                                            tooltip="Salida Contenedor" />
+                                                                        </f:fields>
+                                                                    </f:FormElement>
+                                                                </f:formElements>
+                                                            </f:FormContainer>
+ -->
+
+ <f:FormContainer title="Extra - Carga" visible="{/CargaVisible}">
+    <f:formElements>
+
+        <f:FormElement label="Tipo Carga">
+            <f:fields>
+                <ComboBox id="reg_tpcarga"
+                    items="{path:'tipocarga>/' ,length : '9999'}"
+                    placeholder="Seleccione Tipo Carga"
+                    change="onRefreshTransport">
+                    <core:ListItem key="{tipocarga>TIPOCARGAID}"
+                        text="{tipocarga>DESCRIPCION}" />
+                    </ComboBox>
+                </f:fields>
+            </f:FormElement>
+
+     <!--        <f:FormElement label="Equipo - Bandas">
+                <f:fields>
+                    <Input maxLength="4" id="reg_bandas" placeholder="Bandas" />
+                </f:fields>
+            </f:FormElement> 
+            <f:FormElement label="Equipo - Barrotes">
+                <f:fields>
+                    <Input maxLength="4" id="reg_barrotes" placeholder="Barrotes" />
+                </f:fields>
+            </f:FormElement> 
+            <f:FormElement label="Equipo - Bases">
+                <f:fields>
+                    <Input maxLength="4" id="reg_bases" placeholder="Bases" />
+                </f:fields>
+            </f:FormElement> 
+            <f:FormElement label="Equipo - Esquineros">
+                <f:fields>
+                    <Input maxLength="4" id="reg_esquineros"
+                        placeholder="Esquineris" />
+                    </f:fields>
+                </f:FormElement> 
+                 <f:FormElement label="Equipo - Cadenas">
+                    <f:fields>
+                        <Input maxLength="4" id="reg_cadenas" placeholder="Cadenas" />
+                    </f:fields>
+                </f:FormElement> -->
+
+            </f:formElements>
+        </f:FormContainer>
+
+                                                                            </f:formContainers>
+                                                                        </f:Form>
+                                                                    </VBox>
+                                                                    <beginButton>
+                                                                        <Button type="Emphasized" text="Registrar Unidad" icon="sap-icon://future"
+                                                                            press="onRegistro" />
+                                                                        </beginButton>
+                                                                        <endButton>
+                                                                            <Button
+                                                                                text="Cancelar"
+                                                                                press="onCloseRegistroUnidad" icon="sap-icon://sys-cancel-2"
+                                                                                type="Reject" />
+                                                                            </endButton>
+                                                                        </Dialog>
+                                                                    </core:FragmentDefinition>
+<!-- ciclo procesar change onChangeCiclo -->

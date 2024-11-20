@@ -1,0 +1,150 @@
+<mvc:View
+  controllerName="sap.ui.demo.webapp.controller.Calidad.InspeccionCalidadMP"
+  xmlns:uxap="sap.uxap"
+  xmlns:core="sap.ui.core"
+  xmlns="sap.m"
+  xmlns:f="sap.f"
+  xmlns:layout="sap.ui.layout"
+  xmlns:form="sap.ui.layout.form"
+  xmlns:mvc="sap.ui.core.mvc">
+  <Page
+    backgroundDesign="Solid"
+    enableScrolling="false">
+    <customHeader>
+      <Toolbar
+        class="toolbar_default">
+        <Button icon="sap-icon://nav-back" type="Transparent" class="sapUiMediumMarginBegin" press="onNavBack"></Button>
+        <Image src="images/SAP_Logo.png">
+        </Image>
+        <core:Icon
+        src="sap-icon://cause"
+        class="toolbar_title sapUiSmallMarginBegin">
+          <core:layoutData>
+            <FlexItemData growFactor="1" />
+          </core:layoutData>
+        </core:Icon>
+        <Label labelFor="myColumn"
+          class="toolbar_title"
+          text="Materia prima calidad"
+          wrapping="true"
+        />
+        <ToolbarSpacer/>
+       <Label
+            id ="username"
+            text=""
+            class="toolbar_color"></Label>
+        <Button icon="sap-icon://person-placeholder" type="Transparent" class="sapUiLargeMarginEnd">
+        </Button>
+<Button icon="sap-icon://log" tooltip="Cerrar Sesión" press="onCerrarSesion"  class="sapUiLargeMarginEnd"/>
+      </Toolbar>
+    </customHeader>
+    <content>
+      <uxap:ObjectPageLayout
+    id="ObjectPageLayout"
+    showTitleInHeaderContent="true"
+    alwaysShowContentHeader="true"
+    preserveHeaderStateOnScroll="true"
+    headerContentPinnable="false"
+    isChildPage="true"
+    upperCaseAnchorBar="false">
+        <uxap:headerTitle>
+          <uxap:ObjectPageDynamicHeaderTitle>
+            <uxap:expandedHeading>
+            </uxap:expandedHeading>
+
+            <uxap:snappedHeading>
+           
+            </uxap:snappedHeading>
+
+            <uxap:actions>
+              
+            </uxap:actions>
+          </uxap:ObjectPageDynamicHeaderTitle>
+        </uxap:headerTitle>
+
+        <uxap:headerContent>
+         
+        </uxap:headerContent>
+
+        <uxap:sections>
+          <uxap:ObjectPageSection title="Lotes de inspeccion">
+            <uxap:subSections>
+              <uxap:ObjectPageSubSection>
+                <uxap:blocks>
+                <layout:Grid defaultSpan="L12 M12 S12" class="sapUiSmallMarginTop">
+                    <layout:content>
+                        <FlexBox direction="Column" alignItems="Start">
+                          <Toolbar>
+                            <ToolbarSpacer />
+                            <SearchField 
+                              width="100%" 
+                              placeholder="Buscar...."
+                              liveChange="onSearch"/>
+                          </Toolbar> 
+                        </FlexBox>
+                         <FlexBox direction="Column" alignItems="Start">
+                      <Table
+                     id="Partidas_List"
+                     class="sapUiResponsiveMargin"
+                     width="100%"
+                     growing="true"
+                     items="{/ITEMS}">
+                    <columns>
+                     <Column>
+                        <Label text="Material"/>
+                      </Column>
+                      <Column>
+                        <Label text="Almacen"/>
+                      </Column>
+                      <Column>
+                        <Label text="Lote"/>
+                      </Column>
+                      <Column>
+                        <Label text="Cantidad"/>
+                      </Column>
+                       <Column>
+                        <Label text="Fecha"/>
+                      </Column>
+                      <Column>
+                        <Label text="Lote inspección"/>
+                      </Column>
+                        <Column>
+                        <Label text="Documento"/>
+                      </Column>
+                      <Column>
+                        <Label text="Pedido"/>
+                      </Column>
+ 		<Column>
+                        <Label text="Lote proveedor"/>
+                      </Column>
+                    </columns>
+                    <items>
+                      <ColumnListItem type="Navigation" press="onInspeccion">
+                        <cells>
+                          <Text text="{DESC_MATERIAL} {MATERIAL}"/>
+                          <Text text="{ALMACEN_EMISOR}"/>
+                          <Text text="{LOTE}"/>
+                          <Text text="{CANTIDAD} {UM}"/>
+                          <Text text="{FECHA_INS}"/>
+                          <Text text="{LOTE_INSPECCION}"/>
+                          <Text text="{DOCUMENTO}"/>
+                          <Text text="{PEDIDO}"/>
+                          <Text text="{PROVEEDOR}"/>
+                        </cells>
+                      </ColumnListItem>
+                    </items>
+                  </Table>
+                        </FlexBox>
+                    </layout:content>
+                  </layout:Grid>
+                </uxap:blocks>
+              </uxap:ObjectPageSubSection>
+            </uxap:subSections>
+          </uxap:ObjectPageSection>
+        </uxap:sections>
+      </uxap:ObjectPageLayout>
+    </content>
+  </Page>
+  
+  
+</mvc:View>

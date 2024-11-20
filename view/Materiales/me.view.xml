@@ -1,0 +1,211 @@
+<mvc:View
+  controllerName="sap.ui.demo.webapp.controller.Materiales.me"
+  xmlns:uxap="sap.uxap"
+  xmlns:core="sap.ui.core"
+  xmlns="sap.m"
+  xmlns:f="sap.f"
+  xmlns:layout="sap.ui.layout"
+  xmlns:form="sap.ui.layout.form"
+  xmlns:fb="sap.ui.comp.filterbar"
+  xmlns:mvc="sap.ui.core.mvc">
+  <Page
+    backgroundDesign="Solid"
+    enableScrolling="false">
+    <customHeader>
+      <Toolbar
+        class="toolbar_default">
+        <Button icon="sap-icon://nav-back" type="Transparent" class="sapUiMediumMarginBegin"
+          press="onNavBack"></Button>
+        <Image src="images/SAP_Logo.png">
+        </Image>
+        <core:Icon
+          src="sap-icon://cause"
+          class="toolbar_title sapUiSmallMarginBegin">
+          <core:layoutData>
+            <FlexItemData growFactor="1" />
+          </core:layoutData>
+        </core:Icon>
+        <Label labelFor="myColumn"
+          class="toolbar_title"
+          text="Inspección PT"
+          wrapping="true"
+        />
+        <ToolbarSpacer />
+        <Label
+          id="username"
+          text=""
+          class="toolbar_color"></Label>
+        <Button icon="sap-icon://person-placeholder" type="Transparent" class="sapUiLargeMarginEnd">
+        </Button>
+<Button icon="sap-icon://log" tooltip="Cerrar Sesión" press="onCerrarSesion"  class="sapUiLargeMarginEnd"/>
+
+      </Toolbar>
+    </customHeader>
+    <content>
+
+      <uxap:ObjectPageLayout
+        id="ObjectPageLayout"
+        showTitleInHeaderContent="true"
+        alwaysShowContentHeader="true"
+        preserveHeaderStateOnScroll="true"
+        headerContentPinnable="false"
+        isChildPage="true"
+        upperCaseAnchorBar="false">
+        <uxap:headerTitle>
+          <uxap:ObjectPageDynamicHeaderTitle>
+
+
+          </uxap:ObjectPageDynamicHeaderTitle>
+        </uxap:headerTitle>
+
+        <uxap:headerContent>
+          <fb:FilterBar header="Lotes de inspección producto terminado."
+            reset="onReset" search="onShowView" clear="onClear" showRestoreButton="true"
+            showClearButton="true" class="sapUiSizeCompact">
+            <fb:filterItems>
+
+
+              <fb:FilterItem name="D" label="Puesto trabajo">
+                <fb:control>
+                  <ComboBox
+                    id="Puesto_Trabajo_select"
+                    showSecondaryValues="true"
+                    items="{
+                        path: '/',
+                        sorter: { path: 'desc' }
+                        }"
+                    width="200%">
+                    <core:ListItem key="{ERP_WORK_CENTER_BO}" text="{DESCRIPTION}"
+                      additionalText="{ERP_WORK_CENTER_BO}" />
+                  </ComboBox>
+                </fb:control>
+              </fb:FilterItem>
+
+              <fb:FilterItem name="B" label="UC">
+                <fb:control>
+                  <Input id="cbUC" />
+                </fb:control>
+              </fb:FilterItem>
+
+              <fb:FilterItem name="E" label="Liberados">
+                <fb:control>
+                  <CheckBox id="liberados" selected="true" />
+                </fb:control>
+              </fb:FilterItem>
+
+              <fb:FilterItem name="F" label="Rechazados">
+                <fb:control>
+                  <CheckBox valueState="Error" id="rechazados" />
+                </fb:control>
+              </fb:FilterItem>
+
+              <fb:FilterItem name="G" label="Lote producción">
+                <fb:control>
+                  <SearchField id="lote"
+                    width="100%"
+                    placeholder="Buscar...."
+                    liveChange="onSearch" />
+                </fb:control>
+              </fb:FilterItem>
+
+            </fb:filterItems>
+
+          </fb:FilterBar>
+
+        </uxap:headerContent>
+
+        <uxap:sections>
+
+          <uxap:ObjectPageSection title="Entradas a almacén">
+            <uxap:subSections>
+              <uxap:ObjectPageSubSection>
+                <uxap:blocks>
+
+                  <layout:Grid defaultSpan="L12 M12 S12" class="sapUiSmallMarginTop">
+                    <layout:content>
+                      <FlexBox direction="Column" alignItems="Start">
+                        <Table
+                          id="Partidas_List"
+                          class="sapUiResponsiveMargin"
+                          width="100%"
+                          growing="true"
+                          items="{/ITEMS}">
+                          <headerToolbar>
+                            <OverflowToolbar>
+                              <Title text="" level="H2" />
+                              <ToolbarSpacer></ToolbarSpacer>
+                              <Button icon="sap-icon://download" press="onExport"
+                                tooltip="Exportar Excel" />
+                            </OverflowToolbar>
+                          </headerToolbar>
+                          <columns>
+                            <Column>
+                              <Label text="Material" />
+                            </Column>
+                            <Column>
+                              <Label text="Almacen" />
+                            </Column>
+		<Column>
+                              <Label text="Clave" />
+                            </Column>
+                            <Column>
+                              <Label text="Lote" />
+                            </Column>
+                            <Column>
+                              <Label text="Cantidad" />
+                            </Column>
+                            <Column>
+                              <Label text="Fecha" />
+                            </Column>
+                            <Column>
+                              <Label text="Documento" />
+                            </Column>
+                            <Column>
+                              <Label text="Lote inspección" />
+                            </Column>
+                            <Column>
+                              <Label text="Orden" />
+                            </Column>
+                            <Column>
+                              <Label text="Master" />
+                            </Column>
+                            <Column>
+                              <Label text="Canastilla" />
+                            </Column>
+                            <Column>
+                              <Label text="UC" />
+                            </Column>
+                          </columns>
+                          <items>
+                            <ColumnListItem type="Navigation" press="onInspeccion">
+                              <cells>
+                                <Text text="{MATERIAL} {DESC_MATERIAL}" />
+                                <Text text="{ALMACEN}" />
+		<Text text="{ZCT_CLAVE}" />
+                                <Text text="{LOTE}" visible="{= ${INC_BATCH_NUMBER} === 'O' ? true : false}" />
+                                <Text text="{CANTIDAD} {UM}" />
+                                <Text text="{FECHA_INS}" />
+                                <Text text="{DOCUMENTO}" />
+                                <Text text="{LOTE_INSPECCION}" />
+                                <Text text="{ORDEN}" />
+                                <Text text="{MASTER}" />
+                                <Text text="{ID_CANASTILLA}" />
+                                <Text text="{= ${UC_NOTIF} !== 'NA' ? ${UC_NOTIF} : ''}"/>
+                              </cells>
+                            </ColumnListItem>
+                          </items>
+                        </Table>
+                      </FlexBox>
+                    </layout:content>
+                  </layout:Grid>
+                </uxap:blocks>
+              </uxap:ObjectPageSubSection>
+            </uxap:subSections>
+          </uxap:ObjectPageSection>
+        </uxap:sections>
+      </uxap:ObjectPageLayout>
+    </content>
+  </Page>
+
+
+</mvc:View> 

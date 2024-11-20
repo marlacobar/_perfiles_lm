@@ -1,0 +1,98 @@
+<core:FragmentDefinition
+	id ="metas_prod"
+	xmlns:table="sap.ui.table"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:u="sap.ui.unified"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" class="sapUiSizeCompact">
+	<Dialog title="Meta Estacion de Trabajo" class="titleBold" id="metas_prod" afterClose="onCloseDialogonCnfPorcentaje" contentHeight="100%" contentWidth="70%">
+
+		<VBox width="100%" height="100%">
+			<HBox width="100%" height="100%" class=" sapUiTinyMarginBottom" alignContent="Center">
+				<items>
+					<VBox width="33%" height="100%" class="sapUiTinyMarginEnd">
+						<Text text="" class="bold"/>
+					</VBox>
+					<VBox width="34%" height="100%" class="sapUiTinyMarginEnd sapUiSmallMarginTop">
+						<Text text="Puesto Trabajo" class="bold"/>
+						<ComboBox id="Puesto_Trabajo_selec" showSecondaryValues= "true" class="sapUiSizeCompact" items="{
+							path: '/',
+							sorter: { path: 'desc' }
+							}" width="200%" selectionChange="onTbSelRow_PTP_01">
+							<core:ListItem key="{WORK_CENTER}" text="{DESCRIPTION}"
+								additionalText = "{WORK_CENTER}"/>
+						</ComboBox>
+					</VBox>
+					<VBox width="33%" height="100%" class="sapUiTinyMarginEnd">
+						<Text text="" class="bold"/>
+					</VBox>
+				</items>
+			</HBox>
+			<HBox width="100%" height="100%" class=" sapUiTinyMarginBottom" alignContent="Center">
+				<Table id="oTb_Cnf_PTP" itemPress="onTbSelRow_PTP_02" select="onTbSelRow_PTP_02" selectionChange="onTbSelRow_PTP_02" items="{/ITEMS}" class="sapUiResponsiveMargin" mode="SingleSelectMaster" visibleRowCount="20" growing= "true" growingThreshold="20" growingScrollToLoad="true" alternateRowColors="true" navigationMode="Navigation" editable= "false" enableBusyIndicator= "false" enableColumnReordering= "false" enableGrouping= "false" enableSelectAll= "false" showColumnVisibilityMenu= "false" showNoData= "true" enableCellFilter="false" width="90%" title="Materiales" includeItemInSelection="true" selectionBehavior="Row" threshold="10">
+					<columns>
+						<Column viible="false" hAlign="Center" visible="true" minScreenWidth="Tablet" popinDisplay="WithoutHeader" demandPopin="true">
+							<header>
+								<Label text="ID"/>
+							</header>
+						</Column>
+						<Column hAlign="Center" visible="true" minScreenWidth="Tablet" popinDisplay="WithoutHeader" demandPopin="true">
+							<header>
+								<Label text="Puesto Trabajo"/>
+							</header>
+						</Column>
+						<Column hAlign="Center" visible="true" minScreenWidth="Tablet" popinDisplay="WithoutHeader" demandPopin="true">
+							<header>
+								<Label text="Fecha"/>
+							</header>
+						</Column>
+						<Column hAlign="Center" visible="true" minScreenWidth="Tablet" popinDisplay="WithoutHeader" demandPopin="true">
+							<header>
+								<Label text="Meta"/>
+							</header>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem type="Active">
+							<cells>
+								<Text text="{ID}" />
+								<Text text="{WC}" />
+								<Text text="{ANIO}/{MES}" />
+								<Text text="{META}" />
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</HBox>
+			<HBox width="100%" height="100%" class=" sapUiTinyMarginBottom" alignContent="Center">
+				<items>
+					<VBox width="33%" height="100%" class="sapUiTinyMarginEnd">
+						<Text text="" class="bold"/>
+					</VBox>
+					<VBox width="34%" height="100%" class="sapUiTinyMarginEnd">
+						<Text text="Meta" class="bold"/>
+						<Input id="oInputValorPorc" liveChange="onKeyCode_porc" type="Number" maxlength="6" width="100%" value="" class="Total" placeholder="Cantidad" />
+						<Input visible="false" enabled="false" width="100%" id="oInput_porc" />
+					</VBox>
+					<VBox width="33%" height="100%" class="sapUiTinyMarginEnd">
+						<Text text="" class="bold"/>
+					</VBox>
+				</items>
+			</HBox>
+			<HBox justifyContent="Center" alignContent="Center" class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom">
+				<Label text="" width="2em"/>
+				<Button id="btnAsignaAsignar" press="onAsignarPorcentaje" text="Asignar" enabled="false" class="sapUiSmallMarginEnd" width="100px" type="Accept"/>
+				<Label text="" width="2em"/>
+				<Button id="btnAsignaEliminar" press="onBorrarPorcentaje" text="Eliminar" enabled="false" class="sapUiSmallMarginEnd" width="100px" type="Reject"/>
+				<Label text="" width="2em"/>
+				<!-- <Button text="Cancelar" enabled="false" class="sapUiSmallMarginEnd" width="100px" id="btnAsignaCancelar" type="Reject" press="onLimpiarCamposMaterial" />
+-->
+				<Label text="" width="2em"/>
+				<Button id="btnAsignaClose" press="onCloseDialogonCnfPorcentaje" text="Cerrar" class="sapUiSmallMarginEnd" width="100px" type="Reject"/>
+				<Label text="" width="2em"/>
+			</HBox>
+		</VBox>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,93 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:layout="sap.ui.layout"
+	xmlns:u="sap.ui.unified"
+	xmlns:tnt="sap.tnt"
+	xmlns:table="sap.ui.table"
+	xmlns:dnd="sap.ui.core.dnd"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.f"
+	xmlns:grid="sap.ui.layout.cssgrid"
+	>
+
+	<grid:CSSGrid
+			id="gridEstado"
+			gridAutoFlow="Row"
+			gridTemplateColumns="repeat(12, 1fr)"
+			gridTemplateRows="repeat(3, 5rem)"
+			gridAutoRows="5rem"
+			gridAutoColumns="1fr"
+			gridGap="0.5rem">
+		<VBox class="demoBox">
+                <layoutData>
+                    <grid:GridItemLayoutData gridColumn="span 4"  />
+                </layoutData>
+                <Label text="codificacion: " labelFor="InpCodificacion"/>
+                <Input
+                    id="InpCodificacion"
+                    placeholder="Enter text"
+                    class="sapUiSmallMarginBottom"	
+                    />
+                        
+            </VBox>						
+
+            <VBox class="demoBox">
+                <layoutData>
+                    <grid:GridItemLayoutData gridColumn="span 4" />
+                </layoutData>                
+                <Label text="Fecha deseado:"  labelFor="InpFechaDeseado"/>
+                <Input
+                    id="InpFechaDeseado"
+                    placeholder="Enter text"
+                    class="sapUiSmallMarginBottom"	
+                    />
+
+            </VBox>
+
+	<VBox class="demoBox">
+                            <layoutData>
+                                <grid:GridItemLayoutData gridColumn="span 4" />
+                            </layoutData>
+                <Label text="Fin deseado:"  labelFor="InpFinDeseado"/>
+                <Input
+                    id="InpFinDeseado"
+                    placeholder="Enter text"
+                    class="sapUiSmallMarginBottom"	
+                    />
+            </VBox>		
+
+            <VBox class="demoBox">
+                            <layoutData>
+                                <grid:GridItemLayoutData gridColumn="span 8" />
+                            </layoutData>
+                <Label text="Descripcion: " labelFor="InpDescripcion" />
+            
+                <TextArea
+                    id="InpDescripcion"
+                    placeholder="Enter text"
+	        rows="3" 
+                    cols="80"	
+                    />
+            </VBox>		
+
+	<VBox class="demoBox">
+                            <layoutData>
+                                <grid:GridItemLayoutData gridColumn="span 4" />
+                            </layoutData>
+                <Label text="Prioridad:"  labelFor="InpPrioridad"/>
+
+			         <ComboBox
+					id="InpPrioridad"
+					items="{
+						path: '/TypesProridad',
+						sorter: { path: 'text' }
+						}">
+					<core:Item key="{key}" text="{text}" />
+				</ComboBox>
+            </VBox>	
+           	
+    	
+
+
+	</grid:CSSGrid>
+</core:FragmentDefinition>

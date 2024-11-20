@@ -1,0 +1,700 @@
+<mvc:View controllerName="sap.ui.demo.webapp.controller.Administracion.MantenimientoUsuarios"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:dnd="sap.ui.core.dnd"
+    xmlns:u="sap.ui.unified"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns="sap.m"
+    xmlns:tnt="sap.tnt">
+    <NavContainer id="wizardNavContainer">
+        <pages>
+            <Page id="Plan" showHeader="false">
+                <Toolbar class="toolbar_default">
+                    <Button icon="sap-icon://nav-back" type="Transparent"
+                        class="sapUiMediumMarginBegin" press="onNavBack"></Button>
+                    <Image src="images/SAP_Logo.png" />
+                    <core:Icon class="toolbar_title sapUiSmallMarginBegin"
+                        src="sap-icon://key-user-settings">
+                        <core:layoutData>
+                            <FlexItemData growFactor="1" />
+                        </core:layoutData>
+                    </core:Icon>
+                    <Label labelFor="myColumn" class="toolbar_title"
+                        text="Mantenimiento de Usuarios" wrapping="true" />
+                    <ToolbarSpacer />
+                    <Label id="username" text="" class="toolbar_title" />
+                    <MenuButton visible="true" tooltip="Salir" type="Transparent" text=""
+                        icon="sap-icon://person-placeholder" class="sapUiLargeMarginEnd">
+                        <menu>
+                            <Menu>
+                                <MenuItem text="Cerrar sesión" icon="sap-icon://slim-arrow-right"
+                                    press="logoff" />
+                            </Menu>
+                        </menu>
+                    </MenuButton>
+                </Toolbar>
+                <content>
+                    <SplitApp id="SplitAppDemo" initialDetail="detailUsuarios"
+                        initialMaster="master">
+                        <detailPages>
+                            <Page id="detailUsuarios" title="Mantenimiento de Usuarios"
+                                backgroundDesign="Solid">
+                                <VBox class="sapUiSmallMargin sapUiSizeCompact sapUiSizeCozy ">
+                                    <l:HorizontalLayout>
+                                        <l:content>
+                                            <Toolbar>
+                                                <ToolbarSpacer />
+                                                <Button id="button_recuperar_usuario" text="Buscar"
+                                                    press="onRecuperar" enabled="false"
+                                                    icon="sap-icon://open-folder">
+                                                </Button>
+
+                                                <Button id="button_grabar_usuario" text="Grabar"
+                                                    press="onGrabarUsuario" icon="sap-icon://save">
+                                                </Button>
+
+                                                <Button text="Limpiar Vista" press=".onInitView"
+                                                    icon="sap-icon://eraser">
+                                                </Button>
+
+                                                <Button text="Borrar" press="onDeleteUsuario"
+                                                    icon="sap-icon://delete">
+                                                </Button>
+
+                                                <Button id="button_desactivar_usuario" text=""
+                                                    press="onActivarDesactivarUsuario"
+                                                    icon="sap-icon://restart" />
+
+                                                <Button id="button_copia_nuevo_usuario"
+                                                    text="Copiar nuevo usuario"
+                                                    press="onCopiaNuevoUsuario"
+                                                    icon="sap-icon://copy"
+                                                    enabled="false" />
+
+                                                <Button id="button_refresh_roles"
+                                                    text="Roles"
+                                                    press="onRefreshRoles"
+                                                    icon="sap-icon://refresh" />
+
+                                                <Button id="button_refresh_centro_trabajo"
+                                                    text="Centros de Trabajo"
+                                                    press="onRefreshCentrosTrabajo"
+                                                    icon="sap-icon://refresh" />
+
+                                                <ToolbarSpacer />
+                                            </Toolbar>
+                                        </l:content>
+                                    </l:HorizontalLayout>
+                                    <form:Form id="interfazUsuarios" editable="true">
+                                        <form:layout>
+                                            <form:ResponsiveGridLayout labelSpanXL="4"
+                                                labelSpanL="4" labelSpanM="12" labelSpanS="12"
+                                                adjustLabelSpan="false" emptySpanXL="0"
+                                                emptySpanL="0" emptySpanM="0" emptySpanS="0"
+                                                columnsXL="2" columnsL="2" columnsM="1"
+                                                singleContainerFullSize="false" />
+                                        </form:layout>
+                                        <form:formContainers>
+                                            <form:FormContainer>
+                                                <form:formElements>
+                                                    <form:FormElement label="ID de usuario">
+                                                        <form:fields>
+                                                            <Input
+                                                                class="sapUiTinyMarginBegin sapUiSmallMarginBottom"
+                                                                id="input_usuario_buscar"
+                                                                type="Text"
+                                                                placeholder="Ingrese ID de usuario a buscar"
+                                                                showValueHelp="true"
+                                                                valueHelpRequest="handleValueHelp"
+                                                                liveChange=".onLiveChangeUsuarioBuscar"
+                                                                width="70%" />
+                                                        </form:fields>
+                                                    </form:FormElement>
+                                                </form:formElements>
+                                            </form:FormContainer>
+                                        </form:formContainers>
+                                    </form:Form>
+                                </VBox>
+                                <IconTabBar id="idIconTabBarNoIconsUsuarios"
+                                    expanded="{device>/isNoPhone}"
+                                    class="sapUiResponsiveContentPadding">
+                                    <items>
+                                        <IconTabFilter text="PRINCIPAL" key="info">
+                                            <VBox
+                                                class="sapUiSmallMargin sapUiSizeCompact sapUiSizeCozy ">
+                                                <form:Form id="principalUsuarios" editable="true">
+                                                    <form:layout>
+                                                        <form:ResponsiveGridLayout labelSpanXL="4"
+                                                            labelSpanL="4" labelSpanM="12"
+                                                            labelSpanS="12" adjustLabelSpan="false"
+                                                            emptySpanXL="0" emptySpanL="0"
+                                                            emptySpanM="0" emptySpanS="0"
+                                                            columnsXL="2" columnsL="2" columnsM="1"
+                                                            singleContainerFullSize="false" />
+                                                    </form:layout>
+                                                    <form:formContainers>
+                                                        <form:FormContainer>
+                                                            <form:formElements>
+                                                                <form:FormElement
+                                                                    label="ID de usuario">
+                                                                    <form:fields>
+                                                                        <Input
+                                                                            id="input_usuario"
+                                                                            type="Text"
+                                                                            width="70%"
+                                                                            enabled="false"
+                                                                            liveChange=".onLiveChangeUsuario" />
+                                                                    </form:fields>
+                                                                </form:FormElement>
+
+                                                                <form:FormElement label="Apellido">
+                                                                    <form:fields>
+                                                                        <Input id="input_apellido"
+                                                                            width="70%" />
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement label="Nombre">
+                                                                    <form:fields>
+                                                                        <Input id="input_nombre"
+                                                                            width="70%" />
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement
+                                                                    label="Dirección de correo">
+                                                                    <form:fields>
+                                                                        <Input id="input_direccion"
+                                                                            width="70%" />
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement label="Estatus">
+                                                                    <ComboBox
+                                                                        class="sapUiSmallMarginBottom"
+                                                                        id="input_status"
+                                                                        width="70%">
+                                                                    </ComboBox>
+                                                                </form:FormElement>
+                                                                <form:FormElement
+                                                                    label="Número de empleado">
+                                                                    <form:fields>
+                                                                        <Input id="input_empleado"
+                                                                            width="70%" />
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                            </form:formElements>
+                                                        </form:FormContainer>
+                                                    </form:formContainers>
+                                                </form:Form>
+                                            </VBox>
+                                        </IconTabFilter>
+                                        <IconTabFilter text="ROLES" key="attachments">
+                                            <HBox>
+                                                <Table id="tableRoles" ariaLabelledBy="title"
+                                                    items="{/ITEMS}" mode="MultiSelect">
+                                                    <columns>
+                                                        <Column>
+                                                            <Text text="ID Roles" />
+                                                        </Column>
+                                                    </columns>
+                                                    <items>
+                                                        <ColumnListItem
+                                                            selected="{= ${SELECTED} !== '1' ? false: true}">
+                                                            <cells>
+                                                                <Text text="{USER_GROUP}" />
+                                                            </cells>
+                                                        </ColumnListItem>
+                                                    </items>
+                                                </Table>
+                                            </HBox>
+                                        </IconTabFilter>
+                                        <IconTabFilter text="CENTROS DE TRABAJO" key="attachments">
+                                            <HBox>
+                                                <Table id="tableCentros" ariaLabelledBy="title"
+                                                    items="{/ITEMS}" mode="MultiSelect">
+                                                    <columns>
+                                                        <Column>
+                                                            <Text text="ID Centro de Trabajo" />
+                                                        </Column>
+                                                        <Column>
+                                                            <Text text="Centro de Trabajo" />
+                                                        </Column>
+                                                    </columns>
+                                                    <items>
+                                                        <ColumnListItem
+                                                            selected="{= ${SELECTED} !== '1' ? false: true}">
+                                                            <cells>
+                                                                <Text text="{WORK_CENTER}" />
+                                                                <Text text="{DESCRIPTION}" />
+                                                            </cells>
+                                                        </ColumnListItem>
+                                                    </items>
+                                                </Table>
+                                            </HBox>
+                                        </IconTabFilter>
+                                    </items>
+                                </IconTabBar>
+                            </Page>
+                            <Page id="detailRoles" title="Mantenimiento de Roles"
+                                backgroundDesign="Solid">
+                                <VBox class="sapUiSmallMargin sapUiSizeCompact sapUiSizeCozy ">
+                                    <l:HorizontalLayout>
+                                        <l:content>
+                                            <Toolbar>
+                                                <ToolbarSpacer />
+                                                <Button id="button_recuperar_rol" text="Buscar"
+                                                    press="onRecuperarRol"
+                                                    icon="sap-icon://open-folder">
+                                                </Button>
+                                                <Button id="button_grabar_rol" text="Grabar"
+                                                    press="onGrabarRol" icon="sap-icon://save">
+                                                </Button>
+                                                <Button text="Limpiar Vista" press=".onInitView"
+                                                    icon="sap-icon://eraser">
+                                                </Button>
+                                                <Button text="Borrar" press="onDeleteRol"
+                                                    icon="sap-icon://delete">
+                                                </Button>
+
+                                                <Button id="button_refresh_user2"
+                                                    text="Usuarios"
+                                                    press="onRefreshUsuarios"
+                                                    icon="sap-icon://refresh" />
+
+                                                <Button id="button_refresh_interfaz"
+                                                    text="Interfaz"
+                                                    press="onRefreshInterfaces"
+                                                    icon="sap-icon://refresh" />
+
+                                            </Toolbar>
+                                        </l:content>
+                                    </l:HorizontalLayout>
+                                    <form:Form id="interfazRol" editable="true">
+                                        <form:layout>
+                                            <form:ResponsiveGridLayout labelSpanXL="4"
+                                                labelSpanL="4" labelSpanM="12" labelSpanS="12"
+                                                adjustLabelSpan="false" emptySpanXL="0"
+                                                emptySpanL="0" emptySpanM="0" emptySpanS="0"
+                                                columnsXL="2" columnsL="2" columnsM="1"
+                                                singleContainerFullSize="false" />
+                                        </form:layout>
+                                        <form:formContainers>
+                                            <form:FormContainer>
+                                                <form:formElements>
+                                                    <form:FormElement label="Rol">
+                                                        <form:fields>
+                                                            <Input
+                                                                class="sapUiSmallMarginBottom sapUiTinyMarginBegin"
+                                                                id="input_rol"
+                                                                type="Text"
+                                                                placeholder="Ingrese rol..."
+                                                                showValueHelp="true"
+                                                                valueHelpRequest="handleValueHelpRoles"
+                                                                liveChange=".onLiveChangeRol"
+                                                                width="50%" />
+                                                        </form:fields>
+                                                    </form:FormElement>
+                                                </form:formElements>
+                                            </form:FormContainer>
+                                        </form:formContainers>
+                                    </form:Form>
+                                </VBox>
+                                <IconTabBar id="idIconTabBarNoIconsRoles"
+                                    expanded="{device>/isNoPhone}"
+                                    class="sapUiResponsiveContentPadding">
+                                    <items>
+                                        <IconTabFilter text="PRINCIPAL" key="info">
+                                            <VBox
+                                                class="sapUiSmallMargin sapUiSizeCompact sapUiSizeCozy ">
+                                                <form:Form id="principalRoles" editable="true">
+                                                    <form:layout>
+                                                        <form:ResponsiveGridLayout labelSpanXL="4"
+                                                            labelSpanL="4" labelSpanM="12"
+                                                            labelSpanS="12" adjustLabelSpan="false"
+                                                            emptySpanXL="0" emptySpanL="0"
+                                                            emptySpanM="0" emptySpanS="0"
+                                                            columnsXL="2" columnsL="2" columnsM="1"
+                                                            singleContainerFullSize="false" />
+                                                    </form:layout>
+                                                    <form:formContainers>
+                                                        <form:FormContainer>
+                                                            <form:formElements>
+                                                                <form:FormElement
+                                                                    label="Descripción">
+                                                                    <form:fields>
+                                                                        <Input
+                                                                            id="input_descripcion_rol"
+                                                                            value="{dataGrupo>/DESCRIPTION_GROUP}"
+                                                                            width="70%" />
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                            </form:formElements>
+                                                        </form:FormContainer>
+                                                    </form:formContainers>
+                                                </form:Form>
+                                            </VBox>
+                                        </IconTabFilter>
+                                        <IconTabFilter text="USUARIOS" key="attachments">
+                                            <HBox>
+                                                <Table id="tableUsuarios" ariaLabelledBy="title"
+                                                    items="{/ITEMS}" mode="MultiSelect">
+                                                    <columns>
+                                                        <Column>
+                                                            <Text text="ID de usuario" />
+                                                        </Column>
+                                                    </columns>
+                                                    <items>
+                                                        <ColumnListItem
+                                                            selected="{= ${SELECTED} !== '1' ? false: true}">
+                                                            <cells>
+                                                                <Text text="{USER_ID}" />
+                                                            </cells>
+                                                        </ColumnListItem>
+                                                    </items>
+                                                </Table>
+                                            </HBox>
+                                        </IconTabFilter>
+                                        <IconTabFilter text="INTERFACES" key="attachments">
+                                            <HBox>
+                                                <Table id="tableInterfaces" ariaLabelledBy="title"
+                                                    items="{/ITEMS}" mode="MultiSelect">
+                                                    <columns>
+                                                        <Column>
+                                                            <Text text="#" />
+                                                        </Column>
+                                                        <Column>
+                                                            <Text text="Alias" />
+                                                        </Column>
+                                                        <Column>
+                                                            <Text text="Descripción" />
+                                                        </Column>
+                                                        <Column>
+                                                            <Text text="Estado" />
+                                                        </Column>
+                                                    </columns>
+                                                    <items>
+                                                        <ColumnListItem
+                                                            selected="{= ${SELECTED} !== '1' ? false: true}">
+                                                            <cells>
+                                                                <Text text="{ID_TILE}" />
+                                                                <Text text="{TILE_KEY}" />
+                                                                <Text text="{TILE_DESCRIPCION}" />
+                                                                <ObjectStatus class="stat"
+                                                                    text="{
+                                      path: 'ACTIVO',
+                                      formatter: '.formatter.TextoTile'
+                                    }"
+                                                                    state="{
+                                      path: 'ACTIVO',
+                                      formatter: '.formatter.TextoStateTile'
+                              }" />
+                                                            </cells>
+                                                        </ColumnListItem>
+                                                    </items>
+                                                </Table>
+                                            </HBox>
+                                        </IconTabFilter>
+                                    </items>
+                                </IconTabBar>
+                            </Page>
+                            <Page id="detailCentros" title="Mantenimiento de Centro de Trabajo"
+                                backgroundDesign="Solid">
+                                <VBox class="sapUiSmallMargin sapUiSizeCompact sapUiSizeCozy ">
+                                    <l:HorizontalLayout>
+                                        <l:content>
+                                            <Toolbar>
+                                                <ToolbarSpacer />
+                                                <Button id="button_recuperar_centro" text="Buscar"
+                                                    press="onRecuperarCentro"
+                                                    icon="sap-icon://open-folder">
+                                                </Button>
+                                                <Button id="button_grabar_centro" text="Grabar"
+                                                    press="onGrabarCentro" icon="sap-icon://save">
+                                                </Button>
+                                                <Button text="Limpiar Vista" press=".onInitView"
+                                                    icon="sap-icon://eraser">
+                                                </Button>
+                                                <Button text="Borrar" press="onDeleteCentro"
+                                                    icon="sap-icon://delete">
+                                                </Button>
+
+                                                <Button id="button_refresh_user_workcenter"
+                                                    text="Usuarios"
+                                                    press="onRefreshUsuarios"
+                                                    icon="sap-icon://refresh" />
+
+                                            </Toolbar>
+                                        </l:content>
+                                    </l:HorizontalLayout>
+                                    <form:Form id="interfazCentro" editable="true">
+                                        <form:layout>
+                                            <form:ResponsiveGridLayout labelSpanXL="4"
+                                                labelSpanL="4" labelSpanM="12" labelSpanS="12"
+                                                adjustLabelSpan="false" emptySpanXL="0"
+                                                emptySpanL="0" emptySpanM="0" emptySpanS="0"
+                                                columnsXL="2" columnsL="2" columnsM="1"
+                                                singleContainerFullSize="false" />
+                                        </form:layout>
+                                        <form:formContainers>
+                                            <form:FormContainer>
+                                                <form:formElements>
+                                                    <form:FormElement label="Centro de trabajo">
+                                                        <form:fields>
+                                                            <Input
+                                                                class="sapUiSmallMarginBottom sapUiTinyMarginBegin"
+                                                                id="input_centro"
+                                                                type="Text"
+                                                                placeholder="Ingrese centro de trabajo..."
+                                                                showValueHelp="true"
+                                                                valueHelpRequest="handleValueHelpCentros"
+                                                                liveChange=".onLiveChangeCentro"
+                                                                width="50%" />
+                                                        </form:fields>
+                                                    </form:FormElement>
+                                                </form:formElements>
+                                            </form:FormContainer>
+                                        </form:formContainers>
+                                    </form:Form>
+                                </VBox>
+                                <IconTabBar id="idIconTabBarNoIconsCentros"
+                                    expanded="{device>/isNoPhone}"
+                                    class="sapUiResponsiveContentPadding">
+                                    <items>
+                                        <IconTabFilter text="PRINCIPAL" key="info">
+                                            <VBox
+                                                class="sapUiSmallMargin sapUiSizeCompact sapUiSizeCozy ">
+                                                <form:Form id="principalCentro" editable="true">
+                                                    <form:layout>
+                                                        <form:ResponsiveGridLayout labelSpanXL="4"
+                                                            labelSpanL="4" labelSpanM="12"
+                                                            labelSpanS="12" adjustLabelSpan="false"
+                                                            emptySpanXL="0" emptySpanL="0"
+                                                            emptySpanM="0" emptySpanS="0"
+                                                            columnsXL="2" columnsL="2" columnsM="1"
+                                                            singleContainerFullSize="false" />
+                                                    </form:layout>
+                                                    <form:formContainers>
+                                                        <form:FormContainer>
+                                                            <form:formElements>
+                                                                <form:FormElement
+                                                                    label="Descripción">
+                                                                    <form:fields>
+                                                                        <Input
+                                                                            id="input_descripcion_centro"
+                                                                            value="{dataCentro>/DESCRIPTION}"
+                                                                            width="70%"
+                                                                            enabled="false" />
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement label="Prefijo">
+                                                                    <form:fields>
+                                                                        <Input id="inp_prefijo"
+                                                                            value="{dataCentro>/PREFIJO}"
+                                                                            width="70%"
+                                                                            enabled="true" />
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement label="Area">
+                                                                    <form:fields>
+                                                                        <Input id="inp_area"
+                                                                            value="{dataCentro>/AREA}"
+                                                                            showSuggestion="false"
+                                                                            width="70%"
+                                                                            enabled="true"
+                                                                            showValueHelp="true"
+                                                                            valueHelpRequest="obtenerAreas"
+                                                                            valueHelpOnly="true" />
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement label="Almacén IM">
+                                                                    <form:fields>
+                                                                        <Input id="inp_almacenes"
+                                                                            value="{dataCentro>/ALMACEN}"
+                                                                            showSuggestion="false"
+                                                                            width="70%"
+                                                                            enabled="true"
+                                                                            showValueHelp="true"
+                                                                            valueHelpRequest="obtenerAlmacenes"
+                                                                            valueHelpOnly="true" />
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                            </form:formElements>
+                                                        </form:FormContainer>
+                                                        <form:FormContainer>
+
+                                                        </form:FormContainer>
+                                                    </form:formContainers>
+                                                </form:Form>
+                                            </VBox>
+                                        </IconTabFilter>
+                                        <IconTabFilter text="USUARIOS" key="attachments">
+                                            <HBox>
+                                                <Table id="tableUsuariosCentro"
+                                                    ariaLabelledBy="title" items="{/ITEMS}"
+                                                    mode="MultiSelect">
+                                                    <columns>
+                                                        <Column>
+                                                            <Text text="ID de usuario" />
+                                                        </Column>
+                                                    </columns>
+                                                    <items>
+                                                        <ColumnListItem
+                                                            selected="{= ${SELECTED} !== '1' ? false: true}">
+                                                            <cells>
+                                                                <Text text="{USER_ID}" />
+                                                            </cells>
+                                                        </ColumnListItem>
+                                                    </items>
+                                                </Table>
+                                            </HBox>
+                                        </IconTabFilter>
+                                    </items>
+                                </IconTabBar>
+                            </Page>
+                            <Page id="detailInterfaces" title="Mantenimiento de Interfaces"
+                                backgroundDesign="Solid">
+                                <VBox class="sapUiSmallMargin sapUiSizeCompact sapUiSizeCozy ">
+                                    <l:HorizontalLayout>
+                                        <l:content>
+                                            <Toolbar>
+                                                <ToolbarSpacer />
+                                                <Button id="button_recuperar_interfaz" text="Buscar"
+                                                    press="onRecuperarInterfaz"
+                                                    icon="sap-icon://open-folder" />
+                                                <Button id="button_grabar_interfaz" text="Grabar"
+                                                    press="onGrabarInterfaz" type="Accept"
+                                                    icon="sap-icon://save" />
+                                                <Button text="Limpiar Vista" press=".onInitView"
+                                                    icon="sap-icon://eraser" />
+                                                <Button id="button_desactivar_interfaz" text=""
+                                                    press="onActivarDesactivarInterfaz"
+                                                    icon="sap-icon://restart" />
+
+
+                                                <Button id="button_refresh_roles_mto"
+                                                    text="Roles"
+                                                    press="onRefreshRoles"
+                                                    icon="sap-icon://refresh" />
+
+                                            </Toolbar>
+                                        </l:content>
+                                    </l:HorizontalLayout>
+                                    <form:Form id="interfazInterfaces" editable="true">
+                                        <form:layout>
+                                            <form:ResponsiveGridLayout labelSpanXL="4"
+                                                labelSpanL="4" labelSpanM="12" labelSpanS="12"
+                                                adjustLabelSpan="false" emptySpanXL="0"
+                                                emptySpanL="0" emptySpanM="0" emptySpanS="0"
+                                                columnsXL="2" columnsL="2" columnsM="1"
+                                                singleContainerFullSize="false" />
+                                        </form:layout>
+                                        <form:formContainers>
+                                            <form:FormContainer>
+                                                <form:formElements>
+                                                    <form:FormElement label="Interfaz">
+                                                        <form:fields>
+                                                            <Input id="input_interfaz"
+                                                                class="sapUiTinyMarginBegin"
+                                                                type="Text"
+                                                                placeholder="Ingrese nombre de interfaz"
+                                                                width="50%"
+                                                                showValueHelp="true"
+                                                                valueHelpRequest="handleValueHelpInterfaces"
+                                                                liveChange=".onLiveChangeInterfaz" />
+                                                        </form:fields>
+                                                    </form:FormElement>
+                                                </form:formElements>
+                                            </form:FormContainer>
+                                        </form:formContainers>
+                                    </form:Form>
+                                </VBox>
+                                <IconTabBar id="idIconTabBarNoIconsInterfaces"
+                                    expanded="{device>/isNoPhone}"
+                                    class="sapUiResponsiveContentPadding">
+                                    <items>
+                                        <IconTabFilter text="PRINCIPAL" key="attachments">
+                                            <VBox
+                                                class="sapUiSmallMargin sapUiSizeCompact sapUiSizeCozy ">
+                                                <form:Form id="principalInterfaz" editable="true">
+                                                    <form:layout>
+                                                        <form:ResponsiveGridLayout labelSpanXL="4"
+                                                            labelSpanL="4" labelSpanM="12"
+                                                            labelSpanS="12" adjustLabelSpan="false"
+                                                            emptySpanXL="0" emptySpanL="0"
+                                                            emptySpanM="0" emptySpanS="0"
+                                                            columnsXL="2" columnsL="2" columnsM="1"
+                                                            singleContainerFullSize="false" />
+                                                    </form:layout>
+                                                    <form:formContainers>
+                                                        <form:FormContainer>
+                                                            <form:formElements>
+                                                                <form:FormElement label="Status">
+                                                                    <form:fields>
+                                                                        <ComboBox
+                                                                            class="sapUiSmallMarginBottom"
+                                                                            id="input_status_interfaz"
+                                                                            width="70%">
+                                                                        </ComboBox>
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                                <form:FormElement
+                                                                    label="Descripción">
+                                                                    <form:fields>
+                                                                        <Input
+                                                                            id="input_descripcion_interfaz"
+                                                                            value="{dataInterfaz>/TILE_DESCRIPCION}"
+                                                                            width="70%" />
+                                                                    </form:fields>
+                                                                </form:FormElement>
+                                                            </form:formElements>
+                                                        </form:FormContainer>
+                                                    </form:formContainers>
+                                                </form:Form>
+                                            </VBox>
+                                        </IconTabFilter>
+                                        <IconTabFilter text="ROLES" key="notes">
+                                            <HBox>
+                                                <Table id="tableRolesInterfaz"
+                                                    ariaLabelledBy="title" items="{/ITEMS}"
+                                                    mode="MultiSelect">
+                                                    <columns>
+                                                        <Column>
+                                                            <Text text="ID Rol" />
+                                                        </Column>
+                                                    </columns>
+                                                    <items>
+                                                        <ColumnListItem
+                                                            selected="{= ${SELECTED} !== '1' ? false: true}">
+                                                            <cells>
+                                                                <Text text="{USER_GROUP}" />
+                                                            </cells>
+                                                        </ColumnListItem>
+                                                    </items>
+                                                </Table>
+                                            </HBox>
+                                        </IconTabFilter>
+                                    </items>
+                                </IconTabBar>
+                            </Page>
+                        </detailPages>
+                        <masterPages>
+                            <Page id="masterInterfaces" title="MANTENIMIENTO"
+                                backgroundDesign="List">
+                                <List>
+                                    <StandardListItem title="Usuarios" type="Navigation"
+                                        press=".onPressNavToUsuarios" />
+                                    <StandardListItem title="Roles" type="Navigation"
+                                        press=".onPressNavToRoles" />
+                                    <StandardListItem title="Centro de trabajo" type="Navigation"
+                                        press=".onPressNavToCentros" />
+                                    <StandardListItem title="Interfaces" type="Navigation"
+                                        press=".onPressNavToInterfaces" />
+                                </List>
+                            </Page>
+                        </masterPages>
+                    </SplitApp>
+                </content>
+            </Page>
+        </pages>
+    </NavContainer>
+</mvc:View>

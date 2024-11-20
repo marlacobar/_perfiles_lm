@@ -1,0 +1,289 @@
+<mvc:View
+   controllerName="sap.ui.demo.webapp.controller.Mantenimiento.Ordenes.verOrdenes"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:u="sap.ui.unified"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns="sap.m">
+  <NavContainer id="wizardNavContainer">
+    <pages>
+      <Page
+      id="ViewPMOrders"
+      showHeader="false"
+      backgroundDesign="Solid">
+        <Toolbar
+        class="toolbar_default">
+          <Button icon="sap-icon://nav-back" type="Transparent" class="sapUiMediumMarginBegin" press="onNavBack"></Button>
+          <Image src="images/SAP_Logo.png">
+          </Image>
+          <core:Icon
+          src="sap-icon://grid"
+          class="toolbar_title sapUiSmallMarginBegin">
+            <core:layoutData>
+              <FlexItemData growFactor="1" />
+            </core:layoutData>
+          </core:Icon>
+          <Label labelFor="myColumn"
+            class="toolbar_title"
+            text="Órdenes de Mantenimiento"
+            wrapping="true"
+        />
+          <ToolbarSpacer/>
+          <Label
+              id ="username"
+              text=""
+              class="toolbar_color"></Label>
+					<MenuButton 
+						visible="true"
+						tooltip="Salir"
+						type="Transparent"
+						text=""
+						icon="sap-icon://person-placeholder"
+						class="sapUiLargeMarginEnd">
+						<menu>
+							<Menu>
+								<MenuItem 
+									text="Cerrar sesión" 
+									icon="sap-icon://slim-arrow-right" 
+									press="logoff" />
+							</Menu>
+						</menu>
+					</MenuButton>
+        </Toolbar>
+        <fb:FilterBar header="Órdenes"
+                      reset="onReset" search="onShowView" clear="onClear" showRestoreButton="true" showClearButton="true" class="sapUiSizeCompact">
+          <fb:filterItems>
+
+
+            <fb:FilterItem name="A" label="{i18n>StartDate}">
+              <fb:control>
+                <DatePicker
+                  id="start_date"
+                  valueFormat="dd-MM-yyyy"
+                  displayFormat="dd-MM-yyyy"/>
+              </fb:control>
+            </fb:FilterItem>
+
+            <fb:FilterItem name="B" label="{i18n>EndDate}">
+              <fb:control>
+                <DatePicker
+                  id="end_date"
+                  valueFormat="dd-MM-yyyy"
+                  displayFormat="dd-MM-yyyy"/>
+              </fb:control>
+            </fb:FilterItem>
+
+            <fb:FilterItem name="D" label="Proceso">
+              <fb:control>
+                <ComboBox
+                    id="listPMProceso"
+                    items="{
+                          path: '/',
+                          sorter: { path: 'desc' }
+                        }"
+                    selectionChange="onChangePMProceso">
+                  <core:Item key="{id}" text="{desc}" />
+                </ComboBox>
+              </fb:control>
+            </fb:FilterItem>
+
+            <fb:FilterItem name="E" label="Linea">
+              <fb:control>
+                <ComboBox
+                      id="listPMSubProceso"
+                      items="{
+                          path: '/',
+                          sorter: { path: 'desc' }
+                        }"
+                      selectionChange="onChangePMSubProceso">
+                  <core:Item key="{id}" text="{desc}" />
+                </ComboBox>
+              </fb:control>
+            </fb:FilterItem>
+
+            <fb:FilterItem name="F" label="Funcion">
+              <fb:control>
+                <ComboBox
+                      id="listPMFunction"
+                      items="{
+                          path: '/',
+                          sorter: { path: 'desc' }
+                        }"
+                       change="onchangeModules"
+                      selectionChange="onselectionChangeModules">
+                  <core:Item key="{id}" text="{desc}" />
+                </ComboBox>
+              </fb:control>
+            </fb:FilterItem>
+             <fb:FilterItem name="T" label="Tipo orden">
+              <fb:control>
+               <MultiComboBox
+                  selectionFinish="handleSelectionFinish">
+                  <core:Item key="UM01" text="UM01 Orden de Mantenimiento Planeado"/>
+                  <core:Item key="UM02" text="UM02 Orden de Mantenimiento Preventivo"/>
+                  <core:Item key="UM03" text="UM03 Orden de Mantenimiento Correctivo"/>
+                  <core:Item key="UM04" text="UM04 Orden de Renovación Dados"/>
+                  <core:Item key="UM06" text="UM06 Orden de Proyectos / Mejoras"/>
+                  <core:Item key="UM07" text="UM07 Orden de Maquinados"/>
+                  <core:Item key="UM08" text="UM08 Orden de Mantenimiento Predictivo"/>
+                </MultiComboBox>
+              </fb:control>
+            </fb:FilterItem>
+	<fb:FilterItem name="O" label="Orden" mandatory="false">
+                                <fb:control>
+                                    <MultiInput id="num_orden_input" showValueHelp="false"/>
+                                </fb:control>
+                            </fb:FilterItem>	
+          </fb:filterItems>
+
+
+
+        </fb:FilterBar>
+        <content>     
+    <IconTabBar
+    id="IconTabBar_Orders"
+    select="handleIconTabBarSelect"
+    class="sapUiResponsiveContentPadding">
+    <items>
+      <IconTabFilter
+        showAll="true"
+        count="{/total}"
+        text="{i18n>PMOrders}"
+        key="All" />
+      <IconTabSeparator />
+<IconTabFilter
+        icon="sap-icon://create-entry-time"
+        iconColor="Critical"
+        count="{/ABIE}"
+        text="{i18n>Pending}"
+        key="ABIE" />
+      <IconTabFilter
+        icon="sap-icon://begin"
+        iconColor="Positive"
+        count="{/LIB}"
+        text="{i18n>InTreatment}"
+        key="LIB" />
+      <IconTabFilter
+        icon="sap-icon://course-book"
+        iconColor="Critical"
+        count="{/NOTI}"
+        text="{i18n>Notified}"
+        key="NOTP" />
+      <IconTabFilter
+        icon="sap-icon://product"
+        iconColor="Negative"
+        count="{/MACO}"
+        text="{i18n>ConfMaterial}"
+        key="MACO" />
+      <IconTabFilter
+        icon="sap-icon://bookmark"
+        iconColor="Neutral"
+        count="{/CTEC}"
+        text="{i18n>Finished}"
+        key="CTEC" />
+    </items>
+  </IconTabBar>
+          <Table
+  id="PMOrdersList"
+  class="sapUiResponsiveMargin"
+  width="auto"
+  items="{/ITEMS}">
+<headerToolbar>
+                                        <OverflowToolbar>
+			<Title text="Reporte Ordenes Mtto" level="H2" />
+                                            <ToolbarSpacer></ToolbarSpacer>                                            
+                                            <Button icon="sap-icon://download" press="onExport" tooltip="Exportar CSV" />
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+            <columns>
+              <Column
+                hAlign="End"
+                minScreenWidth="Small"
+                demandPopin="true"
+                width="8em">
+                <Label text="{i18n>columnOrder}"/>
+              </Column>
+              <Column
+                width="4em">
+                <Label text="{i18n>columnOrderType}"/>
+              </Column>
+              <Column
+                minScreenWidth="Small"
+                demandPopin="true"
+                width="4em">
+                <Label text="{i18n>columnActivityKey}"/>
+              </Column>
+              <Column
+                minScreenWidth="Small"
+                demandPopin="true">
+                <Label text="{i18n>Priority}"/>
+              </Column>
+              <Column
+                minScreenWidth="Small"
+                demandPopin="true">
+                <Label text="{i18n>Status}"/>
+              </Column>
+              <Column
+                minScreenWidth="Small"
+                demandPopin="true">
+                <Label text="{i18n>columnDescription}"/>
+              </Column>
+              <Column
+                minScreenWidth="Tablet"
+                demandPopin="false">
+                <Label text="{i18n>columnDescEquipment}"/>
+              </Column>
+            <Column
+                minScreenWidth="Tablet"
+                demandPopin="false">
+                <Label text="{i18n>columnDescFunLoc}"/>
+              </Column>
+                  <Column
+                minScreenWidth="Tablet"
+                demandPopin="false">
+                <Label text="{i18n>columnStartDate}"/>
+              </Column>
+                    <Column
+                minScreenWidth="Tablet"
+                demandPopin="false">
+                <Label text="{i18n>columnEndDate}"/>
+              </Column>
+              <Column
+                minScreenWidth="Tablet"
+                demandPopin="false">
+                <Label text="{i18n>columnID}"/>
+              </Column>
+              <Column
+                minScreenWidth="Tablet"
+                demandPopin="false">
+                <Label text="Puesto trabajo"/>
+              </Column>
+            </columns>
+            <items>
+              <ColumnListItem
+                type="Navigation"
+                press="onPMOrderDetail">
+                <cells>
+                  <ObjectIdentifier title="{order}" emphasized="false"/>                  
+                  <Text text="{order_type}"/>
+                  <Text text="{activity_type}"/>
+                  <Text text="{priority}"/>
+                  <Text text="{status}"/>
+                  <Text text="{description}"/>
+                  <Text text="{desc_equipo}"/>
+                  <Text text="{desc_funcLoc}"/>
+                  <Text text="{start_date}"/>
+                  <Text text="{end_date}"/>
+                  <Link text="{notification}" tooltip="{i18n>PMOrderDetail.tooltipToNoti}" press="onShowNoti" />
+                  <Text text="{work_center}"/>
+                </cells>
+              </ColumnListItem>
+            </items>
+          </Table>
+        </content>
+      </Page>
+    </pages>
+  </NavContainer>
+</mvc:View>
