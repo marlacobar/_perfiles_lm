@@ -1,0 +1,17 @@
+{
+  "name": "perfiles_lm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Component-preload.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sap/generator-fiori": "^1.15.5",
+    "@sap/ux-ui5-tooling": "^1.15.4",
+    "fiori-tools": "^1.3.0"
+  }
+}

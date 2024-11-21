@@ -7,7 +7,7 @@ sap.ui.define([
 
         onInit: function () {
             this._base_onloadCOMBO("ListPlanta", {}, "MII/DatosTransaccionales/Funciones/Plantas_Select", "", "Centros");
-            this._getVersion()
+            // this._getVersion()
         },
 
         onAfterRendering: function () {
@@ -38,7 +38,7 @@ sap.ui.define([
 
             var Othis = this;
             //            var uri = "http://" + this.getOwnerComponent().getManifestEntry("/sap.ui5/initData/server") + "/XMII/Runner?Transaction=" + path + "&OutputParameter=*&Content-Type=text/xml"
-            var uri = "http://" + this.getServerHost() + "/XMII/Runner?Transaction=" + path + "&OutputParameter=*&Content-Type=text/xml"
+            var uri = this.getServerHost() + "/XMII/Runner?Transaction=" + path + "&OutputParameter=*&Content-Type=text/xml"
 
             $.ajax({
                 type: "POST",
@@ -77,7 +77,7 @@ sap.ui.define([
             $.ajax({
                 type: "GET",
                 //url: "http://" + this.getOwnerComponent().getManifestEntry("/sap.ui5/initData/server") +  "/XMII/Illuminator?service=SystemInfo&mode=CurrentProfile&Content-Type=text%2Fxml",
-                url: "http://" + this.getServerHost() + "/XMII/Illuminator?service=SystemInfo&mode=CurrentProfile&Content-Type=text%2Fxml",
+                url: this.getServerHost() + "/XMII/Illuminator?service=SystemInfo&mode=CurrentProfile&Content-Type=text%2Fxml",
 
                 dataType: "xml",
                 cache: false,

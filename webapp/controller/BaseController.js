@@ -22,7 +22,10 @@ sap.ui.define([
               */
             const hostname = window.location.hostname,
                 sPort = window.location.port,
-                sServer = hostname === "localhost" ? "localhost:8010/proxy" : hostname + ":" + sPort;
+                sServer = hostname === "localhost" ? "http://localhost:8010/proxy" : "https://" + hostname + ":" + sPort;
+
+            console.log('hostname: ' + hostname);
+            console.log('port: ' + sPort);
 
             return sServer;
         },
@@ -49,7 +52,7 @@ sap.ui.define([
                 async: false,
                 type: "POST",
                 crossDomain: true,
-                url: "http://" + this.getServerHost() +
+                url: this.getServerHost() +
                     "/XMII/Illuminator?service=PropertyAccessService&mode=retrieve&content-type=text/xml&PropName=IllumLoginName",
                 dataType: "xml",
                 cache: false,
@@ -73,7 +76,7 @@ sap.ui.define([
 
             $.ajax({
                 type: "GET",
-                url: "/XMII/Illuminator?service=SystemInfo&mode=CurrentProfile&Content-Type=text%2Fxml",
+                url: this.getServerHost() + "/XMII/Illuminator?service=SystemInfo&mode=CurrentProfile&Content-Type=text%2Fxml",
                 dataType: "xml",
                 cache: false,
                 async: false,
@@ -108,7 +111,7 @@ sap.ui.define([
             oModel_empty.setData({});
             oTable.setModel(oModel_empty);
 
-            var uri = "/XMII/Runner?Transaction=" + path + "&OutputParameter=JsonOutput&Content-Type=text/xml";
+            var uri = this.getServerHost() + "/XMII/Runner?Transaction=" + path + "&OutputParameter=JsonOutput&Content-Type=text/xml";
             oTable.setBusy(true);
 
             $.ajax({
@@ -166,7 +169,7 @@ sap.ui.define([
         },
 
         _base_onloadHeader: function (oData, path, name, eModel = "") {
-            var uri = "/XMII/Runner?Transaction=" + path + "&OutputParameter=JsonOutput&Content-Type=text/xml"
+            var uri = this.getServerHost() + "/XMII/Runner?Transaction=" + path + "&OutputParameter=JsonOutput&Content-Type=text/xml"
 
             var oThis = this;
 
@@ -218,7 +221,7 @@ sap.ui.define([
         },
 
         _base_onloadCOMBO: function (Combo, oData, path, setKey, name) {
-            var uri = "/XMII/Runner?Transaction=" + path + "&OutputParameter=JsonOutput&Content-Type=text/xml"
+            var uri = this.getServerHost() + "/XMII/Runner?Transaction=" + path + "&OutputParameter=JsonOutput&Content-Type=text/xml"
 
             var oView = this.getView(),
                 oCombo = oView.byId(Combo),
@@ -274,7 +277,7 @@ sap.ui.define([
         },
 
         _base_onloadMULTICOMBO: function (Combo, oData, path, setKey, name) {
-            var uri = "http://" + this.getServerHost() + "/XMII/Runner?Transaction=" + path +
+            var uri = this.getServerHost() + "/XMII/Runner?Transaction=" + path +
                 "&OutputParameter=JsonOutput&Content-Type=text/xml"
             uri = uri.replace(/\s+/g, '');
 
@@ -417,7 +420,7 @@ sap.ui.define([
             // CONSULTAR SI HAY UNO ACTIVO Y DESACTIVARLO.
             var oData = {};
             var path = "MIIExtensions/Operation/Transaction/check_alarma_activa";
-            var uri = "/XMII/Runner?Transaction=" + path + "&OutputParameter=JsonOutput&Content-Type=text/xml";
+            var uri = this.getServerHost() + "/XMII/Runner?Transaction=" + path + "&OutputParameter=JsonOutput&Content-Type=text/xml";
             $.ajax({
                 type: "POST",
                 dataType: "xml",
@@ -475,7 +478,7 @@ sap.ui.define([
                 oThis = this;
             //clear table
             oModel_empty.setData({});
-            var uri = "http://" + this.getServerHost() + "/XMII/Runner?Transaction=" + path +
+            var uri = this.getServerHost() + "/XMII/Runner?Transaction=" + path +
                 "&OutputParameter=JsonOutput&Content-Type=text/xml";
             uri = uri.replace(/\s+/g, '');
             console.log(uri);
@@ -558,7 +561,7 @@ sap.ui.define([
 
         _ejecutarTransaccion: function (oData, path, postEx) {
             var oThis = this;
-            var uri = "http://" + this.getOwnerComponent().getManifestEntry("/sap.ui5/initData/server") + "/XMII/Runner?Transaction=" + path + "&OutputParameter=JsonOutput&Content-Type=text/xml"
+            var uri = this.getServerHost() + "/XMII/Runner?Transaction=" + path + "&OutputParameter=JsonOutput&Content-Type=text/xml"
             uri = uri.replace(/\s+/g, '');
 
             sap.ui.core.BusyIndicator.show(0);
@@ -625,7 +628,7 @@ sap.ui.define([
 
         _setModelo(oData, path, nombre) {
             var oThis = this;
-            var uri = "http://" + this.getServerHost() + "/XMII/Runner?Transaction=" + path + "&OutputParameter=JsonOutput&Content-Type=text/xml";
+            var uri = this.getServerHost() + "/XMII/Runner?Transaction=" + path + "&OutputParameter=JsonOutput&Content-Type=text/xml";
             uri = uri.replace(/\s+/g, '');
 
             $.ajax({
@@ -670,7 +673,7 @@ sap.ui.define([
             var oModelMAT = new sap.ui.model.json.JSONModel();
             var data = new sap.ui.model.json.JSONModel();
             var empty = new sap.ui.model.json.JSONModel();
-            var url = "/XMII/Illuminator?service=CombineQueryRowsets&QueryTemplate=" + oPath + "&Content-Type=text/json";
+            var url = this.getServerHost() + "/XMII/Illuminator?service=CombineQueryRowsets&QueryTemplate=" + oPath + "&Content-Type=text/json";
             var parameters = oData;
             oModelMAT.loadData(url, parameters, true, "POST");
 
