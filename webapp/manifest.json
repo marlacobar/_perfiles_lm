@@ -131,6 +131,11 @@
           "target": "ConfiguracionObjetosMII"
         },
         {
+          "pattern": "AdminContenedor",
+          "name": "AdminContenedor",
+          "target": "AdminContenedor"
+        },
+        {
           "pattern": "Correo",
           "name": "Correo",
           "target": "Correo"
@@ -312,6 +317,12 @@
           "viewId": "ConfiguracionObjetosMII",
           "viewName": "ConfiguracionObjetosMII",
           "viewPath": "sap.ui.demo.webapp.view.Administracion",
+          "viewLevel": 2
+        },
+        "AdminContenedor": {
+          "viewId": "AdminContenedor",
+          "viewName": "AdminContenedor",
+          "viewPath": "sap.ui.demo.webapp.view.Administracion.Contenedor",
           "viewLevel": 2
         },
         "Correo": {
