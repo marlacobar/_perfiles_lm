@@ -119,24 +119,12 @@ sap.ui.define([
             const oThis = this,
                 oView = this.getView(),
                 oItem = oEvent.getSource().getParent(),
-                // sIdReg = oItem.getCells()[0].getBindingInfo('text').binding.oValue,
-                sContenedor = oItem.getCells()[1].getValue(),
-                sWorkCenter = oItem.getCells()[2].getValue(),
+                sIdReg = oItem.getCells()[0].getBindingInfo('text').binding.oValue,
+                // sContenedor = oItem.getCells()[1].getValue(),
+                // sWorkCenter = oItem.getCells()[2].getValue(),
                 sTara = oItem.getCells()[3].getValue(),
                 sProveedor = oItem.getCells()[4].getValue(),
                 sUsername = this.getView().getModel("ModeloPrincipal").getProperty("/USUARIO");
-
-            // Valida el puesto con datos
-            if (sWorkCenter == '') {
-                MessageBox.warning("La estación de trabajo está vacía, favor de recargar los datos");
-                return;
-            }
-
-            // Valida el contenedor con datos
-            if (sContenedor == '') {
-                MessageBox.warning("El contenedor está vacío, favor de recargar los datos");
-                return;
-            }
 
             // Valida Valores de Tara
             if (sTara == '') {
@@ -156,14 +144,13 @@ sap.ui.define([
             }
 
             let oParams = {
-                CONTENEDOR: sContenedor,
-                WORK_CENTER: sWorkCenter,
+                ID_REG: sIdReg,
                 TARA: sTara,
                 PROVEEDOR: sProveedor,
                 USERNAME: sUsername
             };
 
-            oThis._execTransaction(oParams, "MII/DatosTransaccionales/Administracion/Contenedor/Transaction/ins_container", null, oView, function (oResponse) {
+            oThis._execTransaction(oParams, "MII/DatosTransaccionales/Administracion/Contenedor/Transaction/upd_container", null, oView, function (oResponse) {
                 // Limpiar Campos
                 oThis.byId("inpContenedor").setValue('');
                 oThis.byId("inpTara").setValue('');
