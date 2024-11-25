@@ -170,8 +170,8 @@
                                                                         enabled="false" />
                                                                     <Input value="{WORK_CENTER}"
                                                                         enabled="false" />
-                                                                    <Input value="{TARA}" />
-                                                                    <Input value="{PROVEEDOR}" />
+                                                                    <Input value="{TARA}"  type="Number" />
+                                                                    <Input value="{PROVEEDOR}"  type="Text" />
                                                                     <Button text="Guardar"
                                                                         press="onSaveChanges" />
                                                                     <Button text="Eliminar"
