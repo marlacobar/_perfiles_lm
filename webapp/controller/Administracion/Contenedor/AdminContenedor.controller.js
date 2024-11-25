@@ -7,13 +7,14 @@ sap.ui.define([
     "sap/ui/model/FilterOperator",
     "sap/ui/demo/webapp/model/formatter",
     'sap/ui/model/json/JSONModel',
-    'sap/ui/core/util/Export',
+    'sap/ui/export/library',
     'sap/ui/export/Spreadsheet',
-    'sap/ui/core/util/ExportTypeCSV',
-    'sap/m/Token',
+    'sap/ui/core/util/ExportTypeCSV'
 ], function (JQuery, BaseController, MessageToast, MessageBox, Filter, FilterOperator, formatter,
-    JSONModel, Export, Spreadsheet, ExportTypeCSV, Token) {
+    JSONModel, ExportLibrary, Spreadsheet, ExportTypeCSV) {
     "use strict";
+
+    const EdmType = ExportLibrary.EdmType;
 
     return BaseController.extend("sap.ui.demo.webapp.controller.Administracion.Contenedor.AdminContenedor", {
         formatter: formatter,
@@ -67,19 +68,31 @@ sap.ui.define([
 
             // Valida el puesto con datos
             if (sSelectedWC == '') {
-                MessageToast.show("Seleccionar una estación de trabajo");
+                MessageBox.warning("Seleccionar una estación de trabajo");
                 return;
             }
 
             // Valida que el puesto exista en el listado
             if (!bWorkCenterExists) {
-                MessageToast.show("La estación de trabajo seleccionada no existe");
+                MessageBox.warning("La estación de trabajo seleccionada no existe");
                 return;
             }
 
             // Valida inputs con datos
-            if (sContenedor == '' || sTara == '' || sProveedor == '') {
-                MessageToast.show("Ingresar " + (sContenedor == '' ? 'Contenedor' : sTara == '' ? 'Tara' : 'Proveedor'));
+            if (sContenedor == '' || sTara == '') {
+                MessageBox.warning("Favor de ingresar " + (sContenedor == '' ? 'Contenedor' : 'Tara'));
+                return;
+            }
+
+            // Valida Valores de Tara
+            let iTara = parseInt(sTara);
+
+            if(iTara <= 0) {
+                MessageBox.warning("El valor de Tara debe ser mayor a 0");
+                return;
+            }
+            if (iTara > 2500) {
+                MessageBox.warning("Corroborar el valor de Tara");
                 return;
             }
 
@@ -106,6 +119,7 @@ sap.ui.define([
             const oThis = this,
                 oView = this.getView(),
                 oItem = oEvent.getSource().getParent(),
+                // sIdReg = oItem.getCells()[0].getBindingInfo('text').binding.oValue,
                 sContenedor = oItem.getCells()[1].getValue(),
                 sWorkCenter = oItem.getCells()[2].getValue(),
                 sTara = oItem.getCells()[3].getValue(),
@@ -114,19 +128,30 @@ sap.ui.define([
 
             // Valida el puesto con datos
             if (sWorkCenter == '') {
-                MessageToast.show("La estación de trabajo está vacía, favor de recargar los datos");
+                MessageBox.warning("La estación de trabajo está vacía, favor de recargar los datos");
                 return;
             }
 
             // Valida el contenedor con datos
             if (sContenedor == '') {
-                MessageToast.show("El contenedor está vacío, favor de recargar los datos");
+                MessageBox.warning("El contenedor está vacío, favor de recargar los datos");
                 return;
             }
 
-            // Valida inputs con datos
-            if (sTara == '' || sProveedor == '') {
-                MessageToast.show("Ingresar " + (sTara == '' ? 'Tara' : 'Proveedor'));
+            // Valida Valores de Tara
+            if (sTara == '') {
+                MessageBox.warning("Favor de ingresar Tara");
+                return;
+            }
+            
+            let iTara = parseInt(sTara);
+
+            if(iTara <= 0) {
+                MessageBox.warning("El valor de Tara debe ser mayor a 0");
+                return;
+            }
+            if (iTara > 2500) {
+                MessageBox.warning("Corroborar el valor de Tara");
                 return;
             }
 
@@ -173,7 +198,7 @@ sap.ui.define([
 
         onExport: function (sArchivo) {
             let aCols, aProducts, oSettings, oSheet,
-                sSheetName = sArchivo === 'ACTUAL' ? 'ContenedoresActua' : 'ContenedoresHistorico';
+                sSheetName = sArchivo === 'ACTUAL' ? 'ContenedoresActual' : 'ContenedoresHistorico';
 
             if (sArchivo == 'ACTUAL') {
                 aCols = this.createColumnConfigActual();
@@ -192,6 +217,7 @@ sap.ui.define([
             oSettings = {
                 workbook: {
                     columns: aCols,
+                    hierarchyLevel: 'Level',
                     context: {
                         sheetName: sSheetName
                     }
@@ -214,22 +240,22 @@ sap.ui.define([
             return [{
                     label: 'Estación de Trabajo',
                     property: 'WORK_CENTER',
-                    type: 'string',
+                    type: EdmType.String
                 },
                 {
                     label: 'Contenedor',
                     property: 'CONTENEDOR',
-                    type: 'string',
+                    type: EdmType.String
                 },
                 {
                     label: 'Tara (Kg)',
                     property: 'TARA',
-                    type: 'number',
+                    type: EdmType.Number
                 },
                 {
                     label: 'Proveedor',
                     property: 'PROVEEDOR',
-                    type: 'string'
+                    type: EdmType.String
                 }
             ];
         },
@@ -238,35 +264,35 @@ sap.ui.define([
             return [{
                 label: 'Estación de Trabajo',
                 property: 'WORK_CENTER',
-                type: 'string',
+                type: EdmType.String
             }, {
                 label: 'Contenedor',
                 property: 'CONTENEDOR',
-                type: 'string',
+                type: EdmType.String
             }, {
                 label: 'Tara Actual (Kg)',
                 property: 'TARA',
-                type: 'number',
+                type: EdmType.Number
             }, {
                 label: 'Tara Anterior (Kg)',
                 property: 'TARA_ANTERIOR',
-                type: 'number',
+                type: EdmType.Number
             }, {
                 label: 'Proveedor Actual',
                 property: 'PROVEEDOR',
-                type: 'string'
+                type: EdmType.String
             }, {
                 label: 'Proveedor Anterior',
                 property: 'PROVEEDOR_ANTERIOR',
-                type: 'string'
+                type: EdmType.String
             }, {
                 label: 'Usuario Modificó',
                 property: 'USER_INS',
-                type: 'string'
+                type: EdmType.String
             }, {
                 label: 'Fecha Modificó',
                 property: 'FECHA_INS',
-                type: 'string'
+                type: EdmType.String
             }];
         },
 
