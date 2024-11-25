@@ -1,0 +1,263 @@
+<mvc:View controllerName="sap.ui.demo.webapp.controller.Administracion.Contenedor.AdminContenedor"
+    xmlns="sap.m"
+    xmlns:uxap="sap.uxap"
+    xmlns:core="sap.ui.core"
+    xmlns:ui="sap.ui.table"
+    xmlns:f="sap.f"
+    xmlns:layout="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:table="sap.ui.table"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:mvc="sap.ui.core.mvc">
+    <Toolbar class="toolbar_default">
+        <Button icon="sap-icon://nav-back" type="Transparent" class="sapUiMediumMarginBegin"
+            press="onNavBack"></Button>
+        <Image src="images/SAP_Logo.png"></Image>
+        <core:Icon src="sap-icon://show-edit" class="toolbar_title sapUiSmallMarginBegin">
+            <core:layoutData>
+                <FlexItemData growFactor="1" />
+            </core:layoutData>
+        </core:Icon>
+        <Label labelFor="myColumn" class="toolbar_title"
+            text="Administración de Contenedores / Tolvas" wrapping="true" />
+        <ToolbarSpacer />
+        <Label id="username" text="" class="toolbar_color"></Label>
+        <MenuButton visible="true" tooltip="Salir" type="Transparent" text=""
+            icon="sap-icon://person-placeholder" class="sapUiLargeMarginEnd">
+            <menu>
+                <Menu>
+                    <MenuItem text="Cerrar sesión" icon="sap-icon://slim-arrow-right" press="logoff" />
+                </Menu>
+            </menu>
+        </MenuButton>
+    </Toolbar>
+    <uxap:ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="false"
+        alwaysShowContentHeader="false" preserveHeaderStateOnScroll="false"
+        headerContentPinnable="true" isChildPage="true" upperCaseAnchorBar="false">
+        <uxap:headerTitle>
+            <uxap:ObjectPageDynamicHeaderTitle visible="false" />
+        </uxap:headerTitle>
+        <uxap:headerContent>
+            <fb:FilterBar class="sapUiSizeCompact"
+                header="Filtros"
+                search="onLoadActualData"
+                showRestoreButton="false"
+                showClearButton="false"
+                showRestoreOnFB="false">
+                <fb:filterItems>
+                    <fb:FilterItem name="A"
+                    label="Estación de Trabajo">
+                        <fb:control>
+                            <ComboBox class="sapUiSizeCompact"
+                            id="cbFilterWorkCenter"
+                            items="{
+                                path: '/',
+                                sorter: { path: 'WORK_CENTER' }
+                            }"
+                            selectionChange="onLoadActualData" >
+                                <items>
+                                    <core:ListItem key="{WORK_CENTER}" text="{DESCRIPTION}" additionalText="{WORK_CENTER}" />
+                                </items>
+                            </ComboBox>
+                        </fb:control>
+                    </fb:FilterItem>
+                    <fb:FilterItem name="B"
+                    label="Contenedor">
+                        <fb:control>
+                            <Input class="sapUiSizeCompact"
+                            id="inpFilterContenedor" />
+                        </fb:control>
+                    </fb:FilterItem>
+                    <fb:FilterItem name="C"
+                    label="Proveedor">
+                        <fb:control>
+                            <Input class="sapUiSizeCompact"
+                            id="inpFilterProveedor" />
+                        </fb:control>
+                    </fb:FilterItem>
+                </fb:filterItems>
+            </fb:FilterBar>
+        </uxap:headerContent>
+        <uxap:sections>
+            <uxap:ObjectPageSection showTitle="false">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <uxap:blocks>
+                            <layout:Grid defaultSpan="L10 M12 S6" class="sapUiSmallMarginTop">
+                                <layout:content>
+                                    <layout:HorizontalLayout class="sapUiContentPadding">
+                                        <FlexBox direction="Column" alignItems="Start">
+                                            <Label text="Estación de Trabajo:" />
+                                            <ComboBox id="cbWorkCenter"
+                                                width="300px"
+                                                enabled="false"
+                                                class="sapUiSmallMarginBottom"
+                                                selectionChange="onLoadActualData"
+                                                items="{
+                                                    path: '/',
+                                                    sorter: { path: 'WORK_CENTER' }
+                                                }">
+                                                <core:ListItem key="{WORK_CENTER}" text="{DESCRIPTION}" additionalText="{WORK_CENTER}" />
+                                            </ComboBox>
+                                        </FlexBox>
+                                        <FlexBox direction="Column" alignItems="Start">
+                                            <Label text="Contenedor:" />
+                                            <Input id="inpContenedor" type="Text"
+                                                class="sapUiSmallMarginBottom" />
+                                        </FlexBox>
+                                        <FlexBox direction="Column" alignItems="Start">
+                                            <Label text="Tara (Kg):" />
+                                            <Input id="inpTara" type="Number"
+                                                class="sapUiSmallMarginBottom" />
+                                        </FlexBox>
+                                        <FlexBox direction="Column" alignItems="Start">
+                                            <Label text="Proveedor:" />
+                                            <Input id="inpProveedor" type="Text"
+                                                class="sapUiSmallMarginBottom" />
+                                        </FlexBox>
+                                        <FlexBox direction="Column" alignItems="Start">
+                                            <Label text="" />
+                                            <Button type="Accept" icon="sap-icon://sys-enter-2"
+                                                text="Guardar Contenedor" press="onSaveContenedor">
+                                            </Button>
+                                        </FlexBox>
+                                    </layout:HorizontalLayout>
+                                    <FlexBox direction="Column" alignItems="Start" height="100%"
+                                        width="100%">
+                                        <IconTabBar headerMode="Inline" id="itbContenedores"
+                                            class="sapUiResponsiveContentPadding"
+                                            expandable="false"
+                                            upperCase="true">
+                                            <items>
+                                                <IconTabFilter key="actual" text="Contenedores">
+                                                    <Table id="tbContenedor"
+                                                        class="sapUiResponsiveMargin" width="auto"
+                                                        items="{/ITEMS}">
+                                                        <headerToolbar>
+                                                            <Toolbar class="sapMTBStandard_0">
+                                                              <ToolbarSpacer />
+                                                              <Button icon="sap-icon://excel-attachment" type="Accept" tooltip="Exportar" press="onExport('ACTUAL')" />
+                                                            </Toolbar>
+                                                          </headerToolbar>
+                                                        <columns>
+                                                            <Column visible="false">
+                                                                <Label text="Id" />
+                                                            </Column>
+                                                            <Column width="15%">
+                                                                <Label text="Contenedor" />
+                                                            </Column>
+                                                            <Column width="15%">
+                                                                <Label text="Estación de Trabajo" />
+                                                            </Column>
+                                                            <Column width="10%">
+                                                                <Label text="Tara (Kg)" />
+                                                            </Column>
+                                                            <Column width="10%">
+                                                                <Label text="Proveedor" />
+                                                            </Column>
+                                                            <Column width="10%">
+                                                                <Label text="" />
+                                                            </Column>
+                                                            <Column width="10%">
+                                                                <Label text="" />
+                                                            </Column>
+                                                        </columns>
+                                                        <items>
+                                                            <ColumnListItem>
+                                                                <cells>
+                                                                    <Text text="{ID_REG}" />
+                                                                    <Input value="{CONTENEDOR}"
+                                                                        enabled="false" />
+                                                                    <Input value="{WORK_CENTER}"
+                                                                        enabled="false" />
+                                                                    <Input value="{TARA}" />
+                                                                    <Input value="{PROVEEDOR}" />
+                                                                    <Button text="Guardar"
+                                                                        press="onSaveChanges" />
+                                                                    <Button text="Eliminar"
+                                                                        press="onDeleteContainer" />
+                                                                </cells>
+                                                            </ColumnListItem>
+                                                        </items>
+                                                    </Table>
+                                                </IconTabFilter>
+                                                <IconTabFilter key="historico" text="Histórico">
+                                                    <Table id="tbHistorico" class="sapUiResponsiveMargin" width="100%" items="{/ITEMS}">
+                                                        <headerToolbar>
+                                                            <Toolbar class="sapMTBStandard_0">
+                                                              <ToolbarSpacer />
+                                                              <Button icon="sap-icon://excel-attachment" type="Accept" tooltip="Exportar" press="onExport('HISTORICO')" />
+                                                            </Toolbar>
+                                                          </headerToolbar>
+                                                        <columns>
+                                                            <Column visible="false">
+                                                                <Label text="Id" />
+                                                            </Column>
+                                                            <Column>
+                                                                <Label text="Contenedor" />
+                                                            </Column>
+                                                            <Column width="20%">
+                                                                <Label text="Estación de Trabajo" />
+                                                            </Column>
+                                                            <Column>
+                                                                <Label text="Tara Actual (Kg)" />
+                                                            </Column>
+                                                            <Column>
+                                                                <Label text="Tara Anterior (Kg)" />
+                                                            </Column>
+                                                            <Column>
+                                                                <Label text="Proveedor Actual" />
+                                                            </Column>
+                                                            <Column>
+                                                                <Label text="Proveedor Anterior" />
+                                                            </Column>
+                                                            <Column>
+                                                                <Label text="Usuario Modificó" />
+                                                            </Column>
+                                                            <Column>
+                                                                <Label text="Fecha Modificó" />
+                                                            </Column>
+                                                            <Column width="5%">
+                                                                <Label text="" />
+                                                            </Column>
+                                                        </columns>
+                                                        <items>
+                                                            <ColumnListItem>
+                                                                <cells>
+                                                                    <Text text="{ID_REG}" />
+                                                                    <Text text="{CONTENEDOR}" />
+                                                                    <ObjectIdentifier
+                                                                        class="sapUiSmallMarginBottom"
+                                                                        title="{DESC_WORK_CENTER}"
+                                                                        text="{WORK_CENTER}" />
+                                                                    <Text text="{TARA}"/>
+                                                                    <Text
+                                                                        text="{= ${TARA_ANTERIOR} === '---' ? '' : ${TARA_ANTERIOR} === 'NA' ? '' : ${TARA_ANTERIOR}}" />
+                                                                    <Text text="{PROVEEDOR}" />
+                                                                    <Text
+                                                                        text="{PROVEEDOR_ANTERIOR}" />
+                                                                    <Text text="{USER_INS}" />
+                                                                    <Text text="{FECHA_INS}" />
+                                                                    <ObjectStatus
+                                                                        class="sapUiSmallMarginBottom"
+                                                                        text="{= ${ACTIVO} === '1' ? 'Activo' : 'Inactivo'}"
+                                                                        state="{= ${ACTIVO} === '1' ? 'Indication14' : 'Indication12'}"
+                                                                        active="true"
+                                                                        inverted="true" />
+                                                                </cells>
+                                                            </ColumnListItem>
+                                                        </items>
+                                                    </Table>
+                                                </IconTabFilter>
+                                            </items>
+                                        </IconTabBar>
+                                    </FlexBox>
+                                </layout:content>
+                            </layout:Grid>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+    </uxap:ObjectPageLayout>
+</mvc:View>

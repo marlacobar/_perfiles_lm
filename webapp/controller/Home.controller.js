@@ -162,6 +162,10 @@ sap.ui.define([
             }
         },
 
+        onAdminContenedor() {
+            this.getRouter().navTo("AdminContenedor");
+        },
+
         onListaCorreo() {
             this.getRouter().navTo("Correo");
         },

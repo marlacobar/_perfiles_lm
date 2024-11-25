@@ -166,6 +166,11 @@
                         <ImageContent src="sap-icon://syntax" />
                     </TileContent>
                 </GenericTile>
+                <GenericTile id="adminContenedor" class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Contenedores/Tolvas" subheader="Administración" press="onAdminContenedor" visible="true">
+                    <TileContent>
+                        <ImageContent src="sap-icon://syntax" />
+                    </TileContent>
+                </GenericTile>
             </layout:HorizontalLayout>
 
 
