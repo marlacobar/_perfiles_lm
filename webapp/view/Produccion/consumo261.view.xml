@@ -1,0 +1,133 @@
+<mvc:View controllerName="sap.ui.demo.webapp.controller.Produccion.consumo261" xmlns:uxap="sap.uxap" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:f="sap.f" xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns:mvc="sap.ui.core.mvc" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz="sap.viz.ui5.controls">
+
+    <f:DynamicPage id="dynamicPageId" stickySubheaderProvider="iconTabBar" class="sapUiNoContentPadding" toggleHeaderOnTitleClick="{/titleClickable}">
+        <!-- DynamicPage Header -->
+        <f:header>
+            <f:DynamicPageHeader pinnable="false">
+                <Toolbar class="toolbar_default1">
+                    <Button icon="sap-icon://nav-back" type="Transparent" class="sapUiMediumMarginBegin" press="onNavBack"></Button>
+                    <Image src="images/SAP_Logo.png"></Image>
+                    <core:Icon src="sap-icon://grid" class="toolbar_title sapUiSmallMarginBegin">
+                        <core:layoutData>
+                            <FlexItemData growFactor="1" />
+                        </core:layoutData>
+                    </core:Icon>
+                    <Label labelFor="myColumn" class="toolbar_title" text="Consumos" wrapping="true" />
+                    <ToolbarSpacer />
+                    <Label id="username" text="" class="toolbar_color"></Label>
+                    <Button icon="sap-icon://person-placeholder" type="Transparent" class="sapUiLargeMarginEnd"></Button>
+                </Toolbar>
+
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
+                <items>
+
+                    <IconTabFilter text="Generar Consumo 261">
+                        <FlexBox width="100%" alignItems="End" justifyContent="End">                            
+                            <Button icon="sap-icon://add-document" text="Reimprimir Pintura" tooltip="Reimprimir Etiquera Pintura" press="onReimprimir" type="Transparent" />
+                            <Button icon="sap-icon://expense-report" text="Consumo" tooltip="Consumir 261" press="onConsumo" type="Transparent" />
+                        </FlexBox>
+                        <VBox class="sapUiSmallMargin sapUiSizeCompact sapUiSizeCozy ">
+                            <form:Form id="FormChange480_12120" editable="true">
+                                <form:layout>
+                                    <form:ResponsiveGridLayout labelSpanXL="12" labelSpanL="12" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1" singleContainerFullSize="false" />
+                                </form:layout>
+                                <form:formContainers>
+                                    <form:FormContainer>
+                                        <form:formElements>
+                                            <form:FormElement label="Usuario">
+                                                <form:fields>
+                                                    <Input id="usuario" width="100%" enabled="false" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Puesto de Trabajo">
+                                                <form:fields>
+                                                    <ComboBox id="work_center" class="sapUiTinyMarginBegin" showSecondaryValues="true" width="98%" 
+                                                                items="{
+                                                                path: '/',
+                                                                sorter: { path: 'WORK_CENTER' }
+                                                                }"
+                                                                selectionChange="getOrdenesFab">
+                                                        <core:Item key="{WORK_CENTER}" text="{DESCRIPTION}" />
+                                                    </ComboBox>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Orden de Fabricacion">
+                                                <form:fields>
+                                                    <ComboBox id="orden_input" class="sapUiTinyMarginBegin" showSecondaryValues="true" width="98%" selectionChange="onChangeMat" loadItems="handleLoadItems" 
+                                                                items="{ 
+                                                                path: '/', 
+                                                                sorter: { path: 'ORDEN' } 
+                                                                }">
+                                                        <core:ListItem key="{ORDEN}" text="{ORDEN}" additionalText="{MATERIAL_DESC}"/>
+                                                    </ComboBox>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Código Material">
+                                                <form:fields>
+                                                    <ComboBox id="Material_input" class="sapUiTinyMarginBegin" showSecondaryValues="true" width="98%" selectionChange="onChangeMatDet" loadItems="handleLoadItems" 
+                                                                items="{ 
+                                                                path: '/', 
+                                                                sorter: { path: 'MATERIAL' } 
+                                                                }">
+                                                        <core:ListItem key="{MATERIAL}" text="{DESCRIPCION}" additionalText="{MATERIAL}"/>
+                                                    </ComboBox>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="UM">
+                                                <form:fields>
+                                                    <Input id="um" value="" editable="false" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Centro">
+                                                <form:fields>
+                                                    <Input id="centro" width="100%" editable="false" />
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Almacen">
+                                                <form:fields>
+                                                    <ComboBox id="almacen" class="sapUiTinyMarginBegin" showSecondaryValues="true" width="98%" selectionChange="onLotesDisponibles" loadItems="handleLoadItems" 
+                                                                items="{
+                                                                path: '/',
+                                                                sorter: { path: 'LGORT' }
+                                                                }">
+                                                        <core:ListItem key="{LGORT}" text="{LGORT}"/>
+                                                    </ComboBox>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Lote" id="elm_lote">
+                                                <form:fields>
+                                                    <ComboBox id="lote_select" class="sapUiTinyMarginBegin" showSecondaryValues="true" loadItems="handleLoadItems" selectionChange="onCantDisponible"
+                                                                items="{
+                                                                path: '/',
+                                                                sorter: { path: 'LOTE' }
+                                                                }" width="98%">
+                                                        <core:ListItem key="{LOTE}" text="{LOTE} -- {CANTIDAD}"/>
+                                                    </ComboBox>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement label="Cantidad">
+                                                <form:fields>
+                                                    <Input id="ctd" width="100%" />
+                                                    <Label text="Cantidad Disponible:"></Label>
+                                                    <Label id="lbl_cantdispo" text=""></Label>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            
+                                        </form:formElements>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                            </form:Form>
+                        </VBox>
+                    </IconTabFilter>
+
+                </items>
+            </IconTabBar>
+        </f:content>
+
+    </f:DynamicPage>
+
+</mvc:View>

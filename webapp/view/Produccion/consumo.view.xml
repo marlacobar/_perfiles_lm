@@ -1,0 +1,612 @@
+<mvc:View controllerName="sap.ui.demo.webapp.controller.Produccion.consumo"
+  xmlns:uxap="sap.uxap"
+  xmlns:core="sap.ui.core"
+  xmlns="sap.m"
+  xmlns:f="sap.f"
+  xmlns:layout="sap.ui.layout"
+  xmlns:form="sap.ui.layout.form"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+  xmlns:viz.data="sap.viz.ui5.data"
+  xmlns:viz="sap.viz.ui5.controls"
+  xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+
+
+
+  <f:DynamicPage id="dynamicPageId" stickySubheaderProvider="iconTabBar" class="sapUiNoContentPadding" toggleHeaderOnTitleClick="{/titleClickable}">
+    <!-- DynamicPage Header -->
+    <f:header>
+      <f:DynamicPageHeader pinnable="false">
+        <Toolbar class="toolbar_default1">
+          <Button icon="sap-icon://nav-back" type="Transparent" class="sapUiMediumMarginBegin" press="onNavBack">
+          </Button>
+          <Image src="images/SAP_Logo.png">
+          </Image>
+          <core:Icon src="sap-icon://grid" class="toolbar_title sapUiSmallMarginBegin">
+            <core:layoutData>
+              <FlexItemData growFactor="1" />
+            </core:layoutData>
+          </core:Icon>
+          <Label labelFor="myColumn" class="toolbar_title" text="Consumos" wrapping="true"/>
+          <ToolbarSpacer/>
+          <Label id="username" text="" class="toolbar_color">
+          </Label>
+          <Button icon="sap-icon://person-placeholder" type="Transparent" class="sapUiLargeMarginEnd">
+          </Button>
+        </Toolbar>
+
+      </f:DynamicPageHeader>
+    </f:header>
+
+    <f:content>
+      <IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
+        <items>
+
+          <IconTabFilter text="Generar Consumo">
+            <FlexBox width="100%" alignItems="End" justifyContent="End">
+              <Button icon="sap-icon://validate" tooltip="Valida Material" press="onBuscaMaterial" type="Transparent" class="sapUiSmallMarginEnd" visible="false"/>
+              <Button icon="sap-icon://delete" tooltip="Borrar Material Seleccionado" press="onBorrarMaterial" type="Transparent" class="sapUiSmallMarginEnd  "/>
+              <Button icon="sap-icon://add" tooltip="Agregar Material" press="onAddMaterial" type="Transparent" class="sapUiSmallMarginEnd  "/>
+              <Button icon="sap-icon://expense-report" tooltip="Consumir" press="onConsumo" type="Transparent"/>
+            </FlexBox>
+            <VBox class="sapUiSmallMargin sapUiSizeCompact sapUiSizeCozy ">
+              <form:Form id="FormChange480_12120" editable="true">
+                <form:layout>
+                  <form:ResponsiveGridLayout labelSpanXL="12" labelSpanL="12" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1" singleContainerFullSize="false" />
+                </form:layout>
+                <form:formContainers>
+                  <form:FormContainer>
+                    <form:formElements>
+                      <form:FormElement label="Usuario">
+                        <form:fields>
+                          <Input id="usuario" width="80%" enabled="false"/>
+                        </form:fields>
+                      </form:FormElement>
+                      <form:FormElement label="Puesto de Trabajo">
+                        <form:fields>
+                          <ComboBox id="work_center" showSecondaryValues= "true" width="80%" selectionChange="onKeyCode" items="{
+                                        path: '/',
+                                        sorter: { path: 'desc' }
+                                        }">
+                            <core:ListItem key ="{WORK_CENTER}" text="{DESCRIPTION}" additionalText = "{WORK_CENTER}" />
+                          </ComboBox>
+                        </form:fields>
+                      </form:FormElement>
+                      <form:FormElement label="Material(es)">
+                        <form:fields>
+                          <ComboBox id="cmb_material" showSecondaryValues= "true" width="80%" selectionChange="onChangeMat" loadItems="handleLoadItems" items="{ path: '/', sorter: { path: 'id' } }">
+                            <core:ListItem key="{MATERIAL}" text="{MATERIAL} --- {DESCRIPCION}" app:ext_centroCosto="{CENTRO_COSTO}" app:ext_um="{UM}" app:ext_esLote="{ES_LOTE}"/>
+                          </ComboBox>
+                        </form:fields>
+                      </form:FormElement>
+                      <form:FormElement label="UM">
+                        <form:fields>
+                          <Input id="um" value="" editable="false" width="80%"/>
+                        </form:fields>
+                      </form:FormElement>
+                      <form:FormElement label="Centro Costo">
+                        <form:fields>
+                          <Input id="inp_ceco" value="" editable="false" width="80%"/>
+                        </form:fields>
+                      </form:FormElement>
+                      <form:FormElement label="Lote" id="elm_lote">
+                        <form:fields>
+                          <ComboBox id="lote_select" showSecondaryValues= "true" width="80%" items="{
+                                    path: '/',
+                                    sorter: { path: 'LOTE' }
+                                  }">
+                            <core:ListItem key="{KEY}" text="{KEY} --- {LGORT} --- {TEXT}" additionalText = "{TYP}" app:ext_lgort="{LGORT}"/>
+                          </ComboBox>
+                        </form:fields>
+                      </form:FormElement>
+                      <form:FormElement label="Almacen" id="elm_almacen">
+                        <form:fields>
+                          <ComboBox id="cmb_almacen" showSecondaryValues= "true" width="80%" items="{
+                                      path: '/',
+                                      sorter: { path: 'ALMACEN' }
+                                    }">
+                            <core:ListItem key="{ALMACEN}" text="{ALMACEN} --- {QTY}"/>
+                          </ComboBox>
+                        </form:fields>
+                      </form:FormElement>
+                      <form:FormElement label="Cantidad">
+                        <form:fields>
+                          <Input id="ctd" width="80%"/>
+                        </form:fields>
+                      </form:FormElement>
+                    </form:formElements>
+                  </form:FormContainer>
+                </form:formContainers>
+              </form:Form>
+            </VBox>
+          </IconTabFilter>
+
+
+          <IconTabFilter text="Consumos Realizados">
+
+            <Table id="table_consumos" width="auto" items="{/ITEMS}">
+              <headerToolbar>
+                <OverflowToolbar>
+                  <Title text="Consumos Realizados" level="H2"/>
+                  <ToolbarSpacer></ToolbarSpacer>
+                  <Button icon="sap-icon://download" press="onDataExport" tooltip="Exportar CSV"/>
+                </OverflowToolbar>
+              </headerToolbar>
+              <columns>
+                <Column minScreenWidth="Small" visible="true" demandPopin="true">
+                  <Label text="Usuario"/>
+                </Column>
+                <Column minScreenWidth="Small" demandPopin="true">
+                  <Label text="Puesto de Trabajo" textAlign="Center"/>
+                </Column>
+                <Column minScreenWidth="Small" demandPopin="true">
+                  <Label text="Fecha Registro" textAlign="Center"/>
+                </Column>
+                <Column minScreenWidth="Small" demandPopin="true">
+                  <Label text="Material"/>
+                </Column>
+                <Column minScreenWidth="Small" demandPopin="true">
+                  <Label text="Descripcion"/>
+                </Column>
+                <Column minScreenWidth="Small" demandPopin="true">
+                  <Label text="Cantidad"/>
+                </Column>
+                <Column minScreenWidth="Small" demandPopin="true">
+                  <Label text="Documento"/>
+                </Column>
+                <Column minScreenWidth="Small" demandPopin="true">
+                  <Label text="Almacen"/>
+                </Column>
+                <Column minScreenWidth="Small" demandPopin="true">
+                  <Label text="Lote"/>
+                </Column>
+              </columns>
+              <items>
+                <ColumnListItem type="Active">
+                  <cells>
+                    <Text text="{USER}"/>
+                    <Text text="{WORK_CENTER}"/>
+                    <Text text="{FECHA_INS}"/>
+                    <Text text="{MATERIAL}"/>
+                    <Text text="{DESC}"/>
+                    <Text text="{QUANTITY}"/>
+                    <Text text="{DOCUMENT}"/>
+                    <Text text="{ALMACEN}"/>
+                    <Text text="{LOTE}"/>
+                  </cells>
+                </ColumnListItem>
+              </items>
+            </Table>
+
+          </IconTabFilter>
+
+
+          <IconTabFilter text="Reporte Consumo">
+            <layout:Grid defaultSpan="L12 M12 S12">
+              <layout:content>
+                <FlexBox width="100%" alignItems="End" justifyContent="End">
+                  <Button icon="sap-icon://lab" text="Actualizar Densidad" type="Emphasized" press="onDensidad" class="sapUiMediumMarginEnd"/>
+                  <Button icon="sap-icon://business-objects-experience" text="Reporte" type="Emphasized" press="onReporte"/>
+                </FlexBox>
+                <layout:HorizontalLayout allowWrapping="true" class="sapUiSizeCompact">
+                  <layout:VerticalLayout class="sapUiMediumMarginEnd sapUiSizeCompact">
+                    <ObjectAttribute title="Año-Mes"/>
+                    <DatePicker id="DP10" class="sapUiSizeCompact" displayFormat="yyyy-MM" valueFormat="yyyy-MM" change="handleChange"/>
+                  </layout:VerticalLayout>
+
+                  <layout:VerticalLayout visible="false">
+                    <ObjectAttribute title="{i18n>EndDate}"/>
+                    <DatePicker id="end_date" class="sapUiSizeCompact" valueFormat="dd-MM-yyyy" displayFormat="dd-MM-yyyy"/>
+                  </layout:VerticalLayout>
+
+                  <layout:VerticalLayout class="sapUiMediumMarginBegin">
+                    <ObjectAttribute title="Puesto de Trabajo"/>
+                    <ComboBox id="Puesto_Trabajo_select" class="sapUiSizeCompact" showSecondaryValues= "true" width="100%">
+                      <core:ListItem key="MFR1" text="MOLINO DE LAMINACIÓN EN FRÍO" additionalText = "MFR1"/>
+                      <core:ListItem key="CGL1" text="GALVANIZADO 1" additionalText = "CGL1"/>
+                      <core:ListItem key="CGL2" text="GALVANIZADO 2" additionalText = "CGL2"/>
+                      <core:ListItem key="CCL2" text="PINTADORA 2" additionalText = "CCL2"/>
+                    </ComboBox>
+                  </layout:VerticalLayout>
+                </layout:HorizontalLayout>
+
+                <layout:Grid defaultSpan="L12 M12 S12">
+                  <layout:content>
+
+                    <layout:Grid defaultSpan="L6 M6 S6">
+                      <layout:content>
+
+                        <layout:FixFlex id='chartFixFle' minFlexSize="200" class="sapUiSizeCompact">
+                          <layout:flexContent>
+
+                            <viz:Popover id="idPopOve"></viz:Popover>
+                            <viz:VizFrame class="sapUiSizeCompact"
+                              xmlns="sap.viz" vizType='combination' width = "100%" height="300px" id="vizMes" />
+                          </layout:flexContent>
+                        </layout:FixFlex>
+
+                        <Table id="table_mes" fixedLayout="true"  width = "auto" class="sapUiLargeMarginTop sapUiSizeCompact" items="{/ITEMS}">
+                          <columns>
+                            <Column minScreenWidth="Small" visible="true" demandPopin="true">
+                              <Label text="Mes"/>
+                            </Column>
+                            <Column minScreenWidth="Small" demandPopin="true">
+                              <Label text="Puesto de Trabajo" textAlign="Center"/>
+                            </Column>
+                            <Column minScreenWidth="Small" demandPopin="true">
+                              <Label text="Mat Consumido" textAlign="Center"/>
+                            </Column>
+                            <Column minScreenWidth="Small" demandPopin="true">
+                              <Label text="Descripcion"/>
+                            </Column>
+                            <Column minScreenWidth="Small" demandPopin="true">
+                              <Label text="Producido"/>
+                            </Column>
+                            <Column minScreenWidth="Small" demandPopin="true">
+                              <Label text="Consumido"/>
+                            </Column>
+                            <Column minScreenWidth="Small" demandPopin="true">
+                              <Label text="Relación"/>
+                            </Column>
+                          </columns>
+                          <items>
+                            <ColumnListItem type="Active">
+                              <cells>
+                                <Text text="{MES}"/>
+                                <Text text="{WC}"/>
+                                <Text text="{MATERIAL}"/>
+                                <Text text="{DESC}"/>
+                                <Text text="{PROD}"/>
+                                <Text text="{CONSUMO}"/>
+                                <Text text="{RELACION}"/>
+                              </cells>
+                            </ColumnListItem>
+                          </items>
+                        </Table>
+
+                      </layout:content>
+                    </layout:Grid>
+
+
+                    <layout:Grid defaultSpan="L6 M6 S6">
+                      <layout:content>
+
+                        <layout:FixFlex id='chartFixFlex' minFlexSize="200" class="sapUiSizeCompact">
+                          <layout:flexContent>
+                            <viz:Popover id="idPopOver"></viz:Popover>
+                            <viz:VizFrame class="sapUiSizeCompact"
+                              xmlns="sap.viz" vizType='combination' width = "auto" height="300px" selectData="onClickOnColumnaSemana" id="idVizFrame" />
+                          </layout:flexContent>
+                        </layout:FixFlex>
+
+                        <viz:VizFrame class="sapUiSizeCompact"
+                          xmlns="sap.viz" vizType='combination' width = "auto" height="300px" id="vizDia" />
+
+                        <Table id="table_semana" fixedLayout="true" width = "auto" class="sapUiLargeMarginTop sapUiSizeCompact" items="{/ITEMS}">
+                          <columns>
+                            <Column minScreenWidth="Small" visible="true" demandPopin="true">
+                              <Label text="Semana"/>
+                            </Column>
+                            <Column minScreenWidth="Small" demandPopin="true">
+                              <Label text="Puesto de Trabajo" textAlign="Center"/>
+                            </Column>
+                            <Column minScreenWidth="Small" demandPopin="true">
+                              <Label text="Mat Consumido" textAlign="Center"/>
+                            </Column>
+                            <Column minScreenWidth="Small" demandPopin="true">
+                              <Label text="Descripcion"/>
+                            </Column>
+                            <Column minScreenWidth="Small" demandPopin="true">
+                              <Label text="Producido"/>
+                            </Column>
+                            <Column minScreenWidth="Small" demandPopin="true">
+                              <Label text="Consumido"/>
+                            </Column>
+                            <Column minScreenWidth="Small" demandPopin="true">
+                              <Label text="Relación"/>
+                            </Column>
+                          </columns>
+                          <items>
+                            <ColumnListItem type="Active">
+                              <cells>
+                                <Text text="{SEMANA}"/>
+                                <Text text="{WC}"/>
+                                <Text text="{MATERIAL}"/>
+                                <Text text="{DESC}"/>
+                                <Text text="{PROD}"/>
+                                <Text text="{CONSUMIDO}"/>
+                                <Text text="{RELACION}"/>
+                              </cells>
+                            </ColumnListItem>
+                          </items>
+                        </Table>
+
+                        <Table id="table_dia" fixedLayout="true" width = "auto" class="sapUiLargeMarginTop sapUiSizeCompact" items="{/ITEMS}">
+                          <columns>
+                            <Column minScreenWidth="Small" visible="true" demandPopin="true">
+                              <Label text="Día"/>
+                            </Column>
+                            <Column minScreenWidth="Small" demandPopin="true">
+                              <Label text="Puesto de Trabajo" textAlign="Center"/>
+                            </Column>
+                            <Column minScreenWidth="Small" demandPopin="true">
+                              <Label text="Mat Consumido" textAlign="Center"/>
+                            </Column>
+                            <Column minScreenWidth="Small" demandPopin="true">
+                              <Label text="Descripcion"/>
+                            </Column>
+                            <Column minScreenWidth="Small" demandPopin="true">
+                              <Label text="Producido"/>
+                            </Column>
+                            <Column minScreenWidth="Small" demandPopin="true">
+                              <Label text="Consumido"/>
+                            </Column>
+                            <Column minScreenWidth="Small" demandPopin="true">
+                              <Label text="Relación"/>
+                            </Column>
+                          </columns>
+                          <items>
+                            <ColumnListItem type="Active">
+                              <cells>
+                                <Text text="{DIA}"/>
+                                <Text text="{WC}"/>
+                                <Text text="{MATERIAL}"/>
+                                <Text text="{DESC}"/>
+                                <Text text="{PRODUCIDO}"/>
+                                <Text text="{CONSUMIDO}"/>
+                                <Text text="{RELACION}"/>
+                              </cells>
+                            </ColumnListItem>
+                          </items>
+                        </Table>
+                      </layout:content>
+                    </layout:Grid>
+                  </layout:content>
+                </layout:Grid>
+              </layout:content>
+            </layout:Grid>
+          </IconTabFilter>
+
+
+          <IconTabFilter text="Variación de Consumo Zinc">
+            <layout:Grid defaultSpan="L12 M12 S12">
+              <layout:content>
+                <FlexBox width="100%" alignItems="End" justifyContent="End">
+                  <Button icon="sap-icon://business-objects-experience" text="Reporte" type="Emphasized" press="onReporteZinc"/>
+                </FlexBox>
+                <layout:HorizontalLayout allowWrapping="true" class="sapUiSizeCompact">
+                  <layout:VerticalLayout class="sapUiMediumMarginEnd sapUiSizeCompact">
+                    <ObjectAttribute title="Año-Mes"/>
+                    <DatePicker id="DP" class="sapUiSizeCompact" displayFormat="yyyy-MM" valueFormat="yyyy-MM" change="handleChange"/>
+                  </layout:VerticalLayout>
+                  <layout:VerticalLayout class="sapUiMediumMarginEnd sapUiSizeCompact">
+                    <ObjectAttribute title="Puesto de Trabajo"/>
+                    <ComboBox id="Puesto_Trabajo_zinc" class="sapUiSizeCompact" showSecondaryValues= "true" width="100%">
+                      <core:ListItem key="CGL1" text="GALVANIZADO 1" additionalText = "CGL1"/>
+                      <core:ListItem key="CGL2" text="GALVANIZADO 2" additionalText = "CGL2"/>
+                    </ComboBox>
+                  </layout:VerticalLayout>
+                </layout:HorizontalLayout>
+                <layout:Grid defaultSpan="L6 M6 S6" class="sapUiLargeMarginBegin">
+                  <layout:content>
+                    <layout:FixFlex id='fixZinc_mes' minFlexSize="200" class="sapUiSizeCompact">
+                      <layout:flexContent>
+                        <viz:Popover id="idPopZinc_mes"></viz:Popover>
+                        <viz:VizFrame class="sapUiSizeCompact"
+                          xmlns="sap.viz" vizType='combination' width = "auto" height="300px" selectData="onClickOnColumnaSemana" id="ZincMes" />
+                      </layout:flexContent>
+                    </layout:FixFlex>
+
+                    <layout:FixFlex id='fixZincAl_mes' minFlexSize="200" class="sapUiSizeCompact">
+                      <layout:flexContent>
+                        <viz:Popover id="idPopZincAl_mes"></viz:Popover>
+                        <viz:VizFrame class="sapUiSizeCompact"
+                          xmlns="sap.viz" vizType='combination' width = "auto" height="300px" selectData="onClickOnColumnaSemana" id="ZincAlMes" />
+                      </layout:flexContent>
+                    </layout:FixFlex>
+
+                    <Table id="tab_zinc_mes" fixedLayout="true"  width = "auto" class=" sapUiSizeCompact" items="{/ITEMS}">
+                      <columns>
+                        <Column minScreenWidth="Small" visible="true" demandPopin="true">
+                          <Label text="Mes"/>
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true">
+                          <Label text="Teórico" textAlign="Center"/>
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true">
+                          <Label text="Real"/>
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true">
+                          <Label text="Variación"/>
+                        </Column>
+                      </columns>
+                      <items>
+                        <ColumnListItem type="Active">
+                          <cells>
+                            <Text text="{MES}"/>
+                            <Text text="{TEORICO}"/>
+                            <Text text="{REAL}"/>
+                            <ObjectIdentifier title="{VARIACION}"/>
+                          </cells>
+                        </ColumnListItem>
+                      </items>
+                    </Table>
+
+                    <Table id="tab_al_zinc_mes" fixedLayout="true" width = "auto" class=" sapUiSizeCompact" items="{/ITEMS}">
+                      <columns>
+                        <Column minScreenWidth="Small" visible="true" demandPopin="true">
+                          <Label text="Mes"/>
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true">
+                          <Label text="Teórico" textAlign="Center"/>
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true">
+                          <Label text="Real"/>
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true">
+                          <Label text="Variación"/>
+                        </Column>
+                      </columns>
+                      <items>
+                        <ColumnListItem type="Active">
+                          <cells>
+                            <Text text="{MES}"/>
+                            <Text text="{TEORICO}"/>
+                            <Text text="{REAL}"/>
+                            <ObjectIdentifier title="{VARIACION}"/>
+                          </cells>
+                        </ColumnListItem>
+                      </items>
+                    </Table>
+
+
+
+                    <layout:FixFlex id='fixZinc_sem' minFlexSize="200" class="sapUiSizeCompact">
+                      <layout:flexContent>
+                        <viz:Popover id="idPopZinc_sem"></viz:Popover>
+                        <viz:VizFrame class="sapUiSizeCompact"
+                          xmlns="sap.viz" vizType='combination' width = "auto" height="300px" selectData="onClickOnColumnaSemana1" id="ZincSem" />
+                      </layout:flexContent>
+                    </layout:FixFlex>
+
+                    <layout:FixFlex id='fixZincAl_sem' minFlexSize="200" class="sapUiSizeCompact">
+                      <layout:flexContent>
+                        <viz:Popover id="idPopZincAl_sem"></viz:Popover>
+                        <viz:VizFrame class="sapUiSizeCompact"
+                          xmlns="sap.viz" vizType='combination' width = "auto" height="300px" selectData="onClickOnColumnaSemana2" id="ZincAlSem" />
+                      </layout:flexContent>
+                    </layout:FixFlex>
+
+                    <Table id="tab_zinc_sem" fixedLayout="true" width = "auto" class=" sapUiSizeCompact" items="{/ITEMS}">
+                      <columns>
+                        <Column minScreenWidth="Small" visible="true" demandPopin="true">
+                          <Label text="Semana"/>
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true">
+                          <Label text="Teórico" textAlign="Center"/>
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true">
+                          <Label text="Real"/>
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true">
+                          <Label text="Variación"/>
+                        </Column>
+                      </columns>
+                      <items>
+                        <ColumnListItem type="Active">
+                          <cells>
+                            <Text text="{SEMANA}"/>
+                            <Text text="{TEORICO}"/>
+                            <Text text="{REAL}"/>
+                            <ObjectIdentifier title="{VARIACION}"/>
+                          </cells>
+                        </ColumnListItem>
+                      </items>
+                    </Table>
+
+                    <Table id="tab_al_zinc_sem" fixedLayout="true" width = "auto" class=" sapUiSizeCompact" items="{/ITEMS}">
+                      <columns>
+                        <Column minScreenWidth="Small" visible="true" demandPopin="true">
+                          <Label text="Semana"/>
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true">
+                          <Label text="Teórico" textAlign="Center"/>
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true">
+                          <Label text="Real"/>
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true">
+                          <Label text="Variación"/>
+                        </Column>
+                      </columns>
+                      <items>
+                        <ColumnListItem type="Active">
+                          <cells>
+                            <Text text="{SEMANA}"/>
+                            <Text text="{TEORICO}"/>
+                            <Text text="{REAL}"/>
+                            <ObjectIdentifier title="{VARIACION}"/>
+                          </cells>
+                        </ColumnListItem>
+                      </items>
+                    </Table>
+
+                    <layout:FixFlex id='fixZinc_dia' minFlexSize="200" class="sapUiSizeCompact">
+                      <layout:flexContent>
+                        <viz:Popover id="idPopZinc_dia"></viz:Popover>
+                        <viz:VizFrame class="sapUiSizeCompact"
+                          xmlns="sap.viz" vizType='combination' width = "auto" height="300px" id="ZincDia" />
+                      </layout:flexContent>
+                    </layout:FixFlex>
+
+                    <layout:FixFlex id='fixZincAl_dia' minFlexSize="200" class="sapUiSizeCompact">
+                      <layout:flexContent>
+                        <viz:Popover id="idPopZincAl_dia"></viz:Popover>
+                        <viz:VizFrame class="sapUiSizeCompact"
+                          xmlns="sap.viz" vizType='combination' width = "auto" height="300px" id="ZincAlDia" />
+                      </layout:flexContent>
+                    </layout:FixFlex>
+
+                    <Table id="tab_zinc_dia" fixedLayout="true" width = "auto" class=" sapUiSizeCompact" items="{/ITEMS}">
+                      <columns>
+                        <Column minScreenWidth="Small" visible="true" demandPopin="true">
+                          <Label text="Día"/>
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true">
+                          <Label text="Teórico" textAlign="Center"/>
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true">
+                          <Label text="Real"/>
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true">
+                          <Label text="Variación"/>
+                        </Column>
+                      </columns>
+                      <items>
+                        <ColumnListItem type="Active">
+                          <cells>
+                            <Text text="{DIA}"/>
+                            <Text text="{TEORICO}"/>
+                            <Text text="{REAL}"/>
+                            <ObjectIdentifier title="{VARIACION}"/>
+                          </cells>
+                        </ColumnListItem>
+                      </items>
+                    </Table>
+
+                    <Table id="tab_al_zinc_dia" fixedLayout="true" width = "auto" class=" sapUiSizeCompact" items="{/ITEMS}">
+                      <columns>
+                        <Column minScreenWidth="Small" visible="true" demandPopin="true">
+                          <Label text="Día"/>
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true">
+                          <Label text="Teórico" textAlign="Center"/>
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true">
+                          <Label text="Real"/>
+                        </Column>
+                        <Column minScreenWidth="Small" demandPopin="true">
+                          <Label text="Variación"/>
+                        </Column>
+                      </columns>
+                      <items>
+                        <ColumnListItem type="Active">
+                          <cells>
+                            <Text text="{DIA}"/>
+                            <Text text="{TEORICO}"/>
+                            <Text text="{REAL}"/>
+                            <ObjectIdentifier title="{VARIACION}"/>
+                          </cells>
+                        </ColumnListItem>
+                      </items>
+                    </Table>
+                  </layout:content>
+                </layout:Grid>
+              </layout:content>
+            </layout:Grid>
+          </IconTabFilter>
+        </items>
+      </IconTabBar>
+    </f:content>
+  </f:DynamicPage>
+</mvc:View>

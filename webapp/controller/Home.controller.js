@@ -41,12 +41,12 @@ sap.ui.define([
             var uri = "http://" + this.getServerHost() + "/XMII/Runner?Transaction=" + path + "&OutputParameter=*&Content-Type=text/xml"
 
             $.ajax({
-                    type: "POST",
-                    dataType: "xml",
-                    cache: false,
-                    url: uri,
-                    data: oData
-                })
+                type: "POST",
+                dataType: "xml",
+                cache: false,
+                url: uri,
+                data: oData
+            })
                 .done(function (xmlDOM) {
                     console.log(xmlDOM);
                     var tile;
@@ -131,9 +131,7 @@ sap.ui.define([
         onVerAvisos() {
             var idPlanta = this.byId("ListPlanta").getSelectedKey();
             if (idPlanta != "") {
-                this.getRouter().navTo("verAvisos", {
-                    "planta": idPlanta
-                });
+                this.getRouter().navTo("verAvisos", { "planta": idPlanta });
             } else {
                 this.getOwnerComponent().openHelloDialog("Debe  seleccionar  un centro.");
             }
@@ -141,9 +139,7 @@ sap.ui.define([
         onVerOrdenes() {
             var idPlanta = this.byId("ListPlanta").getSelectedKey();
             if (idPlanta != "") {
-                this.getRouter().navTo("verOrdenes", {
-                    "planta": idPlanta
-                });
+                this.getRouter().navTo("verOrdenes", { "planta": idPlanta });
             } else {
                 this.getOwnerComponent().openHelloDialog("Debe  seleccionar  un centro.");
             }
@@ -152,9 +148,7 @@ sap.ui.define([
         onMantenimientoUsuarios() {
             var idPlanta = this.byId("ListPlanta").getSelectedKey();
             if (idPlanta != "") {
-                this.getRouter().navTo("MantenimientoUsuarios", {
-                    "planta": idPlanta
-                });
+                this.getRouter().navTo("MantenimientoUsuarios", { "planta": idPlanta });
 
             } else {
                 this.getOwnerComponent().openHelloDialog("Debe  seleccionar  un centro.");
@@ -164,9 +158,7 @@ sap.ui.define([
         onGotoConfiguracionObjetosMII() {
             var idPlanta = this.byId("ListPlanta").getSelectedKey();
             if (idPlanta != "") {
-                this.getRouter().navTo("ConfiguracionObjetosMII", {
-                    "planta": idPlanta
-                });
+                this.getRouter().navTo("ConfiguracionObjetosMII", { "planta": idPlanta });
             }
         },
 
@@ -190,9 +182,7 @@ sap.ui.define([
 
             var idPlanta = this.byId("ListPlanta").getSelectedKey();
             if (idPlanta != "") {
-                this.getRouter().navTo("supervisoresProd", {
-                    "planta": idPlanta
-                });
+                this.getRouter().navTo("supervisoresProd", { "planta": idPlanta });
 
             } else {
                 this.getOwnerComponent().openHelloDialog("Debe  seleccionar  un centro.");
@@ -220,18 +210,14 @@ sap.ui.define([
         onInspeccion03() {
             var idPlanta = this.byId("ListPlanta").getSelectedKey();
             if (idPlanta != "") {
-                this.getRouter().navTo("InspeccionCalidad03", {
-                    "planta": idPlanta
-                });
+                this.getRouter().navTo("InspeccionCalidad03", { "planta": idPlanta });
             }
 
         },
         onInspeccion09() {
             var idPlanta = this.byId("ListPlanta").getSelectedKey();
             if (idPlanta != "") {
-                this.getRouter().navTo("InspeccionCalidad09", {
-                    "planta": idPlanta
-                });
+                this.getRouter().navTo("InspeccionCalidad09", { "planta": idPlanta });
             }
 
         },
@@ -245,8 +231,8 @@ sap.ui.define([
         onRegistroTransportista() {
             this.getRouter().navTo("registroTransportista");
         },
-        onBasculaNuevo() {
-            this.getRouter().navTo("BasculaNuevo");
+        onBasculaNuevo(){
+	this.getRouter().navTo("BasculaNuevo");
         },
         on_revision_lotes_offline() {
             this.getRouter().navTo("revision_lotes_offline");
@@ -263,12 +249,16 @@ sap.ui.define([
         onReporteCali() {
             var idPlanta = this.byId("ListPlanta").getSelectedKey();
             if (idPlanta != "") {
-                this.getRouter().navTo("ReporteCalidad", {
-                    "plant": idPlanta
-                });
+                this.getRouter().navTo("ReporteCalidad", { "plant": idPlanta });
             } else {
                 this.getOwnerComponent().openHelloDialog("Debe  seleccionar  un centro.");
             }
+        },
+        onConsumo() {
+            this.getRouter().navTo("Consumo201");
+        },
+        onConsumo261() {
+            this.getRouter().navTo("Consumo261");
         },
         onCheckList_Act() {
             this.getRouter().navTo("CheckList_Actividades");
@@ -283,9 +273,7 @@ sap.ui.define([
             var idPlanta = this.byId("ListPlanta").getSelectedKey();
 
             if (idPlanta != "") {
-                this.getRouter().navTo("verParos", {
-                    "idPlanta": idPlanta
-                });
+                this.getRouter().navTo("verParos", { "idPlanta": idPlanta });
             } else {
                 this.getOwnerComponent().openHelloDialog("Debe  seleccionar  un centro.");
             }
@@ -293,9 +281,7 @@ sap.ui.define([
         onMantenedorImpresoras() {
             var idPlanta = this.byId("ListPlanta").getSelectedKey();
             if (idPlanta != "") {
-                this.getRouter().navTo("oImpresoras", {
-                    "planta": idPlanta
-                });
+                this.getRouter().navTo("oImpresoras", { "planta": idPlanta });
             }
         },
         onLogtsTransporte() {

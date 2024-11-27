@@ -191,6 +191,16 @@
           "target": "ReporteCalidad"
         },
         {
+          "pattern": "Consumo201",
+          "name": "Consumo201",
+          "target": "Consumo201"
+        },
+        {
+          "pattern": "Consumo261",
+          "name": "Consumo261",
+          "target": "Consumo261"
+        },
+        {
           "pattern": "CheckList_Actividades",
           "name": "CheckList_Actividades",
           "target": "CheckList_Actividades"
@@ -389,6 +399,18 @@
           "viewId": "ReporteCalidad",
           "viewName": "ReporteCalidad",
           "viewPath": "sap.ui.demo.webapp.view.Reportes",
+          "viewLevel": 2
+        },
+        "Consumo201": {
+          "viewId": "consumo",
+          "viewName": "consumo",
+          "viewPath": "sap.ui.demo.webapp.view.Produccion",
+          "viewLevel": 2
+        },
+        "Consumo261": {
+          "viewId": "consumo261",
+          "viewName": "consumo261",
+          "viewPath": "sap.ui.demo.webapp.view.Produccion",
           "viewLevel": 2
         },
         "CheckList_Actividades": {
