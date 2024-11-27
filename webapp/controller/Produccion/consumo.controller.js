@@ -45,7 +45,7 @@ sap.ui.define([
                 }
             });
 
-            oThis._base_onloadCOMBO("work_center", "", "GALVASID/DatosTransaccionales/Produccion/Transaction/get_workCenter_Consumo201", "", "Centros");
+            oThis._base_onloadCOMBO("work_center", "", "MII/DatosTransaccionales/Produccion/Transaction/get_workCenter_Consumo201", "", "Centros");
 
             //<----------------------------------------VIZFRAME COLUMN--------------------------------------------------------->			
 
@@ -665,7 +665,7 @@ sap.ui.define([
         _onRouteMatched: function (oEvent) {
 
             this._getUsuario("username", "id_consumo_201");
-            this._base_onloadTable("table_consumos", "", "GALVASID/DatosTransaccionales/Produccion/Transaction/get_consumos", "Consumos", ""); // 20200428
+            this._base_onloadTable("table_consumos", "", "MII/DatosTransaccionales/Produccion/Transaction/get_consumos", "Consumos", ""); // 20200428
 
         },
 
@@ -683,8 +683,8 @@ sap.ui.define([
                 "WC": wc
             };
             console.log(oData);
-            this.loadGraph("vizDia", oData, "GALVASID/DatosTransaccionales/Produccion/Transaction/calc_dia", "Grafico Día");
-            this._base_onloadTable("table_dia", oData, "GALVASID/DatosTransaccionales/Produccion/Transaction/calc_dia_tab", "Tabla Día", ""); // 20200428
+            this.loadGraph("vizDia", oData, "MII/DatosTransaccionales/Produccion/Transaction/calc_dia", "Grafico Día");
+            this._base_onloadTable("table_dia", oData, "MII/DatosTransaccionales/Produccion/Transaction/calc_dia_tab", "Tabla Día", ""); // 20200428
         },
 
         onClickOnColumnaSemana1: function (oEvent) {
@@ -701,8 +701,8 @@ sap.ui.define([
                 "WC": wc
             };
             console.log(oData);
-            this.loadGraph("ZincDia", oData, "GALVASID/DatosTransaccionales/Produccion/Transaction/calc_zinc_dia", "Grafico Día");
-            this._base_onloadTable("tab_zinc_dia", oData, "GALVASID/DatosTransaccionales/Produccion/Transaction/calc_tab_zinc_dia", "Tabla Día Zinc", "");
+            this.loadGraph("ZincDia", oData, "MII/DatosTransaccionales/Produccion/Transaction/calc_zinc_dia", "Grafico Día");
+            this._base_onloadTable("tab_zinc_dia", oData, "MII/DatosTransaccionales/Produccion/Transaction/calc_tab_zinc_dia", "Tabla Día Zinc", "");
         },
 
         onClickOnColumnaSemana2: function (oEvent) {
@@ -719,8 +719,8 @@ sap.ui.define([
                 "WC": wc
             };
             console.log(oData);
-            this.loadGraph("ZincAlDia", oData, "GALVASID/DatosTransaccionales/Produccion/Transaction/calc_zinc_dia", "Grafico Día");
-            this._base_onloadTable("tab_al_zinc_dia", oData, "GALVASID/DatosTransaccionales/Produccion/Transaction/calc_tab_zinc_dia", "Tabla Día Aluminio Zinc", "");
+            this.loadGraph("ZincAlDia", oData, "MII/DatosTransaccionales/Produccion/Transaction/calc_zinc_dia", "Grafico Día");
+            this._base_onloadTable("tab_al_zinc_dia", oData, "MII/DatosTransaccionales/Produccion/Transaction/calc_tab_zinc_dia", "Tabla Día Aluminio Zinc", "");
         },
 
         onKeyCode: function (oEvent) {
@@ -732,7 +732,7 @@ sap.ui.define([
                 "WORK_CENTER": workCenter
             };
 
-            this._base_onloadCOMBO("cmb_material", oData, "GALVASID/DatosTransaccionales/Produccion/Transaction/get_materials", "", "Materiales");
+            this._base_onloadCOMBO("cmb_material", oData, "MII/DatosTransaccionales/Produccion/Transaction/get_materials", "", "Materiales");
             this.byId("um").setValue("");
             this.byId("inp_ceco").setValue("");
 
@@ -765,7 +765,7 @@ sap.ui.define([
             oView.byId("lbl_esLote").setText("");
             oView.byId("inp_material").setValue("");
             oView.byId("inp_desc_material").setValue("");
-            this._base_onloadCOMBO("cb_centroCostos", oData, "GALVASID/DatosTransaccionales/Produccion/Transaction/get_ceco", "", "Materiales");
+            this._base_onloadCOMBO("cb_centroCostos", oData, "MII/DatosTransaccionales/Produccion/Transaction/get_ceco", "", "Materiales");
 
         },
 
@@ -781,7 +781,7 @@ sap.ui.define([
                 "WC": wc
             };
 
-            this._base_onloadCOMBO("lote_select", oData, "GALVASID/DatosTransaccionales/Produccion/Transaction/get_batch", "", "Lotes");
+            this._base_onloadCOMBO("lote_select", oData, "MII/DatosTransaccionales/Produccion/Transaction/get_batch", "", "Lotes");
 
         },
 
@@ -798,15 +798,15 @@ sap.ui.define([
             oData = {
                 "MATERIAL": "220"
             };
-            //	this._base_onloadCOMBO("oCmbPueTra", oData, "GALVASID/DatosMaestros/Inventario/Transaction/crhd/crhd_sel_00", "", "oCmbPueTra");
-            //this._base_onloadCOMBO("oCmbPueTra", oData, "GALVASID/DatosMaestros/Inventario/Transaction/crhd/crhd_sel_00_me", "", "oCmbPueTra"); // 20200427
+            //	this._base_onloadCOMBO("oCmbPueTra", oData, "MII/DatosMaestros/Inventario/Transaction/crhd/crhd_sel_00", "", "oCmbPueTra");
+            //this._base_onloadCOMBO("oCmbPueTra", oData, "MII/DatosMaestros/Inventario/Transaction/crhd/crhd_sel_00_me", "", "oCmbPueTra"); // 20200427
             this.onTbSelRow_PTP_01();
             oDialog.open();
         },
 
         onTbSelRow_PTP_01: function () {
 
-            this._base_onloadTable("oTb_Cnf_PTP", "", "GALVASID/DatosTransaccionales/Reportes/Transaction/Calidad/get_factor", "Factores", ""); // 20200428
+            this._base_onloadTable("oTb_Cnf_PTP", "", "MII/DatosTransaccionales/Reportes/Transaction/Calidad/get_factor", "Factores", ""); // 20200428
             this.byId("oInputValorPorc").setValue("");
             this.onTbSelRow_PTP_XX();
 
@@ -847,7 +847,7 @@ sap.ui.define([
                 this.byId("oInputValorPorc").setValue(w_row.FACTOR);
             } else {
                 this.byId("btnAsignaEliminar").setEnabled(false);
-                this.getOwnerComponent().openHelloDialog("Posici�n seleccionada sin informaci�n");
+                this.getOwnerComponent().openHelloDialog("Posición seleccionada sin información");
             }
         },
 
@@ -879,16 +879,16 @@ sap.ui.define([
             if (oCombo_01_01 != "") {
             } else {
                 this.byId("btnAsignaEliminar").setEnabled(false);
-                this.getOwnerComponent().openHelloDialog("Posici�n seleccionada sin informaci�n");
+                this.getOwnerComponent().openHelloDialog("Posición seleccionada sin información");
                 return;
             }
             var oData = {
                 "p_in_01_mandt": "220",
-                "p_in_02_werks": "2010",
+                "p_in_02_werks": "LM00",
                 "p_in_objty": oCombo_01_02,
                 "p_in_objid": oCombo_01_01
             };
-            //this.onGuardar_PTP(oData, 'GALVASID/DatosTransaccionales/Reportes/Transaction/Produccion/delete_meta'); // 20200428
+            //this.onGuardar_PTP(oData, 'MII/DatosTransaccionales/Reportes/Transaction/Produccion/delete_meta'); // 20200428
             this.byId("oInputValorPorc").setValue("");
         },
         onAsignarFactor: function () {
@@ -901,12 +901,12 @@ sap.ui.define([
             var oData = {
                 "p_in_32_user": w_user_login,
                 "p_in_mandt": "220",
-                "p_in_werks": "2010",
+                "p_in_werks": "LM00",
                 "p_in_objty": oCombo_01_02,
                 "p_in_objid": oCombo_01_01,
                 "p_in_porc": oCombo_02
             };
-            //this.onGuardar_PTP(oData, 'GALVASID/DatosTransaccionales/Reportes/Transaction/Produccion/set_meta'); // 20200428
+            //this.onGuardar_PTP(oData, 'MII/DatosTransaccionales/Reportes/Transaction/Produccion/set_meta'); // 20200428
         },
 
 
@@ -1042,14 +1042,14 @@ sap.ui.define([
                 "LOTE": lote,
                 "SPEC_STOCK": spec_stock,
                 "MATERIAL": material,
-                "PLANTA": "2010",
+                "PLANTA": "LM00",
                 "USUARIO": this.byId('usuario').getValue(),
                 "WORK_CENTER": wc,
                 "UM": um,
                 "VLTYP": spec_stock
             };
 
-            var path = "GALVASID/DatosTransaccionales/Produccion/Transaction/mov_201";
+            var path = "MII/DatosTransaccionales/Produccion/Transaction/mov_201";
             var uri = "http://" + this.getOwnerComponent().getManifestEntry("/sap.ui5/initData/server") + "/XMII/Runner?Transaction=" + path + "&OutputParameter=JsonOutput&Content-Type=text/xml"
             uri = uri.replace(/\s+/g, '');
 
@@ -1109,7 +1109,7 @@ sap.ui.define([
                 let oData = {
                     "MATERIAL": material
                 };
-                this._base_onloadCOMBO("lote_select", oData, "GALVASID/DatosTransaccionales/Produccion/Transaction/get_batch", "", "Lotes");
+                this._base_onloadCOMBO("lote_select", oData, "MII/DatosTransaccionales/Produccion/Transaction/get_batch", "", "Lotes");
             } else {
                 this.byId("elm_lote").setVisible(false);
                 this.byId("elm_almacen").setVisible(true);
@@ -1119,7 +1119,7 @@ sap.ui.define([
                 let oData = {
                     "MATERIAL": material
                 };
-                this._base_onloadCOMBO("cmb_almacen", oData, "GALVASID/DatosTransaccionales/Produccion/Transaction/get_qty_materiales_NoLote", "", "Almacenes");
+                this._base_onloadCOMBO("cmb_almacen", oData, "MII/DatosTransaccionales/Produccion/Transaction/get_qty_materiales_NoLote", "", "Almacenes");
             }
 
             this.ceco_desc(ceco_value,oThis);
@@ -1132,7 +1132,7 @@ sap.ui.define([
                 CENTRO_COSTO: ceco
             };
 
-            var path = "GALVASID/DatosTransaccionales/Produccion/Transaction/get_ceco_nombre";
+            var path = "MII/DatosTransaccionales/Produccion/Transaction/get_ceco_nombre";
             var uri = "http://" + this.getOwnerComponent().getManifestEntry("/sap.ui5/initData/server") + "/XMII/Runner?Transaction=" + path + "&OutputParameter=JsonOutput&Content-Type=text/xml"
             uri = uri.replace(/\s+/g, '');
 
@@ -1175,7 +1175,7 @@ sap.ui.define([
                 "MATERIAL": this.byId('Material_input').getValue(),
                 "DESCRIPCION": descripcion
             };
-            var path = "GALVASID/DatosTransaccionales/Produccion/Transaction/get_material";
+            var path = "MII/DatosTransaccionales/Produccion/Transaction/get_material";
             console.log(oData);
             var uri = "http://" + this.getOwnerComponent().getManifestEntry("/sap.ui5/initData/server") + "/XMII/Runner?Transaction=" + path + "&OutputParameter=JsonOutput&Content-Type=text/xml"
             uri = uri.replace(/\s+/g, '');
@@ -1215,7 +1215,7 @@ sap.ui.define([
                                     "MATERIAL": aData.MATERIAL
                                 }
 
-                                oThis._base_onloadCOMBO("Almacen_select", xData, "GALVASID/DatosTransaccionales/Produccion/Transaction/get_storage", "", "Almacenes");
+                                oThis._base_onloadCOMBO("Almacen_select", xData, "MII/DatosTransaccionales/Produccion/Transaction/get_storage", "", "Almacenes");
                             }
                         } else {
                             MessageToast.show("No se han recibido " + name);
@@ -1241,7 +1241,7 @@ sap.ui.define([
                 "MATERIAL": this.byId('inp_material').getValue()
             };
 
-            var path = "GALVASID/DatosTransaccionales/Produccion/Transaction/get_material";
+            var path = "MII/DatosTransaccionales/Produccion/Transaction/get_material";
             var uri = "http://" + this.getOwnerComponent().getManifestEntry("/sap.ui5/initData/server") + "/XMII/Runner?Transaction=" + path + "&OutputParameter=JsonOutput&Content-Type=text/xml"
             uri = uri.replace(/\s+/g, '');
 
@@ -1324,7 +1324,7 @@ sap.ui.define([
                 "ES_LOTE": es_lote
             };
 
-            var path = "GALVASID/DatosTransaccionales/Produccion/Transaction/set_material_combo";
+            var path = "MII/DatosTransaccionales/Produccion/Transaction/set_material_combo";
             var uri = "http://" + this.getOwnerComponent().getManifestEntry("/sap.ui5/initData/server") + "/XMII/Runner?Transaction=" + path + "&OutputParameter=JsonOutput&Content-Type=text/xml"
             uri = uri.replace(/\s+/g, '');
 
@@ -1388,10 +1388,10 @@ sap.ui.define([
                 "WC": wc
             };
             //            
-            oThis.loadGraph("idVizFrame", oData, "GALVASID/DatosTransaccionales/Produccion/Transaction/calc_semanas", "Semanal");
-            oThis.loadGraph("vizMes", oData, "GALVASID/DatosTransaccionales/Produccion/Transaction/calc_mes", "Mensual");
-            oThis._base_onloadTable("table_mes", oData, "GALVASID/DatosTransaccionales/Produccion/Transaction/calc_mes_tab", "Tabla Mensual", ""); // 20200428
-            oThis._base_onloadTable("table_semana", oData, "GALVASID/DatosTransaccionales/Produccion/Transaction/calc_semanas_tab", "Tabla Semanal", ""); // 20200428
+            oThis.loadGraph("idVizFrame", oData, "MII/DatosTransaccionales/Produccion/Transaction/calc_semanas", "Semanal");
+            oThis.loadGraph("vizMes", oData, "MII/DatosTransaccionales/Produccion/Transaction/calc_mes", "Mensual");
+            oThis._base_onloadTable("table_mes", oData, "MII/DatosTransaccionales/Produccion/Transaction/calc_mes_tab", "Tabla Mensual", ""); // 20200428
+            oThis._base_onloadTable("table_semana", oData, "MII/DatosTransaccionales/Produccion/Transaction/calc_semanas_tab", "Tabla Semanal", ""); // 20200428
 
         },
 
@@ -1416,14 +1416,14 @@ sap.ui.define([
                 "WC": this.byId("Puesto_Trabajo_zinc").getSelectedKey()
             };
             //            
-            oThis.loadGraph("ZincMes", oData, "GALVASID/DatosTransaccionales/Produccion/Transaction/calc_zinc_mes", "Mensual Zinc");
-            oThis.loadGraph("ZincAlMes", xData, "GALVASID/DatosTransaccionales/Produccion/Transaction/calc_zinc_mes", "Mensual Aluminio Zinc");
-            oThis.loadGraph("ZincSem", oData, "GALVASID/DatosTransaccionales/Produccion/Transaction/calc_zinc_semanas", "Semanal Zinc");
-            oThis.loadGraph("ZincAlSem", xData, "GALVASID/DatosTransaccionales/Produccion/Transaction/calc_zinc_semanas", "Semanal Aluminio Zinc");
-            oThis._base_onloadTable("tab_zinc_mes", oData, "GALVASID/DatosTransaccionales/Produccion/Transaction/calc_tab_zinc_mes", "Tabla Mensual Zinc", "");
-            oThis._base_onloadTable("tab_al_zinc_mes", xData, "GALVASID/DatosTransaccionales/Produccion/Transaction/calc_tab_zinc_mes", "Tabla Mensual Aluminio Zinc", "");
-            oThis._base_onloadTable("tab_zinc_sem", oData, "GALVASID/DatosTransaccionales/Produccion/Transaction/calc_tab_zinc_semanas", "Tabla Semanal Zinc", "");
-            oThis._base_onloadTable("tab_al_zinc_sem", xData, "GALVASID/DatosTransaccionales/Produccion/Transaction/calc_tab_zinc_semanas", "Tabla Semanal Aluminio Zinc", "");
+            oThis.loadGraph("ZincMes", oData, "MII/DatosTransaccionales/Produccion/Transaction/calc_zinc_mes", "Mensual Zinc");
+            oThis.loadGraph("ZincAlMes", xData, "MII/DatosTransaccionales/Produccion/Transaction/calc_zinc_mes", "Mensual Aluminio Zinc");
+            oThis.loadGraph("ZincSem", oData, "MII/DatosTransaccionales/Produccion/Transaction/calc_zinc_semanas", "Semanal Zinc");
+            oThis.loadGraph("ZincAlSem", xData, "MII/DatosTransaccionales/Produccion/Transaction/calc_zinc_semanas", "Semanal Aluminio Zinc");
+            oThis._base_onloadTable("tab_zinc_mes", oData, "MII/DatosTransaccionales/Produccion/Transaction/calc_tab_zinc_mes", "Tabla Mensual Zinc", "");
+            oThis._base_onloadTable("tab_al_zinc_mes", xData, "MII/DatosTransaccionales/Produccion/Transaction/calc_tab_zinc_mes", "Tabla Mensual Aluminio Zinc", "");
+            oThis._base_onloadTable("tab_zinc_sem", oData, "MII/DatosTransaccionales/Produccion/Transaction/calc_tab_zinc_semanas", "Tabla Semanal Zinc", "");
+            oThis._base_onloadTable("tab_al_zinc_sem", xData, "MII/DatosTransaccionales/Produccion/Transaction/calc_tab_zinc_semanas", "Tabla Semanal Aluminio Zinc", "");
 
         },
 
@@ -1505,7 +1505,7 @@ sap.ui.define([
                 actions: [MessageBox.Action.YES, MessageBox.Action.NO],
                 onClose: function (oAction) {
                     if (oAction === MessageBox.Action.YES) {
-                        oThis.BorrarMaterial(oData, "GALVASID/DatosTransaccionales/Produccion/Transaction/upd_material_consumo201");
+                        oThis.BorrarMaterial(oData, "MII/DatosTransaccionales/Produccion/Transaction/upd_material_consumo201");
                     }
                 }.bind(this)
             });
@@ -1513,7 +1513,7 @@ sap.ui.define([
 
         BorrarMaterial: function (oData, path) {
 
-            //var path = "GALVASID/DatosTransaccionales/Produccion/Transaction/upd_material_consumo201";
+            //var path = "MII/DatosTransaccionales/Produccion/Transaction/upd_material_consumo201";
             var uri = "http://" + this.getOwnerComponent().getManifestEntry("/sap.ui5/initData/server") + "/XMII/Runner?Transaction=" + path + "&OutputParameter=JsonOutput&Content-Type=text/xml"
             uri = uri.replace(/\s+/g, '');
 
@@ -1537,7 +1537,7 @@ sap.ui.define([
                             oThis.getOwnerComponent().openHelloDialog(aData.ERROR);
                         } else {
                             MessageToast.show(aData.MESSAGE);
-                            oThis._base_onloadCOMBO("cmb_material", oData, "GALVASID/DatosTransaccionales/Produccion/Transaction/get_materials", "", "Materiales");
+                            oThis._base_onloadCOMBO("cmb_material", oData, "MII/DatosTransaccionales/Produccion/Transaction/get_materials", "", "Materiales");
                             oThis.byId("um").setValue("");
                             oThis.byId("inp_ceco").setValue("");
                         }
