@@ -47,9 +47,9 @@
       ]
     },
     "initData": {
-      "server": "devmiiplm.perfileslm.com:50100",
+      "server": "http://localhost:8010/proxy",
       "protocol": "http://",
-      "__server__": "devmiiplm.perfileslm.com:50100"
+      "__server__": "http://localhost:8010/proxy"
     },
     "routing": {
       "config": {
